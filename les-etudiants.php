@@ -7,7 +7,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,9 +21,9 @@
     foreach($etudiants as $etudiant){
         if($etudiant['for_id'] == $id){
             $fornom = $etudiant['for_nom'];
+            $for_id = $etudiant['for_id'];
         }
     }
-                
 ?>
 <body>
     <div class="container" id="div-push">
@@ -35,6 +35,10 @@
                 unset($_SESSION['status']);
             }
         ?>
+        <div class="text-center mt-3">
+            <a href="absence?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Gérer l'absence</a>
+        </div>
+        
         <table class="table table-hover mt-5">
             <thead class="text-center">
                 <tr>
@@ -74,6 +78,7 @@
                     <td>
                         <button type="button" class="btn btn-primary btn-id" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $etudiant['etud_id'] ?>">Détails</button>
                         <a href="saisir_notes?id=<?php echo $etudiant['etud_id'] ?>" target="_blank" class="btn btn-primary">Saisir les notes</a>
+                        
                     </td>
                 </tr>
                 <?php

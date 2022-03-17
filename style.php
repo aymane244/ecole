@@ -6,6 +6,7 @@
             top:0;
             z-index: 1;
         }
+        
         .bg-hero{
             background-color: rgba(000,000,000,0.5);
         }
@@ -214,6 +215,9 @@
             .foot-bg{
                 display: none;
             }
+            .foot-bg select{
+                padding: 5px;
+            } 
             .img-width{
                 height: 200px;
                 width: 30rem;
@@ -954,7 +958,7 @@
             font-size: small;
             position: absolute;
             margin-top: -7px;
-            margin-left: 370px;
+            margin-left: 200px;
             cursor: pointer;
         }
         .text-color{

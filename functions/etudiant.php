@@ -205,8 +205,28 @@
         }
         public function getFormationMatiere(){
             $result = $this->db->conn->query("SELECT `mat_id`, `for_nom`, `mat_formation`, `mat_nom`, 
-                    `mat_prof`, `mat_duree` FROM `formation` INNER JOIN 
+                    `mat_prof`, `mat_duree`, `for_id` FROM `formation` INNER JOIN 
                     `matiere` ON formation.for_id=matiere.mat_formation ORDER BY for_nom");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function getFormationMatiereEtudiant(){
+            $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
+                    INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation ORDER BY mat_nom");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function etudiantTotal(){
+            $result = $this->db->conn->query("SELECT *, COUNT(etud_nom) AS 'total_etudiant' FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
+            INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation GROUP BY mat_nom");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -431,6 +451,16 @@
             $result = $this->db->conn->query("SELECT `for_nom`, `for_id`, `mat_id`, `mat_nom`
                         FROM `formation` INNER JOIN `matiere` ON for_id=mat_formation INNER JOIN `etudiant` ON for_id=etud_formation
                         WHERE etud_id=$id");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function getEtudiantFormationID(){
+            $id = $_GET['id'];
+            $result = $this->db->conn->query("SELECT * FROM `etudiant` INNER JOIN  `formation` ON for_id=etud_formation WHERE for_id=$id");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -816,6 +846,15 @@
             }
             return $result;
         }
+        public function getSeance(){
+            $result = $this->db->conn->query("SELECT * FROM `seance`");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
         public function insertSalle(){
             $nom_salle = $_POST['nom_salle'];
             $salle_prix = $_POST['salle_prix'];
@@ -955,13 +994,49 @@
             $email_reservation = $_POST['email_reservation'];
             $reservation_telephone = $_POST['reservation_telephone'];
             $salle_id = $_POST['salle_id'];
+            $date_salle = $_POST['date_salle'];
+            $time_debut = $_POST['time_debut'];
+            $time_fin = $_POST['time_fin'];
             $commentaire_reservation = mysqli_escape_string($this->db->conn, $_POST['commentaire_reservation']);
-            $result = $this->db->conn->query("INSERT INTO `reservation`(`res_nom`, `res_telephone`, `res_email`, `res_salle`, `res_commentaire`) 
-            VALUES ('$reservation_nom','$reservation_telephone','$email_reservation','$salle_id','$commentaire_reservation')");
-            return $result;
+            $date = date("Y-m-d");
+            $result = $this->db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$salle_id AND res_date='$date_salle'");
+            $result2 = $this->db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$salle_id AND time_debut>='$time_debut' AND time_debut <'$time_fin'");
+            if($date_salle === ""){
+                echo '<div class="alert alert-danger text-center mt-2" role="alert">
+                    Réservation échouée svp vérifier les données entrées
+                </div>';
+            }else if($date_salle < $date){
+                echo '<div class="alert alert-danger text-center mt-2" role="alert">
+                    Réservation échouée svp vérifier les données entrées
+                </div>';
+            }else if(mysqli_num_rows($result) && mysqli_num_rows($result2)){
+                echo "<div class='alert alert-danger text-center mt-2' role='alert'>
+                Heure réservée, Merci de prendre une nouvelle heure
+                </div>";
+            }else if($time_fin < $time_debut){
+                echo "<div class='alert alert-danger text-center mt-2' role='alert'>
+                L'heure de fin doit toujours être supérieur à la date de début
+                </div>";
+            }else{
+                $result3 = $this->db->conn->query("INSERT INTO `reservation`(`res_nom`, `res_telephone`, `res_email`, `res_salle`, 
+                `res_commentaire`, `res_date`, `time_debut`, `time_fin`) 
+                VALUES ('$reservation_nom','$reservation_telephone','$email_reservation','$salle_id','$commentaire_reservation'
+                ,'$date_salle','$time_debut','$time_fin')");
+                echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre réservation a été envoyé avec succes <i class="fas fa-times font-close2" onclick="fermer()"></i></div>';   
+                return $result3;
+            }
         }
         public function getReservations(){
             $result = $this->db->conn->query("SELECT * FROM `reservation` INNER JOIN `salle` ON sal_id=res_salle");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function getReservationsId(){
+            $result = $this->db->conn->query("SELECT * FROM `reservation`");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -1036,6 +1111,39 @@
             }
             return $resultArray;
         }
+        public function insertAbsence(){
+            $absence_formation = $_POST['absence_formation'];
+            $absence_matiere = $_POST['absence_matiere'];
+            $absence_date = $_POST['absence_date'];
+            $absence_etudiant = $_POST['absence_etudiant'];
+            $absence = $_POST['absence'];
+            $number_etudiant = $_POST['number_etudiant'];
+            for($i=0;$i<$number_etudiant; $i++){
+                $result = $this->db->conn->query("INSERT INTO `absence`(`abs_etudiant`, `abs_date`, `abs_formation`, `abs_matiere`, `abs_absence`) 
+                VALUES ('$absence_etudiant[$i]','$absence_date','$absence_formation','$absence_matiere','$absence[$i]')");
+                if($result){
+                    $_SESSION['status'] = "Les données sont bien enregistrées";
+                    //echo "<script>window.location.href='absence'</script>";
+                    echo 'good';
+                }else{
+                    echo $this->db->conn->error;
+                }
+            }
+            return $result;
+        }
+        public function getabsence(){
+            @$get_matiere = $_POST['get_matiere'];
+            @$absence_date = $_POST['absence_date'];
+            $result = $this->db->conn->query("SELECT * FROM `absence` INNER JOIN `etudiant` 
+                    ON absence.abs_etudiant=etudiant.etud_id INNER JOIN `formation` ON absence.abs_formation=formation.for_id 
+                    WHERE abs_matiere='$get_matiere' AND abs_date='$absence_date' GROUP BY etud_id, abs_date");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
     }
     class Admin{
         public function loginAdmin(){
@@ -1047,6 +1155,7 @@
                 $_SESSION['username'] = $username;
                 $_SESSION['pwd'] = $password;
                 echo "<script>window.location.href='dashboard'</script>";
+                
             }else{
                 $_SESSION['status'] = "Mot de passe ou nom d'utilsateur incorrecte";
                 echo "<script>window.location.href='login_admin'</script>";

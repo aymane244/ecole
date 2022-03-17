@@ -69,17 +69,61 @@ if(isset($_POST['action'])){
             }
         }
     }
+    if ($_POST['action']=='verifier_reservation') {
+        $date_salle = $_POST['date_salle'];
+        $time_debut = $_POST['time_debut'];
+        $time_fin = $_POST['time_fin'];
+        $reservation_salle = $_POST['reservation_salle'];
+        $date = date("Y-m-d");
+        if($date_salle === ""){
+            echo '<div class="alert alert-danger text-center mt-2" role="alert">
+                Veuillez choisir votre date
+            </div>';
+        }else if($date_salle < $date){
+            echo '<div class="alert alert-danger text-center mt-2" role="alert">
+                Date invalide
+            </div>';
+        }else if($time_fin === $time_debut){
+            echo "<div class='alert alert-danger text-center mt-2' role='alert'>
+            Heure incorrect merci de réessayé une nouvelle fois
+            </div>";
+        }else if($time_fin < $time_debut){
+                echo "<div class='alert alert-danger text-center mt-2' role='alert'>
+                        L'heure de fin doit toujours être supérieur à la date de début
+                    </div>";
+        }else{
+            $result = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND res_date='$date_salle'");
+            //$result2 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND time_fin BETWEEN '$time_debut' AND '$time_fin'");
+            $result2 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND time_debut>='$time_debut' AND time_debut <'$time_fin'");
+            if(mysqli_num_rows($result) && mysqli_num_rows($result2)){
+                echo "<div class='alert alert-danger text-center mt-2' role='alert'>
+                        Heure réservée, Merci de prendre une nouvelle heure
+                    </div>";
+            }else{
+                echo '<div class="alert alert-success text-center mt-2" role="alert">
+                        Date et heure disponible, vous pouvez prendre votre rendez-vous
+                        </div>';
+            }
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                /*if($time_debut >= $item['time_debut'] && $time_debut <= $item['time_fin']){
+                    echo "reserved";
+                }else if($time_debut >= $item['time_fin'] && $time_debut > $item['time_debut']){
+                    echo "not reserved";
+                }*/
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+    }
     if ($_POST['action']=='add_message') {
         $data->insertContact();
         echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre message a été envoyé avec succes <i class="fas fa-times font-close" onclick="fermer()"></i></div>';   
     }
     if ($_POST['action']=='add_reservation') {
         $data->insertReservation();
-        echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre réservation a été envoyé avec succes <i class="fas fa-times font-close2" onclick="fermer()"></i></div>';   
-    }
-    if ($_POST['action']=='add_reservation') {
-        $data->insertReservation();
-        echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre réservation a été envoyé avec succes <i class="fas fa-times font-close2" onclick="fermer()"></i></div>';   
+        
     }
     if ($_POST['action']=='search_student') {
         $data->getEtudiantNotesSearch();

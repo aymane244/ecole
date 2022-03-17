@@ -39,6 +39,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="editor"></div>
                             <div class="row mb-3">
                                 <label for="prof" class="col-md-12 col-form-label text-md-end">Déscription</label>
                                 <div class="col-md-12">
@@ -74,6 +75,11 @@
         document.getElementById("zone-textf").classList.toggle("fulltext2")
         document.getElementById("sizerformation").classList.toggle("fullsizer2")
     }
+</script>
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow'
+  });
 </script>
 </body>
 </html>

@@ -44,7 +44,7 @@
     <?php
         class Calendar{
             function years(){
-                $years = array_combine(range(date("Y"), 2050), range(date("Y"), 2050));
+                $years = array_combine(range(date("Y"), 2024), range(date("Y"), 2024));
                 //implode($coma, $years);
                 //echo implode($coma, $years);
                 foreach($years as $year){

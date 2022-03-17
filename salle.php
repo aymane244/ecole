@@ -23,7 +23,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,8 +34,6 @@
     <div class="div-background">
         <div class="container">
             <?php
-                echo $calendar->years();
-                echo $calendar->months();
                 if(isset($_SESSION['status'])){
             ?>
             <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
@@ -140,9 +138,6 @@
                 <h2 class="pt-4">Réservation de la <?= $sal_nom?></h2>
                 <hr class="hr-width">
             </div>
-            <div class="container">
-                <div id="result"></div>
-            </div>
             <div class="row justify-content-center bg-white py-3">
                 <div class="col-md-8">
                     <div class="row">
@@ -174,9 +169,52 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Date de location</label>
-                        <div class="d-flex">
-                            <i class="fas fa-calendar position-awesome"></i>
-                            <input type="datetime-local" class="form-control pl-5" id="date_salle" name="date_salle" required>
+                        <div class="row justify-content-around mt-2 align-items-center">
+                            <div class='col-md-4'>
+                                <label for="exampleInputEmail1">Date</label>
+                                <div class="d-flex">
+                                    <i class="fas fa-calendar position-awesome"></i>
+                                    <input type="date" class="form-control pl-5" id="date_salle" name="date_salle" required>
+                                </div>
+                            </div>
+                            <div class='col-md-4'>
+                            <!--<input type="time" step="3600000" min="08:00" max="18:00">-->
+                                <label for="heur_debut">Heure de début</label>
+                                <div class="d-flex">
+                                    <i class="fas fa-clock position-awesome"></i>
+                                    <select class="custom-select px-5" id="time_debut" name="time_debut">
+                                        <option value="08:00">08:00</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-md-4'>
+                                <label for="heur_debut">Heure de fin</label>
+                                <div class="d-flex">
+                                    <i class="fas fa-clock position-awesome"></i>
+                                    <select class="custom-select px-5" name="time_fin" id="time_fin">
+                                        <option value="09:00">09:00</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="18:00">18:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="show-disponibilite"></div>
+                        <div class="mt-3">
+                            <input type="hidden" name="reservation_salle" id="reservation_salle" value="<?= $sal_id?>">
+                            <button class="btn btn-primary" name="availability" id="availability">Vérifier dispnobilité</button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -187,6 +225,7 @@
                         <input type="hidden" name="salle_id" id="salle_id" value="<?= $sal_id?>">
                         <button class="btn btn-primary" id="submit_salle" name="submit_salle" style="border-radius:0 !important">Réserver</button>
                     </div>
+                    <div id="result"></div>
                 </div>
             </div>
         </div>
@@ -202,14 +241,32 @@
                 var reservation_telephone = $("#reservation_telephone").val();
                 var commentaire_reservation = $("#commentaire_reservation").val();
                 var salle_id = $("#salle_id").val();
+                var date_salle = $("#date_salle").val();
+                var time_debut = $("#time_debut").val();
+                var time_fin = $("#time_fin").val();
                 $.post( "functions/traitement.php",{reservation_nom: reservation_nom, email_reservation: email_reservation, 
-                    commentaire_reservation:commentaire_reservation, reservation_telephone:reservation_telephone, salle_id:salle_id, action:'add_reservation'}, function( result ) {
+                    commentaire_reservation:commentaire_reservation, reservation_telephone:reservation_telephone, salle_id:salle_id, 
+                    date_salle:date_salle, time_debut:time_debut, time_fin:time_fin,action:'add_reservation'}, function( result ) {
                     $('#result').html(result);
                 });
                 $("#reservation_nom").val('');
                 $("#email_reservation").val('');
                 $("#reservation_telephone").val('');
                 $("#commentaire_reservation").val('');
+            });
+        })
+    </script>
+        <script>
+        $(document).ready(function(){
+            $("#availability").click(function() {
+                var date_salle = $("#date_salle").val();
+                var time_debut = $("#time_debut").val();
+                var time_fin = $("#time_fin").val();
+                var reservation_salle = $("#reservation_salle").val();
+                $.post( "functions/traitement.php",{ date_salle:date_salle, time_debut:time_debut, time_fin:time_fin, 
+                    reservation_salle:reservation_salle, action:'verifier_reservation'}, function( result ) {
+                    $('#show-disponibilite').html(result);
+                });
             });
         })
     </script>

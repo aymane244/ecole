@@ -196,6 +196,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Salle</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Email</th>
                     <th scope="col">Telephone</th>
@@ -211,6 +212,7 @@
                 <tr>
                     <th scope="row"><?php echo $i++ ?></th>
                     <td><?php echo $reservation['sal_nom'];?></td>
+                    <td><?php echo $reservation['res_date']. " ".$reservation['time_debut']." ".$reservation['time_fin'];?></td>
                     <td><?php echo $reservation['res_nom'];?></td>
                     <td><?php echo $reservation['res_email'];?></td>
                     <td><?php echo $reservation['res_telephone'];?></td>
