@@ -53,3 +53,13 @@
         document.getElementById('douane').style.display='block';
     }
 </script>
+<script>
+    function frensh(){
+        document.getElementById("frensh").style.display="block";
+        document.getElementById("arabe").style.display="none";
+    }
+    function arabe(){
+        document.getElementById("arabe").style.display="block";
+        document.getElementById("frensh").style.display="none";
+    }
+</script>

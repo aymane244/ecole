@@ -1,21 +1,12 @@
+<?php include_once "session.php";?>
 <?php
-    include_once "header.php";
-    include_once "navbar_admin.php";
-    $data = new Etudiant($db);
     if(!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])){
-        echo "<script>window.location.href='login_admin'</script>";
+        echo "<script>window.location.href='login-admin'</script>";
     }
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sasie de note</title>
-</head>
-<?php
-    @$id = $_GET['id'];
+    if(!isset($_GET['id'])){
+        echo "<script>window.location.href='formations'</script>";
+    }
+    $id = $_GET['id'];
     $formations = $data->getEtudiantMatiereFormation();
     $etudiants = $data->getEtudForm();
     $matieres = $data->getForMat();
@@ -32,77 +23,90 @@
         }
     }
 ?>
-<body>
-    <div class="container">
-        <?php
-            if(isset($_SESSION['status'])){
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <?php 
+            include_once "header.php";  
+            include_once "style.php";
+            include_once "scripts.php";
         ?>
-        <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
-        <?php
-                unset($_SESSION['status']);
-            }
-        ?>
-        <div class="row justify-content-center">
-            <div class="col-md-8 mt-5">
-                <div class="card card-position">
-                    <div class="card-header text-center link-font"><i class="fas fa-edit"></i> Saisir les notes</div>
+        <title>Modifier la note</title>
+    </head>
+    <body>
+        <?php include_once "navbar-admin.php";?>
+        <div class="container">
+            <?php
+                if(isset($_SESSION['status'])){
+            ?>
+            <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
+            <?php
+                    unset($_SESSION['status']);
+                }
+            ?>
+            <div class="row justify-content-center">
+                <div class="col-md-12 mt-5">
+                    <div class="card card-position">
+                        <div class="card-header text-center link-font"><i class="fas fa-edit"></i> modifier les notes</div>
                         <div class="card-body py-5">
                             <form action="" method="POST" enctype="multipart/form-data">
-                            <div class="row mb-3">
-                                <label for="categorie" class="col-md-4 col-form-label text-md-end">Formations</label>
-                                <div class="col-md-12">
-                                    <div class="d-flex">
-                                        <i class="fas fa-folder-open position-awesome"></i>
-                                        <select class="custom-select px-5" name="nameformations">
-                                            <option value="<?php echo $for_id ?>"><?php echo $for_nom?></option>
-                                        </select>
+                                <div class="row mb-3">
+                                    <label for="categorie" class="col-md-4 col-form-label text-md-end">Formation</label>
+                                    <div class="col-md-12">
+                                        <div class="d-flex">
+                                            <i class="fas fa-folder-open position-awesome"></i>
+                                            <select class="custom-select pl-5" name="nameformations">
+                                                <option value="<?php echo $for_id ?>"><?php echo $for_nom?></option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="categorie" class="col-md-4 col-form-label text-md-end">Matières</label>
-                                <div class="col-md-12">
-                                    <div class="d-flex">
-                                        <i class="fas fa-folder-open position-awesome"></i>
-                                        <select class="custom-select px-5" name="matieres">
-                                            <option value="<?php echo $formation['mat_id'] ?>"><?php echo $formation['mat_nom']?></option>
-                                        </select>
+                                <div class="row mb-3">
+                                    <label for="categorie" class="col-md-4 col-form-label text-md-end">Matière</label>
+                                    <div class="col-md-12">
+                                        <div class="d-flex">
+                                            <i class="fas fa-tag position-awesome"></i>
+                                            <select class="custom-select pl-5" name="matieres">
+                                                <option value="<?php echo $formation['mat_id'] ?>"><?php echo $formation['mat_nom']?></option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="categorie" class="col-md-4 col-form-label text-md-end">Etudiants</label>
-                                <div class="col-md-12">
-                                    <div class="d-flex">
-                                        <i class="fas fa-folder-open position-awesome"></i>
-                                        <select class="custom-select px-5" name="etudiants">
-                                            <option value="<?php echo $etud_id ?>"><?php echo $etud_prenom." ". $etud_nom?></option>
-                                        </select>
+                                <div class="row mb-3">
+                                    <label for="categorie" class="col-md-4 col-form-label text-md-end">Etudiant</label>
+                                    <div class="col-md-12">
+                                        <div class="d-flex">
+                                            <i class="fas fa-user-graduate position-awesome"></i>
+                                            <select class="custom-select pl-5" name="etudiants">
+                                                <option value="<?php echo $etud_id ?>"><?php echo $etud_prenom." ". $etud_nom?></option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="note" class="col-md-4 col-form-label text-md-end">Saisir la note</label>
-                                <div class="col-md-6">
-                                    <div class="d-flex">
-                                        <i class="fas fa-poll position-awesome"></i>
-                                        <input id="note" type="number" class="form-control px-5" min="0" max="20" name="note" value="<?php echo $note ?>" autocomplete="note" size="2" autofocus required>
+                                <div class="row mb-3">
+                                    <label for="note" class="col-md-4 col-form-label text-md-end">Saisir la note</label>
+                                    <div class="col-md-12">
+                                        <div class="d-flex">
+                                            <i class="fas fa-poll position-awesome"></i>
+                                            <input id="note" type="number" class="form-control pl-5" min="0" max="20" name="note" value="<?php echo $note ?>" autocomplete="note" size="2" autofocus required>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" name="submit" class="btn btn-primary mx-3">Modifier la note</button>
+                                <div class="row mb-0">
+                                    <div class="col-md-8 offset-md-4">
+                                        <button type="submit" name="submit" class="btn btn-primary">Modifier la note</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</body>
+    </body>
 </html>
 <?php
     if(isset($_POST['submit'])){

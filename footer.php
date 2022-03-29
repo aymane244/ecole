@@ -3,7 +3,7 @@
     $formations = $data->getformation();
 ?>
 <div class="text-center pt-3 text-color" id="contactez-nous">
-    <h2 class="pt-4">Contactez-nous</h2>
+    <h2 class="pt-4"><?php echo $footer['contactez'] ?></h2>
     <hr class="hr-width">
 </div>
 <div class="footer-background">
@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-lg-6 py-2">
                 <div class="text-center pt-3 text-white">
-                    <h2 class="pt-4">Comment nous trouver</h2>
+                    <h2 class="pt-4"><?php echo $footer['trouver'] ?></h2>
                     <hr class="hr-width">
                 </div>
                 <div>
@@ -20,13 +20,13 @@
             </div>
             <div class="col-lg-6 py-2">
                 <div class="text-center pt-3 text-white">
-                    <h2 class="pt-4">Envoyez-nous un message</h2>
+                    <h2 class="pt-4"><?php echo $footer['envoyermessage'] ?></h2>
                     <hr class="hr-width">
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="exampleInputSuje1" class="text-white">Votre nom</label>
+                            <label for="exampleInputSuje1" class="text-white"><?php echo $footer['nom'] ?></label>
                             <div class="d-flex">
                                 <i class="fas fa-user position-awesome"></i>
                                 <input type="text" class="form-control pl-5" name="nom" id="contact_nom" placeholder="Nom complet" required>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="exampleInputSuje1" class="text-white">Votre email</label>
+                            <label for="exampleInputSuje1" class="text-white"><?php echo $footer['email'] ?></label>
                             <div class="d-flex">
                                 <i class="fas fa-envelope position-awesome-email"></i>
                                 <input type="email" class="form-control pl-5" name="email" id="contact_email" placeholder="email" required>
@@ -44,18 +44,18 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputSuje1" class="text-white">Sujet</label>
+                    <label for="exampleInputSuje1" class="text-white"><?php echo $footer['sujet'] ?></label>
                     <div class="d-flex">
                         <i class="fas fa-book-open position-awesome-sujet"></i>
                         <input type="text" class="form-control pl-5" id="exampleInputSuje1" name ="sujet" aria-describedby="emailSujet" placeholder="Sujet" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1" class="text-white">Votre message</label>
+                    <label for="exampleFormControlTextarea1" class="text-white"><?php echo $footer['message'] ?></label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="6" required></textarea>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary" id="submit" name="submit">Envoyer votre message</button>
+                    <button type="submit" class="btn btn-primary" id="submit" name="submit"><?php echo $footer['btn_message'] ?></button>
                     <div id="output"></div>
                 </div>
             </div>
@@ -65,41 +65,50 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <h4 class="text-color-footer">Liens utils</h4>
+                <h4 class="text-color-footer"><?php echo $footer['liens'] ?></h4>
                 <div class="text-white">
-                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="index" class="text-white"> Accueil</a></div>
+                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="index" class="text-white"> <?php echo $navbar['Accueil'] ?></a></div>
                     <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="ARTL-Nord" class="text-white"> ARTLN</a></div>
-                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="qui-sommes-nous" class="text-white"> Conseil & Accompagnement</a></div>
-                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="salle-reservation" class="text-white"> Location des salles</a></div>
-                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="article" class="text-white"> Actualités</a></div>
+                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="conseil" class="text-white"> <?php echo $navbar['Conseil'] ?></a></div>
+                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="salle-reservation" class="text-white"> <?php echo $navbar['salles'] ?></a></div>
+                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="article" class="text-white"> <?php echo $navbar['Actualites'] ?></a></div>
                 </div>
             </div>
             <div class="col-lg-3">
-                <h4 class="text-color-footer">Formations</h4>
+                <h4 class="text-color-footer"><?php echo $navbar['Formations'] ?></h4>
                 <div class="text-white">
                     <?php
                         foreach($formations as $formation){
                     ?>
-                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <?php echo $formation['for_nom']?></div>
+                    <div class="mt-3 ml-3">
+                        <i class="fas fa-caret-right"></i> 
+                        <?php 
+                            if($_SESSION['lang'] =="ar"){
+                                echo $formation['for_nom_arab'];
+                            }else{
+                                echo $formation['for_nom'];
+                            }
+                        ?>
+                    </div>
                     <?php
                         }
                     ?>
                 </div>
             </div>
             <div class="col-lg-3">
-                <h4 class="text-color-footer">Adresse</h4>
+                <h4 class="text-color-footer"><?php echo $footer['adresse_footer'] ?></h4>
                 <div class="text-white">
-                    <p>07 Boulevard Hariri N°12<br> Tanger-Maroc</p>
+                    <p><?php echo $footer['adresse'] ?><br> <?php echo $footer['ville'] ?></p>
                     <p class="pt-3">
-                        <b>Téléphone: </b>+212664159137 <br>
-                        <b>Fix: </b>+212539320395 <br>
-                        <b>Fax: </b>+212539320395 <br>
-                        <b>Email: </b>artl.nord.tanger@gmail.com
+                        <b><?php echo $footer['phone'] ?>: </b>+212664159137 <br>
+                        <b><?php echo $footer['fix'] ?>: </b>+212539320395 <br>
+                        <b><?php echo $footer['fax'] ?>: </b>+212539320395 <br>
+                        <b><?php echo $footer['email_footer'] ?>: </b>artl.nord.tanger@gmail.com
                     </p>
                 </div>
             </div>
             <div class="col-lg-3">
-                <h4 class="text-color-footer">A propos de nous</h4>
+                <h4 class="text-color-footer"><?php echo $footer['propos'] ?></h4>
                 <div class="text-white">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis reprehenderit doloribus odit praesentium.</p>
                     <div class="d-flex pb-3 justify-content-center">
@@ -117,22 +126,20 @@
         <i class="far fa-copyright size-awesome"></i> Copyright Aimane, Chaimae, Yasmina. All right reserved
     </div>
 </div>
-    <script>
-        $(document).ready(function(){
-            $("#submit").click(function() {
-                var nom = $("#contact_nom").val();
-                var email = $("#contact_email").val();
-                var sujet = $("#exampleInputSuje1").val();
-                var message = $("#exampleFormControlTextarea1").val();
-                $.post( "functions/traitement.php",{nom: nom, email: email, sujet:sujet, message:message, action:'add_message'}, function( result ) {
-                    $('#output').html(result);
-                });
-                $("#contact_nom").val('');
-                $("#contact_email").val('');
-                $("#exampleInputSuje1").val('');
-                $("#exampleFormControlTextarea1").val('');
+<script>
+    $(document).ready(function(){
+        $("#submit").click(function() {
+            var nom = $("#contact_nom").val();
+            var email = $("#contact_email").val();
+            var sujet = $("#exampleInputSuje1").val();
+            var message = $("#exampleFormControlTextarea1").val();
+            $.post( "functions/traitement.php",{nom: nom, email: email, sujet:sujet, message:message, action:'add_message'}, function( result ) {
+                $('#output').html(result);
             });
-        })
-    </script>
-</body>
-</html>
+            $("#contact_nom").val('');
+            $("#contact_email").val('');
+            $("#exampleInputSuje1").val('');
+            $("#exampleFormControlTextarea1").val('');
+        });
+    })
+</script>

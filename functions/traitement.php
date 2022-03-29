@@ -1,13 +1,12 @@
 <?php 
+session_start();
 include_once 'etudiant.php';
 include_once 'db.php';
 $db = new DBController();
 $data = new Etudiant($db);
-
 if(isset($_POST['action'])){
     if ($_POST['action']=='add_comment') {
         $data->insertComment();
-        $output = $data->getCommentsAjax();
         foreach ($data->getCommentsAjax() as $comment) {
             echo '<p class="pl-3 mt-3">
             <b>'.$comment['com_prenom'].' '.$comment['com_nom'].' </b> <br>
