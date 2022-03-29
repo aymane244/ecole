@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 17 mars 2022 à 11:28
+-- Généré le : mar. 29 mars 2022 à 14:09
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -59,7 +59,9 @@ INSERT INTO `absence` (`abs_id`, `abs_etudiant`, `abs_date`, `abs_formation`, `a
 CREATE TABLE `article` (
   `art_id` int(11) NOT NULL,
   `art_titre` varchar(200) NOT NULL,
+  `art_titre_arab` varchar(200) NOT NULL,
   `art_texte` text NOT NULL,
+  `art_texte_arab` text NOT NULL,
   `art_image` varchar(200) NOT NULL,
   `art_ajout` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -68,9 +70,10 @@ CREATE TABLE `article` (
 -- Déchargement des données de la table `article`
 --
 
-INSERT INTO `article` (`art_id`, `art_titre`, `art_texte`, `art_image`, `art_ajout`) VALUES
-(1, 'Parentologie : comment les parents se sont transformés en communicants de crise', 'Il y a deux ans, on a déjà dû faire assaut de pédagogie pour expliquer ce qu’était le Covid-19. La première difficulté, c’est que l’adulte, censé incarner un savoir sans limite, est souvent lui-même complètement largué. A la simple question « qu’est-ce qu’un virus ? », il lui faut, dans la majorité des cas, foncer en douce sur Wikipédia pour pouvoir ensuite asséner d’un ton docte : « Un virus est un agent infectieux nécessitant un hôte, souvent une cellule, dont les constituants et le métabolisme déclenchent la réplication. » Puis, son enfant haussant un sourcil en signe d’incompréhension, l’adulte devra entreprendre de traduire ce jargon comme il peut, en utilisant pourquoi pas des images mentales, des schémas, ou encore le pouvoir didactique de la mie de pain, en une sorte de remake domestique de l’émission « C’est pas sorcier ».', './images/etudiants/téléchargement.jfif', '2022-02-05'),
-(2, 'Dans les supermarchés, les prix vont augmenter d’au moins 3 % sur 2022', 'Selon le gouvernement, certaines négociations se sont finalement achevées mercredi à 8 heures. A ce jour, le taux de signature des contrats dépasse les 80 % dans la plupart des enseignes, à une ou deux exceptions près. Dans les cas les plus conflictuels, le médiateur est saisi et une soixantaine de médiations sont en cours. Même s’il faudra attendre fin mars pour avoir une image claire des résultats, des tendances se dessinent d’ores et déjà.\r\n\r\nTout d’abord, les prix des produits alimentaires sont, globalement, en hausse, alors que ceux des produits d’hygiène, de beauté et d’entretien sont, eux, en déflation ou stables. Une conséquence directe de la loi EGalim 2, qui sanctuarise la part agricole dans les produits alimentaires. Les enseignes tentent ainsi de limiter l’inflation du panier de courses du consommateur en se rattrapant sur le non-alimentaire.', './images/etudiants/téléchar.jfif', '2022-02-05');
+INSERT INTO `article` (`art_id`, `art_titre`, `art_titre_arab`, `art_texte`, `art_texte_arab`, `art_image`, `art_ajout`) VALUES
+(1, 'Parentologie : comment les parents se sont transformés en communicants de crise', 'علم الوالدين: كيف تحول الآباء إلى متصلين بالأزمات', '<p>Il y a deux ans, on a d&eacute;j&agrave; d&ucirc; faire assaut de p&eacute;dagogie pour expliquer ce qu&rsquo;&eacute;tait le Covid-19. La premi&egrave;re difficult&eacute;, c&rsquo;est que l&rsquo;adulte, cens&eacute; incarner un savoir sans limite, est souvent lui-m&ecirc;me compl&egrave;tement largu&eacute;. A la simple question &laquo; qu&rsquo;est-ce qu&rsquo;un virus ? &raquo;, il lui faut, dans la majorit&eacute; des cas, foncer en douce sur Wikip&eacute;dia pour pouvoir ensuite ass&eacute;ner d&rsquo;un ton docte : &laquo; Un virus est un agent infectieux n&eacute;cessitant un h&ocirc;te, souvent une cellule, dont les constituants et le m&eacute;tabolisme d&eacute;clenchent la r&eacute;plication. &raquo; Puis, son enfant haussant un sourcil en signe d&rsquo;incompr&eacute;hension, l&rsquo;adulte devra entreprendre de traduire ce jargon comme il peut, en utilisant pourquoi pas des images mentales, des sch&eacute;mas, ou encore le pouvoir didactique de la mie de pain, en une sorte de remake domestique de l&rsquo;&eacute;mission &laquo; C&rsquo;est pas sorcier &raquo;.</p>\r\n', 'قبل عامين ، كان علينا بالفعل القيام بهجوم تربوي لشرح ماهية Covid-19. تتمثل الصعوبة الأولى في أن البالغ ، الذي من المفترض أن يجسد معرفة غير محدودة ، غالبًا ما يتم إسقاطه تمامًا. على السؤال البسيط \"ما هو الفيروس؟\" \"، من الضروري بالنسبة له ، في معظم الحالات ، الاستعجال على ويكيبيديا حتى يتمكن بعد ذلك من الضرب بنبرة مكتسبة:\" الفيروس عامل معدي يتطلب مضيفًا ، غالبًا خلية ، مكوناته وعملية الأيض التي تؤدي إلى التكاثر. بعد ذلك ، يرفع طفله حاجبًا كعلامة لعدم الفهم ، سيتعين على الشخص البالغ أن يترجم هذه المصطلحات على أفضل وجه ممكن ، فلماذا لا يستخدم الصور الذهنية أو المخططات أو حتى القوة التعليمية لفتات الخبز ، في نوع ما من النسخة المحلية من العرض \"إنه ليس علم الصواريخ\".', './images/etudiants/téléchargement.jfif', '2022-02-05'),
+(2, 'Dans les supermarchés, les prix vont augmenter d’au moins 3 % sur 2022', 'في محلات السوبر ماركت ، سترتفع الأسعار بنسبة 3٪ على الأقل في عام 2022', 'Selon le gouvernement, certaines négociations se sont finalement achevées mercredi à 8 heures. A ce jour, le taux de signature des contrats dépasse les 80 % dans la plupart des enseignes, à une ou deux exceptions près. Dans les cas les plus conflictuels, le médiateur est saisi et une soixantaine de médiations sont en cours. Même s’il faudra attendre fin mars pour avoir une image claire des résultats, des tendances se dessinent d’ores et déjà.\n\nTout d’abord, les prix des produits alimentaires sont, globalement, en hausse, alors que ceux des produits d’hygiène, de beauté et d’entretien sont, eux, en déflation ou stables. Une conséquence directe de la loi EGalim 2, qui sanctuarise la part agricole dans les produits alimentaires. Les enseignes tentent ainsi de limiter l’inflation du panier de courses du consommateur en se rattrapant sur le non-alimentaire.', 'وفقا للحكومة ، تم الانتهاء أخيرا من بعض المفاوضات يوم الأربعاء في الساعة 8 صباحا. حتى الآن ، تجاوز معدل توقيع العقد 80٪ في معظم العلامات التجارية ، مع استثناء واحد أو اثنين. في الحالات الأكثر تضاربًا ، يتم الاتصال بالوسيط وحوالي ستين عملية وساطة جارية. حتى لو اضطررنا إلى الانتظار حتى نهاية شهر مارس للحصول على صورة واضحة للنتائج ، فإن الاتجاهات بدأت بالفعل في الظهور.  بادئ ذي بدء ، أسعار المنتجات الغذائية بشكل عام آخذة في الارتفاع ، في حين أن أسعار منتجات النظافة والجمال والصيانة في حالة انكماش أو مستقرة. نتيجة مباشرة لقانون EGalim 2 ، الذي يحمي الحصة الزراعية في المنتجات الغذائية. وبالتالي تحاول العلامات التجارية الحد من تضخم سلة تسوق المستهلك من خلال اللحاق بالمواد غير الغذائية.', './images/etudiants/téléchar.jfif', '2022-02-05'),
+(6, 'Nouveau article', 'مقال جديد', '<p>Article nouveau</p>\r\n', '<p>مقال جديد</p>\r\n', './images/articles/630.jpg', '2022-03-22');
 
 -- --------------------------------------------------------
 
@@ -114,7 +117,8 @@ INSERT INTO `commentaire` (`com_id`, `com_nom`, `com_prenom`, `com_comentaire`, 
 (1, 'Chammi', 'Achraf', 'Salut c\'est mon premier commentaire', 1, '2022-02-15'),
 (2, 'Zghlouli', 'Mourad', 'Salut c\'est mon deuxième commentaire', 2, '2022-02-15'),
 (23, 'Chnaif', 'Aimane', 'Hello c\'est un commentaire', 1, '2022-03-05'),
-(24, 'Aimane', 'Chnaif', 'On présente', 1, '2022-03-05');
+(24, 'Aimane', 'Chnaif', 'On présente', 1, '2022-03-05'),
+(25, 'Chnaif', 'Aimane', 'un commentaire', 6, '2022-03-26');
 
 -- --------------------------------------------------------
 
@@ -236,8 +240,9 @@ CREATE TABLE `formation` (
 --
 
 INSERT INTO `formation` (`for_id`, `for_nom`, `for_nom_arab`, `for_pres`, `for_pres_arab`, `for_descr`, `for_desc_arab`, `for_image`) VALUES
-(1, 'Formation Qualifiante Initiale Minimum Obligatoire (FQIMO) des conducteurs professionnels', 'الحد الأدنى الإلزامي من تدريب التأهيل الأولي للسائقين \nالمحترفين (FQIMO)', 'Formation pour toute personne intéressée d\'avoir un permis de conduite professionnel des camions', 'تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية', 'Tout conducteur de véhicule de transport de marchandises dont le poids total autorisé en charge (PTAC) excède 3,5 tonnes doit avoir satisfait, préalablement à l’exercice de son activité de conduite, à une obligation de qualification initiale. Cette qualification initiale est\nobtenue à l’issue d’une formation professionnelle qui peut être longue ou accélérée. La qualification initiale peut être obtenue à l’issue d’une formation professionnelle longue de 280 heures minimum, sanctionnée par l’obtention d’un titre professionnel de conduite routière ou d’un diplôme de niveau V de conducteur routier.\nSont ainsi visés :\n- le Certificat d’Aptitude Professionnelle (CAP) conducteur routier de marchandises,\n- le Brevet d’Études Professionnelles (BEP) conduite et services dans le transport routier,\n- le titre professionnel de Conducteur du Transport Routier de Marchandises sur tous Véhicules (CTRMV) délivré par le Ministre chargé de l’emploi et de la formation professionnelle,\n- le titre professionnel de Conducteur du Transport Routier de Marchandises sur Porteur (CTRMP) délivré par le Ministre chargé de l’emploi et de la  formation professionnelle.\nL’obtention de l’un de ces titres ou diplômes permet à son titulaire de conduire, dès l’âge de 18 ans, les véhicules pour lesquels un permis de conduire des catégories C ou EC est requis.\nAu vu du diplôme ou du titre professionnel, le préfet du département dans lequel a été délivré le titre ou le diplôme, délivre au conducteur, après avoir vérifié la validité de son permis de conduire, une carte de qualification de conducteur (modèle à paraître prochainement). Cette carte doit être renouvelée tous les 5 ans après chaque session de formation continue', 'تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية', './images/etudiants/library.jpg'),
-(2, 'Formation des conducteurs professionnels', 'تدريب السائقين المحترفين', 'Formation pour toute personne intéreseé d\'avoir un permis de conduite professionnel des camions', 'تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية', 'Tout conducteur de véhicule de transport de marchandises dont le poids total autorisé en charge (PTAC) excède 3,5 tonnes doit avoir satisfait, préalablement à l’exercice de son activité de conduite, à une obligation de qualification initiale. Cette qualification initiale est\r\nobtenue à l’issue d’une formation professionnelle qui peut être longue ou accélérée. La qualification initiale peut être obtenue à l’issue d’une formation professionnelle longue de 280 heures minimum, sanctionnée par l’obtention d’un titre professionnel de conduite routière ou d’un diplôme de niveau V de conducteur routier.\r\nSont ainsi visés :\r\n- le Certificat d’Aptitude Professionnelle (CAP) conducteur routier de marchandises,\r\n- le Brevet d’Études Professionnelles (BEP) conduite et services dans le transport routier,\r\n- le titre professionnel de Conducteur du Transport Routier de Marchandises sur tous Véhicules (CTRMV) délivré par le Ministre chargé de l’emploi et de la \r\n   formation professionnelle,\r\n- le titre professionnel de Conducteur du Transport Routier de Marchandises sur Porteur (CTRMP) délivré par le Ministre chargé de l’emploi et de la \r\n   formation professionnelle.\r\n\r\nL’obtention de l’un de ces titres ou diplômes permet à son titulaire de conduire, dès l’âge de 18 ans, les véhicules pour lesquels un permis de conduire des catégories C ou EC est requis.\r\nAu vu du diplôme ou du titre professionnel, le préfet du département dans lequel a été délivré le titre ou le diplôme, délivre au conducteur, après avoir vérifié la validité de son permis de conduire, une carte de qualification de conducteur (modèle à paraître prochainement). Cette carte doit être renouvelée tous les 5 ans après chaque session de formation continue', 'تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية', './images/etudiants/library.jpg');
+(1, 'Formation Qualifiante Initiale Minimum Obligatoire (FQIMO) des conducteurs professionnels', 'الحد الأدنى الإلزامي من تدريب التأهيل الأولي للسائقين المحترفين (FQIMO)', '<p><strong>Formation pour toute personne </strong>int&eacute;ress&eacute;e d&#39;avoir un permis de conduite professionnel des grands camions et petit</p>\r\n', '<p>تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية بالنسبة للشاحنات الكبرى والصغرى</p>\r\n', '<p>Tout conducteur de v&eacute;hicule de transport de marchandises dont le poids total autoris&eacute; en charge (PTAC) exc&egrave;de 3,5 tonnes doit avoir satisfait, pr&eacute;alablement &agrave; l&rsquo;exercice de son activit&eacute; de conduite, &agrave; une obligation de qualification initiale. Cette qualification initiale est obtenue &agrave; l&rsquo;issue d&rsquo;une formation professionnelle qui peut &ecirc;tre longue ou acc&eacute;l&eacute;r&eacute;e. La qualification initiale peut &ecirc;tre obtenue &agrave; l&rsquo;issue d&rsquo;une formation professionnelle longue de 280 heures minimum, sanctionn&eacute;e par l&rsquo;obtention d&rsquo;un titre professionnel de conduite routi&egrave;re ou d&rsquo;un dipl&ocirc;me de niveau V de conducteur routier. Sont ainsi vis&eacute;s :</p>\r\n\r\n<p>- le Certificat d&rsquo;Aptitude Professionnelle (CAP) conducteur routier de marchandises,</p>\r\n\r\n<p>- le Brevet d&rsquo;&Eacute;tudes Professionnelles (BEP) conduite et services dans le transport routier,</p>\r\n\r\n<p>- le titre professionnel de Conducteur du Transport Routier de Marchandises sur tous V&eacute;hicules (CTRMV) d&eacute;livr&eacute; par le Ministre charg&eacute; de l&rsquo;emploi et de la formation professionnelle, - le titre professionnel de Conducteur du Transport Routier de Marchandises sur Porteur (CTRMP) d&eacute;livr&eacute; par le Ministre charg&eacute; de l&rsquo;emploi et de la formation professionnelle.</p>\r\n\r\n<p>L&rsquo;obtention de l&rsquo;un de ces titres ou dipl&ocirc;mes permet &agrave; son titulaire de conduire, d&egrave;s l&rsquo;&acirc;ge de 18 ans, les v&eacute;hicules pour lesquels un permis de conduire des cat&eacute;gories C ou EC est requis. Au vu du dipl&ocirc;me ou du titre professionnel, le pr&eacute;fet du d&eacute;partement dans lequel a &eacute;t&eacute; d&eacute;livr&eacute; le titre ou le dipl&ocirc;me, d&eacute;livre au conducteur, apr&egrave;s avoir v&eacute;rifi&eacute; la validit&eacute; de son permis de conduire, une carte de qualification de conducteur (mod&egrave;le &agrave; para&icirc;tre prochainement). Cette carte doit &ecirc;tre renouvel&eacute;e tous les 5 ans apr&egrave;s chaque session de formation continue</p>\r\n', '<p>تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية</p>\r\n', './images/etudiants/library.jpg'),
+(2, 'Formation des conducteurs professionnels', 'تدريب السائقين المحترفين', 'Formation pour toute personne intéreseé d\'avoir un permis de conduite professionnel des camions', 'تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية', 'Tout conducteur de véhicule de transport de marchandises dont le poids total autorisé en charge (PTAC) excède 3,5 tonnes doit avoir satisfait, préalablement à l’exercice de son activité de conduite, à une obligation de qualification initiale. Cette qualification initiale est\r\nobtenue à l’issue d’une formation professionnelle qui peut être longue ou accélérée. La qualification initiale peut être obtenue à l’issue d’une formation professionnelle longue de 280 heures minimum, sanctionnée par l’obtention d’un titre professionnel de conduite routière ou d’un diplôme de niveau V de conducteur routier.\r\nSont ainsi visés :\r\n- le Certificat d’Aptitude Professionnelle (CAP) conducteur routier de marchandises,\r\n- le Brevet d’Études Professionnelles (BEP) conduite et services dans le transport routier,\r\n- le titre professionnel de Conducteur du Transport Routier de Marchandises sur tous Véhicules (CTRMV) délivré par le Ministre chargé de l’emploi et de la \r\n   formation professionnelle,\r\n- le titre professionnel de Conducteur du Transport Routier de Marchandises sur Porteur (CTRMP) délivré par le Ministre chargé de l’emploi et de la \r\n   formation professionnelle.\r\n\r\nL’obtention de l’un de ces titres ou diplômes permet à son titulaire de conduire, dès l’âge de 18 ans, les véhicules pour lesquels un permis de conduire des catégories C ou EC est requis.\r\nAu vu du diplôme ou du titre professionnel, le préfet du département dans lequel a été délivré le titre ou le diplôme, délivre au conducteur, après avoir vérifié la validité de son permis de conduire, une carte de qualification de conducteur (modèle à paraître prochainement). Cette carte doit être renouvelée tous les 5 ans après chaque session de formation continue', 'تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية', './images/etudiants/library.jpg'),
+(10, 'Nouvelle Formation', 'تكوين جديد', '<p>C&#39;est une nouvelle formation</p>\r\n', '<p>تكوين جديد</p>\r\n', '<p>Une nouvelle formation</p>\r\n\r\n<p>Pour les &eacute;tudiants int&eacute;ress&eacute; de voyager &agrave; l&#39;&eacute;tranger pour continuer leurs &eacute;tudes.</p>\r\n', '<p>تكوين لصالح الطلبة المهتمين بالسفر إلى الخارج للدراسة</p>\r\n', './images/formation/630.jpg');
 
 -- --------------------------------------------------------
 
@@ -261,7 +266,8 @@ CREATE TABLE `img_salle` (
 INSERT INTO `img_salle` (`img_id`, `img_salle`, `img1`, `img2`, `img3`, `img4`) VALUES
 (4, 1, './images/salles/salle1.jfif', './images/salles/salle2.jpg', './images/salles/salle3.jfif', './images/salles/salle4.jfif'),
 (7, 3, './images/salles/salle1.jpg', './images/salles/salle2.jfif', './images/salles/salle3.jpg', './images/salles/salle4.jfif'),
-(8, 4, './images/salles/salle1.jfif', './images/salles/salle2.jfif', './images/salles/salle3.jfif', './images/salles/Tangier.jpg');
+(8, 4, './images/salles/salle1.jfif', './images/salles/salle2.jfif', './images/salles/salle3.jfif', './images/salles/Tangier.jpg'),
+(9, 5, './images/salles/630.jpg', './images/salles/class_a.jpg', './images/salles/iso-9001.jpg', './images/salles/entropot.jpg');
 
 -- --------------------------------------------------------
 
@@ -314,19 +320,25 @@ CREATE TABLE `matiere` (
   `mat_id` int(11) NOT NULL,
   `mat_formation` int(11) NOT NULL,
   `mat_nom` varchar(200) NOT NULL,
-  `mat_duree` varchar(200) NOT NULL,
-  `mat_prof` varchar(200) NOT NULL
+  `mat_nom_arab` varchar(200) NOT NULL,
+  `mat_duree` int(11) NOT NULL,
+  `mat_prof` varchar(200) NOT NULL,
+  `mat_prof_arab` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `matiere`
 --
 
-INSERT INTO `matiere` (`mat_id`, `mat_formation`, `mat_nom`, `mat_duree`, `mat_prof`) VALUES
-(1, 1, 'Traduction', '4h', 'Mohamed Louadi'),
-(2, 1, 'Marketing', '5h', 'Yasmina Aboussabr'),
-(5, 2, 'Cours pratique', '4h', 'Abderahmane Bouhouch'),
-(69, 2, 'Cours théorique', '3h', 'Salim Guechich');
+INSERT INTO `matiere` (`mat_id`, `mat_formation`, `mat_nom`, `mat_nom_arab`, `mat_duree`, `mat_prof`, `mat_prof_arab`) VALUES
+(1, 1, 'Traduction', 'الترجمة', 4, 'Hicham Louadi', 'هشام الوادي'),
+(2, 1, 'Marketing', 'التسويق', 5, 'Yasmina Aboussabr', 'ياسمين أبوالصبر'),
+(5, 2, 'Cours pratique', 'درس تطبيقي', 4, 'Abderahmane Bouhouch', 'عبدالرحمان بوحوش'),
+(69, 2, 'Cours théorique', 'درس نظري', 3, 'Salim Guechich', 'سليم كشيش'),
+(75, 10, 'Economie', 'الاقتصاد', 3, 'Jamal Bida', 'جمال بيدا'),
+(76, 10, 'Comptabilité', 'المحاسبة', 3, 'Khaled Bessi', 'خالد بيسسي'),
+(77, 1, 'Littérature Français', 'أدب فرنسي', 4, 'Salma Houma', 'سلمى حوما'),
+(78, 1, 'Histoire et Géographie', 'التاريخ والجغرافيا', 4, 'Said Benmoura', 'سعيد بنمورا');
 
 -- --------------------------------------------------------
 
@@ -347,16 +359,21 @@ CREATE TABLE `note` (
 --
 
 INSERT INTO `note` (`not_id`, `not_formation`, `not_matiere`, `not_etudiant`, `not_note`) VALUES
-(4, 1, 1, 1, 18),
-(19, 1, 2, 1, 12),
 (29, 2, 69, 90, 12),
 (30, 2, 5, 90, 20),
 (50, 2, 5, 91, 12),
 (51, 2, 69, 95, 19),
 (52, 2, 5, 95, 12),
 (53, 2, 69, 91, 13),
-(60, 1, 1, 96, 14),
-(61, 2, 5, 97, 11);
+(60, 1, 1, 96, 18),
+(61, 2, 5, 97, 11),
+(64, 1, 2, 96, 17),
+(65, 1, 77, 96, 13),
+(68, 1, 1, 1, 14),
+(69, 1, 2, 1, 12),
+(70, 1, 77, 1, 12),
+(71, 1, 78, 1, 14),
+(72, 1, 78, 96, 15);
 
 -- --------------------------------------------------------
 
@@ -414,28 +431,31 @@ INSERT INTO `reservation` (`res_id`, `res_nom`, `res_telephone`, `res_email`, `r
 CREATE TABLE `salle` (
   `sal_id` int(11) NOT NULL,
   `sal_nom` varchar(200) NOT NULL,
+  `sal_nom_arab` varchar(200) NOT NULL,
   `sal_desc` text NOT NULL,
+  `sal_desc_arab` varchar(200) NOT NULL,
   `sal_prix` float NOT NULL,
   `sal_personne` int(11) NOT NULL,
   `sal_image` varchar(200) NOT NULL,
   `sal_service` varchar(200) NOT NULL,
+  `sal_service_arab` varchar(200) NOT NULL,
   `sal_service2` varchar(200) NOT NULL,
+  `sal_service2_arab` varchar(200) NOT NULL,
   `sal_service3` varchar(200) NOT NULL,
+  `sal_service3_arab` varchar(200) NOT NULL,
   `sal_service4` varchar(200) NOT NULL,
-  `sal_service5` varchar(200) NOT NULL,
-  `sal_service6` varchar(200) NOT NULL,
-  `sal_service7` varchar(200) NOT NULL,
-  `sal_service8` varchar(200) NOT NULL
+  `sal_service4_arab` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `salle`
 --
 
-INSERT INTO `salle` (`sal_id`, `sal_nom`, `sal_desc`, `sal_prix`, `sal_personne`, `sal_image`, `sal_service`, `sal_service2`, `sal_service3`, `sal_service4`, `sal_service5`, `sal_service6`, `sal_service7`, `sal_service8`) VALUES
-(1, 'Salle 1', 'Notre salle de formation est munie du wifi haute-vitesse, un projecteur, un paper board et ses accessoires, un microphone et des sonorisations. Tout est mis à votre disposition afin de vous permettre de réaliser vos présentations et vos projections, la salle de formation est  aussi équipée d’un système audiovisuel de haute qualité (Smart télévision).\r\n\r\nLa salle de formation est une salle ultramoderne, chic et élégante, facile d’accès située dans un endroit unique, équipée d’une air climatisée de premier ordre , d’un ordinateur et de Multi-prises électriques. Notre salle de formation de Rabat est l’endroit qu’il faut pour vos formation à venir.', 150, 20, './images/salles/location-salle-de-formation.jpg', 'Oridnateurs', 'Imprimante', 'Photocopieur', 'Restauration', '', '', '', ''),
-(3, 'Salle 2', 'Notre salle de formation est munie du wifi haute-vitesse, un projecteur, un paper board et ses accessoires, un microphone et des sonorisations. Tout est mis à votre disposition afin de vous permettre de réaliser vos présentations et vos projections, la salle de formation est  aussi équipée d’un système audiovisuel de haute qualité (Smart télévision).\r\n\r\nLa salle de formation est une salle ultramoderne, chic et élégante, facile d’accès située dans un endroit unique, équipée d’une air climatisée de premier ordre , d’un ordinateur et de Multi-prises électriques. Notre salle de formation de Rabat est l’endroit qu’il faut pour vos formation à venir.', 150, 20, './images/salles/salle.jfif', 'Oridnateurs', 'Imprimantes', 'Photocopieurs', 'Restauration', '', '', '', ''),
-(4, 'Salle 3', 'Notre salle de formation est munie du wifi haute-vitesse, un projecteur, un paper board et ses accessoires, un microphone et des sonorisations. Tout est mis à votre disposition afin de vous permettre de réaliser vos présentations et vos projections, la salle de formation est  aussi équipée d’un système audiovisuel de haute qualité (Smart télévision).\r\n\r\nLa salle de formation est une salle ultramoderne, chic et élégante, facile d’accès située dans un endroit unique, équipée d’une air climatisée de premier ordre , d’un ordinateur et de Multi-prises électriques. Notre salle de formation de Rabat est l’endroit qu’il faut pour vos formation à venir.', 150, 20, './images/salles/for.jfif', 'Oridnateurs', 'Imprimantes', 'Photocopieurs', 'Restauration', '', '', '', '');
+INSERT INTO `salle` (`sal_id`, `sal_nom`, `sal_nom_arab`, `sal_desc`, `sal_desc_arab`, `sal_prix`, `sal_personne`, `sal_image`, `sal_service`, `sal_service_arab`, `sal_service2`, `sal_service2_arab`, `sal_service3`, `sal_service3_arab`, `sal_service4`, `sal_service4_arab`) VALUES
+(1, 'Salle 1', 'قاعة 1', 'Notre salle de formation est munie du wifi haute-vitesse, un projecteur, un paper board et ses accessoires, un microphone et des sonorisations. Tout est mis à votre disposition afin de vous permettre de réaliser vos présentations et vos projections, la salle de formation est  aussi équipée d’un système audiovisuel de haute qualité (Smart télévision).\r\n\r\nLa salle de formation est une salle ultramoderne, chic et élégante, facile d’accès située dans un endroit unique, équipée d’une air climatisée de premier ordre , d’un ordinateur et de Multi-prises électriques. Notre salle de formation de Rabat est l’endroit qu’il faut pour vos formation à venir.', 'قاعة 1', 150, 20, './images/salles/location-salle-de-formation.jpg', 'Oridnateurs', 'حواسيب', 'Imprimante', 'آلة طباعة', 'Photocopieur', 'آلة نسخ', 'Restauration', 'أكل وجبة'),
+(3, 'Salle 2', 'قاعة 2', 'Notre salle de formation est munie du wifi haute-vitesse, un projecteur, un paper board et ses accessoires, un microphone et des sonorisations. Tout est mis à votre disposition afin de vous permettre de réaliser vos présentations et vos projections, la salle de formation est  aussi équipée d’un système audiovisuel de haute qualité (Smart télévision).\r\n\r\nLa salle de formation est une salle ultramoderne, chic et élégante, facile d’accès située dans un endroit unique, équipée d’une air climatisée de premier ordre , d’un ordinateur et de Multi-prises électriques. Notre salle de formation de Rabat est l’endroit qu’il faut pour vos formation à venir.', 'قاعة 2', 150, 20, './images/salles/salle.jfif', 'Oridnateurs', 'حواسيب', 'Imprimantes', 'آلة طباعة', 'Photocopieurs', 'آلة نسخ', 'Restauration', 'أكل وجبة'),
+(4, 'Salle 3', 'قاعة 3', 'Notre salle de formation est munie du wifi haute-vitesse, un projecteur, un paper board et ses accessoires, un microphone et des sonorisations. Tout est mis à votre disposition afin de vous permettre de réaliser vos présentations et vos projections, la salle de formation est  aussi équipée d’un système audiovisuel de haute qualité (Smart télévision).\r\n\r\nLa salle de formation est une salle ultramoderne, chic et élégante, facile d’accès située dans un endroit unique, équipée d’une air climatisée de premier ordre , d’un ordinateur et de Multi-prises électriques. Notre salle de formation de Rabat est l’endroit qu’il faut pour vos formation à venir.', 'قاعة 3', 150, 20, './images/salles/for.jfif', 'Oridnateurs', 'حواسيب', 'Imprimantes', 'آلة طباعة', 'Photocopieurs', 'آلة نسخ', 'Restauration', 'أكل وجبة'),
+(5, 'Salle 4', 'قاعة 4', '<p>Salle 4</p>\r\n', '<p>قاعة 4</p>\r\n', 220, 20, './images/salles/entropot.jpg', 'Oridnateurs', '', 'Imprimante', '', 'Photocopieur', '', 'Restauration', '');
 
 -- --------------------------------------------------------
 
@@ -600,7 +620,7 @@ ALTER TABLE `absence`
 -- AUTO_INCREMENT pour la table `article`
 --
 ALTER TABLE `article`
-  MODIFY `art_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `art_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `attestation`
@@ -612,7 +632,7 @@ ALTER TABLE `attestation`
 -- AUTO_INCREMENT pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT pour la table `contact`
@@ -642,13 +662,13 @@ ALTER TABLE `etudiant`
 -- AUTO_INCREMENT pour la table `formation`
 --
 ALTER TABLE `formation`
-  MODIFY `for_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `for_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `img_salle`
 --
 ALTER TABLE `img_salle`
-  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `iso`
@@ -666,13 +686,13 @@ ALTER TABLE `langue`
 -- AUTO_INCREMENT pour la table `matiere`
 --
 ALTER TABLE `matiere`
-  MODIFY `mat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `mat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT pour la table `note`
 --
 ALTER TABLE `note`
-  MODIFY `not_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `not_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT pour la table `promos`
@@ -690,7 +710,7 @@ ALTER TABLE `reservation`
 -- AUTO_INCREMENT pour la table `salle`
 --
 ALTER TABLE `salle`
-  MODIFY `sal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `sal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `seance`
