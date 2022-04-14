@@ -1,14 +1,19 @@
 <?php
-    $lang= array(
-        "lang_fr" => "الفرنسية",
-		"lang_ar" => "العربية"
+    $lang = array(
+        "langue" => "اختر لغتك",
+        "fr" => "فر",
+        "ar" => "عر",
+        "francais" => "فرنسية",
+        "arabe" => "عربية"
     );
     $title= array(
         "titre" => "الأكاديمية الجهوية للنقل واللوجستيك",
         "Accompagnement" => "ISO مصاحبة شهادة",
         "salle" => "كراء القاعات",
         "article" => "الأخبار",
-        "connexion" => "تسجيل الدخول"
+        "connexion" => "تسجيل الدخول",
+        "inscription" => "تسجيل",
+        "password" => "نسيت كلمة المرور"
     );
     $navbar= array(
         "Accueil"=>"الصفحة الرئيسية",
@@ -142,7 +147,53 @@
         "connexion" => "تسجيل الدخول",
         "CIN" => "بطاقة التعريف",
         "passe" => "كلمة المرور",
-        "inscrire" => "التسجيل من هنا"
+        "inscrire" => "التسجيل من هنا",
+        "oublie" => "نسيت كلمة المرور"
+    );
+    $password= array(
+        "oublie" => "نسيت كلمة المرور",
+        "nouveau" => "كلمة مرور جديدة",
+        "afficher" => "عرض كلمة المرور",
+        "suivant" => "التالي",
+        "emailcheck" => "أدخل بريدك الإلكتروني",
+        "email" => "بريدك الإلكتروني",
+        "envoyer" => "إرسال",
+    );
+    $espaceetudiant= array(
+        "notes" => "نقطي",
+        "documents" => "ملفاتي",
+        "presence" => "حضور",
+        "seances" => "حصص",
+        "avancement" => "تقدم",
+        "envoyee" => "تم ارسال الطلب",
+        "Diplome" => "دبلوم جاهز",
+        "Demande_dip" => "طلب دبلوم",
+        "Attestation" => "شهادة جاهزة",
+        "Demande_att" => "طلب شهادة",
+        "general" => "النقطة عامه",
+        "note" => "نقط"
+    );
+    $inscription= array(
+        "email" => "بريد الالكتروني",
+        "date" => "تاريخ الميلاد",
+        "lieu" => "مكان الولادة",
+        "telephone" => "رقم الهاتف",
+        "adresse" => "عنوان",
+        "passe" => "كلمة السر",
+        "cin" => "رقم البطاقة الوطنية",
+        "formation" => "التكوينات",
+        "permis" => "رقم رخصة السياقة",
+        "categorie" => "فئة رخصة السياقة",
+        "obtention" => "تاريخ الحصول على رخصة السياقة",
+        "scan_cin" => "مسح البطاقة الوطنية",
+        "scan_permis" => "مسح رخصة القيادة",
+        "scan_visite" => "مسح الفحص الطبي",
+        "image" => "صورة شخصية",
+        "inscrire" => "التسجيل",
+        "inscription" => "التسجيل",
+        "choisir" => "اختر التدريب الخاص بك",
+        "profesionnel" => "رقم البطاقة المهنية",
+        "categorie_permis" => "فئة الرخصة الخاص بك"
     );
     $footer= array(
         "contactez" => "اتصل بنا",

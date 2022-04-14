@@ -19,90 +19,93 @@
     </head>
     <body>
         <?php include_once "navbar-admin.php";?>
-        <div class="container">
-            <form action="" method="POST" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col-md-12 my-5">
-                        <h3 class="text-center mb-3">Ajout en Français</h3>
-                        <div class="card card-position">
-                            <div class="card-header text-center link-font align-items-center">
-                                <i class="fas fa-plus-square"></i> Ajouter une formation
-                            </div>
-                            <div class="card-body py-5 w-100">
-                                <div class="row mb-3">
-                                    <label for="titre" class="col-md-12 col-form-label text-md-end">Nom de formation</label>
-                                    <div class="col-md-12">
-                                        <div class="d-flex">
-                                            <i class="fas fa-tag position-awesome"></i>
-                                            <input id="titre" type="text" class="form-control pl-5" name="titre" value="" autocomplete="titre" autofocus required>
-                                        </div>
-                                    </div>
+            <div class="container">
+                <div class="text-center py-3">
+                    <h2><i class="fas fa-plus-square"></i> Ajouter Formation</h2>
+                </div>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-12 my-5">
+                            <h3 class="text-center mb-3">Ajout en Français</h3>
+                            <div class="card card-position">
+                                <div class="card-header text-center link-font align-items-center">
+                                    <i class="fas fa-plus-square"></i> Ajouter une formation
                                 </div>
-                                <div class="row mb-3">
-                                    <label for="presentation" class="col-md-12 col-form-label text-md-end">Présentation</label>
-                                    <div class="col-md-12">
-                                        <textarea id="editor2"rows="10" class="form-control position-text-area" name="presentation" value="" autocomplete="presentation" autofocus required></textarea>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="prof" class="col-md-12 col-form-label text-md-end">Déscription</label>
-                                    <div class="col-md-12">
-                                        <textarea rows="10" class="form-control position-text-area" id="editor" name="description" value="" autocomplete="presentation" autofocus required></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 my-5">
-                        <h3 class="text-center mb-3">Ajout en Arabe</h3>
-                        <div class="card card-position">
-                            <div class="card-header text-center link-font align-items-center"><i class="fas fa-plus-square"></i> أضف تكوين</div>
-                                <div class="card-body py-5">
+                                <div class="card-body py-5 w-100">
                                     <div class="row mb-3">
-                                        <label for="titre" class="col-md-12 col-form-label text-md-end">اسم التكوين</label>
+                                        <label for="titre" class="col-md-12 col-form-label text-md-end">Nom de formation</label>
                                         <div class="col-md-12">
                                             <div class="d-flex">
                                                 <i class="fas fa-tag position-awesome"></i>
-                                                <input id="titre" type="text" class="form-control pl-5" name="titre_arabe" value="" autocomplete="titre" autofocus required>
+                                                <input id="titre" type="text" class="form-control pl-5" name="titre" value="" autocomplete="titre" autofocus required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="presentation" class="col-md-12 col-form-label text-md-end">مقدمة عن التكوين</label>
+                                        <label for="presentation" class="col-md-12 col-form-label text-md-end">Présentation</label>
                                         <div class="col-md-12">
-                                            <textarea id="editor3"rows="10" class="form-control position-text-area" name="presentation_arabe" value="" autocomplete="presentation" autofocus required></textarea>
+                                            <textarea id="editor2"rows="10" class="form-control position-text-area" name="presentation" value="" autocomplete="presentation" autofocus required></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="prof" class="col-md-12 col-form-label text-md-end">وصف التكوين</label>
+                                        <label for="prof" class="col-md-12 col-form-label text-md-end">Déscription</label>
                                         <div class="col-md-12">
-                                            <textarea rows="10" class="form-control position-text-area" id="editor4" name="description_arabe" value="" autocomplete="presentation" autofocus required></textarea>
+                                            <textarea rows="10" class="form-control position-text-area" id="editor" name="description" value="" autocomplete="presentation" autofocus required></textarea>
                                         </div>
                                     </div>
-                                    <div class="row mb-3 align-items-center">
-                                        <label for="prof" class="col-md-12 col-form-label text-md-end">Image</label>
-                                        <div class="col-md-6">
-                                            <div class="d-flex">
-                                                <i class="fas fa-camera position-awesome-image"></i>
-                                                <input id="image_input" type="file" class="form-control-file pl-5" name="image" autofocus required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 my-5">
+                            <h3 class="text-center mb-3">Ajout en Arabe</h3>
+                            <div class="card card-position">
+                                <div class="card-header text-center link-font align-items-center"><i class="fas fa-plus-square"></i> أضف تكوين</div>
+                                    <div class="card-body py-5">
+                                        <div class="row mb-3">
+                                            <label for="titre" class="col-md-12 col-form-label text-md-end">اسم التكوين</label>
+                                            <div class="col-md-12">
+                                                <div class="d-flex">
+                                                    <i class="fas fa-tag position-awesome"></i>
+                                                    <input id="titre" type="text" class="form-control pl-5" name="titre_arabe" value="" autocomplete="titre" autofocus required>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div id="display_image" class="display_image"></div>
+                                        <div class="row mb-3">
+                                            <label for="presentation" class="col-md-12 col-form-label text-md-end">مقدمة عن التكوين</label>
+                                            <div class="col-md-12">
+                                                <textarea id="editor3"rows="10" class="form-control position-text-area" name="presentation_arabe" value="" autocomplete="presentation" autofocus required></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-0 text-center">
-                                        <div class="col-md-12">
-                                            <button type="submit" name="submit" class="btn btn-primary">Ajouter la formation</button>
+                                        <div class="row mb-3">
+                                            <label for="prof" class="col-md-12 col-form-label text-md-end">وصف التكوين</label>
+                                            <div class="col-md-12">
+                                                <textarea rows="10" class="form-control position-text-area" id="editor4" name="description_arabe" value="" autocomplete="presentation" autofocus required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 align-items-center">
+                                            <label for="prof" class="col-md-12 col-form-label text-md-end">Image</label>
+                                            <div class="col-md-6">
+                                                <div class="d-flex">
+                                                    <i class="fas fa-camera position-awesome-image"></i>
+                                                    <input id="image_input" type="file" class="form-control-file pl-5" name="image" autofocus required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div id="display_image" class="display_image"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-0 text-center">
+                                            <div class="col-md-12">
+                                                <button type="submit" name="submit" class="btn btn-primary">Ajouter la formation</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
         <script>
             CKEDITOR.replace('editor');
             CKEDITOR.replace('editor2');

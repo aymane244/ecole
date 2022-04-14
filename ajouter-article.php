@@ -25,6 +25,9 @@
     <body>
         <?php include_once "navbar-admin.php";?>
         <div class="container">
+            <div class="text-center py-5">
+                <h2><i class="fas fa-plus-square"></i> Ajouter Un article</h2>
+            </div>
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-12 my-5">

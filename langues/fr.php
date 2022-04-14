@@ -1,7 +1,10 @@
 <?php
-    $lang= array(
-        "lang_fr" => "Français",
-		"lang_ar" => "Arabe"
+    $lang = array(
+        "langue" => "Choisir votre langue",
+        "fr" => "FR",
+        "ar" => "AR",
+        "francais" => "Français",
+        "arabe" => "Arabe"
     );
     $title= array(
         "titre" => "ARTL Nord",
@@ -9,7 +12,9 @@
         "Categoratsion" => "Catégoratsion de la douane",
         "salle" => "Location des salles",
         "article" => "Articles",
-        "connexion" => "Connexion"
+        "connexion" => "Connexion",
+        "inscription" => "Inscription",
+        "password" => "Mot de passe oublié"
     );
     $navbar= array(
         "Accueil"=>"Accueil",
@@ -145,11 +150,57 @@
         "comment" => "Votre Commentaire",
         "Ecrire" => "Ecrire votre commentaire",
     );
+    $espaceetudiant= array(
+        "notes" => "Mes Notes",
+        "documents" => "Mes Documents",
+        "presence" => "Présence",
+        "seances" => "Séances",
+        "avancement" => "Etat d'avancement",
+        "envoyee" => "Demande envoyée",
+        "Diplome" => "Diplome prêt",
+        "Demande_dip" => "Demande Diplôme",
+        "Attestation" => "Attestation prête",
+        "Demande_att" => "Demande Attestation",
+        "general" => "Note Générale",
+        "note" => "Notes"
+    );
     $login= array(
         "connexion" => "Connexion",
         "CIN" => "CIN",
         "passe" => "Mot de passe",
-        "inscrire" => "S'inscrire Ici"
+        "inscrire" => "S'inscrire Ici",
+        "oublie" => "Mot de passe oublié"
+    );
+    $inscription= array(
+        "email" => "Email",
+        "date" => "Date de naissance",
+        "lieu" => "Lieu de naissance",
+        "telephone" => "Numéro de téléphone",
+        "adresse" => "Adresse",
+        "passe" => "Mot de passe",
+        "cin" => "CIN",
+        "formation" => "Formations",
+        "permis" => "Numéro de permis",
+        "categorie" => "Catégorie de permis",
+        "obtention" => "Date de l'obtention",
+        "scan_cin" => "Scan CIN",
+        "scan_permis" => "Scan du permis de conduite",
+        "scan_visite" => "Scan de la visite médicale",
+        "image" => "Image personnelle",
+        "inscrire" => "S'inscrire",
+        "inscription" => "Inscription",
+        "choisir" => "Choisir votre formation",
+        "profesionnel" => "Numéro de la carte professionnelle",
+        "categorie_permis" => "La Catégorie de votre permis"
+    );
+    $password= array(
+        "oublie" => "Mot de passe oublié",
+        "nouveau" => "Nouveau mot de passe",
+        "afficher" => "Afficher mot de passe",
+        "suivant" => "Suivant",
+        "emailcheck" => "Insérez votre email",
+        "email" => "Votre email",
+        "envoyer" => "Envoyer",
     );
     $footer= array(
         "contactez" => "Contactez-nous",

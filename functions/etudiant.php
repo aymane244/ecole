@@ -416,22 +416,32 @@
             return $resultArray;
         }
         public function checkEmailCin(){
+            $date = date("Y-m-d");
             $nom = $_POST['nom'];
+            $nom_arab = $_POST['nom_arab'];
             $prenom = $_POST['prenom'];
+            $prenom_arab = $_POST['prenom_arab'];
             $email = $_POST['email'];
             $motdepasse = md5($_POST['motdepasse']);
             $cin = $_POST['cin'];
             $telephone = $_POST['telephone'];
             $naissance = $_POST['naissance'];
+            $lieu = $_POST['lieu'];
+            $adresse = $_POST['adresse'];
             $formation = $_POST['formation'];
-            $diplome = basename($_FILES['diplome']['name']);
-            $allowed = array('jpg', 'png', 'jpeg');
-            $allowed2 = array('pdf');
+            $permis = $_POST['permis'];
+            $categorie = $_POST['categorie'];
+            $obtenir = $_POST['obtenir'];
+            $profesionnel = $_POST['profesionnel'];
+            $promos = $_POST['promos'];
+            $scan_cin = basename($_FILES['scan_cin']['name']);
+            $scan_permis = basename($_FILES['scan_permis']['name']);
+            $scan_visite = basename($_FILES['scan_visite']['name']);
             $image = basename($_FILES['image']['name']);
-            $path = "./images/etudiants/";
-            $path2 = "./diplomes/";
-            $ext = pathinfo($image, PATHINFO_EXTENSION);
-            $ext2 = pathinfo($diplome, PATHINFO_EXTENSION);
+            
+            //$ext = pathinfo($image, PATHINFO_EXTENSION);
+            //$ext2 = pathinfo($scan_cin, PATHINFO_EXTENSION);
+            $age = date_diff(date_create($naissance), date_create($date));
             $result = $this->db->conn->query("SELECT `etud_email` FROM `etudiant` WHERE etud_email = '$email'");
             $result2 = $this->db->conn->query("SELECT `etud_cin` FROM `etudiant` WHERE etud_cin = '$cin'");
             if(mysqli_num_rows($result)){
@@ -440,28 +450,41 @@
             else if(mysqli_num_rows($result2)){
                 $_SESSION['status'] = "CIN exist déja";
             }else{
-                if(!in_array($ext, $allowed) & $image != ""){
+                if($formation == ""){
                     echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Le fichier que vous avez choisit est de type ".$ext.
-                            "<br>Nous supportant juste les fichiers type images 'jpg, png, jpeg'
+                            Veuillez choisir une formation
                         </div>";
-                }else if($diplome == ""){
+                }else if($categorie == ""){
                     echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Veuillez charger votre diplôme
+                            Veuillez choisir une catégorie de permis
                         </div>";
-                }else if(!in_array($ext2, $allowed2)){
+                }else if($date < $naissance){
                     echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Le fichier que vous avez choisit est de type ".$ext2.
-                            "<br>Nous supportant le fichiers de type pdf
+                            Veuillez saisir une date de naissance correcte
+                        </div>";
+                }else if((int)$age->format('%y') < 18){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            Votre age doit dépasser 18 ans veuillez vérifier la date de naissance
+                        </div>";
+                }else if($date < $obtenir){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            La date d'obtention ne dois pas dépasser la date d'aujourd'hui ".$date." 
                         </div>";
                 }else{
-                    move_uploaded_file($_FILES['image']['tmp_name'], $path.$image);
-                    move_uploaded_file($_FILES['diplome']['tmp_name'], $diplome);
-                    $res = $this->db->conn->query("INSERT INTO `etudiant`
-                        (`etud_nom`, `etud_prenom`, `etud_email`, `etud_motdepasse`, `etud_cin`, `etud_telephone`, `etud_naissance`, 
-                        `etud_formation`, `etud_diplome`, `etud_image`, `etud_inscription`)
-                        VALUES ('$nom','$prenom','$email','$motdepasse','$cin',$telephone,'$naissance',
-                        '$formation','$path2$diplome','$path$image',NOW())");
+                    mkdir("dossiers-stagiaires/".$prenom."-".$nom,0777,true);
+                    $path = "./dossiers-stagiaires/$prenom-$nom/";
+                    if($path){
+                        move_uploaded_file($_FILES['image']['tmp_name'], $path."image-".$image);
+                        move_uploaded_file($_FILES['scan_cin']['tmp_name'], $path."cin-".$scan_cin);
+                        move_uploaded_file($_FILES['scan_permis']['tmp_name'], $path."permis-".$scan_permis);
+                        move_uploaded_file($_FILES['scan_visite']['tmp_name'], $path."visite-".$scan_visite);   
+                    }
+                    $res = $this->db->conn->query("INSERT INTO `etudiant`(`etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, 
+                        `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, 
+                        `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, 
+                        `etud_scan_cin`, `etud_scan_permis`, `etud_scan_visite`, `etud_promos`, `etud_image`, `etud_inscription`) VALUES ('$nom','$nom_arab',
+                        '$prenom','$prenom_arab','$email','$telephone','$motdepasse','$cin','$formation','$naissance','$lieu','$adresse',
+                        '$permis','$categorie','$profesionnel','$obtenir','$path$scan_cin','$path$scan_permis','$path$scan_visite','$promos','$path$image',NOW())");
                     if($res){
                         $_SESSION['status_login'] = "Votre inscription a été bien effectué merci de visiter votre email<br><a href='login'>Connectez-vous ici</a>";
                     }
@@ -614,8 +637,8 @@
             $douane_email = $_POST['douane_email'];
             $douane_message = mysqli_escape_string($this->db->conn, $_POST['douane_message']);
             $douane_categorie= $_POST['douane_categorie'];
-            $result = $this->db->conn->query("INSERT INTO `douane`(`dou_nom`, `dou_res_nom`, `dou_res_email`, `dou_res_message`) 
-                VALUES ('$douane_categorie','$douane_nom','$douane_email','$douane_message')");
+            $result = $this->db->conn->query("INSERT INTO `douane`(`dou_nom`, `dou_res_nom`, `dou_res_email`, `dou_res_message`, `dou_res_date`) 
+                VALUES ('$douane_categorie','$douane_nom','$douane_email','$douane_message', NOW())");
             if($result){
                 $_SESSION['status'] = "Votre demande de catégorisation douane a été envoyée avec success";
                 echo "<script>window.location.href='douane'</script>";
@@ -800,8 +823,8 @@
             $iso_email = $_POST['iso_email'];
             $iso_message = mysqli_escape_string($this->db->conn, $_POST['iso_message']);
             $iso_categorie= $_POST['iso_categorie'];
-            $result = $this->db->conn->query("INSERT INTO `iso`(`iso_nom`, `iso_res_nom`, `iso_res_email`, `iso_res_message`) 
-                VALUES ('$iso_categorie','$iso_nom','$iso_email','$iso_message')");
+            $result = $this->db->conn->query("INSERT INTO `iso`(`iso_nom`, `iso_res_nom`, `iso_res_email`, `iso_res_message`, `iso_res_date`) 
+                VALUES ('$iso_categorie','$iso_nom','$iso_email','$iso_message', NOW())");
             if($result){
                 $_SESSION['status'] = "Votre demande d'accompagnement ISO a été envoyée avec success";
                 echo "<script>window.location.href='conseil'</script>";
@@ -978,9 +1001,47 @@
                 $resultArray[] = $item;
             }
             return $resultArray;
+        }
+        public function getisoTotal(){
+            $result = $this->db->conn->query("SELECT COUNT(iso_id) AS 'total_iso' FROM `iso`");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
             }
-            public function getdouane(){
+            return $resultArray;
+        }
+        public function getisoDate(){
+            $date = date("Y-m-d");
+            $result = $this->db->conn->query("SELECT COUNT(iso_id) AS 'total_iso_date' FROM `iso` WHERE iso_res_date='$date'");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function getdouane(){
             $result = $this->db->conn->query("SELECT * FROM `douane`");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function getdouaneTotal(){
+            $result = $this->db->conn->query("SELECT COUNT(dou_id) AS 'Total_douane' FROM `douane`");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function getdouaneDate(){
+            $date = date("Y-m-d");
+            $result = $this->db->conn->query("SELECT COUNT(dou_id) AS 'Total_douane_date' FROM `douane` WHERE dou_res_date='$date'");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -998,11 +1059,33 @@
             return $resultArray;
         }
         public function getabsence(){
-            $get_matiere = $_POST['get_matiere'];
-            $absence_date = $_POST['absence_date'];
+            @$get_matiere = $_POST['get_matiere'];
+            @$absence_date = $_POST['absence_date'];
             $result = $this->db->conn->query("SELECT * FROM `absence` INNER JOIN `etudiant` 
                 ON absence.abs_etudiant=etudiant.etud_id INNER JOIN `formation` ON absence.abs_formation=formation.for_id 
                 WHERE abs_matiere='$get_matiere' AND abs_date='$absence_date' GROUP BY etud_id, abs_date");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function getabsenceetudiant(){
+            $id = $_SESSION['id'];
+            $result = $this->db->conn->query("SELECT *, COUNT(abs_absence) AS 'Total_absence' FROM `absence` INNER JOIN `etudiant` 
+                ON absence.abs_etudiant=etudiant.etud_id WHERE abs_absence='Présent' AND etud_id=$id");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function getTotalAbsence(){
+            $id = $_SESSION['id'];
+            $result = $this->db->conn->query("SELECT *, COUNT(abs_id) AS 'Total' FROM `absence` INNER JOIN `etudiant` 
+            ON absence.abs_etudiant=etudiant.etud_id WHERE etud_id=$id");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){

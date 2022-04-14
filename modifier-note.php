@@ -38,74 +38,77 @@
     </head>
     <body>
         <?php include_once "navbar-admin.php";?>
-        <div class="container">
-            <?php
-                if(isset($_SESSION['status'])){
-            ?>
-            <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
-            <?php
-                    unset($_SESSION['status']);
-                }
-            ?>
-            <div class="row justify-content-center">
-                <div class="col-md-12 mt-5">
-                    <div class="card card-position">
-                        <div class="card-header text-center link-font"><i class="fas fa-edit"></i> modifier les notes</div>
-                        <div class="card-body py-5">
-                            <form action="" method="POST" enctype="multipart/form-data">
-                                <div class="row mb-3">
-                                    <label for="categorie" class="col-md-4 col-form-label text-md-end">Formation</label>
-                                    <div class="col-md-12">
-                                        <div class="d-flex">
-                                            <i class="fas fa-folder-open position-awesome"></i>
-                                            <select class="custom-select pl-5" name="nameformations">
-                                                <option value="<?php echo $for_id ?>"><?php echo $for_nom?></option>
-                                            </select>
+            <div class="container pb-1">
+                <div class="text-center py-3">
+                    <h2><i class="fas fa-edit"></i> Modifier Notes</h2>
+                </div>
+                <?php
+                    if(isset($_SESSION['status'])){
+                ?>
+                <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
+                <?php
+                        unset($_SESSION['status']);
+                    }
+                ?>
+                <div class="row justify-content-center">
+                    <div class="col-md-12 mt-5">
+                        <div class="card card-position">
+                            <div class="card-header text-center link-font"><i class="fas fa-edit"></i> Modifier les notes</div>
+                            <div class="card-body py-5">
+                                <form action="" method="POST" enctype="multipart/form-data">
+                                    <div class="row mb-3">
+                                        <label for="categorie" class="col-md-4 col-form-label text-md-end">Formation</label>
+                                        <div class="col-md-12">
+                                            <div class="d-flex">
+                                                <i class="fas fa-folder-open position-awesome"></i>
+                                                <select class="custom-select pl-5" name="nameformations">
+                                                    <option value="<?php echo $for_id ?>"><?php echo $for_nom?></option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="categorie" class="col-md-4 col-form-label text-md-end">Matière</label>
-                                    <div class="col-md-12">
-                                        <div class="d-flex">
-                                            <i class="fas fa-tag position-awesome"></i>
-                                            <select class="custom-select pl-5" name="matieres">
-                                                <option value="<?php echo $formation['mat_id'] ?>"><?php echo $formation['mat_nom']?></option>
-                                            </select>
+                                    <div class="row mb-3">
+                                        <label for="categorie" class="col-md-4 col-form-label text-md-end">Matière</label>
+                                        <div class="col-md-12">
+                                            <div class="d-flex">
+                                                <i class="fas fa-tag position-awesome"></i>
+                                                <select class="custom-select pl-5" name="matieres">
+                                                    <option value="<?php echo $formation['mat_id'] ?>"><?php echo $formation['mat_nom']?></option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="categorie" class="col-md-4 col-form-label text-md-end">Etudiant</label>
-                                    <div class="col-md-12">
-                                        <div class="d-flex">
-                                            <i class="fas fa-user-graduate position-awesome"></i>
-                                            <select class="custom-select pl-5" name="etudiants">
-                                                <option value="<?php echo $etud_id ?>"><?php echo $etud_prenom." ". $etud_nom?></option>
-                                            </select>
+                                    <div class="row mb-3">
+                                        <label for="categorie" class="col-md-4 col-form-label text-md-end">Etudiant</label>
+                                        <div class="col-md-12">
+                                            <div class="d-flex">
+                                                <i class="fas fa-user-graduate position-awesome"></i>
+                                                <select class="custom-select pl-5" name="etudiants">
+                                                    <option value="<?php echo $etud_id ?>"><?php echo $etud_prenom." ". $etud_nom?></option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="note" class="col-md-4 col-form-label text-md-end">Saisir la note</label>
-                                    <div class="col-md-12">
-                                        <div class="d-flex">
-                                            <i class="fas fa-poll position-awesome"></i>
-                                            <input id="note" type="number" class="form-control pl-5" min="0" max="20" name="note" value="<?php echo $note ?>" autocomplete="note" size="2" autofocus required>
+                                    <div class="row mb-3">
+                                        <label for="note" class="col-md-4 col-form-label text-md-end">Saisir la note</label>
+                                        <div class="col-md-12">
+                                            <div class="d-flex">
+                                                <i class="fas fa-poll position-awesome"></i>
+                                                <input id="note" type="number" class="form-control pl-5" min="0" max="20" name="note" value="<?php echo $note ?>" autocomplete="note" size="2" autofocus required>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mb-0">
-                                    <div class="col-md-8 offset-md-4">
-                                        <button type="submit" name="submit" class="btn btn-primary">Modifier la note</button>
+                                    <div class="row mb-0">
+                                        <div class="col-md-12 text-center mt-3">
+                                            <button type="submit" name="submit" class="btn btn-primary">Modifier la note</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </body>
 </html>
 <?php

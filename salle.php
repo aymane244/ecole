@@ -313,11 +313,11 @@
                     </div>
                 </div>
             </div>
+            <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">
+                <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>
+            </div>
+            <?php include_once "footer.php";?>
         </div>
-        <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">
-            <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>
-        </div>
-        <?php include_once "footer.php";?>
         <script>
             $(document).ready(function(){
                 $("#submit_salle").click(function() {

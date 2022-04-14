@@ -3,32 +3,9 @@
     if(!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])){
         echo "<script>window.location.href='login-admin'</script>";
     }
-    include_once 'etudiant.php';
-    include_once 'functions/db.php';
-    $db = new DBController();
-    $data = new Etudiant($db);
-    //$etudiants = $data->getEtudiantForma();
-    $result = $db->conn->query("SELECT `etud_id` FROM `etudiant` INNER JOIN `formation` ON for_id=etud_formation");
-    $per_page = 5;
-    $start = 0;
-    $current_page = 1;
-    $record = $result->num_rows; 
-    if(isset($_GET['page'])){
-        $start=$_GET['page'];
-        if($start <=0){
-            $start = 0;
-            $current_page = 1;
-        }else{
-            $current_page = $start;
-            $start--;
-            $start = $start*$per_page;
-        }
-    }
-    $pages = ceil($record/$per_page);
-        $result = $db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON for_id=etud_formation LIMIT $start, $per_page");
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,55 +15,60 @@
             include_once "style.php";
             include_once "scripts.php";
         ?>
-        <title>Etudiants</title>
+        <title>Gestion de formation</title>
     </head>
+    <?php
+        $id = $_GET['id'];
+        $etudiants = $data->getEtudiantNotes();
+        foreach($etudiants as $etudiant){
+            if($etudiant['for_id'] == $id){
+                $fornom = $etudiant['for_nom'];
+                $for_id = $etudiant['for_id'];
+            }
+        }
+    ?>
     <body>
         <?php include_once "navbar-admin.php";?>
             <div class="container" id="div-push">
-                <?php
-                    if(isset($_SESSION['status'])){
-                ?>
-                <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
-                <?php
-                        unset($_SESSION['status']);
-                    }
-                ?>
-                <div class="text-center py-5">
-                    <h2><i class="fas fa-user-graduate"></i> Page étudiant</h2>
+                <div class="text-center pt-3 mb-4">
+                    <h2>Gestion de la formation</h2>
                 </div>
-                <div class="d-flex mt-3">
-                    <i class="fas fa-search position-awesome"></i>
-                    <input type="text" class="form-control px-5" id="search" placeholder="Chercher un etudiant" name="nom">
-                </div>
-                <table class="table bg-white table-bordered mt-5">
+                <div class="text-center mt-3">
+                    <a href="absence?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Gérer l'absence</a>
+                    <a href="notes?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Afficher les notes</a>
+                </div> 
+                <table class="table table-hover mt-5 bg-white">
                     <thead class="text-center">
                         <tr>
                             <th scope="col" colspan="9">ARTL Nord</th>
                         </tr>
                         <tr>
+                            <th scope = "col" colspan="9"><?= $fornom ?></th>
+                        </tr>
+                        <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Formation</th>
                             <th scope="col">Nom complet</th>
                             <th scope="col">diplôme</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="text-center"  id="result">
+                    <tbody class="text-center">
                         <?php
-                            if($result->num_rows <= 0){
-                        ?>
+                            $i=1;
+                            foreach($etudiants as $etudiant){
+                                if($etudiant['for_id'] == $id){
+                                    if($etudiant['etud_formation'] != $etudiant['for_id']){
+                        ?>  
                         <tr>
-                            <th scope="col" colspan="4"><h1>Pas d'étudiants</h1></th>
+                            <th scope="row" colspan="4"><h1>Pas d'étudiants</h1></th>
                         </tr>
                         <?php
                             }else{
-                                $i=1;
-                                while($etudiant = $result->fetch_assoc()){
                         ?>
                         <tr>
                             <th scope="row"><?php echo $i++ ?></th>
-                            <td><?php echo $etudiant['for_nom'];?></td>
                             <td><?php echo $etudiant['etud_prenom']." ".$etudiant['etud_nom'];?></td>
-                            <td> 
+                            <td>
                                 <a download="<?php echo $etudiant['etud_diplome']?>" href="<?php echo $etudiant['etud_diplome']?>">
                                     <?php
                                         if($etudiant['etud_diplome'] == ''){      
@@ -98,28 +80,18 @@
                                     ?>
                                 </a>
                             </td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-id" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $etudiant['etud_id'] ?>">Détails</button>
+                                <a href="saisir-notes?id=<?php echo $etudiant['etud_id'] ?>" target="_blank" class="btn btn-primary">Saisir les notes</a>
+                            </td>
                         </tr>
-                        <?php
+                        <?php       
+                                    }
                                 }
                             }
                         ?>
                     </tbody>
                 </table>
-                <nav aria-label="Page navigation example" class="pb-1">
-                    <ul class="pagination">
-                        <?php
-                            for($n=1;$n<=$pages;$n++){
-                                $calss ='';
-                                if($current_page == $n){
-                                    $calss ="active";
-                                }
-                        ?>
-                        <li class="page-item <?php echo $calss ?> ml-2"><a class="page-link" href="?page=<?php echo $n ?>"><?php echo $n ?></a></li>
-                        <?php
-                            }
-                        ?>
-                    </ul>
-                </nav>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -145,17 +117,7 @@
                     var ids = $(this).data('id');
                     $.post("functions/traitement.php",{id:ids, action: "student_id"}, function(data){
 					    $('#load_data').html(data);
-			        })
-                });
-            })
-        </script>
-        <script>
-            $(document).ready(function(){
-                $("#search").keyup(function() {
-                    var nom = $("#search").val();
-                    $.post( "functions/traitement.php",{nom: nom, action:'search_student'}, function(result) {
-                        $('#result').html(result);
-                    });
+			    })
                 });
             })
         </script>

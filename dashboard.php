@@ -16,6 +16,12 @@
     $etuds = $data->getEtudiantTotalDate();
     $dates = $data->getReservationsDate();
     $counts = $data->getReservationsCount();
+    $iso = $data->getiso();
+    $isodate = $data->getisoDate();
+    $douane = $data->getdouane();
+    $douanedate = $data->getdouaneDate();
+    $isototal = $data->getisoTotal();
+    $douanetotal = $data->getdouaneTotal();
     $i=1;
     foreach($etudparforma as $etud){
         $nombreEtudiant[] = $etud['nombre_total'];
@@ -45,6 +51,18 @@
     foreach($dates as $date){
         $salledate = $date['reservations_date'];
     }
+    foreach($isodate as $item){
+        $countisodate = $item['total_iso_date'];
+    }
+    foreach($douanedate as $item){
+        $countdouanedate = $item['Total_douane_date'];
+    }
+    foreach($isototal as $count){
+        $countiso = $count['total_iso'];
+    }
+    foreach($douanetotal as $count){
+        $countdaounae = $count['Total_douane'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,184 +78,229 @@
         <title>Dashboard</title>
     </head>
     <body>
-        <div class="div-background">
-            <?php include_once "navbar-admin.php";?>
-            <div class="container" id="div-push">
-                <?php
-                    if(isset($_SESSION['status'])){
-                ?>
-                <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
-                <?php
-                        unset($_SESSION['status']);
-                    }
-                ?>
-                <div class="text-center pt-3 text-color mb-4">
-                    <h2 class="pt-4"><i class="fas fa-tachometer-alt"></i> Tableau de bord de l'institut</h2>
-                    <hr class="hr-width">
+        <?php include_once "navbar-admin.php";?>
+        <div class="container" id="div-push">
+            <?php
+                if(isset($_SESSION['status'])){
+            ?>
+            <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
+            <?php
+                    unset($_SESSION['status']);
+                }
+            ?>
+            <div class="text-center pt-3 text-color mb-4">
+                <h2 class="pt-4"><i class="fas fa-tachometer-alt"></i> Tableau de bord de l'institut</h2>
+                <hr class="hr-width">
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
+                        <h4>Total de stagiaires: <label id="value_etud"><?php echo $total_etud?></label></h4>
+                        <div class="div-progress mx-auto">
+                            <div id="myBar" class="bar"></div>
+                        </div>
+                        <h4 class="mt-4">Total des formateurs: <label id="value_prof"><?php echo $total_prof?></label></h4>
+                        <div class="div-progress mx-auto">
+                            <div id="myBar3" class="bar"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
-                            <h4>Total de stagiaires: <label id="value_etud"><?php echo $total_etud?></label></h4>
-                            <div class="div-progress mx-auto">
-                                <div id="myBar" class="bar"></div>
-                            </div>
-                            <h4 class="mt-4">Total des formateurs: <label id="value_prof"><?php echo $total_prof?></label></h4>
-                            <div class="div-progress mx-auto">
-                                <div id="myBar3" class="bar"></div>
-                            </div>
-                        </div>
+                <div class="col-md-4 text-center">
+                    <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
+                        <h4>Articles publiés: <br> <label id="value_article"><?php echo $total_article?></label></h4>
+                        <h4 class="mt-3">Commentaires ecrits: <br><label id="value_comm"><?php echo $com_total?></label></h4>
                     </div>
-                    <div class="col-md-4 text-center">
-                        <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
-                            <h4>Articles publiés: <br> <label id="value_article"><?php echo $total_article?></label></h4>
-                            <h4 class="mt-3">Commentaires ecrits: <br><label id="value_comm"><?php echo $com_total?></label></h4>
-                        </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
+                        <h4>Date: <label id=""><?php echo date("d/m/Y")?></label></h4>
+                        <h4 class="mt-5">Etudiants inscrits aujourd'hui: <br> <label id="value_etud_date"><?php echo $etudiantdate?></label></h4>
                     </div>
-                    <div class="col-md-4 text-center">
-                        <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
-                            <h4>Date: <label id=""><?php echo date("d/m/Y")?></label></h4>
-                            <h4 class="mt-5">Etudiants inscrits aujourd'hui: <br> <label id="value_etud_date"><?php echo $etudiantdate?></label></h4>
-                        </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="text-center pt-3 text-color">
+                        <h4 class="pt-4">Nouvels inscriptions</h4>
+                        <hr class="hr-width mb-3">
                     </div>
-                    <div class="col-md-8">
-                        <div class="text-center pt-3 text-color">
-                            <h4 class="pt-4">Nouvels inscriptions</h4>
-                            <hr class="hr-width mb-3">
-                        </div>
-                        <table class="table bg-white">
-                            <thead class="text-center">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nom et prénom</th>
-                                    <th scope="col">Formation</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
-                                <?php
-                                    foreach($etudiantsinscrit as $inscrit){
-                                ?>
-                                <tr>
-                                    <th scope="row"><?php echo $i ?></th>
-                                    <td><?php echo $inscrit['etud_nom']." ".$inscrit['etud_prenom']; ?></td>
-                                    <td><?php echo $inscrit['for_nom'] ?></td>
-                                </tr>
-                                <?php
-                                        $i++;
+                    <table class="table bg-white">
+                        <thead class="text-center">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom et prénom</th>
+                                <th scope="col">Formation</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <?php
+                                foreach($etudiantsinscrit as $inscrit){
+                            ?>
+                            <tr>
+                                <th scope="row"><?php echo $i ?></th>
+                                <td><?php echo $inscrit['etud_nom']." ".$inscrit['etud_prenom']; ?></td>
+                                <td><?php echo $inscrit['for_nom'] ?></td>
+                            </tr>
+                            <?php
+                                    $i++;
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="text-center pt-3 text-color">
+                        <h4 class="pt-4">Demandes documents</h4>
+                        <hr class="hr-width mb-3">
+                    </div>
+                    <table class="table bg-white">
+                        <thead class="text-center">
+                            <tr>
+                                <th scope="col" colspan="2">Demande diplome</th>
+                            </tr>
+                            <tr>
+                                <th>Nom et prénom</th>
+                                <th>Type de demande</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <?php
+                                foreach($diplomes as $diplome){
+                                    if($diplome['dip_image'] == ''){
+                            ?>
+                            <tr>
+                                <td><?= $diplome['etud_prenom']." ".$diplome['etud_nom']?></td>
+                                <td>Diplôme</td>
+                            </tr>
+                            <?php
                                     }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <div class="text-center pt-3 text-color">
-                            <h4 class="pt-4">Réservation des salles</h4>
-                            <hr class="hr-width mb-3">
-                        </div>
-                        <div class="bg-white w-100 rounded px-3 py-3 text-color">
-                            <h4>Nombre de réservations: <label id="sall_res"><?php echo $sallenumb?></label></h4>
-                            <h4 class="mt-5">Réservations aujourd'hui: <br> <label id="sall_res_date"><?php echo $salledate?></label></h4>
-                        </div>
-                    </div>
-                    <div class="col-md-7 text-center">
-                        <div class="text-center pt-3 text-color">
-                            <h4 class="pt-4">Etudiant inscrit pour chaque formation</h4>
-                            <hr class="hr-width mb-3">
-                        </div>
-                        <div class="bg-white py-3">
-                            <canvas class="myChart px-5"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-md-5 text-center">
-                        <div class="text-center pt-3 text-color">
-                            <h4 class="pt-4">Demandes documents</h4>
-                            <hr class="hr-width mb-3">
-                        </div>
-                        <table class="table bg-white">
-                            <thead class="text-center">
-                                <tr>
-                                    <th scope="col" colspan="2">Demande diplome</th>
-                                </tr>
-                                <tr>
-                                    <th>Nom et prénom</th>
-                                    <th>Type de demande</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
-                                <?php
-                                    foreach($diplomes as $diplome){
-                                        if($diplome['dip_image'] == ''){
-                                ?>
-                                <tr>
-                                    <td><?= $diplome['etud_prenom']." ".$diplome['etud_nom']?></td>
-                                    <td>Diplôme</td>
-                                </tr>
-                                <?php
-                                        }
-                                    }foreach($attestations as $attestation){
-                                        if($attestation['att_image'] == ''){
-                                ?>
-                                <tr>
-                                    <td><?= $attestation['etud_prenom']." ".$attestation['etud_nom']?></td>
-                                    <td>Attestation</td>
-                                </tr>
-                                <?php
-                                        }
+                                }foreach($attestations as $attestation){
+                                    if($attestation['att_image'] == ''){
+                            ?>
+                            <tr>
+                                <td><?= $attestation['etud_prenom']." ".$attestation['etud_nom']?></td>
+                                <td>Attestation</td>
+                            </tr>
+                            <?php
                                     }
-                                ?>
-                            </tbody>
-                        </table>
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                    <div class="text-center text-color">
+                        <h4 class="pt-4">Accompagnement</h4>
+                        <hr class="hr-width mb-3">
                     </div>
-                    <div class="col-md-12">
-                        <div class="text-center pt-3 text-color">
-                            <h2 class="pt-4">Réservations des salles</h2>
-                            <hr class="hr-width mb-3">
-                        </div>
-                        <table class="table bg-white mt-4">
-                            <thead class="text-center">
-                                <tr>
-                                    <th scope="col" colspan="9">ALT Nord</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Salle</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Nom</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Telephone</th>
-                                    <th scope="col">Message</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
-                                <?php
-                                    $i=1;
-                                    foreach($reservations as $reservation){
-                                ?>
-                                <tr>
-                                    <th scope="row"><?php echo $i++ ?></th>
-                                    <td><?php echo $reservation['sal_nom'];?></td>
-                                    <td><?php echo $reservation['res_date']. " ".$reservation['time_debut']." ".$reservation['time_fin'];?></td>
-                                    <td><?php echo $reservation['res_nom'];?></td>
-                                    <td><?php echo $reservation['res_email'];?></td>
-                                    <td><?php echo $reservation['res_telephone'];?></td>
-                                    <td><?php echo $reservation['res_commentaire'];?></td>
-                                    <td class="row-style">
-                                        <form action="" method="POST">
-                                            <input type="hidden" name="reservation_id" value="<?php echo $reservation['res_id']?>">
-                                            <input type="hidden" name="salle_id" value="<?php echo $reservation['sal_id']?>">
-                                            <button type="submit" class="btn-style" name="submit_res" onclick='return confirm("Voulez-vous supprimer cette réservation")'>
-                                                <i class="fas fa-trash-alt text-danger awesome-size"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <?php
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
+                    <table class="table bg-white">
+                        <thead class="text-center">
+                            <tr>
+                                <th scope="col" colspan="2">Accompagnement</th>
+                            </tr>
+                            <tr>
+                                <th>Nom et prénom</th>
+                                <th>Type de d'accomp.</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <?php
+                                foreach($iso as $item){
+                            ?>
+                            <tr>
+                                <td><?= $item['iso_res_nom']?></td>
+                                <td><?= $item['iso_nom']?></td>
+                            </tr>
+                            <?php
+                                }
+                                foreach($douane as $item){
+                            ?>
+                            <tr>
+                                <td><?= $item['dou_res_nom']?></td>
+                                <td><?= $item['dou_nom']?></td>
+                            </tr>
+                            <?php
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-7 text-center">
+                    <div class="text-center pt-3 text-color">
+                        <h4 class="pt-4">Etudiant inscrit pour chaque formation</h4>
+                        <hr class="hr-width mb-3">
                     </div>
+                    <div class="bg-white py-3">
+                        <canvas class="myChart px-5"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-5 text-center">
+                    <div class="text-center pt-3 text-color">
+                        <h4 class="pt-4">Réservation des salles</h4>
+                        <hr class="hr-width mb-3">
+                    </div>
+                    <div class="bg-white w-100 rounded px-3 py-3 text-color">
+                        <h4>Nombre de réservations total: <label id="sall_res"><?php echo $sallenumb?></label></h4>
+                        <h4 class="mt-5">Réservations aujourd'hui: <br> <label id="sall_res_date"><?php echo $salledate?></label></h4>
+                    </div>
+                    <div class="text-center text-color">
+                        <h4 class="pt-4">Accompagnement & Conseil</h4>
+                        <hr class="hr-width mb-3">
+                    </div>
+                    <div class="bg-white w-100 rounded px-3 py-3 text-color">
+                        <h4>Nombre d'accompagnement total: <label id="res_iso"><?php echo $countiso?></label></h4>
+                        <h4 class="mt-5">Réservations aujourd'hui: <br> <label id="res_iso_date"><?php echo $countisodate?></label></h4>
+                    </div>
+                    <div class="bg-white w-100 rounded px-3 py-3 text-color">
+                        <h4>Nombre de catégorisation total: <label id="res_douane"><?php echo $countdaounae?></label></h4>
+                        <h4 class="mt-5">Réservations aujourd'hui: <br> <label id="res_douane_date"><?php echo $countdouanedate?></label></h4>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="text-center pt-3 text-color">
+                        <h2 class="pt-4">Réservations des salles</h2>
+                        <hr class="hr-width mb-3">
+                    </div>
+                    <table class="table bg-white mt-4">
+                        <thead class="text-center">
+                            <tr>
+                                <th scope="col" colspan="9">ALT Nord</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Salle</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Telephone</th>
+                                <th scope="col">Message</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <?php
+                                $i=1;
+                                foreach($reservations as $reservation){
+                            ?>
+                            <tr>
+                                <th scope="row"><?php echo $i++ ?></th>
+                                <td><?php echo $reservation['sal_nom'];?></td>
+                                <td><?php echo $reservation['res_date']. " ".$reservation['time_debut']." ".$reservation['time_fin'];?></td>
+                                <td><?php echo $reservation['res_nom'];?></td>
+                                <td><?php echo $reservation['res_email'];?></td>
+                                <td><?php echo $reservation['res_telephone'];?></td>
+                                <td><?php echo $reservation['res_commentaire'];?></td>
+                                <td class="row-style">
+                                    <form action="" method="POST">
+                                        <input type="hidden" name="reservation_id" value="<?php echo $reservation['res_id']?>">
+                                        <input type="hidden" name="salle_id" value="<?php echo $reservation['sal_id']?>">
+                                        <button type="submit" class="btn-style" name="submit_res" onclick='return confirm("Voulez-vous supprimer cette réservation")'>
+                                            <i class="fas fa-trash-alt text-danger awesome-size"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php
+                                }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -349,26 +412,38 @@
             var numetuddate = <?php echo json_encode($etudiantdate)?>;
             var sallres = <?php echo json_encode($sallenumb)?>;
             var sallresdate = <?php echo json_encode($salledate)?>;
+            var iso = <?php echo json_encode($countiso)?>;
+            var douane = <?php echo json_encode($countdaounae)?>;
+            var isodate = <?php echo json_encode($countisodate)?>;
+            var douanedate = <?php echo json_encode($countdouanedate)?>;
             function animateValue(obj, start, end, duration){
                 let startTimestamp = null;
                 const step = (timestamp) =>{
                     if(!startTimestamp) startTimestamp = timestamp;
-                    if(numbetud <10){
+                    if(numbetud < 10){
                         var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
-                    }else if(numbforma){
+                    }else if(numbforma < 10){
                         var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
-                    }else if(numbprof){
+                    }else if(numbprof < 10){
                         var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
-                    }else if(numbart){
+                    }else if(numbart < 10){
                         var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
-                    }else if(numbcom){
+                    }else if(numbcom < 10){
                         var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
-                    }else if(numetuddate){
+                    }else if(numetuddate < 10){
                         var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
-                    }else if(sallres){
+                    }else if(sallres < 10){
                         var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
-                    }else if(sallresdate){
+                    }else if(sallresdate < 10){
                         var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
+                    }else if(iso < 10){
+                        var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
+                    }else if(douane < 10){
+                        var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
+                    }else if(isodate < 10){
+                        var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
+                    }else if(douanedate < 10){
+                        var progress = Math.min((timestamp - startTimestamp) / duration, 1);
                     }else{
                         var progress = Math.min((timestamp - startTimestamp) / duration, 1);
                     }
@@ -403,6 +478,18 @@
             }if(sallresdate){
                 const obj = document.getElementById("sall_res_date");
                 animateValue(obj, sallresdate, 0, 5000);
+            }if(iso){
+                const obj = document.getElementById("res_iso");
+                animateValue(obj, iso, 0, 5000);
+            }if(douane){
+                const obj = document.getElementById("res_douane");
+                animateValue(obj, douane, 0, 5000);
+            }if(isodate){
+                const obj = document.getElementById("res_iso_date");
+                animateValue(obj, isodate, 0, 5000);
+            }if(douanedate){
+                const obj = document.getElementById("res_douane_date");
+                animateValue(obj, douanedate, 0, 5000);
             }
         </script>
     </body>

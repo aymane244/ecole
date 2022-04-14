@@ -36,88 +36,91 @@
     </head>
     <body>
         <?php include_once "navbar-admin.php";?>
-        <div class="container">
-            <form action="" method="POST" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col-md-12 mt-5">
-                        <h3 class="text-center mb-3">Modifier en Français</h3>
-                        <div class="card card-position pb-5">
-                            <div class="card-header text-center link-font"><i class="fas fa-edit"></i> Editer votre formation</div>
-                            <div class="card-body py-5">
-                                <div class="row mb-3">
-                                    <label for="formationom" class="col-md-12 col-form-label text-md-end">Nom de Formation</label>
-                                    <div class="col-md-12">
-                                        <div class="d-flex">
-                                            <i class="fas fa-tag position-awesome"></i>
-                                            <input id="formationom" type="text" class="form-control pl-5" name="formation_nom" value="<?php echo $forma ?>" autocomplete="matiere" autofocus required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="presentation" class="col-md-12 col-form-label text-md-end">Présentation</label>
-                                    <div class="col-md-12">
-                                        <textarea id="editor2" type="text" rows="10" class="form-control" name="presentation" autocomplete="presentation" autofocus required><?php echo $presentation ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="description" class="col-md-12 col-form-label text-md-end">Déscription</label>
-                                    <div class="col-md-12">
-                                        <textarea id="editor" type="text" rows="10" class="form-control" name="description" autocomplete="description" value="<?php echo $description ?>" required><?php echo $description ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-5">
-                        <h3 class="text-center mb-3">Modifier en Arabe</h3>
-                        <div class="card card-position">
-                            <div class="card-header text-center link-font"><i class="fas fa-edit"></i>تعديل التكوين</div>
-                            <div class="card-body py-5">
-                                <div class="row mb-3">
-                                    <label for="formationom" class="col-md-12 col-form-label text-md-end">اسم التكوين</label>
-                                    <div class="col-md-12">
-                                        <div class="d-flex">
-                                            <i class="fas fa-tag position-awesome"></i>
-                                            <input id="formationom" type="text" class="form-control pl-5" name="formation_nom_arab" value="<?php echo $forma_arab ?>" autocomplete="matiere" autofocus required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="presentation" class="col-md-12 col-form-label text-md-end">مقدمة عن التكوين</label>
-                                    <div class="col-md-12">
-                                        <textarea id="editor3" type="text" rows="10" class="form-control" name="presentation_arab" autocomplete="presentation" autofocus required><?php echo $presentation_arab ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="description" class="col-md-12 col-form-label text-md-end">عرض التكوين</label>
-                                    <div class="col-md-12">
-                                        <textarea id="editor4" type="text" rows="10" class="form-control" name="description_arab" autocomplete="description" value="<?php echo $description_arab ?>" required><?php echo $description_arab ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center">
-                                    <label for="prof" class="col-md-12 col-form-label text-md-end">Image</label>
-                                    <div class="col-md-6">
-                                        <div class="d-flex">
-                                            <i class="fas fa-camera position-awesome-image"></i>
-                                            <input id="image_2" type="file" class="form-control-file pl-5" name="image" autofocus>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div id="display_image_2" class="display_image" style="display:none;"></div>
-                                        <img src="<?php echo $image ?>" alt="" style="width:400px; height:225px" id="image_display">
-                                    </div>
-                                </div>
-                                <div class="row mb-0 text-center">
-                                    <div class="col-md-12 mt-4">
-                                        <button type="submit" name="submit" class="btn btn-primary">Modifier la formation</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="container">
+                <div class="text-center py-3">
+                    <h2><i class="fas fa-edit"></i> Modifier la formation</h2>
                 </div>
-            </form>
-        </div>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-12 mt-5">
+                            <h3 class="text-center mb-3">Modification en Français</h3>
+                            <div class="card card-position pb-5">
+                                <div class="card-header text-center link-font"><i class="fas fa-edit"></i> Editer votre formation</div>
+                                <div class="card-body py-5">
+                                    <div class="row mb-3">
+                                        <label for="formationom" class="col-md-12 col-form-label text-md-end">Nom de Formation</label>
+                                        <div class="col-md-12">
+                                            <div class="d-flex">
+                                                <i class="fas fa-tag position-awesome"></i>
+                                                <input id="formationom" type="text" class="form-control pl-5" name="formation_nom" value="<?php echo $forma ?>" autocomplete="matiere" autofocus required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="presentation" class="col-md-12 col-form-label text-md-end">Présentation</label>
+                                        <div class="col-md-12">
+                                            <textarea id="editor2" type="text" rows="10" class="form-control" name="presentation" autocomplete="presentation" autofocus required><?php echo $presentation ?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="description" class="col-md-12 col-form-label text-md-end">Déscription</label>
+                                        <div class="col-md-12">
+                                            <textarea id="editor" type="text" rows="10" class="form-control" name="description" autocomplete="description" value="<?php echo $description ?>" required><?php echo $description ?></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-5">
+                            <h3 class="text-center mb-3">Modification en Arabe</h3>
+                            <div class="card card-position">
+                                <div class="card-header text-center link-font"><i class="fas fa-edit"></i>تعديل التكوين</div>
+                                <div class="card-body py-5">
+                                    <div class="row mb-3">
+                                        <label for="formationom" class="col-md-12 col-form-label text-md-end">اسم التكوين</label>
+                                        <div class="col-md-12">
+                                            <div class="d-flex">
+                                                <i class="fas fa-tag position-awesome"></i>
+                                                <input id="formationom" type="text" class="form-control pl-5" name="formation_nom_arab" value="<?php echo $forma_arab ?>" autocomplete="matiere" autofocus required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="presentation" class="col-md-12 col-form-label text-md-end">مقدمة عن التكوين</label>
+                                        <div class="col-md-12">
+                                            <textarea id="editor3" type="text" rows="10" class="form-control" name="presentation_arab" autocomplete="presentation" autofocus required><?php echo $presentation_arab ?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="description" class="col-md-12 col-form-label text-md-end">عرض التكوين</label>
+                                        <div class="col-md-12">
+                                            <textarea id="editor4" type="text" rows="10" class="form-control" name="description_arab" autocomplete="description" value="<?php echo $description_arab ?>" required><?php echo $description_arab ?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <label for="prof" class="col-md-12 col-form-label text-md-end">Image</label>
+                                        <div class="col-md-6">
+                                            <div class="d-flex">
+                                                <i class="fas fa-camera position-awesome-image"></i>
+                                                <input id="image_2" type="file" class="form-control-file pl-5" name="image" autofocus>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div id="display_image_2" class="display_image" style="display:none;"></div>
+                                            <img src="<?php echo $image ?>" alt="" style="width:400px; height:225px" id="image_display">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-0 text-center">
+                                        <div class="col-md-12 mt-4">
+                                            <button type="submit" name="submit" class="btn btn-primary">Modifier la formation</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         <script>
             CKEDITOR.replace('editor');
             CKEDITOR.replace('editor2');

@@ -58,8 +58,8 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid">
-                <div class="bg-choisir rounded px-3 py-4 mt-4 text-center">
+            <div class="container">
+                <div class="bg-choisir rounded px-3 mt-4 text-center pt-3">
                     <h2 class="text-white"><?php echo $index['pourquoi'] ?></h2>
                     <p class="text-white">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, porro dolor quae hic, 
@@ -68,35 +68,37 @@
                     </p>
                     <div class="row">
                         <div class="col-lg-4">
-                            <div class="border p-4 bg-white" style="height:350px">
-                                <div class="pb-3 pt-5"><i class="fas fa-award awesome-font pt-2"></i></div>
+                            <div class="border bg-white py-3">
+                                <div class="py-3"><i class="fas fa-award awesome-font pt-2"></i></div>
                                 <h2><?php echo $index['qualite'] ?></h2>
-                                <p class="text-padding-3">
+                                <p class="">
                                     Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip
                                 </p>
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="border p-4 bg-white" style="height:350px">
-                                <div class="pb-3 pt-5"><i class="fas fa-user-tie awesome-font pt-2"></i></div>
-                                <h2 class="text-padding-3"><?php echo $index['profes'] ?></h2>
+                        <div class="border bg-white py-3">
+                                <div class="py-3"><i class="fas fa-user-tie awesome-font pt-2"></i></div>
+                                <h2><?php echo $index['profes'] ?></h2>
                                 <p>
                                     Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip
                                 </p>
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="border p-4 bg-white" style="height:350px">
-                            <div class="pb-3 pt-5"><i class="fas fa-address-card awesome-font pt-2"></i></div>
+                        <div class="border bg-white py-3">
+                            <div class="py-3"><i class="fas fa-address-card awesome-font pt-2"></i></div>
                                 <h2><?php echo $index['carte'] ?></h2>
                                 <p>
                                     Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip
                                 </p>
                             </div>
                         </div>
-                    </div>
-                    <div class="text-center my-5">
-                        <a href="ARTL-Nord" class="btn-formation rounded-pill py-2"><?php echo $index['plus'] ?> <i class="fas fa-chevron-right arrow-font"></i></a>
+                        <div class="col-lg-12">
+                            <div class="text-center my-5">
+                                <a href="ARTL-Nord" class="btn-formation rounded-pill py-2"><?php echo $index['plus'] ?> <i class="fas fa-chevron-right arrow-font"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

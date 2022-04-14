@@ -156,7 +156,7 @@
               </div>
             </div>
           </div> 
-          <div class="container">
+          <div class="container mt-3">
             <div class="row bg-white py-3 align-items-center">
               <div class="col-md-12">
                 <h2 class="text-center mb-3"><?php echo $accompagenemt['accompa'] ?> <span class="iso-style">ISO</span></h2>
@@ -236,8 +236,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <?php include_once "footer.php";?>  
+      <?php include_once "footer.php";?> 
+    </div> 
   </body>
 </html>
 <?php

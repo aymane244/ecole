@@ -9,17 +9,31 @@
     <div class="d-flex justify-content-around">
         <div class="text-white"><i class="fas fa-home"></i> <?php echo $navbar['adresse'] ?></div>
         <div class="text-white">
-            <b><i class="fas fa-mobile"></i> </b><span class="pr-2">+212664159137 </span> 
-            <b><i class="fas fa-phone"></i> </b><span class="pr-2">+212539320395 </span> 
-            <b><i class="fas fa-phone"></i> </b><span class="pr-2">+212539320395</span> 
+            <b><i class="fas fa-mobile"></i> </b><span class="pr-2">+212664159137 </span>
+            <b><i class="fas fa-phone"></i> </b><span class="pr-2">+212539320395 </span>
+            <b><i class="fas fa-envelope"></i> </b><span class="pr-2">artl.nord.tanger@gmail.com </span>
         </div>
-        <div class="text-white"><i class="fas fa-envelope"></i> artl.nord.tanger@gmail.com</div>
         <!--<div id="google_translate_element"></div>-->
         <div>
-            <form action="" method="POST">
-                <input type="submit" value="<?php echo $lang['lang_fr'] ?>" name="fr"></a>
-                <input type="submit" value="<?php echo $lang['lang_ar'] ?>" name="ar"></a>
-            </form>
+            <div class="dropdown">
+                <h6 class="text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <?php echo $lang['langue'] ?>
+                </h6>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <form action="" method="POST">
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" name="fr" style="background-color:transparent; border:none;" data-toggle="tooltip" data-placement="bottom" title="<?php echo $lang['francais'] ?>">
+                                <img src='images/Flag_of_France.svg.png' style='max-width:40px' class="img-fluid">
+                                <span class=""> <?php echo $lang['fr'] ?></span>
+                            </button>
+                            <button type="submit" name="ar" style="background-color:transparent; border:none;" data-toggle="tooltip" data-placement="bottom" title="<?php echo $lang['arabe'] ?>">
+                                <img src='images/Flag_of_the_Arab_League.svg.png' style='max-width:40px' class="img-fluid">
+                                <span > <?php echo $lang['ar'] ?></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

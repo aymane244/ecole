@@ -8,6 +8,16 @@
     $articles = $data->getArticle();
     $diplomes = $data->getDataDiplome();
     $attestations = $data->getAttestation();
+    $absences = $data->getabsenceetudiant();
+    $totalabsences = $data->getTotalAbsence();
+    foreach($absences as $absence){
+        if($absence['etud_id'] == $_SESSION['id']){
+            $totalabsence = $absence['Total_absence'];
+        }
+        foreach($totalabsences as $total){
+            $abs = $total['Total'];
+        }
+    }
     foreach($etudiants as $etudiant){
         if($_SESSION['id'] == $etudiant['etud_id']){
             $etud_id = $etudiant['etud_id'];
@@ -55,7 +65,7 @@
                     <h2 class="pt-3 mb-3"><?php echo $navbar['etudiant']?></h2>
                     <hr class="hr-width">
                 </div>
-                <div class="row align-items-center bg-white py-3">
+                <div class="row bg-white py-3">
                     <div class="col-lg-4">
                         <div>
                             <hr class="bg-light">
@@ -85,14 +95,14 @@
                                             foreach($diplomes as $diplome){
                                                 if($_SESSION['id'] == $diplome['etud_id']){
                                                     if($diplome['dip_image'] == ''){
-                                                        echo '<button type="submit" disabled class="btn btn-info button-style">Demande envoyée</button>';
+                                                        echo '<button type="submit" disabled class="btn btn-info button-style">'.$espaceetudiant['envoyee'].'</button>';
                                                     }else if(in_array($etud_id, $data->getDiplometId($data->getDataDiplome()) ?? [])){
-                                                        echo '<a href="mes-documents" class="btn btn-info button-style">Diplome prêt</a>';
+                                                        echo '<a href="mes-documents" class="btn btn-info button-style">'.$espaceetudiant['Diplome'].'</a>';
                                                     }
                                                 }
                                             }
                                             if(!in_array($etud_id, $data->getDiplometId($data->getDataDiplome()) ?? [])){
-                                                echo '<button type="submit" name="diplome_submit" class="btn btn-info button-style">Demande Diplôme</button>';
+                                                echo '<button type="submit" name="diplome_submit" class="btn btn-info button-style">'.$espaceetudiant['Demande_dip'].'</button>';
                                             }
                                         ?>
                                     </form>    
@@ -102,14 +112,14 @@
                                             foreach($attestations as $attestation){
                                                 if($_SESSION['id'] == $attestation['etud_id']){
                                                     if($attestation['att_image'] == ''){
-                                                        echo '<button type="submit" disabled class="btn btn-info button-style ml-3">Demande envoyée</button>';
+                                                        echo '<button type="submit" disabled class="btn btn-info button-style ml-3">'.$espaceetudiant['envoyee'].'</button>';
                                                     }else if(in_array($etud_id, $data->getAttestationtId($data->getDataAttestation()) ?? [])){
-                                                        echo '<a href="mes-documents" class="btn btn-info button-style ml-3">Attestation prête</a>';
+                                                        echo '<a href="mes-documents" class="btn btn-info button-style ml-3">'.$espaceetudiant['Attestation'].'</a>';
                                                     }
                                                 }
                                             }
                                             if(!in_array($etud_id, $data->getAttestationtId($data->getDataAttestation()) ?? [])){
-                                                echo '<button type="submit" name="attestation_submit" class="btn btn-info button-style ml-3">Demande Attestation</button>';
+                                                echo '<button type="submit" name="attestation_submit" class="btn btn-info button-style ml-3">'.$espaceetudiant['Demande_att'].'</button>';
                                             }
                                        ?>
                                     </form>
@@ -119,18 +129,37 @@
                         </div>
                     </div>
                     <div class="col-lg-8 bg-white py-3">
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-lg-4 col-sm-12 pt-3 text-center">
-                                <a href="mes-notes"><h3 class="text-color">Mes Notes</h3></a>
+                                <a href="mes-notes"><h3 class="text-color"><?php echo $espaceetudiant['notes']?></h3></a>
                                 <a href="mes-notes"><img src="images/notes.jpg" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
                             </div>
                             <div class="col-lg-4 col-sm-12 pt-3 text-center">
-                                <a href="mes-documents"><h3 class="text-color">Mes Documents</h3></a>
+                                <a href="mes-documents"><h3 class="text-color"><?php echo $espaceetudiant['documents']?></h3></a>
                                 <a href="mes-documents"><img src="images/documents.jpg" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
                             </div>
                             <div class="col-lg-4 col-sm-12 pt-3 text-center">
                                 <a href="article"><h3 class="text-color">Actualités</h3></a>
                                 <a href="article"><img src="images/actualites.jpg" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
+                            </div>
+                            <div class="col-md-4 mt-4 mt-lg-5 text-center">
+                                <h5><?php echo $espaceetudiant['avancement']?></h5>
+                            </div>
+                            <div class="col-md-8 mt-4 text-center">
+                                <?php
+                                    if($_SESSION['lang'] == 'ar'){
+                                ?>
+                                <div class="ml-4"> <?php echo $espaceetudiant['presence']?> <?php echo $totalabsence?> / <?php echo $espaceetudiant['seances']?> <?php echo $abs?></div>
+                                <?php        
+                                    }else{
+                                ?>
+                                <div class="ml-4"><?php echo $totalabsence?> <?php echo $espaceetudiant['presence']?> / <?php echo $abs?> <?php echo $espaceetudiant['seances']?></div>
+                                <?php      
+                                    }
+                                ?>
+                                
+                                <progress id="progressBar" value="0" max="<?php echo $abs?>" style="width:300px; height: 30px;" class="ml-3"></progress>
+                                <span id="status"></span>
                             </div>
                         </div>
                     </div>
@@ -158,12 +187,31 @@
             <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">
                 <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>
             </div>
+            <?php include_once "footer.php";?>
         </div>
-        <?php include_once "footer.php";?>
         <script>
             $(document).ready(function(){
                 $(".owl-carousel").owlCarousel();
             });
+        </script>
+        <script>
+            function progress(al){
+                var bar = document.getElementById('progressBar');
+                var status = document.getElementById("status");
+                var numbetud = <?php echo json_encode($totalabsence)?>;
+                var absence = <?php echo json_encode($abs)?>;
+                //status.innerHTML = al+1+"%";
+                bar.value = al;
+                al++;
+                var simulation = setTimeout("progress("+al+")",100);
+                if(al == numbetud){
+                   // status.innerHTML = absence+'%';
+                    bar.value =numbetud;
+                    clearTimeout(simulation);
+                }
+            }
+            var amountLoad = 0;
+            progress(amountLoad);
         </script>
     </body>
 </html>

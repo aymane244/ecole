@@ -4,12 +4,14 @@
         echo "<script>window.location.href='login'</script>";
     }
     $etudiants = $data->getEtudiantMatiereFormation();
+    $matieres = $data->getEtudiantMatiereFormation();
     $notes = $data->noteGenerale();
     foreach($etudiants as $etudiant){
         if($_SESSION['id'] == $etudiant['etud_id']){
             $etudnom = $etudiant['etud_nom'];
             $etudprenom = $etudiant['etud_prenom'];
             $fornom = $etudiant['for_nom'];
+            $fornom_arab = $etudiant['for_nom_arab'];
         }
     }
 ?>
@@ -24,49 +26,69 @@
             include_once "style.php";
             include_once "scripts.php";
         ?>
-        <title>Mes notes</title>
+        <title><?php echo $espaceetudiant['notes']?></title>
     </head>
     <body>
         <?php include_once "navbar.php";?>
-        <h1 class="py-3 text-center" id="top">Mes notes</h1>
+        <h1 class="py-3 text-center" id="top"><?php echo $espaceetudiant['notes']?></h1>
         <div class="container">
             <div class="mx-auto w-75 pb-3">
                 <table class="table table-hover mt-5">
                     <thead class="text-center">
                         <tr>
-                            <th scope="col" colspan="9">ARTL Nord</th>
+                            <th scope="col" colspan="9"><?php echo $title['titre']?></th>
                         </tr>
                         <tr>
-                            <th scope="col" colspan="9"><?php echo $fornom?></th>
+                        <?php
+                            if($_SESSION['lang'] =="ar"){
+                        ?>
+                            <th scope="col" colspan="9"><?php echo $fornom_arab?></th>
+                        <?php
+                            }else{
+                        ?>
+                         <th scope="col" colspan="9"><?php echo $fornom?></th>
+                        <?php      
+                            }
+                        ?>
                         </tr>
                         <tr>
                             <th scope="col" colspan="9"><?php echo $etudprenom." ".$etudnom?></th>
                         </tr>
                         <tr>
-                            <th scope="col">Matières</th>
-                            <th scope="col">Notes</th>
+                            <th scope="col"><?php echo $forma['matieres']?></th>
+                            <th scope="col"><?php echo $espaceetudiant['note']?></th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
                         <?php
-                            foreach($etudiants as $etudiant){
-                                if($_SESSION['id'] == $etudiant['etud_id']){
+                            foreach($matieres as $matiere){
+                                if($_SESSION['id'] == $matiere['etud_id']){
                         ?>
                         <tr>
-                            <td scope="row"><?php echo $etudiant['mat_nom'] ?></td>
-                            <td><?php echo $etudiant['not_note']?></td>
+                            <?php
+                                if($_SESSION['lang'] =="ar"){
+                            ?>
+                            <td scope="row"><?php echo $matiere['mat_nom_arab'] ?></td>
+                            <?php
+                                }else{
+                            ?>
+                            <td scope="row"><?php echo $matiere['mat_nom'] ?></td>
+                            <?php      
+                                }
+                            ?>
+                            <td><?php echo $matiere['not_note']?></td>
                         </tr>
                         <?php
                                 }
                             }
                         ?>
                         <tr>
-                            <td>Note Générale</td>
+                            <td><b><?php echo $espaceetudiant['general']?></b></td>
                             <?php
                                 foreach($notes as $note){
                                     if($note['etud_id'] == $_SESSION['id']){
                             ?>
-                            <td><?php echo $note['notegenerale']?></td>
+                            <td><b><?php echo $note['notegenerale']?></b></td>
                             <?php
                                     }
                                 }

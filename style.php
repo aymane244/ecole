@@ -25,6 +25,9 @@
     .div-background{
         background-color: #F3F8FA;
     }
+    body{
+        background-color: #F3F8FA;
+    }
     .text-color{
         color: #003366;
     }
@@ -738,6 +741,24 @@
         background-color: #0075FF;
         border-radius: 5px 5px;
     }
+    progress {
+        border-radius: 7px; 
+        width: 80%;
+        height: 22px;
+        margin-left: -11.5%;
+        box-shadow: 1px 1px 4px rgba( 0, 0, 0, 0.2 );
+    }
+    progress::-webkit-progress-bar {
+        background-color: #138496 ;
+        border-radius: 7px;
+    }
+    progress::-webkit-progress-value {
+        background-color: #0D2735;
+        border-radius: 7px;
+    }
+    progress::-moz-progress-bar {
+        /* style rules */
+    }
     .blog-background{
         background-color: #F3F8FA;
     }
@@ -1427,4 +1448,39 @@
         border-left: none !important;
         border-right: none !important;
     }
+    .file{
+        display: none;
+    }
+    .file-label{
+        background-color: #0069D9;
+        color: white;
+        cursor: pointer;
+        display: block;
+        transition: 0.4s;
+        border: 1px solid #0069D9;
+    }
+    .file-label:hover{
+        background-color: white;
+        color:#0069D9;
+        border: 1px solid #0069D9;
+    }
+    .position-awesome-upload{
+        font-size: 23px;
+    }
+    .showimage{
+        height: 150px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .showpdf{
+        height: 50px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .fa-arrow-left{
+     	font-size: 35px;
+        position: absolute;
+        padding-top:5px;
+        cursor: pointer;
+	}
 </style>

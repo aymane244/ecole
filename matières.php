@@ -41,152 +41,153 @@
     ?>
     <body>
         <?php include_once "navbar-admin.php";?>
-        <div class="container" id="div-push">
-            <?php
-                if(isset($_SESSION['status'])){
-            ?>
-            <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
-            <?php
-                    unset($_SESSION['status']);
-                }
-            ?>
-            <div class="text-center my-3">
-                <h2><i class="fas fa-book-open"></i> Page Matières</h2>
-            </div>
-            <div class="mt-4 text-center">
-                <a href="ajouter-matière" target="_blank" class="btn btn-primary"><i class="fas fa-plus-square"></i> Ajouter une matière</a>
-            </div>
-            <div class="mt-4 align-items-center d-flex justify-content-center">
-                <input type="button" value="Français" class="btn btn-primary" onclick="frensh()">
-                <input type="button" value="Arabe" class="btn btn-primary ml-3" onclick="arabe()">
-            </div>
-            <div id="frensh">
-                <table class="table table-bordered mt-5">
-                <thead class="text-center">
-                        <tr>
-                            <th scope="col" colspan="5">ARTL Nord</th>
-                        </tr>
-                        <tr>
-                            <th scope="col">Formation</th>
-                            <th scope="col">Matières</th>
-                            <th scope="col">Professeur</th>
-                            <th scope="col">Durée globale</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <?php
-                            for($i=0; $i<sizeof($matieres); $i++){
-                                $formationom = $formationame[$i];
-                        ?>
-                        <tr>
-                            <?php
-                                if($arr[$formationom]['printed'] == 'no'){
-                            ?>
-                            <td class="row-style" rowspan="<?php echo $arr[$formationom]['rowspan'] ?>"><?php echo $formationom ?></td>    
-                            <?php
-                                    $arr[$formationom]['printed'] = 'yes';
-                                }
-                            ?>      
-                            <td><?php echo $matieres[$i] ?> </td>
-                            <td><?php echo $prof[$i] ?></td>
-                            <td><?php echo $duree[$i] ?>h</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <a href="modifier-matière?id=<?php echo $mat_id[$i] ?>" target="_blank"> 
-                                            <i class="fas fa-edit text-success awesome-size"></i>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <form action="" method="POST">
-                                            <input type="hidden" name="matiere_id" value="<?php echo $mat_id[$i] ?>">
-                                            <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer cette matière")'>
-                                                <i class="fas fa-trash-alt text-danger awesome-size"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php
-                            }
-                        ?>
-                    </tbody>    
-                </table>
-            </div>
-            <?php
-                $arr_arab = array();
-                $matieres_arab = array();
-                $formationame_arab = array();
-                $prof_arab = array();
-                foreach($formations as $row){
-                    array_push($formationame_arab, $row['for_nom_arab']);
-                    array_push($matieres_arab, $row['mat_nom_arab']);
-                    array_push($prof_arab, $row['mat_prof_arab']);
-                    if(!isset($arr_arab[$row['for_nom_arab']])){
-                        $arr_arab[$row['for_nom_arab']]['rowspan'] = 0;
+            <div class="container" id="div-push">
+                <div class="text-center py-3">
+                    <h2><i class="fas fa-book-open"></i> Page Matières</h2>
+                </div>
+                <?php
+                    if(isset($_SESSION['status'])){
+                ?>
+                <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
+                <?php
+                        unset($_SESSION['status']);
                     }
-                    $arr_arab[$row['for_nom_arab']]['printed'] = 'no';
-                    $arr_arab[$row['for_nom_arab']]['rowspan'] += 1;
-                }
-            ?>
-            <div id="arabe" style="display:none">
-                <table class="table table-bordered mt-5">
-                    <thead class="text-center">
-                        <tr>
-                        <th scope="col" colspan="5">الأكاديمية الجهوية للنقل واللوجستيك بجهة طنجة</th>
-                        </tr>
-                        <tr>
-                            <th scope="col">اسم التكوين</th>
-                            <th scope="col">اسم المادة</th>
-                            <th scope="col">اسم الأستاذ</th>
-                            <th scope="col">مدة دراسة المادة</th>
-                            <th scope="col">إجراءات</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <?php
-                            for($i=0; $i<sizeof($matieres_arab); $i++){
-                                $formationom_arab = $formationame_arab[$i];
-                        ?>
-                        <tr>
+                ?>
+                <div class="mt-4 text-center">
+                    <a href="ajouter-matière" target="_blank" class="btn btn-primary"><i class="fas fa-plus-square"></i> Ajouter une matière</a>
+                </div>
+                <div class="mt-4 align-items-center d-flex justify-content-center">
+                    <input type="button" value="Français" class="btn btn-primary" onclick="frensh()">
+                    <input type="button" value="Arabe" class="btn btn-primary ml-3" onclick="arabe()">
+                </div>
+                <div id="frensh">
+                    <table class="table table-bordered mt-5 bg-white">
+                        <thead class="text-center">
+                            <tr>
+                                <th scope="col" colspan="5">ARTL Nord</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Formation</th>
+                                <th scope="col">Matières</th>
+                                <th scope="col">Professeur</th>
+                                <th scope="col">Durée globale</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
                             <?php
-                                if($arr_arab[$formationom_arab]['printed'] == 'no'){
+                                for($i=0; $i<sizeof($matieres); $i++){
+                                    $formationom = $formationame[$i];
                             ?>
-                            <td class="row-style" rowspan="<?php echo $arr_arab[$formationom_arab]['rowspan'] ?>"><?php echo $formationom_arab ?></td>    
+                            <tr>
+                                <?php
+                                    if($arr[$formationom]['printed'] == 'no'){
+                                ?>
+                                <td class="row-style" rowspan="<?php echo $arr[$formationom]['rowspan'] ?>"><?php echo $formationom ?></td>    
+                                <?php
+                                        $arr[$formationom]['printed'] = 'yes';
+                                    }
+                                ?>      
+                                <td><?php echo $matieres[$i] ?> </td>
+                                <td><?php echo $prof[$i] ?></td>
+                                <td><?php echo $duree[$i] ?>h</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="modifier-matière?id=<?php echo $mat_id[$i] ?>" target="_blank"> 
+                                                <i class="fas fa-edit text-success awesome-size"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <form action="" method="POST">
+                                                <input type="hidden" name="matiere_id" value="<?php echo $mat_id[$i] ?>">
+                                                <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer cette matière")'>
+                                                    <i class="fas fa-trash-alt text-danger awesome-size"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
                             <?php
-                                    $arr_arab[$formationom_arab]['printed'] = 'yes';
                                 }
-                            ?>      
-                            <td><?php echo $matieres_arab[$i] ?> </td>
-                            <td><?php echo $prof_arab[$i] ?></td>
-                            <td><?php echo $duree[$i] ?>h</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <a href="modifier-matière?id=<?php echo $mat_id[$i] ?>" target="_blank"> 
-                                            <i class="fas fa-edit text-success awesome-size"></i>
-                                        </a>
+                            ?>
+                        </tbody>    
+                    </table>
+                    <br>
+                </div>
+                <?php
+                    $arr_arab = array();
+                    $matieres_arab = array();
+                    $formationame_arab = array();
+                    $prof_arab = array();
+                    foreach($formations as $row){
+                        array_push($formationame_arab, $row['for_nom_arab']);
+                        array_push($matieres_arab, $row['mat_nom_arab']);
+                        array_push($prof_arab, $row['mat_prof_arab']);
+                        if(!isset($arr_arab[$row['for_nom_arab']])){
+                            $arr_arab[$row['for_nom_arab']]['rowspan'] = 0;
+                        }
+                        $arr_arab[$row['for_nom_arab']]['printed'] = 'no';
+                        $arr_arab[$row['for_nom_arab']]['rowspan'] += 1;
+                    }
+                ?>
+                <div id="arabe" style="display:none">
+                    <table class="table table-bordered bg-white mt-5">
+                        <thead class="text-center">
+                            <tr>
+                            <th scope="col" colspan="5">الأكاديمية الجهوية للنقل واللوجستيك بجهة طنجة</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">اسم التكوين</th>
+                                <th scope="col">اسم المادة</th>
+                                <th scope="col">اسم الأستاذ</th>
+                                <th scope="col">مدة دراسة المادة</th>
+                                <th scope="col">إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <?php
+                                for($i=0; $i<sizeof($matieres_arab); $i++){
+                                    $formationom_arab = $formationame_arab[$i];
+                            ?>
+                            <tr>
+                                <?php
+                                    if($arr_arab[$formationom_arab]['printed'] == 'no'){
+                                ?>
+                                <td class="row-style" rowspan="<?php echo $arr_arab[$formationom_arab]['rowspan'] ?>"><?php echo $formationom_arab ?></td>    
+                                <?php
+                                        $arr_arab[$formationom_arab]['printed'] = 'yes';
+                                    }
+                                ?>      
+                                <td><?php echo $matieres_arab[$i] ?> </td>
+                                <td><?php echo $prof_arab[$i] ?></td>
+                                <td><?php echo $duree[$i] ?>h</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="modifier-matière?id=<?php echo $mat_id[$i] ?>" target="_blank"> 
+                                                <i class="fas fa-edit text-success awesome-size"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <form action="" method="POST">
+                                                <input type="hidden" name="matiere_id" value="<?php echo $mat_id[$i] ?>">
+                                                <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer cette matière")'>
+                                                    <i class="fas fa-trash-alt text-danger awesome-size"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <form action="" method="POST">
-                                            <input type="hidden" name="matiere_id" value="<?php echo $mat_id[$i] ?>">
-                                            <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer cette matière")'>
-                                                <i class="fas fa-trash-alt text-danger awesome-size"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php
-                            }
-                        ?>
-                    </tbody>    
-                </table>
+                                </td>
+                            </tr>
+                            <?php
+                                }
+                            ?>
+                        </tbody>    
+                    </table>
+                </div>
             </div>
-        </div>
     </body>
 </html>
 <?php
