@@ -67,7 +67,6 @@
                             <th scope="col">#</th>
                             <th scope="col">Formation</th>
                             <th scope="col">Nom complet</th>
-                            <th scope="col">diplôme</th>
                         </tr>
                     </thead>
                     <tbody class="text-center"  id="result">
@@ -86,18 +85,18 @@
                             <th scope="row"><?php echo $i++ ?></th>
                             <td><?php echo $etudiant['for_nom'];?></td>
                             <td><?php echo $etudiant['etud_prenom']." ".$etudiant['etud_nom'];?></td>
-                            <td> 
-                                <a download="<?php echo $etudiant['etud_diplome']?>" href="<?php echo $etudiant['etud_diplome']?>">
+                            <!--<td> 
+                                <a download="<?php //echo $etudiant['etud_diplome']?>" href="<?php //echo $etudiant['etud_diplome']?>">
                                     <?php
-                                        if($etudiant['etud_diplome'] == ''){      
+                                        //if($etudiant['etud_diplome'] == ''){      
                                     ?>
                                     <?php
-                                        }else{
-                                            echo '<img src="images/PDF_file_icon.svg" style="width:30px">';
-                                        }
+                                        //}else{
+                                        //    echo '<img src="images/PDF_file_icon.svg" style="width:30px">';
+                                        //}
                                     ?>
                                 </a>
-                            </td>
+                            </td>-->
                         </tr>
                         <?php
                                 }

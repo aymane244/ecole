@@ -48,7 +48,6 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nom complet</th>
-                            <th scope="col">diplôme</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -68,18 +67,18 @@
                         <tr>
                             <th scope="row"><?php echo $i++ ?></th>
                             <td><?php echo $etudiant['etud_prenom']." ".$etudiant['etud_nom'];?></td>
-                            <td>
-                                <a download="<?php echo $etudiant['etud_diplome']?>" href="<?php echo $etudiant['etud_diplome']?>">
+                            <!--<td>
+                                <a download="<?php //echo $etudiant['etud_diplome']?>" href="<?php //echo $etudiant['etud_diplome']?>">
                                     <?php
-                                        if($etudiant['etud_diplome'] == ''){      
+                                        //if($etudiant['etud_diplome'] == ''){      
                                     ?>
                                     <?php
-                                        }else{
-                                            echo '<img src="images/PDF_file_icon.svg" style="width:30px">';
-                                        }
+                                        //}else{
+                                        //    echo '<img src="images/PDF_file_icon.svg" style="width:30px">';
+                                        //}
                                     ?>
                                 </a>
-                            </td>
+                            </td>-->
                             <td>
                                 <button type="button" class="btn btn-primary btn-id" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $etudiant['etud_id'] ?>">Détails</button>
                                 <a href="saisir-notes?id=<?php echo $etudiant['etud_id'] ?>" target="_blank" class="btn btn-primary">Saisir les notes</a>

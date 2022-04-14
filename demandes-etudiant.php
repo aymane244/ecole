@@ -92,10 +92,10 @@
                         </table>
                     </div>
                     <div class="col-md-12" style='display:none' id='attestation'>
-                        <table class="table table-hover">
+                        <table class="table table-hover bg-white table-bordered">
                             <thead class="text-center">
                                 <tr>
-                                    <th scope="col" colspan="4">Demande d'attestation</th>
+                                    <th scope="col" colspan="5">Demande d'attestation</th>
                                 </tr>
                                 <tr>
                                     <th>#</th>

@@ -90,7 +90,7 @@
                             <i class="far fa-share-square"></i> Envoyer un email
                         </a>
                     </div>-->
-                    <table class="table bg-white mt-5">
+                    <table class="table bg-white mt-5 table-bordered">
                         <thead class="text-center">
                             <tr>
                                 <th scope="col" colspan="9">ARTL Nord</th>

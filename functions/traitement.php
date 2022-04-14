@@ -132,15 +132,16 @@ if(isset($_POST['action'])){
                 <td>".$i++."</td>
                 <td>".$search['for_nom']."</td>
                 <td>".$search['etud_prenom']." ".$search['etud_nom']."</td>
-                <td>
+                
+            </tr>";
+            /*<td>
                     <a download=".$search['etud_diplome']." href=".$search['etud_diplome'].">";
                         if($search['etud_diplome'] == ''){
                         }else{
                             echo '<img src="images/PDF_file_icon.svg" style="width:30px">';
                         }
                     echo "</a>
-                </td>
-            </tr>";
+                </td>*/
         }
     }
 }
