@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 29 mars 2022 à 14:09
+-- Généré le : jeu. 14 avr. 2022 à 16:50
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -48,7 +48,11 @@ INSERT INTO `absence` (`abs_id`, `abs_etudiant`, `abs_date`, `abs_formation`, `a
 (6, 1, '2022-03-15', 1, 1, 'Absent'),
 (7, 96, '2022-03-15', 1, 1, 'Absent'),
 (8, 1, '2022-03-10', 1, 2, 'Absent'),
-(9, 96, '2022-03-10', 1, 2, 'Absent');
+(9, 96, '2022-03-10', 1, 2, 'Absent'),
+(10, 90, '2022-03-10', 2, 5, 'Présent'),
+(11, 91, '2022-03-10', 2, 5, 'Absent'),
+(12, 95, '2022-03-10', 2, 5, 'Absent'),
+(13, 97, '2022-03-10', 2, 5, 'Absent');
 
 -- --------------------------------------------------------
 
@@ -174,15 +178,18 @@ CREATE TABLE `douane` (
   `dou_nom` varchar(200) NOT NULL,
   `dou_res_nom` varchar(200) NOT NULL,
   `dou_res_email` varchar(200) NOT NULL,
-  `dou_res_message` text NOT NULL
+  `dou_res_message` text NOT NULL,
+  `dou_res_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `douane`
 --
 
-INSERT INTO `douane` (`dou_id`, `dou_nom`, `dou_res_nom`, `dou_res_email`, `dou_res_message`) VALUES
-(4, 'Classe B', 'Aimane', 'a.chnaif2010@gmail.com', 'sqdqsdqsd');
+INSERT INTO `douane` (`dou_id`, `dou_nom`, `dou_res_nom`, `dou_res_email`, `dou_res_message`, `dou_res_date`) VALUES
+(4, 'Classe B', 'Aimane', 'a.chnaif2010@gmail.com', 'sqdqsdqsd', '2022-03-01'),
+(5, 'Classe SS', 'qsdqsd', 'a.chnaif2010@gmail.com', 'qsdqsdqsd', '2022-04-12'),
+(6, 'Classe B', 'sqd', 'ty@ghjg.com', 'jkkjlkjl', '2022-04-12');
 
 -- --------------------------------------------------------
 
@@ -193,14 +200,24 @@ INSERT INTO `douane` (`dou_id`, `dou_nom`, `dou_res_nom`, `dou_res_email`, `dou_
 CREATE TABLE `etudiant` (
   `etud_id` int(11) NOT NULL,
   `etud_nom` varchar(200) NOT NULL,
+  `etud_nom_arab` varchar(200) NOT NULL,
   `etud_prenom` varchar(200) NOT NULL,
+  `etud_prenom_arabe` varchar(200) NOT NULL,
   `etud_email` varchar(200) NOT NULL,
   `etud_telephone` varchar(200) NOT NULL,
   `etud_motdepasse` varchar(200) NOT NULL,
   `etud_cin` varchar(200) NOT NULL,
   `etud_formation` int(11) NOT NULL,
   `etud_naissance` date NOT NULL,
-  `etud_diplome` varchar(200) NOT NULL,
+  `etud_lieu_naissance` varchar(50) NOT NULL,
+  `etud_adress` varchar(200) NOT NULL,
+  `etud_permis` varchar(200) NOT NULL,
+  `etud_cat_permis` varchar(200) NOT NULL,
+  `etude_carte_pro` varchar(200) NOT NULL,
+  `etud_permis_obt` date NOT NULL DEFAULT current_timestamp(),
+  `etud_scan_cin` varchar(200) NOT NULL,
+  `etud_scan_permis` varchar(200) NOT NULL,
+  `etud_scan_visite` varchar(200) NOT NULL,
   `etud_promos` int(11) NOT NULL,
   `etud_image` varchar(500) NOT NULL,
   `etud_inscription` date NOT NULL DEFAULT current_timestamp()
@@ -210,13 +227,13 @@ CREATE TABLE `etudiant` (
 -- Déchargement des données de la table `etudiant`
 --
 
-INSERT INTO `etudiant` (`etud_id`, `etud_nom`, `etud_prenom`, `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, `etud_diplome`, `etud_promos`, `etud_image`, `etud_inscription`) VALUES
-(1, 'Chnaif', 'Aimane', 'a.chnaif2010@gmail.com', '0644776612', '25f9e794323b453885f5181f1b624d0b', 'G621092', 1, '1999-11-26', '', 1, './images/etudiants/DSC_27762.jpg', '2022-02-03'),
-(90, 'Aboussabr', 'Othmane', 'aboussabryanina@gmail.com', '0606118291', '25f9e794323b453885f5181f1b624d0b', 'G621097', 2, '1991-11-26', '', 1, './images/etudiants/IMG_20191229_020502_262.jpg', '2022-02-01'),
-(91, 'Souiri', 'Chaimae', 'chaimaesouiri8@gmail.com', '0659499427', '25f9e794323b453885f5181f1b624d0b', 'G621099', 2, '2001-02-11', '', 1, './images/etudiants/', '2022-02-04'),
-(95, 'Aboussabr', 'Yasmina', 'q.chnaif@gmail.com', '+212644776612', '25f9e794323b453885f5181f1b624d0b', 'G111', 2, '1999-11-11', './diplomes/Accounting Certificate.pdf', 1, './images/etudiants/', '2022-03-04'),
-(96, 'Chnaif', 'Ayoub', 'a.chnaif20hh10@gmail.com', '655778899', '25f9e794323b453885f5181f1b624d0b', 'G555', 1, '1999-11-11', './diplomes/Attestation 1001 Evasions.pdf', 1, './images/etudiants/', '2022-03-04'),
-(97, 'Bendaoud', 'Mouad', 'mouad@gmail.com', '644776612', '25f9e794323b453885f5181f1b624d0b', 'G621090', 2, '2000-11-11', './diplomes/Certificat Udemey Allemand.pdf', 1, './images/etudiants/', '2022-03-05');
+INSERT INTO `etudiant` (`etud_id`, `etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, `etud_scan_cin`, `etud_scan_permis`, `etud_scan_visite`, `etud_promos`, `etud_image`, `etud_inscription`) VALUES
+(1, 'Chnaif', '', 'Aimane', '', 'a.chnaif2010@gmail.com', '0644776612', '25f9e794323b453885f5181f1b624d0b', 'G621092', 1, '1999-11-26', '', '', '', '', '', '2022-04-13', '', '', '', 1, './images/etudiants/DSC_27762.jpg', '2022-02-03'),
+(90, 'Aboussabr', '', 'Othmane', '', 'aboussabryanina@gmail.com', '0606118291', '25f9e794323b453885f5181f1b624d0b', 'G621097', 2, '1991-11-26', '', '', '', '', '', '2022-04-13', '', '', '', 1, './images/etudiants/IMG_20191229_020502_262.jpg', '2022-02-01'),
+(91, 'Souiri', '', 'Chaimae', '', 'chaimaesouiri8@gmail.com', '0659499427', '25f9e794323b453885f5181f1b624d0b', 'G621099', 2, '2001-02-11', '', '', '', '', '', '2022-04-13', '', '', '', 1, './images/etudiants/', '2022-02-04'),
+(95, 'Aboussabr', '', 'Yasmina', '', 'q.chnaif@gmail.com', '+212644776612', '25f9e794323b453885f5181f1b624d0b', 'G111', 2, '1999-11-11', '', '', '', '', '', '2022-04-13', './diplomes/Accounting Certificate.pdf', '', '', 1, './images/etudiants/', '2022-03-04'),
+(96, 'Chnaif', '', 'Ayoub', '', 'a.chnaif20hh10@gmail.com', '655778899', '25f9e794323b453885f5181f1b624d0b', 'G555', 1, '1999-11-11', '', '', '', '', '', '2022-04-13', './diplomes/Attestation 1001 Evasions.pdf', '', '', 1, './images/etudiants/', '2022-03-04'),
+(97, 'Bendaoud', '', 'Mouad', '', 'mouad@gmail.com', '644776612', '25f9e794323b453885f5181f1b624d0b', 'G621090', 2, '2000-11-11', '', '', '', '', '', '2022-04-13', './diplomes/Certificat Udemey Allemand.pdf', '', '', 1, './images/etudiants/', '2022-03-05');
 
 -- --------------------------------------------------------
 
@@ -281,15 +298,18 @@ CREATE TABLE `iso` (
   `iso_presentation` text NOT NULL,
   `iso_res_nom` varchar(200) NOT NULL,
   `iso_res_email` varchar(200) NOT NULL,
-  `iso_res_message` text NOT NULL
+  `iso_res_message` text NOT NULL,
+  `iso_res_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `iso`
 --
 
-INSERT INTO `iso` (`iso_id`, `iso_nom`, `iso_presentation`, `iso_res_nom`, `iso_res_email`, `iso_res_message`) VALUES
-(6, 'ISO 45001', '', 'Fahd', 'Houta@gmail.com', 'sqdqsdqsd');
+INSERT INTO `iso` (`iso_id`, `iso_nom`, `iso_presentation`, `iso_res_nom`, `iso_res_email`, `iso_res_message`, `iso_res_date`) VALUES
+(6, 'ISO 45001', '', 'Fahd', 'Houta@gmail.com', 'sqdqsdqsd', '2022-04-11'),
+(7, 'ISO 39001', '', 'Aimane', 'a.chnaif2010@gmail.com', 'hello', '2022-04-11'),
+(8, 'ISO 45001', '', 'qsdqsd', 'a.chnaif2010@gmail.com', 'qsdqsdqsd', '2022-04-12');
 
 -- --------------------------------------------------------
 
@@ -614,7 +634,7 @@ ALTER TABLE `seance`
 -- AUTO_INCREMENT pour la table `absence`
 --
 ALTER TABLE `absence`
-  MODIFY `abs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `abs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `article`
@@ -650,13 +670,13 @@ ALTER TABLE `diplome`
 -- AUTO_INCREMENT pour la table `douane`
 --
 ALTER TABLE `douane`
-  MODIFY `dou_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `dou_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `etudiant`
 --
 ALTER TABLE `etudiant`
-  MODIFY `etud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `etud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT pour la table `formation`
@@ -674,7 +694,7 @@ ALTER TABLE `img_salle`
 -- AUTO_INCREMENT pour la table `iso`
 --
 ALTER TABLE `iso`
-  MODIFY `iso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `iso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `langue`
