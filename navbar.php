@@ -101,7 +101,17 @@
                                 if($etudiant['etud_id'] == $_SESSION['id']){   
                     ?>
                     <a class="dropdown-toggle text-color btn-etudiant rounded" id="btn-etudiant" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        <?php    
+                            if($_SESSION['lang'] == 'ar'){
+                        ?>
+                        <?php echo $etudiant['etud_prenom_arabe']." ". $etudiant['etud_nom_arab'] ?> <i class="fas fa-user "></i>
+                        <?php
+                            }else{
+                        ?>
                         <i class="fas fa-user "></i> <?php echo $etudiant['etud_prenom']." ". $etudiant['etud_nom'] ?>
+                        <?php        
+                            }   
+                        ?>
                     </a>
                     <?php
                                 }

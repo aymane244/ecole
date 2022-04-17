@@ -23,7 +23,9 @@
             $etud_id = $etudiant['etud_id'];
             $etud_email = $etudiant['etud_email'];
             $etud_nom = $etudiant['etud_nom'];
+            $etud_nom_arab = $etudiant['etud_nom_arab'];
             $etud_prenom = $etudiant['etud_prenom'];
+            $etud_prenom_arab = $etudiant['etud_prenom_arabe'];
             $etud_cin = $etudiant['etud_cin'];
             $etud_image =$etudiant["etud_image"];
             $etud_formation =$etudiant["for_nom"];
@@ -66,121 +68,111 @@
                     <hr class="hr-width">
                 </div>
                 <div class="row bg-white py-3">
-                    <div class="col-lg-4">
-                        <div>
-                            <hr class="bg-light">
+                    <div class="col-lg-6">
+                        <hr class="bg-light">
+                        <div class="text-center">
+                            <?php
+                                if($etud_image === "./images/etudiants/"){
+                                    echo '<img src="images/etudiants/unknown_person.jpg" alt="" class="card-image">';
+                                }
+                            ?>
+                            <p><img src="<?php echo $etud_image ?>" alt=""  class="card-image"></p>
+                            <!--<a href="modifier-profile?id=<?php //echo $etudiant['etud_id'] ?>" class="btn btn-info" target="_blank"><i class="fas fa-edit"></i> Modifier mon profile</a>-->
+                        </div>
+                        <hr class="bg-light">
+                        <div class="d-flex justify-content-between">
                             <div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <?php
-                                        if($etud_image === "./images/etudiants/"){
-                                            echo '<img src="images/etudiants/unknown_person.jpg" alt="" class="card-image">';
-                                        }
-                                    ?>
-                                    <p><img src="<?php echo $etud_image ?>" alt=""  class="card-image"></p>
-                                    <a href="modifier-profile?id=<?php echo $etudiant['etud_id'] ?>" class="btn btn-info" target="_blank"><i class="fas fa-edit"></i> Modifier mon profile</a>
-                                </div>
-                                <hr class="bg-light">
-                                <div>
-                                    <h5 class="pl-4">Nom: <?php echo $etud_nom ?></h5>
-                                    <h5 class="pl-4">Prénom: <?php echo $etud_prenom ?></h5>
-                                    <h5 class="pl-4">Age: <?php echo $age->format('%y');?> ans</h5>
-                                    <h5 class="pl-4">CIN: <?php echo $etud_cin ?></h5>
-                                    <h5 class="pl-4">Formation: <?php echo $etud_formation ?></h5>
-                                </div>
-                                <hr class="bg-light">
-                                <div class="d-flex justify-content-center">
-                                    <form action="" method="POST">
-                                        <input type="hidden" name="student_id" value="<?php echo $etud_id ?? '1'; ?>">
-                                        <?php
-                                            foreach($diplomes as $diplome){
-                                                if($_SESSION['id'] == $diplome['etud_id']){
-                                                    if($diplome['dip_image'] == ''){
-                                                        echo '<button type="submit" disabled class="btn btn-info button-style">'.$espaceetudiant['envoyee'].'</button>';
-                                                    }else if(in_array($etud_id, $data->getDiplometId($data->getDataDiplome()) ?? [])){
-                                                        echo '<a href="mes-documents" class="btn btn-info button-style">'.$espaceetudiant['Diplome'].'</a>';
-                                                    }
-                                                }
-                                            }
-                                            if(!in_array($etud_id, $data->getDiplometId($data->getDataDiplome()) ?? [])){
-                                                echo '<button type="submit" name="diplome_submit" class="btn btn-info button-style">'.$espaceetudiant['Demande_dip'].'</button>';
-                                            }
-                                        ?>
-                                    </form>    
-                                    <form action="" method="POST">
-                                        <input type="hidden" name="student_id" value="<?php echo $etud_id ?? '1'; ?>">
-                                        <?php
-                                            foreach($attestations as $attestation){
-                                                if($_SESSION['id'] == $attestation['etud_id']){
-                                                    if($attestation['att_image'] == ''){
-                                                        echo '<button type="submit" disabled class="btn btn-info button-style ml-3">'.$espaceetudiant['envoyee'].'</button>';
-                                                    }else if(in_array($etud_id, $data->getAttestationtId($data->getDataAttestation()) ?? [])){
-                                                        echo '<a href="mes-documents" class="btn btn-info button-style ml-3">'.$espaceetudiant['Attestation'].'</a>';
-                                                    }
-                                                }
-                                            }
-                                            if(!in_array($etud_id, $data->getAttestationtId($data->getDataAttestation()) ?? [])){
-                                                echo '<button type="submit" name="attestation_submit" class="btn btn-info button-style ml-3">'.$espaceetudiant['Demande_att'].'</button>';
-                                            }
-                                       ?>
-                                    </form>
-                                </div>
-                                <hr class="bg-light">
+                                <h5 class="pl-4">Nom: <?php echo $etud_nom ?></h5>
+                                <h5 class="pl-4">Prénom: <?php echo $etud_prenom ?></h5>
+                            </div>
+                            <div>
+                                <h5 class="pl-4">الاسم العائلي:  <?php echo $etud_nom_arab ?></h5>
+                                <h5 class="pl-4">الاسم الشخصي: <?php echo $etud_prenom_arab ?></h5>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="pl-4">Age: <?php echo $age->format('%y');?> ans</h5>
+                            <h5 class="pl-4">السن: <?php echo $age->format('%y');?> سنة</h5>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="pl-4">CIN: <?php echo $etud_cin ?></h5>
+                            <h5 class="pl-4"><?php echo $etud_cin ?> :ر.ب.و</h5>
+                        </div>
+                        <h5 class="pl-4">Formation: <?php echo $etud_formation ?></h5>
+                        <hr class="bg-light">
+                        <div class="d-flex align-items-center">
+                            <?php
+                                if($_SESSION['lang'] == 'ar'){
+                            ?>
+                            <h5 class="text-center">
+                                <span><?php echo $espaceetudiant['presence']?> <?php echo $totalabsence?> / <?php echo $espaceetudiant['seances']?> <?php echo $abs?></span>
+                                <progress id="progressBar" value="0" max="<?php echo $abs?>" style="width:300px; height: 30px;" class="ml-3"></progress>
+                                <span id="status"></span>
+                            </h5>
+                            <h5 class="pl-4">:<?php echo $espaceetudiant['avancement']?></h5>
+                            <?php        
+                                }else{
+                            ?>
+                                <h5 class="pl-4"><?php echo $espaceetudiant['avancement']?>:</h5>
+                                <h5 class="text-center">
+                                <span><?php echo $totalabsence?> <?php echo $espaceetudiant['presence']?> / <?php echo $abs?> <?php echo $espaceetudiant['seances']?></span>
+                                <progress id="progressBar" value="0" max="<?php echo $abs?>" style="width:300px; height: 30px;" class="ml-3"></progress>
+                                <span id="status"></span>
+                            </h5>
+                            <?php      
+                                }
+                            ?>
+                        </div>
+                        <hr class="bg-light">
+                        <div class="d-flex justify-content-center">
+                            <form action="" method="POST">
+                                <input type="hidden" name="student_id" value="<?php echo $etud_id ?? '1'; ?>">
+                                <?php
+                                    foreach($diplomes as $diplome){
+                                        if($_SESSION['id'] == $diplome['etud_id']){
+                                            if($diplome['dip_image'] == ''){
+                                                echo '<button type="submit" disabled class="btn btn-info button-style">'.$espaceetudiant['envoyee'].'</button>';
+                                            }else if(in_array($etud_id, $data->getDiplometId($data->getDataDiplome()) ?? [])){
+                                                echo '<a href="mes-documents" class="btn btn-info button-style">'.$espaceetudiant['Diplome'].'</a>';
+                                            }
+                                        }
+                                    }
+                                    if(!in_array($etud_id, $data->getDiplometId($data->getDataDiplome()) ?? [])){
+                                        echo '<button type="submit" name="diplome_submit" class="btn btn-info button-style">'.$espaceetudiant['Demande_dip'].'</button>';
+                                    }
+                                ?>
+                            </form>    
+                            <form action="" method="POST">
+                                <input type="hidden" name="student_id" value="<?php echo $etud_id ?? '1'; ?>">
+                                <?php
+                                    foreach($attestations as $attestation){
+                                        if($_SESSION['id'] == $attestation['etud_id']){
+                                            if($attestation['att_image'] == ''){
+                                                echo '<button type="submit" disabled class="btn btn-info button-style ml-3">'.$espaceetudiant['envoyee'].'</button>';
+                                            }else if(in_array($etud_id, $data->getAttestationtId($data->getDataAttestation()) ?? [])){
+                                                echo '<a href="mes-documents" class="btn btn-info button-style ml-3">'.$espaceetudiant['Attestation'].'</a>';
+                                            }
+                                        }
+                                    }
+                                    if(!in_array($etud_id, $data->getAttestationtId($data->getDataAttestation()) ?? [])){
+                                        echo '<button type="submit" name="attestation_submit" class="btn btn-info button-style ml-3">'.$espaceetudiant['Demande_att'].'</button>';
+                                    }
+                               ?>
+                            </form>
+                        </div>
+                        <hr class="bg-light">
                     </div>
-                    <div class="col-lg-8 bg-white py-3">
-                        <div class="row align-items-center">
-                            <div class="col-lg-4 col-sm-12 pt-3 text-center">
+                    <div class="col-lg-6 py-3">
+                        <div class="d-flex justify-content-around">
+                            <div class="text-center">
                                 <a href="mes-notes"><h3 class="text-color"><?php echo $espaceetudiant['notes']?></h3></a>
-                                <a href="mes-notes"><img src="images/notes.jpg" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
+                                <a href="mes-notes"><img src="images/notes.png" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
                             </div>
-                            <div class="col-lg-4 col-sm-12 pt-3 text-center">
+                            <div class="text-center">
                                 <a href="mes-documents"><h3 class="text-color"><?php echo $espaceetudiant['documents']?></h3></a>
                                 <a href="mes-documents"><img src="images/documents.jpg" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
                             </div>
-                            <div class="col-lg-4 col-sm-12 pt-3 text-center">
-                                <a href="article"><h3 class="text-color">Actualités</h3></a>
-                                <a href="article"><img src="images/actualites.jpg" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
-                            </div>
-                            <div class="col-md-4 mt-4 mt-lg-5 text-center">
-                                <h5><?php echo $espaceetudiant['avancement']?></h5>
-                            </div>
-                            <div class="col-md-8 mt-4 text-center">
-                                <?php
-                                    if($_SESSION['lang'] == 'ar'){
-                                ?>
-                                <div class="ml-4"> <?php echo $espaceetudiant['presence']?> <?php echo $totalabsence?> / <?php echo $espaceetudiant['seances']?> <?php echo $abs?></div>
-                                <?php        
-                                    }else{
-                                ?>
-                                <div class="ml-4"><?php echo $totalabsence?> <?php echo $espaceetudiant['presence']?> / <?php echo $abs?> <?php echo $espaceetudiant['seances']?></div>
-                                <?php      
-                                    }
-                                ?>
-                                
-                                <progress id="progressBar" value="0" max="<?php echo $abs?>" style="width:300px; height: 30px;" class="ml-3"></progress>
-                                <span id="status"></span>
-                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="text-center pt-3 text-color mb-3">
-                    <h2 class="pt-4">Articles</h2>
-                    <hr class="hr-width">
-                </div>
-                <div class="bg-white py-3 px-3">
-                    <div class="owl-carousel">
-                        <?php
-                            foreach($articles as $article){                 
-                        ?>
-                        <div class="px-4">
-                            <a href="article-lecture?id=<?php echo $article['art_id']?>"><img src="<?php echo $article['art_image'] ?>" alt="" class="img-fluid img-etudiant"></a>
-                            <h5 class="mt-2"><b><a href="article-lecture?id=<?php echo $article['art_id']?>"><?php echo $article['art_titre']?></a></b></h5>
-                            <p class="text-length-2"><?php echo $article['art_texte']?></p>
-                        </div>
-                        <?php
-                            }
-                        ?>
                     </div>
                 </div>
             </div>

@@ -33,7 +33,7 @@
         <h1 class="py-3 text-center" id="top"><?php echo $espaceetudiant['notes']?></h1>
         <div class="container">
             <div class="mx-auto w-75 pb-3">
-                <table class="table table-hover mt-5">
+                <table class="table table-hover mt-5 bg-white">
                     <thead class="text-center">
                         <tr>
                             <th scope="col" colspan="9"><?php echo $title['titre']?></th>

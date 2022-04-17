@@ -185,7 +185,7 @@
                                         <div class="col-md-12 mb-3">
                                             <div class="d-flex">
                                                 <i class="fas fa-folder-open position-awesome"></i>
-                                                <select class="custom-select px-5" name="formation" onchange="affichage()" id="formation">
+                                                <select class="custom-select pl-5" name="formation" onchange="affichage()" id="formation">
                                                     <option selected value="">--<?php echo $inscription['choisir']?>--</option>
                                                     <?php
                                                         foreach($formations as $formation){

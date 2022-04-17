@@ -34,9 +34,13 @@
                     <h2>Gestion de la formation</h2>
                 </div>
                 <div class="text-center mt-3">
+                    <a href="gérer-promotion" target="_blank" class="btn btn-primary">Gérer les promotion</a>
                     <a href="absence?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Gérer l'absence</a>
                     <a href="notes?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Afficher les notes</a>
-                </div> 
+                </div>
+                <div>
+                    <!--<h5>Choisir promotion</h5>-->
+                </div>
                 <table class="table table-hover mt-5 bg-white">
                     <thead class="text-center">
                         <tr>
@@ -116,7 +120,7 @@
                     var ids = $(this).data('id');
                     $.post("functions/traitement.php",{id:ids, action: "student_id"}, function(data){
 					    $('#load_data').html(data);
-			    })
+			        })
                 });
             })
         </script>

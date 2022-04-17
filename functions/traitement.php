@@ -68,6 +68,40 @@ if(isset($_POST['action'])){
             }
         }
     }
+    if ($_POST['action']=='promotion') {
+        $etudiants = $data->getEtudiantPromotion();
+        $promos = $data->getPromotion();
+        $id = $_POST['id'];
+        foreach ($etudiants as $detail) {
+            if($detail['etud_id'] == $id){
+                echo '<div class="container-fluid">
+                    <table class="table table-hover mt-5 font-style">
+                        <tr>
+                            <td>Nom</td>
+                            <td>'.$detail['etud_nom'].'</td>
+                            <td><input type="hidden" name="id_etud" value="'.$detail['etud_id'].'"></td>
+                        </tr>
+                        <tr>
+                            <td>Prénom</td>
+                            <td>'.$detail['etud_prenom'].'</td>
+                        </tr>
+                        <tr>
+                            <th>Promotion</th>
+                            <th>
+                                <select name="promotion" id="promotion" class="custom-select w-75">
+                                    <option value="'.$detail['pro_id'].'">'.$detail['pro_année'].'</option>';            
+                                        foreach($promos as $promo){
+                                    echo '<option value="'.$promo['pro_id'].'">'.$promo['pro_année'].'</option>';
+                                    }
+                                echo '</select>
+                            </th>
+                        </tr>
+                        </tr>
+                    </table>
+                </div>';
+            }
+        }
+    }
     if ($_POST['action']=='verifier_reservation') {
         $date_salle = $_POST['date_salle'];
         $time_debut = $_POST['time_debut'];
@@ -92,8 +126,9 @@ if(isset($_POST['action'])){
                     </div>";
         }else{
             $result = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND res_date='$date_salle'");
-            //$result2 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND time_fin BETWEEN '$time_debut' AND '$time_fin'");
-            $result2 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND time_debut>='$time_debut' AND time_debut <'$time_fin'");
+            $result2 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND (time_fin BETWEEN '$time_debut' AND '$time_fin') OR (time_debut BETWEEN '$time_debut' AND '$time_fin')");
+            $result3 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND time_debut BETWEEN '$time_debut' AND '$time_fin'");
+            //$result2 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND time_debut>='$time_debut' AND time_debut <='$time_fin'");
             if(mysqli_num_rows($result) && mysqli_num_rows($result2)){
                 echo "<div class='alert alert-danger text-center mt-2' role='alert'>
                         Heure réservée, Merci de prendre une nouvelle heure

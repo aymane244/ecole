@@ -486,7 +486,7 @@
                         '$prenom','$prenom_arab','$email','$telephone','$motdepasse','$cin','$formation','$naissance','$lieu','$adresse',
                         '$permis','$categorie','$profesionnel','$obtenir','$path$scan_cin','$path$scan_permis','$path$scan_visite','$promos','$path$image',NOW())");
                     if($res){
-                        $_SESSION['status_login'] = "Votre inscription a été bien effectué merci de visiter votre email<br><a href='login'>Connectez-vous ici</a>";
+                        $_SESSION['status_login'] = "Votre inscription a été bien effectué";
                     }
                     return $res;
                 }
@@ -1190,6 +1190,44 @@
                 '$article_id',NOW())");
             if($result){
                 $_SESSION['status'] = "Votre commentaire a été poster avec success";
+            }else{
+                echo $this->db->conn->error;
+            }
+            return $result;
+        }
+        public function updatePassword(){
+            $password = md5($_POST['password']);
+            $email =  $_POST['email'];
+            $result = $this->db->conn->query("UPDATE `etudiant` SET `etud_motdepasse`='$password' WHERE etud_email='$email'");
+            if($result){
+                $_SESSION['status'] = "Votre mot de passe à été modifié avec success";
+            }
+            return $result;
+        }
+        public function getEtudiantPromotion(){
+            $result = $this->db->conn->query("SELECT `etud_id`, `etud_nom`, `etud_prenom`, `pro_id`, `pro_année` FROM `promos` 
+                    INNER JOIN `etudiant` ON pro_id=etud_promos ORDER BY etud_prenom ASC");
+            $resultArray = array();
+            while($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray [] = $item;
+            }
+            return $resultArray;
+        }
+        public function getPromotion(){
+            $result = $this->db->conn->query("SELECT * FROM `promos`");
+            $resultArray = array();
+            while($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item; 
+            }
+            return $resultArray;
+        }
+        public function updatePromotion(){
+            $promotion = $_POST['promotion'];
+            $id = $_POST['id_etud'];
+            $result =$this->db->conn->query("UPDATE `etudiant` SET `etud_promos`='$promotion' WHERE etud_id='$id'");
+            if($result){
+                echo '<script>window.location.href="gérer-promotion"</script>';
+                $_SESSION['status'] = "Promotion a été modifiée avec success";
             }else{
                 echo $this->db->conn->error;
             }
