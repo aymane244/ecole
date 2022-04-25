@@ -35,6 +35,9 @@
                     unset($_SESSION['status']);
                 }
             ?>
+            <div class="mt-4 text-center">
+                <a href="ajouter-promotion" target="_blank" class="btn btn-primary"><i class="fas fa-plus-square"></i> Ajouter une promotion</a>
+            </div>
             <table class="table table-hover mt-5 bg-white">
                 <thead class="text-center">
                     <tr>
@@ -89,7 +92,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title text-center" id="exampleModalLabel">Informations personnelles</h5>
+                            <h5 class="modal-title text-center" id="exampleModalLabel">Choisir la promotion</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

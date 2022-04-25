@@ -9,15 +9,17 @@
     $id = $_GET['id'];
     $etudiants = $data->getEtudiantFormation();
     $matieres = $data->getMatiereFormation();
-    foreach($etudiants as $etudiant){
-        if($etudiant['for_id'] == $id){
-            $etud_id = $etudiant['etud_id'];
-            $etud_nom = $etudiant['etud_nom'];
-            $etud_prenom = $etudiant['etud_prenom'];
-            $for_id = $etudiant['for_id'];
-            $for_nom = $etudiant['for_nom'];
+    
+        foreach($etudiants as $etudiant){
+            if($etudiant['for_id'] == $id){
+                $etud_id = $etudiant['etud_id'];
+                $etud_nom = $etudiant['etud_nom'];
+                $etud_prenom = $etudiant['etud_prenom'];
+                $for_id = $etudiant['for_id'];
+                $for_nom = $etudiant['for_nom'];
+            }
         }
-    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +40,14 @@
                 <div class="text-center py-3">
                     <h2><i class="fas fa-graduation-cap"></i> Notes</h2>
                 </div>
+                <?php
+                    if(isset($_SESSION['status_error'])){
+                ?>
+                <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status_error']?></div>
+                <?php
+                        unset($_SESSION['status_error']);
+                    }
+                ?>
                 <div class="row pb-2">
                     <div class="col-md-6 mt-5">
                         <div class="card card-position affichage">
@@ -56,12 +66,11 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="categorie" class="col-md-4 col-form-label text-md-end">Etudiants</label>
+                                        <label for="categorie" class="col-md-4 col-form-label text-md-end">Stagiaires</label>
                                         <div class="col-md-12">
                                             <div class="d-flex">
                                                 <i class="fas fa-user-graduate position-awesome"></i>
                                                 <select class="custom-select pl-5" name="etudiants">
-                                                    <option value="">--Choisir un étudiant--</option>
                                                     <?php
                                                         foreach($etudiants as $etudiant){
                                                             if($etudiant['for_id'] == $id){
@@ -84,7 +93,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <?php
                         if(isset($_POST['submit_note'])){
                             $formations = $data->getEtudiantMatiereFormations();
@@ -94,7 +102,6 @@
                                 $etud_note_nom = $etud['etud_nom'];
                             }
                     ?>
-                    
                     <div class="col-md-6">
                         <table class="table table-bordered mt-5 bg-white">
                             <thead class="text-center">

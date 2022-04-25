@@ -1,6 +1,10 @@
 <?php include_once "session.php";?>
 <?php
     $formations = $data->getformation();
+    $promos = $data->getPromotion();
+    foreach($promos as $promo){
+        $promoid = $promo['pro_id']; 
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,30 +25,18 @@
                 <?php
                     if(isset($_POST['submit'])){
                         $data->checkEmailCin();
-                        //mkdir("test",0777,true);
                     }
                 ?>
                 <?php
-                    if(isset($_SESSION['status'])){
+                    if(isset($_SESSION['status_error'])){
                 ?>
-                <div class='alert alert-danger text-center' role='alert'><?php echo $_SESSION['status']?></div>
+                <div class='alert alert-danger text-center' role='alert'><?php echo $_SESSION['status_error']?></div>
                 <?php
-                        unset($_SESSION['status']);
+                        unset($_SESSION['status_error']);
                     }
                 ?>
                 <?php
                     if(isset($_SESSION['status_login'])){
-                        /* $to = $_POST['email'];
-                        $subject = "Confirmation d'inscription";
-                        $headers = 'Content-type: text/html';
-                        $msg = "<center><h1>Confirmation d'inscription</h1><br>
-                                <p><b>Merci d'avoir choisit notre institut.<br>
-                                Veuillez trouvez ci-dessous vos identifiants:
-                                <p> idenatidiant: ".$_POST['cin']."</p>
-                                <br>Mot de passe: ".$_POST['motdepasse']."<br>
-                                Pour plus d'information merci de visiter notre .<br><br>
-                                <a href='http://localhost/ecole/'>Click here</a><b></p></center>";
-                        mail($to, $subject, $msg, $headers);*/
                 ?>
                 <div class='alert alert-success text-center' role='alert'><?php echo $_SESSION['status_login']?></div>
                 <?php
@@ -66,7 +58,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-user position-awesome"></i>
-                                                        <input id="prenom" type="text" class="form-control pl-5" name="prenom" autocomplete="prenom" placeholder="Votre prénom" autofocus required>
+                                                        <input id="prenom" type="text" class="form-control pl-5" name="prenom" autocomplete="prenom" placeholder="Votre prénom" autofocus value="<?php echo isset($_POST['prenom']) ? $_POST['prenom'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,7 +69,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-user position-awesome"></i>
-                                                        <input id="nom" type="text" class="form-control pl-5" name="nom" autocomplete="nom" placeholder="Votre nom" autofocus required>
+                                                        <input id="nom" type="text" class="form-control pl-5" name="nom" autocomplete="nom" placeholder="Votre nom" autofocus value="<?php echo isset($_POST['nom']) ? $_POST['nom'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -88,7 +80,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-user position-awesome"></i>
-                                                        <input id="prenom_arab" type="text" class="form-control pl-5" name="prenom_arab" autocomplete="prenom" placeholder="الاسم الشخصي" autofocus required>
+                                                        <input id="prenom_arab" type="text" class="form-control pl-5" name="prenom_arab" autocomplete="prenom" placeholder="الاسم الشخصي" autofocus value="<?php echo isset($_POST['prenom_arab']) ? $_POST['prenom_arab'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -99,7 +91,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-user position-awesome"></i>
-                                                        <input id="nom_arab" type="text" class="form-control pl-5" name="nom_arab" autocomplete="nom_arab" placeholder="الاسم العائلي" autofocus required>
+                                                        <input id="nom_arab" type="text" class="form-control pl-5" name="nom_arab" autocomplete="nom_arab" placeholder="الاسم العائلي" autofocus value="<?php echo isset($_POST['nom_arab']) ? $_POST['nom_arab'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -110,7 +102,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-envelope position-awesome"></i>
-                                                        <input id="email" type="email" class="form-control pl-5" name="email" autocomplete="email" placeholder="Votre email" autofocus required>
+                                                        <input id="email" type="email" class="form-control pl-5" name="email" autocomplete="email" placeholder="Votre email" autofocus value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,7 +113,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-lock position-awesome"></i>
-                                                        <input id="motdepasse" type="password" class="form-control pl-5" name="motdepasse" placeholder="Votre mot de passe" autofocus required>
+                                                        <input id="motdepasse" type="password" class="form-control pl-5" name="motdepasse" placeholder="Votre mot de passe" autofocus value="<?php echo isset($_POST['motdepasse']) ? $_POST['motdepasse'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -132,7 +124,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-calendar position-awesome"></i>
-                                                        <input id="naissance" type="date" class="form-control pl-5" name="naissance" autofocus required>
+                                                        <input id="naissance" type="date" class="form-control pl-5" name="naissance" autofocus value="<?php echo isset($_POST['naissance']) ? $_POST['naissance'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,7 +135,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-map-marker-alt position-awesome"></i>
-                                                        <input id="lieu" type="text" class="form-control pl-5" name="lieu" placeholder='Lieu de naissance' autofocus required>
+                                                        <input id="lieu" type="text" class="form-control pl-5" name="lieu" placeholder='Lieu de naissance' autofocus value="<?php echo isset($_POST['lieu']) ? $_POST['lieu'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,7 +146,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-file-alt position-awesome"></i>
-                                                        <input id="cin" type="text" class="form-control pl-5" name="cin" autocomplete="cin" placeholder="Votre CIN" autofocus required>
+                                                        <input id="cin" type="text" class="form-control pl-5" name="cin" autocomplete="cin" placeholder="Votre CIN" autofocus value="<?php echo isset($_POST['cin']) ? $_POST['cin'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -165,7 +157,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-phone position-awesome"></i>
-                                                        <input id="telephone-inscription" type="text" class="form-control pl-5" name="telephone" autocomplete="telephone" placeholder="Votre numéro de téléphone" autofocus required>
+                                                        <input id="telephone-inscription" type="text" class="form-control pl-5" name="telephone" autocomplete="telephone" placeholder="Votre numéro de téléphone" autofocus value="<?php echo isset($_POST['telephone']) ? $_POST['telephone'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -176,7 +168,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-map-marker-alt position-awesome"></i>
-                                                        <input id="adresse" type="text" class="form-control pl-5" name="adresse" autocomplete="adresse" placeholder="Votre Adresse" autofocus required>
+                                                        <input id="adresse" type="text" class="form-control pl-5" name="adresse" autocomplete="adresse" placeholder="Votre Adresse" autofocus value="<?php echo isset($_POST['adresse']) ? $_POST['adresse'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -215,7 +207,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-id-badge position-awesome"></i>
-                                                        <input id="permis" type="text" class="form-control pl-5" name="permis" autocomplete="permis" placeholder="Votre numéro de permis" autofocus required>
+                                                        <input id="permis" type="text" class="form-control pl-5" name="permis" autocomplete="permis" placeholder="Votre numéro de permis" autofocus value="<?php echo isset($_POST['permis']) ? $_POST['permis'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -242,7 +234,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-calendar position-awesome"></i>
-                                                        <input id="obtenir" type="date" class="form-control pl-5" name="obtenir" autocomplete="obtenir" autofocus required>
+                                                        <input id="obtenir" type="date" class="form-control pl-5" name="obtenir" autocomplete="obtenir" autofocus value="<?php echo isset($_POST['obtenir']) ? $_POST['obtenir'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -255,7 +247,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-address-card position-awesome"></i>
-                                                        <input id="profesionnel" type="text" class="form-control pl-5" name="profesionnel" autocomplete="profesionnel" placeholder="Votre numéro de la carte professionelle" autofocus>
+                                                        <input id="profesionnel" type="text" class="form-control pl-5" name="profesionnel" autocomplete="profesionnel" placeholder="Votre numéro de la carte professionelle" autofocus value="<?php echo isset($_POST['profesionnel']) ? $_POST['profesionnel'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -267,16 +259,16 @@
                                                 <i class="fas fa-file-upload position-awesome-upload"></i> &nbsp;
                                                 <?php echo $inscription['scan_cin']?>
                                             </label>
-                                            <input id="scan_cin" type="file" class="form-control-file file" name="scan_cin" autofocus required>
+                                            <input id="scan_cin" type="file" class="form-control-file file" name="scan_cin" autofocus>
                                             <div id="showimage4" class="showpdf"></div>
                                             <div id="show4" class="text-center"></div>
                                         </div>
                                         <div class="col-md-3 mt-3">
-                                                <label for="scan_permis" class="text-md-end d-flex justify-content-center file-label py-3 rounded">
+                                            <label for="scan_permis" class="text-md-end d-flex justify-content-center file-label py-3 rounded">
                                                 <i class="fas fa-file-upload position-awesome-upload"></i> &nbsp;
                                                 <?php echo $inscription['scan_permis']?>
                                             </label>
-                                            <input id="scan_permis" type="file" class="form-control-file file" name="scan_permis" autofocus required>
+                                            <input id="scan_permis" type="file" class="form-control-file file" name="scan_permis" autofocus>
                                             <div id="showimage3" class="showpdf"></div>
                                             <div id="show3" class="text-center"></div>
                                         </div>
@@ -285,7 +277,7 @@
                                                 <i class="fas fa-file-upload position-awesome-upload"></i> &nbsp;
                                                 <?php echo $inscription['scan_visite']?>
                                             </label>
-                                            <input id="scan_visite" type="file" class="form-control-file file" name="scan_visite" autofocus required>
+                                            <input id="scan_visite" type="file" class="form-control-file file" name="scan_visite" autofocus>
                                             <div id="showimage2" class="showpdf"></div>
                                             <div id="show2" class="text-center"></div>
                                         </div>
@@ -301,8 +293,8 @@
                                     </div>
                                     <div class="row justify-content-center mt-3">
                                         <div class="col-md-12 text-center">
-                                            <input type="hidden" name="promos" value="1">
-                                            <button type="submit" class="btn btn-primary" name="submit"><?php echo $inscription['inscrire']?></button>
+                                            <input type="hidden" name="promos" value="<?php echo $promoid ?>">
+                                            <button type="submit" class="btn btn-primary" name="submit" id="submit_inscri"><?php echo $inscription['inscrire']?></button>
                                         </div>
                                     </div>
                                 </form>
@@ -330,15 +322,14 @@
                 var output = event.srcElement;
                 var filee = output.files[0].name;
                 var extension = filee.split('.').pop();
-                if(extension != "pdf"){
-                    alert('Veuillez inserer un fichier de type pdf, le fichier insérer est de type '+extension)
-                }else{
+                //if(extension != "pdf"){
+                //    alert('Veuillez inserer un fichier de type pdf, le fichier insérer est de type '+extension)
                     const reader = new FileReader();
                 reader.addEventListener('load', () =>{
                     document.getElementById("showimage4").style.backgroundImage = `url('images/Untitled-2.png')`;
                 });
                 reader.readAsDataURL(this.files[0]);
-                }
+                
 
             });
         </script>
@@ -348,15 +339,14 @@
                 var output = event.srcElement;
                 var filee = output.files[0].name;
                 var extension = filee.split('.').pop();
-                if(extension != "pdf"){
-                    alert('Veuillez inserer un fichier de type pdf, le fichier insérer est de type '+extension)
-                }else{
+                //if(extension != "pdf"){
+                //    alert('Veuillez inserer un fichier de type pdf, le fichier insérer est de type '+extension)
                     const reader = new FileReader();
                 reader.addEventListener('load', () =>{
                     document.getElementById("showimage3").style.backgroundImage = `url('images/Untitled-2.png')`;
                 });
                 reader.readAsDataURL(this.files[0]);
-                }
+                
             });
         </script>
         <script>
@@ -365,15 +355,13 @@
                 var output = event.srcElement;
                 var filee = output.files[0].name;
                 var extension = filee.split('.').pop();
-                if(extension != "pdf"){
-                    alert('Veuillez inserer un fichier de type pdf, le fichier insérer est de type '+extension)
-                }else{
+                //if(extension != "pdf"){
+                //    alert('Veuillez inserer un fichier de type pdf, le fichier insérer est de type '+extension)
                     const reader = new FileReader();
                 reader.addEventListener('load', () =>{
                     document.getElementById("showimage2").style.backgroundImage = `url('images/Untitled-2.png')`;
                 });
                 reader.readAsDataURL(this.files[0]);
-                }
             });
         </script>
         <script>
@@ -383,10 +371,9 @@
                 var output = event.srcElement;
                 var filee = output.files[0].name;
                 var extension = filee.split('.').pop();
-                if(extension != "jpeg" && extension != "jpg" && extension != "png"){
-                    alert('Veuillez inserer un fichier de type png, jpg ou jpeg, le fichier insérer est de type '+extension);
-                    document.getElementById("showimage").classList.remove("showimage");
-                }else{
+                //if(extension != "jpeg" && extension != "jpg" && extension != "png"){
+                //    alert('Veuillez inserer un fichier de type png, jpg ou jpeg, le fichier insérer est de type '+extension);
+                //    document.getElementById("showimage").classList.remove("showimage");
                     const reader = new FileReader();
                     reader.addEventListener('load', () =>{
                     uploaded_image = reader.result;
@@ -394,7 +381,6 @@
                     document.getElementById("showimage").classList.add("showimage");
                 });
                 reader.readAsDataURL(this.files[0]);
-                }
             });
         </script>
         <script>
@@ -405,11 +391,9 @@
                 var input_cin = e.srcElement;
                 var filName = input_cin.files[0].name;
                 var extension = filName.split('.').pop();
-                if(extension != "pdf"){
-                    infoArea_cin.innerHTML = '';
-                }else{
+                //if(extension != "pdf"){
+                //    infoArea_cin.innerHTML = '';
                     infoArea_cin.textContent = filName;
-                }
             }
         </script>
         <script>
@@ -420,11 +404,9 @@
                 var input_permis = e.srcElement;
                 var filName = input_permis.files[0].name;
                 var extension = filName.split('.').pop();
-                if(extension != "pdf"){
-                    infoArea_permis.innerHTML = '';
-                }else{
+                //if(extension != "pdf"){
+                //    infoArea_permis.innerHTML = '';
                     infoArea_permis.textContent = filName;
-                }
             }
         </script>
         <script>
@@ -435,11 +417,9 @@
                 var input_visite = e.srcElement;
                 var filName = input_visite.files[0].name;
                 var extension = filName.split('.').pop();
-                if(extension != "pdf"){
-                    infoArea_visite.innerHTML = '';
-                }else{
+                //if(extension != "pdf"){
+                //    infoArea_visite.innerHTML = '';
                     infoArea_visite.textContent = filName;
-                }
             }
         </script>
         <script>
@@ -450,12 +430,40 @@
                 var input = e.srcElement;
                 var filName = input.files[0].name;
                 var extension = filName.split('.').pop();
-                if(extension != "png" && extension != "jpg" && extension != "jpeg"){
-                    infoArea.innerHTML = '';
-                }else{
+                //if(extension != "png" && extension != "jpg" && extension != "jpeg"){
+                //    infoArea.innerHTML = '';
                     infoArea.textContent = filName;
-                }
             }
+        </script>
+        <script>
+            /*$('#submit_inscri').click(function(e){
+                var prenom = $("#prenom").val();
+                var nom = $("#nom").val();
+                var prenom_arab = $("#prenom_arab").val();
+                var nom_arab = $("#nom_arab").val();
+                var email = $("#email").val();
+                var motdepasse = $("#motdepasse").val();
+                var naissance = $("#naissance").val();
+                var lieu = $("#lieu").val();
+                var cin = $("#cin").val();
+                var telephone = $("#telephone-inscription").val();
+                var adresse = $("#adresse").val();
+                var formation = $("#formation").val();
+                var permis = $("#permis").val();
+                var categorie = $("#categorie").val();
+                var obtenir = $("#obtenir").val();
+                var profesionnel = $("#profesionnel").val();
+                var scan_cin = $("#scan_cin").val();
+                var scan_permis = $("#scan_permis").val();
+                var scan_visite = $("#scan_visite").val();
+                var image = $("#image").val();
+                if(prenom == '' && nom == '' && prenom_arab == '' && nom_arab == '' && email == '' && motdepasse == '' && naissance == '' &&
+                    lieu == '' && cin == '' && telephone == '' && adresse == '' && formation == '' && permis == '' && categorie == '' && obtenir == '' && 
+                    profesionnel == '' && scan_cin == '' && scan_permis == '' && scan_visite == '' && image == ''){
+                    e.preventDefault();
+                    $('#error').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez remplir tous les champs</div>');
+                }
+            })*/
         </script>
     </body>
 </html>

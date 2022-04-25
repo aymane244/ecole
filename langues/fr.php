@@ -84,7 +84,7 @@
         "pres" => "Présentation de la formation",
         "description" => "Description et objectif de cette formation",
         "cursus" => "Cursus de la formation",
-        "matieres" => "Matières",
+        "matieres" => "Modules",
         "durée" => "Durée/h",
         "inscrivez" => "Inscrivez-vous ici"
     );
@@ -92,7 +92,7 @@
         "presentation" => "Présentation de la formation",
         "description" => "Description et objectif de cette formation",
         "cursus" => "Cursus de la formation",
-        "matieres" => "Matières",
+        "matieres" => "Modules",
         "durée" => "Durée/h",
         "inscrivez" => "Inscrivez-vous ici"
     );
@@ -157,10 +157,10 @@
         "seances" => "Séances",
         "avancement" => "Etat d'avancement",
         "envoyee" => "Demande envoyée",
-        "Diplome" => "Diplome prêt",
-        "Demande_dip" => "Demande Diplôme",
-        "Attestation" => "Attestation prête",
-        "Demande_att" => "Demande Attestation",
+        "Diplome" => "Document 1 prêt",
+        "Demande_dip" => "Demande Document 1",
+        "Attestation" => "Document 2 prêt",
+        "Demande_att" => "Demande Document 2",
         "general" => "Note Générale",
         "note" => "Notes"
     );

@@ -96,6 +96,24 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="text-center" style="display:none">
+                <?php
+                    foreach($notes as $note){
+                        if($note['etud_id'] == $_SESSION['id']){
+                            if($note['notegenerale'] > 9){
+                ?>
+                <h5 class="text-success"> Félicitaion vous avez bien passé votre module</h5>
+                <?php
+                            }else{
+                ?>
+                <h5 class="text-success"> Vous devez passer votre ratrappage</h5>
+                <?php                
+                            }
+                        }
+                    }
+                ?>
+                </div>
+
             </div>
         </div>
         <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">

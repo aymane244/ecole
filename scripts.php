@@ -63,3 +63,9 @@
         document.getElementById("frensh").style.display="none";
     }
 </script>
+<script>
+    function afficher(){
+        document.getElementById("formation").style.display="block";
+        document.getElementById("divbtn").style.display="block";
+    }
+</script>

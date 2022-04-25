@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 14 avr. 2022 à 16:50
+-- Généré le : lun. 25 avr. 2022 à 14:28
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -52,7 +52,20 @@ INSERT INTO `absence` (`abs_id`, `abs_etudiant`, `abs_date`, `abs_formation`, `a
 (10, 90, '2022-03-10', 2, 5, 'Présent'),
 (11, 91, '2022-03-10', 2, 5, 'Absent'),
 (12, 95, '2022-03-10', 2, 5, 'Absent'),
-(13, 97, '2022-03-10', 2, 5, 'Absent');
+(13, 97, '2022-03-10', 2, 5, 'Absent'),
+(17, 90, '2022-04-20', 2, 5, 'Présent'),
+(18, 91, '2022-04-20', 2, 5, 'Présent'),
+(19, 95, '2022-04-20', 2, 5, 'Présent'),
+(20, 97, '2022-04-20', 2, 5, 'Présent'),
+(21, 90, '2022-04-12', 2, 5, 'Présent'),
+(22, 91, '2022-04-12', 2, 5, 'Présent'),
+(23, 95, '2022-04-12', 2, 5, 'Présent'),
+(24, 97, '2022-04-12', 2, 5, 'Présent'),
+(25, 90, '2022-04-11', 2, 5, 'Absent'),
+(26, 91, '2022-04-11', 2, 5, 'Absent'),
+(27, 95, '2022-04-11', 2, 5, 'Présent'),
+(28, 97, '2022-04-11', 2, 5, 'Présent'),
+(29, 125, '2022-04-05', 10, 75, 'Présent');
 
 -- --------------------------------------------------------
 
@@ -122,7 +135,17 @@ INSERT INTO `commentaire` (`com_id`, `com_nom`, `com_prenom`, `com_comentaire`, 
 (2, 'Zghlouli', 'Mourad', 'Salut c\'est mon deuxième commentaire', 2, '2022-02-15'),
 (23, 'Chnaif', 'Aimane', 'Hello c\'est un commentaire', 1, '2022-03-05'),
 (24, 'Aimane', 'Chnaif', 'On présente', 1, '2022-03-05'),
-(25, 'Chnaif', 'Aimane', 'un commentaire', 6, '2022-03-26');
+(25, 'Chnaif', 'Aimane', 'un commentaire', 6, '2022-03-26'),
+(28, 'Chnaif', 'Aimane', 'hello xorld', 6, '2022-04-21'),
+(29, 'Chnaif', 'Aimane', 'hello world', 6, '2022-04-21'),
+(30, 'Chnaif', 'Aimane', 'hello world comment', 6, '2022-04-21'),
+(32, 'Chnaif', 'Aimane', 'wcwxcwxc', 6, '2022-04-21'),
+(33, 'Chnaif', 'Aimane', 'cccoioicoicoci', 6, '2022-04-21'),
+(34, 'Chnaif', 'Aimane', 'hello worldncncncncnc', 6, '2022-04-21'),
+(35, 'qsdqsd', 'Fah', 'qsdqsdqd', 6, '2022-04-21'),
+(36, 'wxcwxc', ';wxc', 'wxcwxcwxc', 6, '2022-04-21'),
+(37, 'wxcwxc', 'wxcwc', 'wxcwxcwx', 6, '2022-04-21'),
+(39, 'ئءؤئءؤ', ',wxcw', 'ئءؤئءؤ', 6, '2022-04-21');
 
 -- --------------------------------------------------------
 
@@ -146,7 +169,14 @@ CREATE TABLE `contact` (
 INSERT INTO `contact` (`con_id`, `con_nom`, `con_email`, `con_sujet`, `con_message`, `con_envoie`) VALUES
 (11, 'Aimane', 'a.chnaif2010@gmail.com', 'Message test', 'Test', '2022-02-19'),
 (12, 'Aimane', 'Chnaif', 'Test', 'Test message', '2022-02-20'),
-(13, 'Aimane', 'Chnaif', 'Test', 'Test message', '2022-02-20');
+(13, 'Aimane', 'Chnaif', 'Test', 'Test message', '2022-02-20'),
+(30, '', '', '', '', '2022-04-20'),
+(31, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', '', '', '2022-04-20'),
+(32, 'qsdsd', '', '', '', '2022-04-20'),
+(33, 'aimane', 'a.chnaif2010@gmail.com', 'Reclamation', '', '2022-04-20'),
+(34, '', '', '', '', '2022-04-20'),
+(35, '', '', '', '', '2022-04-20'),
+(36, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'wqsdqsd', 'wxcwxcwxcwxc', '2022-04-21');
 
 -- --------------------------------------------------------
 
@@ -189,7 +219,17 @@ CREATE TABLE `douane` (
 INSERT INTO `douane` (`dou_id`, `dou_nom`, `dou_res_nom`, `dou_res_email`, `dou_res_message`, `dou_res_date`) VALUES
 (4, 'Classe B', 'Aimane', 'a.chnaif2010@gmail.com', 'sqdqsdqsd', '2022-03-01'),
 (5, 'Classe SS', 'qsdqsd', 'a.chnaif2010@gmail.com', 'qsdqsdqsd', '2022-04-12'),
-(6, 'Classe B', 'sqd', 'ty@ghjg.com', 'jkkjlkjl', '2022-04-12');
+(6, 'Classe B', 'sqd', 'ty@ghjg.com', 'jkkjlkjl', '2022-04-12'),
+(7, 'Classe A', 'Aimane', 'a.chnaif2010@gmail.com', '', '2022-04-20'),
+(8, 'Classe A', 'Aimane', 'a.chnaif2010@gmail.com', '', '2022-04-20'),
+(9, 'Classe A', 'wxc', 'a.chnaif2010@gmail.comwxc', '', '2022-04-24'),
+(10, 'Classe A', 'wxc', 'a.chnaif2010@gmail.comwxc', '', '2022-04-24'),
+(11, 'Classe A', 'wxc', 'a.chnaif2010@gmail.comwxc', '', '2022-04-24'),
+(12, 'Classe A', 'wxc', 'a.chnaif2010@gmail.comwxc', '', '2022-04-24'),
+(13, 'Classe A', 'wxc', 'a.chnaif2010@gmail.comwxc', '', '2022-04-24'),
+(14, 'Classe A', 'wxc', 'a.chnaif2010@gmail.comwxc', '', '2022-04-24'),
+(15, 'Classe A', 'wxc', 'a.chnaif2010@gmail.comwxc', '', '2022-04-24'),
+(16, 'Classe A', 'wxc', 'a.chnaif2010@gmail.comwxc', '', '2022-04-24');
 
 -- --------------------------------------------------------
 
@@ -228,12 +268,13 @@ CREATE TABLE `etudiant` (
 --
 
 INSERT INTO `etudiant` (`etud_id`, `etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, `etud_scan_cin`, `etud_scan_permis`, `etud_scan_visite`, `etud_promos`, `etud_image`, `etud_inscription`) VALUES
-(1, 'Chnaif', '', 'Aimane', '', 'a.chnaif2010@gmail.com', '0644776612', '25f9e794323b453885f5181f1b624d0b', 'G621092', 1, '1999-11-26', '', '', '', '', '', '2022-04-13', '', '', '', 1, './images/etudiants/DSC_27762.jpg', '2022-02-03'),
+(1, 'Chnaif', 'شنايف', 'Aimane', 'أيمن', 'a.chnaif201@gmail.com', '0644776612', 'ab4f63f9ac65152575886860dde480a1', 'G621092', 1, '1999-11-26', 'Kénitra', 'Riad Ahlan', 'N7777', 'B', '', '2022-04-13', '', '', '', 1, './images/etudiants/DSC_27762.jpg', '2022-02-03'),
 (90, 'Aboussabr', '', 'Othmane', '', 'aboussabryanina@gmail.com', '0606118291', '25f9e794323b453885f5181f1b624d0b', 'G621097', 2, '1991-11-26', '', '', '', '', '', '2022-04-13', '', '', '', 1, './images/etudiants/IMG_20191229_020502_262.jpg', '2022-02-01'),
 (91, 'Souiri', '', 'Chaimae', '', 'chaimaesouiri8@gmail.com', '0659499427', '25f9e794323b453885f5181f1b624d0b', 'G621099', 2, '2001-02-11', '', '', '', '', '', '2022-04-13', '', '', '', 1, './images/etudiants/', '2022-02-04'),
-(95, 'Aboussabr', '', 'Yasmina', '', 'q.chnaif@gmail.com', '+212644776612', '25f9e794323b453885f5181f1b624d0b', 'G111', 2, '1999-11-11', '', '', '', '', '', '2022-04-13', './diplomes/Accounting Certificate.pdf', '', '', 1, './images/etudiants/', '2022-03-04'),
+(95, 'Aboussabr', '', 'Yasmina', '', 'q.chnaif@gmail.com', '+212644776612', 'azerty', 'G111', 2, '1999-11-11', '', '', '', '', '', '2022-04-13', './diplomes/Accounting Certificate.pdf', '', '', 1, './images/etudiants/', '2022-03-04'),
 (96, 'Chnaif', '', 'Ayoub', '', 'a.chnaif20hh10@gmail.com', '655778899', '25f9e794323b453885f5181f1b624d0b', 'G555', 1, '1999-11-11', '', '', '', '', '', '2022-04-13', './diplomes/Attestation 1001 Evasions.pdf', '', '', 1, './images/etudiants/', '2022-03-04'),
-(97, 'Bendaoud', '', 'Mouad', '', 'mouad@gmail.com', '644776612', '25f9e794323b453885f5181f1b624d0b', 'G621090', 2, '2000-11-11', '', '', '', '', '', '2022-04-13', './diplomes/Certificat Udemey Allemand.pdf', '', '', 1, './images/etudiants/', '2022-03-05');
+(97, 'Bendaoud', '', 'Mouad', '', 'mouad@gmail.com', '644776612', '25f9e794323b453885f5181f1b624d0b', 'G621090', 2, '2000-11-11', '', '', '', '', '', '2022-04-13', './diplomes/Certificat Udemey Allemand.pdf', '', '', 1, './images/etudiants/', '2022-03-05'),
+(125, 'Chnaif', 'اشنايف', 'Aimane', 'أيمن', 'a.chnaif2010@gmail.com', '212644776612', '25f9e794323b453885f5181f1b624d0b', 'N8888', 10, '1991-11-26', 'Kénitra', 'Riad Ahlan', 'N7777', 'A', '', '2022-04-18', './dossiers-stagiaires/Aimane-Chnaif/cin-CIN.pdf', './dossiers-stagiaires/Aimane-Chnaif/permis-permis.pdf', './dossiers-stagiaires/Aimane-Chnaif/visite-visite.pdf', 5, './dossiers-stagiaires/Aimane-Chnaif/image-logo.png', '2022-04-23');
 
 -- --------------------------------------------------------
 
@@ -259,7 +300,8 @@ CREATE TABLE `formation` (
 INSERT INTO `formation` (`for_id`, `for_nom`, `for_nom_arab`, `for_pres`, `for_pres_arab`, `for_descr`, `for_desc_arab`, `for_image`) VALUES
 (1, 'Formation Qualifiante Initiale Minimum Obligatoire (FQIMO) des conducteurs professionnels', 'الحد الأدنى الإلزامي من تدريب التأهيل الأولي للسائقين المحترفين (FQIMO)', '<p><strong>Formation pour toute personne </strong>int&eacute;ress&eacute;e d&#39;avoir un permis de conduite professionnel des grands camions et petit</p>\r\n', '<p>تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية بالنسبة للشاحنات الكبرى والصغرى</p>\r\n', '<p>Tout conducteur de v&eacute;hicule de transport de marchandises dont le poids total autoris&eacute; en charge (PTAC) exc&egrave;de 3,5 tonnes doit avoir satisfait, pr&eacute;alablement &agrave; l&rsquo;exercice de son activit&eacute; de conduite, &agrave; une obligation de qualification initiale. Cette qualification initiale est obtenue &agrave; l&rsquo;issue d&rsquo;une formation professionnelle qui peut &ecirc;tre longue ou acc&eacute;l&eacute;r&eacute;e. La qualification initiale peut &ecirc;tre obtenue &agrave; l&rsquo;issue d&rsquo;une formation professionnelle longue de 280 heures minimum, sanctionn&eacute;e par l&rsquo;obtention d&rsquo;un titre professionnel de conduite routi&egrave;re ou d&rsquo;un dipl&ocirc;me de niveau V de conducteur routier. Sont ainsi vis&eacute;s :</p>\r\n\r\n<p>- le Certificat d&rsquo;Aptitude Professionnelle (CAP) conducteur routier de marchandises,</p>\r\n\r\n<p>- le Brevet d&rsquo;&Eacute;tudes Professionnelles (BEP) conduite et services dans le transport routier,</p>\r\n\r\n<p>- le titre professionnel de Conducteur du Transport Routier de Marchandises sur tous V&eacute;hicules (CTRMV) d&eacute;livr&eacute; par le Ministre charg&eacute; de l&rsquo;emploi et de la formation professionnelle, - le titre professionnel de Conducteur du Transport Routier de Marchandises sur Porteur (CTRMP) d&eacute;livr&eacute; par le Ministre charg&eacute; de l&rsquo;emploi et de la formation professionnelle.</p>\r\n\r\n<p>L&rsquo;obtention de l&rsquo;un de ces titres ou dipl&ocirc;mes permet &agrave; son titulaire de conduire, d&egrave;s l&rsquo;&acirc;ge de 18 ans, les v&eacute;hicules pour lesquels un permis de conduire des cat&eacute;gories C ou EC est requis. Au vu du dipl&ocirc;me ou du titre professionnel, le pr&eacute;fet du d&eacute;partement dans lequel a &eacute;t&eacute; d&eacute;livr&eacute; le titre ou le dipl&ocirc;me, d&eacute;livre au conducteur, apr&egrave;s avoir v&eacute;rifi&eacute; la validit&eacute; de son permis de conduire, une carte de qualification de conducteur (mod&egrave;le &agrave; para&icirc;tre prochainement). Cette carte doit &ecirc;tre renouvel&eacute;e tous les 5 ans apr&egrave;s chaque session de formation continue</p>\r\n', '<p>تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية</p>\r\n', './images/etudiants/library.jpg'),
 (2, 'Formation des conducteurs professionnels', 'تدريب السائقين المحترفين', 'Formation pour toute personne intéreseé d\'avoir un permis de conduite professionnel des camions', 'تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية', 'Tout conducteur de véhicule de transport de marchandises dont le poids total autorisé en charge (PTAC) excède 3,5 tonnes doit avoir satisfait, préalablement à l’exercice de son activité de conduite, à une obligation de qualification initiale. Cette qualification initiale est\r\nobtenue à l’issue d’une formation professionnelle qui peut être longue ou accélérée. La qualification initiale peut être obtenue à l’issue d’une formation professionnelle longue de 280 heures minimum, sanctionnée par l’obtention d’un titre professionnel de conduite routière ou d’un diplôme de niveau V de conducteur routier.\r\nSont ainsi visés :\r\n- le Certificat d’Aptitude Professionnelle (CAP) conducteur routier de marchandises,\r\n- le Brevet d’Études Professionnelles (BEP) conduite et services dans le transport routier,\r\n- le titre professionnel de Conducteur du Transport Routier de Marchandises sur tous Véhicules (CTRMV) délivré par le Ministre chargé de l’emploi et de la \r\n   formation professionnelle,\r\n- le titre professionnel de Conducteur du Transport Routier de Marchandises sur Porteur (CTRMP) délivré par le Ministre chargé de l’emploi et de la \r\n   formation professionnelle.\r\n\r\nL’obtention de l’un de ces titres ou diplômes permet à son titulaire de conduire, dès l’âge de 18 ans, les véhicules pour lesquels un permis de conduire des catégories C ou EC est requis.\r\nAu vu du diplôme ou du titre professionnel, le préfet du département dans lequel a été délivré le titre ou le diplôme, délivre au conducteur, après avoir vérifié la validité de son permis de conduire, une carte de qualification de conducteur (modèle à paraître prochainement). Cette carte doit être renouvelée tous les 5 ans après chaque session de formation continue', 'تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية', './images/etudiants/library.jpg'),
-(10, 'Nouvelle Formation', 'تكوين جديد', '<p>C&#39;est une nouvelle formation</p>\r\n', '<p>تكوين جديد</p>\r\n', '<p>Une nouvelle formation</p>\r\n\r\n<p>Pour les &eacute;tudiants int&eacute;ress&eacute; de voyager &agrave; l&#39;&eacute;tranger pour continuer leurs &eacute;tudes.</p>\r\n', '<p>تكوين لصالح الطلبة المهتمين بالسفر إلى الخارج للدراسة</p>\r\n', './images/formation/630.jpg');
+(10, 'Nouvelle Formation', 'تكوين جديد', '<p>C&#39;est une nouvelle formation</p>\r\n', '<p>تكوين جديد</p>\r\n', '<p>Une nouvelle formation</p>\r\n\r\n<p>Pour les &eacute;tudiants int&eacute;ress&eacute; de voyager &agrave; l&#39;&eacute;tranger pour continuer leurs &eacute;tudes.</p>\r\n', '<p>تكوين لصالح الطلبة المهتمين بالسفر إلى الخارج للدراسة</p>\r\n', './images/formation/630.jpg'),
+(11, 'Formation 1', 'تكوين 1', '<p>Ceci est une formation</p>\r\n', '<p>هذا تكوين</p>\r\n', '<p>Une formation nouvelle</p>\r\n', '<p>تكوين جديد</p>\r\n', './images/formation/logo.png');
 
 -- --------------------------------------------------------
 
@@ -309,7 +351,52 @@ CREATE TABLE `iso` (
 INSERT INTO `iso` (`iso_id`, `iso_nom`, `iso_presentation`, `iso_res_nom`, `iso_res_email`, `iso_res_message`, `iso_res_date`) VALUES
 (6, 'ISO 45001', '', 'Fahd', 'Houta@gmail.com', 'sqdqsdqsd', '2022-04-11'),
 (7, 'ISO 39001', '', 'Aimane', 'a.chnaif2010@gmail.com', 'hello', '2022-04-11'),
-(8, 'ISO 45001', '', 'qsdqsd', 'a.chnaif2010@gmail.com', 'qsdqsdqsd', '2022-04-12');
+(8, 'ISO 45001', '', 'qsdqsd', 'a.chnaif2010@gmail.com', 'qsdqsdqsd', '2022-04-12'),
+(9, '', '', '', '', '', '2022-04-20'),
+(10, '', '', '', '', '', '2022-04-20'),
+(11, '', '', '', '', '', '2022-04-20'),
+(12, '', '', '', '', '', '2022-04-20'),
+(13, '', '', '', '', '', '2022-04-20'),
+(14, '', '', '', '', '', '2022-04-20'),
+(15, '', '', '', '', '', '2022-04-20'),
+(16, '', '', '', '', '', '2022-04-20'),
+(17, '', '', '', '', '', '2022-04-20'),
+(18, '', '', '', '', '', '2022-04-20'),
+(19, '', '', '', '', '', '2022-04-20'),
+(20, '', '', '', '', '', '2022-04-20'),
+(21, '', '', '', '', '', '2022-04-20'),
+(22, '', '', '', '', '', '2022-04-20'),
+(23, '', '', '', '', '', '2022-04-20'),
+(24, '', '', '', '', '', '2022-04-20'),
+(25, '', '', '', '', '', '2022-04-20'),
+(26, 'ISO 9001', '', 'Fahd', 'a.chnaif2010@gmail.com', '', '2022-04-20'),
+(27, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', '', '2022-04-24'),
+(28, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', '', '2022-04-24'),
+(29, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', '', '2022-04-24'),
+(30, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', '', '2022-04-24'),
+(31, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', '', '2022-04-24'),
+(32, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(33, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(34, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(35, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(36, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(37, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(38, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(39, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(40, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(41, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(42, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(43, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(44, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(45, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(46, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(47, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(48, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(49, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(50, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(51, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(52, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
+(53, 'ISO 9001', '', 'wX', 'a.chnaif2010@gmail.comwxc', '', '2022-04-24');
 
 -- --------------------------------------------------------
 
@@ -351,7 +438,7 @@ CREATE TABLE `matiere` (
 --
 
 INSERT INTO `matiere` (`mat_id`, `mat_formation`, `mat_nom`, `mat_nom_arab`, `mat_duree`, `mat_prof`, `mat_prof_arab`) VALUES
-(1, 1, 'Traduction', 'الترجمة', 4, 'Hicham Louadi', 'هشام الوادي'),
+(1, 1, 'Cours pratique', 'ذرس تطبيقي', 4, 'Hicham Louadi', 'هشام الوادي'),
 (2, 1, 'Marketing', 'التسويق', 5, 'Yasmina Aboussabr', 'ياسمين أبوالصبر'),
 (5, 2, 'Cours pratique', 'درس تطبيقي', 4, 'Abderahmane Bouhouch', 'عبدالرحمان بوحوش'),
 (69, 2, 'Cours théorique', 'درس نظري', 3, 'Salim Guechich', 'سليم كشيش'),
@@ -386,14 +473,16 @@ INSERT INTO `note` (`not_id`, `not_formation`, `not_matiere`, `not_etudiant`, `n
 (52, 2, 5, 95, 12),
 (53, 2, 69, 91, 13),
 (60, 1, 1, 96, 18),
-(61, 2, 5, 97, 11),
+(61, 2, 5, 97, 14),
 (64, 1, 2, 96, 17),
 (65, 1, 77, 96, 13),
 (68, 1, 1, 1, 14),
 (69, 1, 2, 1, 12),
 (70, 1, 77, 1, 12),
 (71, 1, 78, 1, 14),
-(72, 1, 78, 96, 15);
+(72, 1, 78, 96, 15),
+(73, 2, 69, 97, 14),
+(74, 10, 75, 125, 15);
 
 -- --------------------------------------------------------
 
@@ -411,7 +500,10 @@ CREATE TABLE `promos` (
 --
 
 INSERT INTO `promos` (`pro_id`, `pro_année`) VALUES
-(1, 'promos 2022/2023');
+(1, 'promos 2022/2023'),
+(3, '2999'),
+(4, '2399'),
+(5, 'ss');
 
 -- --------------------------------------------------------
 
@@ -428,19 +520,29 @@ CREATE TABLE `reservation` (
   `res_commentaire` varchar(200) NOT NULL,
   `res_date` date NOT NULL DEFAULT current_timestamp(),
   `time_debut` varchar(200) NOT NULL,
-  `time_fin` varchar(200) NOT NULL
+  `time_fin` varchar(200) NOT NULL,
+  `res_ajout` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `reservation`
 --
 
-INSERT INTO `reservation` (`res_id`, `res_nom`, `res_telephone`, `res_email`, `res_salle`, `res_commentaire`, `res_date`, `time_debut`, `time_fin`) VALUES
-(12, 'Aimane Chnaif', '212644776612', 'a.chnaif2010@gmail.com', 4, 'Pas de commentaire', '2022-03-24', '08:00', '09:00'),
-(13, 'Aimane', '212644776612', 'a.chnaif2010@gmail.com', 4, 'pas de commentaire', '2022-03-08', '08:00', '09:00'),
-(14, 'Aimane Chnaif', '212644776612', 'a.chnaif2010@gmail.com', 4, 'pas de commentaire', '2022-03-25', '08:00', '10:00'),
-(34, 'Aymane', '212644776612', 'a.chnaif2010@gmail.com', 4, 'salut', '2022-03-25', '11:00', '12:00'),
-(35, 'Aymane', '212644776612', 'a.chnaif2010@gmail.com', 4, 'sd', '2022-03-31', '08:00', '09:00');
+INSERT INTO `reservation` (`res_id`, `res_nom`, `res_telephone`, `res_email`, `res_salle`, `res_commentaire`, `res_date`, `time_debut`, `time_fin`, `res_ajout`) VALUES
+(12, 'Aimane Chnaif', '212644776612', 'a.chnaif2010@gmail.com', 4, 'Pas de commentaire', '2022-03-24', '08:00', '09:00', '2022-04-20'),
+(13, 'Aimane', '212644776612', 'a.chnaif2010@gmail.com', 4, 'pas de commentaire', '2022-03-08', '08:00', '09:00', '2022-04-20'),
+(14, 'Aimane Chnaif', '212644776612', 'a.chnaif2010@gmail.com', 4, 'pas de commentaire', '2022-03-25', '08:00', '10:00', '2022-04-20'),
+(34, 'Aymane', '212644776612', 'a.chnaif2010@gmail.com', 4, 'salut', '2022-03-25', '11:00', '12:00', '2022-04-20'),
+(35, 'Aymane', '212644776612', 'a.chnaif2010@gmail.com', 4, 'sd', '2022-03-31', '08:00', '09:00', '2022-04-20'),
+(40, '', '', '', 3, 'reserver', '2022-04-21', '09:00', '11:00', '2022-04-20'),
+(41, 'Aimane', 'lklqsjd', 'a.chnaif2010@gmail.com', 1, '', '2022-04-29', '08:00', '10:00', '2022-04-20'),
+(42, '', '', '', 1, '', '2022-04-29', '14:00', '18:00', '2022-04-20'),
+(43, 'Aimane Chnaif', '', '', 1, '', '2022-04-30', '08:00', '09:00', '2022-04-20'),
+(44, 'qsdqsd', '+212644776612', 'a.chnaif2010@gmail.com', 1, 'qsdqsd', '2022-04-28', '08:00', '09:00', '2022-04-20'),
+(45, 'sdqsd', '+212644776612', 'a.chnaif2010@gmail.com', 1, 'wsdqsdqsd', '2022-04-27', '08:00', '09:00', '2022-04-20'),
+(46, 'Aimane', '0644776612', 'a.chnaif2010@gmail.com', 1, 'hello', '2022-04-26', '11:00', '12:00', '2022-04-20'),
+(47, 'Chnaif', '+212644776612', 'a.chnaif2010@gmail.com', 4, 'comm', '2022-04-28', '11:00', '12:00', '2022-04-21'),
+(48, 'Chnaif', '+212644776612', 'a.chnaif2010@gmail.com', 4, 'lllllllll', '2022-04-28', '08:00', '09:00', '2022-04-21');
 
 -- --------------------------------------------------------
 
@@ -634,7 +736,7 @@ ALTER TABLE `seance`
 -- AUTO_INCREMENT pour la table `absence`
 --
 ALTER TABLE `absence`
-  MODIFY `abs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `abs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT pour la table `article`
@@ -652,13 +754,13 @@ ALTER TABLE `attestation`
 -- AUTO_INCREMENT pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT pour la table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `con_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `con_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT pour la table `diplome`
@@ -670,19 +772,19 @@ ALTER TABLE `diplome`
 -- AUTO_INCREMENT pour la table `douane`
 --
 ALTER TABLE `douane`
-  MODIFY `dou_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `dou_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `etudiant`
 --
 ALTER TABLE `etudiant`
-  MODIFY `etud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `etud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT pour la table `formation`
 --
 ALTER TABLE `formation`
-  MODIFY `for_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `for_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `img_salle`
@@ -694,7 +796,7 @@ ALTER TABLE `img_salle`
 -- AUTO_INCREMENT pour la table `iso`
 --
 ALTER TABLE `iso`
-  MODIFY `iso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `iso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT pour la table `langue`
@@ -706,25 +808,25 @@ ALTER TABLE `langue`
 -- AUTO_INCREMENT pour la table `matiere`
 --
 ALTER TABLE `matiere`
-  MODIFY `mat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `mat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT pour la table `note`
 --
 ALTER TABLE `note`
-  MODIFY `not_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `not_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT pour la table `promos`
 --
 ALTER TABLE `promos`
-  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT pour la table `salle`

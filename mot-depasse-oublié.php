@@ -3,7 +3,10 @@
 	if(isset($_POST['submit_pwd'])){
 		$etudiants = $data->getEtudiant();
 		foreach($etudiants as $etudiant){
-			if($etudiant['etud_email'] != $_POST['email']){
+			if($_POST['email'] == ''){
+				$message = "Veuillez saisir votre email";
+			}else if($etudiant['etud_email'] != $_POST['email']){
+				
 				$message = "Email ".$_POST['email']." n'existe pas dans nos données";
 			}else{
 				$data->updatePassword();
@@ -27,8 +30,8 @@
     <body>
         <?php include_once "navbar.php";?>
 		<div class="container py-4">
-		<?php
-                if(isset($_SESSION['status'])){
+			<?php
+            	if(isset($_SESSION['status'])){
             ?>
             <div class='alert alert-success text-center' role='alert'><?php echo $_SESSION['status']?></div>
             <?php
@@ -41,9 +44,6 @@
 					unset($message);
 				}
 			?>
-			<div class="text-center py-4">
-				<h2><i class="fas fa-lock"></i> <?php echo $password['oublie'] ?></h2>
-            </div>
 			<form action="" method="POST" class="pb-3">
 				<div id="password">
 					<div class="row justify-content-center">
@@ -53,12 +53,12 @@
 									<h3><i class="fas fa-lock"></i> <?php echo $password['oublie'] ?></h3>
 								</div>
 								<div class="card-body py-5">
-									<div class="row mb-3">
-										<label for="motdepasse" class="col-md-4 col-form-label text-md-end"><?php echo $password['nouveau'] ?></label>
-										<div class="col-md-6">
+									<div class="row mb-3 justify-content-center">
+										<label for="motdepasse" class="col-md-8 col-form-label"><?php echo $password['nouveau'] ?></label>
+										<div class="col-md-8">
 											<div class="d-flex">
 												<i class="fas fa-key position-awesome"></i>
-												<input type="password" class="form-control pl-5" id="exampleInputPassword" placeholder="Mot de Passe" name="password" required>
+												<input type="password" class="form-control pl-5" id="exampleInputPassword" placeholder="Mot de Passe" name="password">
 											</div>
 											<p id="error"></p>
 											<div class="form-group form-check px-4">
@@ -89,12 +89,12 @@
 									</div>
 								</div>
 								<div class="card-body py-5">
-									<div class="row mb-3">
-										<label for="email" class="col-md-4 col-form-label text-md-end"><?php echo $password['email'] ?></label>
-										<div class="col-md-6">
+									<div class="row mb-3 justify-content-center">
+										<label for="email" class="col-md-8 col-form-label"><?php echo $password['email'] ?></label>
+										<div class="col-md-8">
 											<div class="d-flex">
 												<i class="fas fa-at position-awesome"></i>
-												<input type="email" class="form-control pl-5" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" name="email" required>
+												<input type="email" class="form-control pl-5" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" name="email">
 											</div>
 											<br>
 											<div class="pt-2">

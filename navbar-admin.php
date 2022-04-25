@@ -7,8 +7,8 @@
                 <div class="mt-4 ml-lg-5 pt-4 div-menu-width">
                     <p><a href="dashboard" class="link-color">Dashboard<i class="fas fa-tachometer-alt awesome-padding float-right"></i></a></p>
                     <p><a href="formations" class="link-color">Formations<i class="fas fa-school awesome-padding float-right"></i></a></p>
-                    <p><a href="matières" class="link-color">Matières<i class="fas fa-book-open awesome-padding float-right"></i></a></p>
-                    <p><a href="etudiant" class="link-color">Etudiants<i class="fas fa-user-graduate awesome-padding float-right"></i></a></p>
+                    <p><a href="module" class="link-color">Modules<i class="fas fa-book-open awesome-padding float-right"></i></a></p>
+                    <p><a href="stagiaire" class="link-color">Stagiaires<i class="fas fa-user-graduate awesome-padding float-right"></i></a></p>
                     <p><a href="demandes-etudiant" class="link-color">Demandes<i class="fas fa-graduation-cap awesome-padding float-right"></i></a></p>
                     <p><a href="salles" class="link-color">Salles<i class="fas fa-chalkboard-teacher awesome-padding float-right"></i></a></p>
                     <p><a href="accomagnement-conseil" class="link-color">Accompa. & conseil<i class="fas fa-question awesome-padding float-right"></i></a></p>

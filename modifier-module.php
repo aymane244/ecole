@@ -4,7 +4,7 @@
         echo "<script>window.location.href='login-admin'</script>";
     }
     if(!isset($_GET['id'])){
-        echo "<script>window.location.href='matière'</script>";
+        echo "<script>window.location.href='module'</script>";
     }
     $id = $_GET['id'];
     $matieres = $data->getFormationMatiere();
@@ -33,18 +33,18 @@
             include_once "style.php";
             include_once "scripts.php";
         ?>
-        <title>Modifier Matière</title>
+        <title>Modifier Module</title>
     </head>
     <body>
         <?php include_once "navbar-admin.php";?>
             <div class="container">
                 <div class="text-center py-5">
-                    <h2><i class="fas fa-edit"></i> Modifier la matière</h2>
+                    <h2><i class="fas fa-edit"></i> Modifier le module</h2>
                 </div>
                 <div class="row pb-1">
                     <div class="col-md-12">
                         <div class="card card-position">
-                            <div class="card-header text-center link-font"><i class="fas fa-edit"></i> Modifier votre matière</div>
+                            <div class="card-header text-center link-font"><i class="fas fa-edit"></i> Modifier votre module</div>
                             <div class="card-body py-5">
                                 <form action="" method="POST" enctype="multipart/form-data">
                                     <div class="row mb-3 justify-content-center">
@@ -69,7 +69,7 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3 justify-content-center">
-                                        <label for="matiere" class="col-md-3 col-form-label text-md-end">Matières</label>
+                                        <label for="matiere" class="col-md-3 col-form-label text-md-end">Module</label>
                                         <div class="col-md-6">
                                             <div class="d-flex">
                                                 <i class="fas fa-tag position-awesome"></i>
@@ -78,16 +78,7 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3 justify-content-center">
-                                        <label for="matiere_arab" class="col-md-3 col-form-label text-md-end">المادة</label>
-                                        <div class="col-md-6">
-                                            <div class="d-flex">
-                                                <i class="fas fa-tag position-awesome"></i>
-                                                <input id="matiere_arab" type="text" class="form-control pl-5" name="matiere_nom_arab" value="<?php echo $mat_arab ?>" autocomplete="matiere" autofocus required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3 justify-content-center">
-                                        <label for="prof" class="col-md-3 col-form-label text-md-end">Professeur</label>
+                                        <label for="prof" class="col-md-3 col-form-label text-md-end">Formateur</label>
                                         <div class="col-md-6">
                                             <div class="d-flex">
                                                 <i class="fas fa-user-tie position-awesome"></i>
@@ -96,7 +87,16 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3 justify-content-center">
-                                        <label for="prof_arab" class="col-md-3 col-form-label text-md-end">الأستاذ</label>
+                                        <label for="matiere_arab" class="col-md-3 col-form-label text-md-end">الوحدة</label>
+                                        <div class="col-md-6">
+                                            <div class="d-flex">
+                                                <i class="fas fa-tag position-awesome"></i>
+                                                <input id="matiere_arab" type="text" class="form-control pl-5" name="matiere_nom_arab" value="<?php echo $mat_arab ?>" autocomplete="matiere" autofocus required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 justify-content-center">
+                                        <label for="prof_arab" class="col-md-3 col-form-label text-md-end">المؤطر</label>
                                         <div class="col-md-6">
                                             <div class="d-flex">
                                                 <i class="fas fa-user-tie position-awesome"></i>
@@ -115,7 +115,7 @@
                                     </div>
                                     <div class="row mb-0">
                                         <div class="col-md-8 offset-md-4">
-                                            <button type="submit" name="submit" class="btn btn-primary mx-3">Modifier matière</button>
+                                            <button type="submit" name="submit" class="btn btn-primary mx-3">Modifier module</button>
                                         </div>
                                     </div>
                                 </form>

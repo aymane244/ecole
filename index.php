@@ -181,7 +181,7 @@
                 </div>
                 <div class="bg-white pb-4">
                     <div class="container-fluid">
-                        <div class="row">
+                        <div class="row justify-content-center">
                             <?php
                                 foreach($formations as $formation){
                             ?>

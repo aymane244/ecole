@@ -26,6 +26,7 @@
                 $for_id = $etudiant['for_id'];
             }
         }
+        $promos = $data->getPromotion();
     ?>
     <body>
         <?php include_once "navbar-admin.php";?>
@@ -38,10 +39,10 @@
                     <a href="absence?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Gérer l'absence</a>
                     <a href="notes?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Afficher les notes</a>
                 </div>
-                <div>
-                    <!--<h5>Choisir promotion</h5>-->
+                <div class="text-center pt-5 pb-3">
+                    <h3>Liste des stagiaires</h3>
                 </div>
-                <table class="table table-hover mt-5 bg-white">
+                <table class="table table-hover bg-white">
                     <thead class="text-center">
                         <tr>
                             <th scope="col" colspan="9">ARTL Nord</th>
@@ -52,6 +53,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nom complet</th>
+                            <th scope="col">Promotion</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -63,7 +65,7 @@
                                     if($etudiant['etud_formation'] != $etudiant['for_id']){
                         ?>  
                         <tr>
-                            <th scope="row" colspan="4"><h1>Pas d'étudiants</h1></th>
+                            <th scope="row" colspan="4"><h1>Pas de stagiaires</h1></th>
                         </tr>
                         <?php
                             }else{
@@ -71,6 +73,7 @@
                         <tr>
                             <th scope="row"><?php echo $i++ ?></th>
                             <td><?php echo $etudiant['etud_prenom']." ".$etudiant['etud_nom'];?></td>
+                            <td><?php echo $etudiant['pro_année'] ?></td>
                             <!--<td>
                                 <a download="<?php //echo $etudiant['etud_diplome']?>" href="<?php //echo $etudiant['etud_diplome']?>">
                                     <?php

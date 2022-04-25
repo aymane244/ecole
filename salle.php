@@ -230,7 +230,7 @@
                                     <label for="nom"><?php echo $salle['nom'] ?></label>
                                     <div class="d-flex">
                                         <i class="fas fa-user position-awesome"></i>
-                                        <input type="text" class="form-control pl-5" name="reservation_nom" id="reservation_nom" placeholder="Votre nom" required>
+                                        <input type="text" class="form-control pl-5" name="reservation_nom" id="reservation_nom" placeholder="Votre nom" value="<?php echo isset($_POST['reservation_nom']) ? $_POST['reservation_nom'] : '' ?>">
                                     </div>
                                 </div>
                             </div>
@@ -239,7 +239,7 @@
                                     <label for="telephone"><?php echo $salle['num'] ?></label>
                                     <div class="d-flex">
                                         <i class="fas fa-phone position-awesome"></i>
-                                        <input type="text" class="form-control pl-5" name="reservation_telephone" id="reservation_telephone" placeholder="Votre numéro de telephone" required>
+                                        <input type="text" class="form-control pl-5" name="reservation_telephone" id="reservation_telephone" placeholder="Votre numéro de telephone" value="<?php echo isset($_POST['reservation_telephone']) ? $_POST['reservation_telephone'] : '' ?>">
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +248,7 @@
                             <label for="exampleInputEmail1"><?php echo $salle['email'] ?></label>
                             <div class="d-flex">
                                 <i class="fas fa-envelope position-awesome"></i>
-                                <input type="email" class="form-control pl-5" id="email_reservation" name="email_reservation" aria-describedby="emailHelp" placeholder="Votre adresse email" required>
+                                <input type="email" class="form-control pl-5" id="email_reservation" name="email_reservation" aria-describedby="emailHelp" placeholder="Votre adresse email" value="<?php echo isset($_POST['email_reservation']) ? $_POST['email_reservation'] : '' ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -258,7 +258,7 @@
                                     <label for="exampleInputEmail1"><?php echo $salle['date'] ?></label>
                                     <div class="d-flex">
                                         <i class="fas fa-calendar position-awesome"></i>
-                                        <input type="date" class="form-control pl-5" id="date_salle" name="date_salle" required>
+                                        <input type="date" class="form-control pl-5" id="date_salle" name="date_salle" value="<?php echo isset($_POST['date_salle']) ? $_POST['date_salle'] : '' ?>">
                                     </div>
                                 </div>
                                 <div class='col-md-4'>
@@ -266,7 +266,7 @@
                                     <label for="heur_debut"><?php echo $salle['debut'] ?></label>
                                     <div class="d-flex">
                                         <i class="fas fa-clock position-awesome"></i>
-                                        <select class="custom-select pl-5" id="time_debut" name="time_debut">
+                                        <select class="custom-select pl-5" id="time_debut" name="time_debut" value="<?php echo isset($_POST['time_debut']) ? $_POST['time_debut'] : '' ?>">
                                             <option value="08:00">08:00</option>
                                             <option value="09:00">09:00</option>
                                             <option value="10:00">10:00</option>
@@ -282,7 +282,7 @@
                                     <label for="heur_debut"><?php echo $salle['fin'] ?></label>
                                     <div class="d-flex">
                                         <i class="fas fa-clock position-awesome"></i>
-                                        <select class="custom-select pl-5" name="time_fin" id="time_fin">
+                                        <select class="custom-select pl-5" name="time_fin" id="time_fin" value="<?php echo isset($_POST['time_fin']) ? $_POST['time_fin'] : '' ?>">
                                             <option value="09:00">09:00</option>
                                             <option value="10:00">10:00</option>
                                             <option value="11:00">11:00</option>
@@ -296,6 +296,7 @@
                                 </div>
                             </div>
                             <div id="show-disponibilite"></div>
+                            <div id="errors"></div>
                             <div class="mt-3">
                                 <input type="hidden" name="reservation_salle" id="reservation_salle" value="<?= $sal_id?>">
                                 <button class="btn btn-primary" name="availability" id="availability"><?php echo $salle['verifier'] ?></button>
@@ -303,7 +304,7 @@
                         </div>
                         <div class="form-group">
                             <label for="commentaire_reservation"><?php echo $salle['comment'] ?></label>
-                            <textarea class="form-control" id="commentaire_reservation" name="commentaire_reservation" rows="6" required></textarea>
+                            <textarea class="form-control" id="commentaire_reservation" name="commentaire_reservation" rows="6"><?php echo isset($_POST['commentaire_reservation']) ? $_POST['commentaire_reservation'] : '' ?></textarea>
                         </div>
                         <div class="text-center">
                             <input type="hidden" name="salle_id" id="salle_id" value="<?= $sal_id?>">
@@ -329,15 +330,39 @@
                     var date_salle = $("#date_salle").val();
                     var time_debut = $("#time_debut").val();
                     var time_fin = $("#time_fin").val();
-                    $.post( "functions/traitement.php",{reservation_nom: reservation_nom, email_reservation: email_reservation, 
-                        commentaire_reservation:commentaire_reservation, reservation_telephone:reservation_telephone, salle_id:salle_id, 
-                        date_salle:date_salle, time_debut:time_debut, time_fin:time_fin,action:'add_reservation'}, function( result ) {
-                        $('#result').html(result);
-                    });
-                    $("#reservation_nom").val('');
-                    $("#email_reservation").val('');
-                    $("#reservation_telephone").val('');
-                    $("#commentaire_reservation").val('');
+                    if(reservation_nom == '' && email_reservation == '' && reservation_telephone == '' && commentaire_reservation == '' && date_salle == ''){
+                        $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez remplir tous les champs</div>');
+                    }else if(reservation_nom== ''){
+                        $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez choir saisir votre nom</div>');
+                    }else if(reservation_telephone == ''){
+                        $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre numéro de téléphone</div>');
+                    }else if(email_reservation == ''){
+                        $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir un email</div>');
+                    }else if(date_salle== ''){
+                        $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez choisir une date</div>');
+                    }else if(commentaire_reservation == ''){
+                        $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre commentaire</div>');
+                    }else{
+                            $.post( "functions/traitement.php",{reservation_nom: reservation_nom, email_reservation: email_reservation, 
+                            commentaire_reservation:commentaire_reservation, reservation_telephone:reservation_telephone, salle_id:salle_id, 
+                            date_salle:date_salle, time_debut:time_debut, time_fin:time_fin,action:'add_reservation'}, function( result ) {
+                            $('#result').html(result);
+                            $("#reservation_nom").val('');
+                            $("#email_reservation").val('');
+                            $("#reservation_telephone").val('');
+                            $("#commentaire_reservation").val('');
+                            reservation_nom.hide();
+                            reservation_telephone.hide();
+                            email_reservation.hide();
+                            commentaire_reservation.hide();
+                            date_salle.hide();
+                            $("#show-disponibilite").hide();
+                            setTimeout(cacher, 3000);
+                            function cacher(){
+                                $('#result').fadeOut();
+                            }
+                        });
+                    }
                 });
             })
         </script>

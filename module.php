@@ -34,16 +34,13 @@
             include_once "style.php";
             include_once "scripts.php";
         ?>
-        <title>Matières</title>
+        <title>Modules</title>
     </head>
-    <?php
-        
-    ?>
     <body>
         <?php include_once "navbar-admin.php";?>
             <div class="container" id="div-push">
                 <div class="text-center py-3">
-                    <h2><i class="fas fa-book-open"></i> Page Matières</h2>
+                    <h2><i class="fas fa-book-open"></i> Page Modules</h2>
                 </div>
                 <?php
                     if(isset($_SESSION['status'])){
@@ -54,7 +51,7 @@
                     }
                 ?>
                 <div class="mt-4 text-center">
-                    <a href="ajouter-matière" target="_blank" class="btn btn-primary"><i class="fas fa-plus-square"></i> Ajouter une matière</a>
+                    <a href="ajouter-module" target="_blank" class="btn btn-primary"><i class="fas fa-plus-square"></i> Ajouter un module</a>
                 </div>
                 <div class="mt-4 align-items-center d-flex justify-content-center">
                     <input type="button" value="Français" class="btn btn-primary" onclick="frensh()">
@@ -68,8 +65,8 @@
                             </tr>
                             <tr>
                                 <th scope="col">Formation</th>
-                                <th scope="col">Matières</th>
-                                <th scope="col">Professeur</th>
+                                <th scope="col">Modules</th>
+                                <th scope="col">Formateur</th>
                                 <th scope="col">Durée globale</th>
                                 <th scope="col">Actions</th>
                             </tr>
@@ -94,14 +91,14 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <a href="modifier-matière?id=<?php echo $mat_id[$i] ?>" target="_blank"> 
+                                            <a href="modifier-module?id=<?php echo $mat_id[$i] ?>" target="_blank"> 
                                                 <i class="fas fa-edit text-success awesome-size"></i>
                                             </a>
                                         </div>
                                         <div class="col-md-6">
                                             <form action="" method="POST">
                                                 <input type="hidden" name="matiere_id" value="<?php echo $mat_id[$i] ?>">
-                                                <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer cette matière")'>
+                                                <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer ce module")'>
                                                     <i class="fas fa-trash-alt text-danger awesome-size"></i>
                                                 </button>
                                             </form>
@@ -140,9 +137,9 @@
                             </tr>
                             <tr>
                                 <th scope="col">اسم التكوين</th>
-                                <th scope="col">اسم المادة</th>
-                                <th scope="col">اسم الأستاذ</th>
-                                <th scope="col">مدة دراسة المادة</th>
+                                <th scope="col">اسم الوحدة</th>
+                                <th scope="col">اسم المؤطر</th>
+                                <th scope="col">مدة دراسة الوحدة</th>
                                 <th scope="col">إجراءات</th>
                             </tr>
                         </thead>
@@ -166,14 +163,14 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <a href="modifier-matière?id=<?php echo $mat_id[$i] ?>" target="_blank"> 
+                                            <a href="modifier-module?id=<?php echo $mat_id[$i] ?>" target="_blank"> 
                                                 <i class="fas fa-edit text-success awesome-size"></i>
                                             </a>
                                         </div>
                                         <div class="col-md-6">
                                             <form action="" method="POST">
                                                 <input type="hidden" name="matiere_id" value="<?php echo $mat_id[$i] ?>">
-                                                <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer cette matière")'>
+                                                <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer ce module")'>
                                                     <i class="fas fa-trash-alt text-danger awesome-size"></i>
                                                 </button>
                                             </form>

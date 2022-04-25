@@ -56,7 +56,8 @@
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary" id="submit" name="submit"><?php echo $footer['btn_message'] ?></button>
-                    <div id="output"></div>
+                    <div id="res"></div>
+                    <div id="errorr"></div>
                 </div>
             </div>
         </div>
@@ -123,23 +124,35 @@
     </div>
     <div class="bg-white text-center pb-4">
         <hr>
-        <i class="far fa-copyright size-awesome"></i> Copyright Aimane Chnaif. All right reserved
+        <i class="far fa-copyright size-awesome"></i> Copyright Aimane, Chaimae, Yasmina. All right reserved
     </div>
 </div>
 <script>
     $(document).ready(function(){
-        $("#submit").click(function() {
+        $("#submit").click(function(){
             var nom = $("#contact_nom").val();
             var email = $("#contact_email").val();
             var sujet = $("#exampleInputSuje1").val();
             var message = $("#exampleFormControlTextarea1").val();
-            $.post( "functions/traitement.php",{nom: nom, email: email, sujet:sujet, message:message, action:'add_message'}, function( result ) {
-                $('#output').html(result);
-            });
-            $("#contact_nom").val('');
-            $("#contact_email").val('');
-            $("#exampleInputSuje1").val('');
-            $("#exampleFormControlTextarea1").val('');
+            if((nom == '') && (email =='') && (sujet == '') && (message == '')){
+                $('#errorr').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez remplir tous les champs</div>');
+            }else if(nom == ''){
+                $('#errorr').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre nom</div>');
+            }else if(email == ''){
+                $('#errorr').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre email</div>');
+            }else if(sujet == ''){
+                $('#errorr').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre sujet</div>');
+            }else if(message == ''){
+                $('#errorr').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre message</div>');
+            }else{
+                $.post( "functions/traitement.php",{nom: nom, email: email, sujet:sujet, message:message, action:'add_message'}, function( result ) {
+                    $('#res').html(result);
+                });
+                $("#contact_nom").val('');
+                $("#contact_email").val('');
+                $("#exampleInputSuje1").val('');
+                $("#exampleFormControlTextarea1").val('');
+            } 
         });
     })
 </script>

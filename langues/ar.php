@@ -85,7 +85,7 @@
         "presentation" => "عرض التكوين",
         "description" => "الوصف والهدف من هذا التكوين",
         "cursus" => "دورات تدريبية",
-        "matieres" => "المواد",
+        "matieres" => "الوحدات",
         "durée" => "مدة / س.",
         "inscrivez" => "التسجل من هنا"
     );
@@ -166,8 +166,8 @@
         "seances" => "حصص",
         "avancement" => "تقدم",
         "envoyee" => "تم ارسال الطلب",
-        "Diplome" => "دبلوم جاهز",
-        "Demande_dip" => "طلب دبلوم",
+        "Diplome" => "وثيقة جاهزة",
+        "Demande_dip" => "طلب وثيقة",
         "Attestation" => "شهادة جاهزة",
         "Demande_att" => "طلب شهادة",
         "general" => "النقطة عامه",

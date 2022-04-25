@@ -1437,6 +1437,14 @@
         background-position: center;
         background-size: cover;
     }
+    .display_image_profile{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+        margin-left: 24.5rem;
+    }
     .text-length3{
         display: -webkit-box;
         -webkit-line-clamp: 2;

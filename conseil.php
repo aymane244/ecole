@@ -20,10 +20,10 @@
           if(isset($_SESSION['status'])){
         ?>
         <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
-          <?php
-              unset($_SESSION['status']);
-            }
-          ?>
+        <?php
+            unset($_SESSION['status']);
+          }
+        ?>
           <div class="text-center pt-3 text-color">
             <h1 class="text-center"><?php echo $accompagenemt['accompagnement'] ?></h1>
             <hr class="hr-width">
@@ -183,13 +183,14 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
+              <div id="error"></div>
               <form action="" method="POST">
                 <div class="row justify-content-center mt-3">
                   <div class="col-md-8">
                     <div class="form-group">
                       <div class="d-flex">
                         <i class="fas fa-user position-awesome"></i>
-                        <input type="text" class="form-control pl-5" name="iso_nom" id="iso_nom" placeholder="Nom complet" required>
+                        <input type="text" class="form-control pl-5" name="iso_nom" id="iso_nom" placeholder="Nom complet">
                       </div>
                     </div>
                   </div>
@@ -197,7 +198,7 @@
                     <div class="form-group">
                       <div class="d-flex">
                         <i class="fas fa-envelope position-awesome-email"></i>
-                        <input type="email" class="form-control pl-5" name="iso_email" id="iso_email" placeholder="Email" required>
+                        <input type="email" class="form-control pl-5" name="iso_email" id="iso_email" placeholder="Email">
                       </div>
                     </div>
                   </div>
@@ -227,7 +228,7 @@
                 </div>
               </form>
               <div class="modal-body">
-                <div id="load_data">
+                <div id="load_data"></div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $accompagenemt['fermer'] ?></button>
@@ -237,11 +238,31 @@
         </div>
       </div>
       <?php include_once "footer.php";?> 
-    </div> 
+    </div>
+    <script>
+      $('#iso_submit').click(function(e){
+        e.preventDefault();
+        var iso_nom = $('#iso_nom').val();
+        var iso_email = $('#iso_email').val();
+        var iso_categorie = $('#iso_categorie').val();
+        var iso_message = $('#iso_message').val();
+        if(iso_nom == '' && iso_email == '' && iso_categorie == ''){
+          $('#error').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez remplir tous les champs</div>');
+        }else if(iso_nom == ''){
+          $('#error').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre nom</div>');
+        }else if(iso_email == ''){
+          $('#error').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre email</div>');
+        }else if(iso_categorie == ''){
+          $('#error').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez choisir la catégorie</div>');
+        }else{
+          $.post( "functions/traitement.php",{iso_nom: iso_nom, iso_email: iso_email, iso_categorie:iso_categorie, iso_message:iso_message, 
+          action:'add_iso'}, function( result ) {
+            window.location.href='conseil';
+          });
+        }
+      })
+    </script>
   </body>
 </html>
 <?php
-  if(isset($_POST['iso_submit'])){
-    $data->insertiso();
-  }
 ?>

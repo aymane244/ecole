@@ -62,16 +62,16 @@
                         </a>
                     </h6>
                 </div>
+            </div>
+            <div class="container mt-3">
                 <?php
                     if(isset($_SESSION['status'])){
                 ?>
                 <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
                 <?php
-                        unset($_SESSION['status']);
+                    unset($_SESSION['status']);
                     }
                 ?>
-            </div>
-            <div class="container mt-3">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row">
@@ -124,8 +124,8 @@
                                                 ?>
                                                 <form action="" method="POST">
                                                     <input type="hidden" name="comment_id" value="<?php echo $commentaire['com_id'] ?>">
-                                                   <button type="submit" name="submit_comment" onclick='return confirm("Voulez-vous supprimer ce commentaire")' class="btn-style">
-                                                        <i class="fas fa-times"></i>
+                                                    <button type="submit" name="submit_comment" onclick='return confirm("Voulez-vous supprimer ce commentaire")' class="btn-style">
+                                                        <i class="fas fa-times" style="font-size:20px"></i>
                                                     </button>
                                                 </form>
                                                 <?php
@@ -133,7 +133,6 @@
                                                 ?>
                                             </div>
                                         </div>
-
                                         <?php
                                             }
                                         ?>
@@ -146,6 +145,8 @@
                                     <hr class="hr-width">
                                 </div>
                                 <div class="container bg-white py-3">
+                                    <div id='error'></div>
+                                    <div id="success"></div>
                                     <div class="row justify-content-center">
                                         <div class="col-md-8">
                                             <div class="row">
@@ -154,7 +155,7 @@
                                                         <label for="exampleInputSuje1"><?php echo $artic['prenom'] ?></label>
                                                         <div class="d-flex">
                                                             <i class="fas fa-user position-awesome"></i>
-                                                            <input type="text" class="form-control pl-5" name="nom" id="nom_comment" placeholder="Votre nom" required>
+                                                            <input type="text" class="form-control pl-5" name="prenom" id="prenom_comment" placeholder="Votre prenom">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,14 +164,14 @@
                                                         <label for="exampleInputSuje1"><?php echo $artic['nom'] ?></label>
                                                         <div class="d-flex">
                                                             <i class="fas fa-user position-awesome"></i>
-                                                            <input type="text" class="form-control pl-5" name="prenom" id="prenom_comment" placeholder="Votre prenom" required>
+                                                            <input type="text" class="form-control pl-5" name="nom" id="nom_comment" placeholder="Votre nom">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleFormControlTextarea1"><?php echo $artic['comment'] ?></label>
-                                                <textarea class="form-control" id="comments" name="commentaire" rows="6" required></textarea>
+                                                <textarea class="form-control" id="comments" name="commentaire" rows="6"></textarea>
                                             </div>
                                             <div class="text-center">
                                                 <input type="hidden" name="article_id" id="article_id" value="<?php echo $art_id ?>">
@@ -232,13 +233,29 @@
                     var prenom = $("#prenom_comment").val();
                     var article_id = $("#article_id").val();
                     var commentaire = $("#comments").val();
-                    $.post( "functions/traitement.php",{ article_id:article_id ,nom: nom, prenom: prenom, commentaire:commentaire,action:'add_comment' }, function( result ) {
-                        $('#list_comments').html(result);
-                    });
-                    $("#nom_comment").val('');
-                    $("#prenom_comment").val('');
-                    $("#article_id").val('');
-                    $("#comments").val('');
+                    if(nom == '' && prenom == '' && commentaire == ''){
+                        $('#error').html('<div class="alert alert-danger text-center mt-2" role="alert">Veuillez remplir tous les champs</div>');
+                    }else if(nom == ''){
+                        $('#error').html('<div class="alert alert-danger text-center mt-2" role="alert">Veuillez saisir votre nom</div>');
+                    }else if(prenom == ''){
+                        $('#error').html('<div class="alert alert-danger text-center mt-2" role="alert">Veuillez saisir votre prenom</div>');
+                    }else if(commentaire == ''){
+                        $('#error').html('<div class="alert alert-danger text-center mt-2" role="alert">Veuillez laisser votre commentaire</div>');
+                    }else{
+                        $.post( "functions/traitement.php",{ article_id:article_id ,nom: nom, prenom: prenom, commentaire:commentaire,
+                            action:'add_comment' }, function( result ) {
+                            $('#list_comments').html(result);
+                            $('#success').html('<div class="alert alert-success text-center mt-2" role="alert">Commentaire bien enregistré</div>')
+                            $("#nom_comment").val();
+                            $("#prenom_comment").val('');
+                            $("#article_id").val('');
+                            $("#comments").val('');
+                            setTimeout(cacher, 3000);
+                            function cacher(){
+                                $('#success').fadeOut()
+                            }
+                        });
+                    }
                 });
             })
         </script>

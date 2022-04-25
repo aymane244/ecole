@@ -23,6 +23,11 @@
                 <div class="text-center py-3">
                     <h2><i class="fas fa-plus-square"></i> Ajouter Formation</h2>
                 </div>
+                <?php
+                    if(isset($_POST['submit'])){
+                        $data->insertFormation();
+                    }
+                ?>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-12 my-5">
@@ -37,20 +42,20 @@
                                         <div class="col-md-12">
                                             <div class="d-flex">
                                                 <i class="fas fa-tag position-awesome"></i>
-                                                <input id="titre" type="text" class="form-control pl-5" name="titre" value="" autocomplete="titre" autofocus required>
+                                                <input id="titre" type="text" class="form-control pl-5" name="titre" value="<?php echo isset($_POST['titre']) ? $_POST['titre'] : ''; ?>" autocomplete="titre" autofocus>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="presentation" class="col-md-12 col-form-label text-md-end">Présentation</label>
                                         <div class="col-md-12">
-                                            <textarea id="editor2"rows="10" class="form-control position-text-area" name="presentation" value="" autocomplete="presentation" autofocus required></textarea>
+                                            <textarea id="editor2"rows="10" class="form-control position-text-area" name="presentation" value="<?php echo isset($_POST['presentation']) ? $_POST['presentation'] : ''; ?>" autocomplete="presentation" autofocus><?php echo isset($_POST['presentation']) ? $_POST['presentation'] : ''; ?></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="prof" class="col-md-12 col-form-label text-md-end">Déscription</label>
                                         <div class="col-md-12">
-                                            <textarea rows="10" class="form-control position-text-area" id="editor" name="description" value="" autocomplete="presentation" autofocus required></textarea>
+                                            <textarea rows="10" class="form-control position-text-area" id="editor" name="description" value="<?php echo isset($_POST['description']) ? $_POST['description'] : ''; ?>" autocomplete="description" autofocus><?php echo isset($_POST['description']) ? $_POST['description'] : ''; ?></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -66,20 +71,20 @@
                                             <div class="col-md-12">
                                                 <div class="d-flex">
                                                     <i class="fas fa-tag position-awesome"></i>
-                                                    <input id="titre" type="text" class="form-control pl-5" name="titre_arabe" value="" autocomplete="titre" autofocus required>
+                                                    <input id="titre" type="text" class="form-control pl-5" name="titre_arabe" value="<?php echo isset($_POST['titre_arabe']) ? $_POST['titre_arabe'] : ''; ?>" autocomplete="titre" autofocus>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <label for="presentation" class="col-md-12 col-form-label text-md-end">مقدمة عن التكوين</label>
                                             <div class="col-md-12">
-                                                <textarea id="editor3"rows="10" class="form-control position-text-area" name="presentation_arabe" value="" autocomplete="presentation" autofocus required></textarea>
+                                                <textarea id="editor3"rows="10" class="form-control position-text-area" name="presentation_arabe" value="<?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?>" autocomplete="presentation" autofocus><?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <label for="prof" class="col-md-12 col-form-label text-md-end">وصف التكوين</label>
                                             <div class="col-md-12">
-                                                <textarea rows="10" class="form-control position-text-area" id="editor4" name="description_arabe" value="" autocomplete="presentation" autofocus required></textarea>
+                                                <textarea rows="10" class="form-control position-text-area" id="editor4" name="description_arabe" value="<?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?>" autocomplete="description" autofocus><?php echo isset($_POST['description_arabe']) ? $_POST['description_arabe'] : ''; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="row mb-3 align-items-center">
@@ -87,7 +92,7 @@
                                             <div class="col-md-6">
                                                 <div class="d-flex">
                                                     <i class="fas fa-camera position-awesome-image"></i>
-                                                    <input id="image_input" type="file" class="form-control-file pl-5" name="image" autofocus required>
+                                                    <input id="image_input" type="file" class="form-control-file pl-5" name="image" autofocus>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -126,8 +131,3 @@
         </script>
     </body>
 </html>
-<?php
-    if(isset($_POST['submit'])){
-        $data->insertFormation();
-    }
-?>

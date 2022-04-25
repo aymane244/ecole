@@ -45,6 +45,14 @@
                         unset($_SESSION['status']);
                     }
                 ?>
+                <?php
+                    if(isset($_SESSION['status_error'])){
+                ?>
+                <div class='alert alert-danger text-center mt-2' role='alert'><?php echo $_SESSION['status_error']?></div>
+                <?php
+                        unset($_SESSION['status_error']);
+                    }
+                ?>
                 <div class="row">
                     <div class="col-md-6 mt-5">
                         <div class="card card-position affichage">
@@ -63,12 +71,12 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="categorie" class="col-md-4 col-form-label text-md-end">Matières</label>
+                                        <label for="categorie" class="col-md-4 col-form-label text-md-end">Modules</label>
                                         <div class="col-md-12">
                                             <div class="d-flex">
                                                 <i class="fas fa-tag position-awesome"></i>
                                                 <select class="custom-select pl-5" name="matieres">
-                                                    <option selected value="">--Choisir la matière--</option>
+                                                    <option selected value="">--Choisir le module--</option>
                                                     <?php
                                                         foreach($output as $item){
                                                             foreach($matieres as $matiere){
@@ -85,7 +93,7 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="categorie" class="col-md-4 col-form-label text-md-end">Etudiants</label>
+                                        <label for="categorie" class="col-md-4 col-form-label text-md-end">Stagiaires</label>
                                         <div class="col-md-12">
                                             <div class="d-flex">
                                                 <i class="fas fa-user-graduate position-awesome"></i>
@@ -133,7 +141,7 @@
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Matières</th>
+                                    <th scope="col">Modules</th>
                                     <th scope="col">Note</th>
                                     <th scope="col">Actions</th>
                                 </tr>

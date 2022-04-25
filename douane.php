@@ -163,13 +163,14 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+            <div id="errors"></div>
             <form action="" method="POST">
               <div class="row justify-content-center mt-3">
                 <div class="col-md-8">
                   <div class="form-group">
                     <div class="d-flex">
                       <i class="fas fa-user position-awesome"></i>
-                      <input type="text" class="form-control pl-5" name="douane_nom" id="douane_nom" placeholder="Nom complet" required>
+                      <input type="text" class="form-control pl-5" name="douane_nom" id="douane_nom" placeholder="Nom complet">
                     </div>
                   </div>
                 </div>
@@ -177,7 +178,7 @@
                   <div class="form-group">
                     <div class="d-flex">
                       <i class="fas fa-envelope position-awesome-email"></i>
-                      <input type="email" class="form-control pl-5" name="douane_email" id="douane_email" placeholder="Email" required>
+                      <input type="email" class="form-control pl-5" name="douane_email" id="douane_email" placeholder="Email">
                     </div>
                   </div>
                 </div>
@@ -199,7 +200,7 @@
                     <textarea class="form-control" id="douane_message" name="douane_message" rows="6"></textarea>
                   </div>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary" id="iso_submit" name="douane_submit"><?php echo $douane['choisir_select'] ?></button>
+                    <button type="submit" class="btn btn-primary" id="douane_submit" name="douane_submit"><?php echo $douane['choisir_select'] ?></button>
                   </div>
                 </div>
               </div>
@@ -214,11 +215,29 @@
         </div>
       </div>
     </div>
-    <?php include_once "footer.php";?>  
+    <?php include_once "footer.php";?>
+    <script>
+      $('#douane_submit').click(function(e){
+        e.preventDefault();
+        var douane_nom = $('#douane_nom').val();
+        var douane_email = $('#douane_email').val();
+        var douane_categorie = $('#douane_categorie').val();
+        var douane_message = $('#douane_message').val();
+        if(douane_nom == '' && douane_email == '' && douane_categorie == ''){
+          $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez remplir tous les champs</div>');
+        }else if(douane_nom == ''){
+          $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre nom</div>');
+        }else if(douane_email == ''){
+          $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre email</div>');
+        }else if(douane_categorie == ''){
+          $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez choisir la catégorie</div>');
+        }else{
+          $.post( "functions/traitement.php",{douane_nom: douane_nom, douane_email: douane_email, douane_categorie: douane_categorie, douane_message: douane_message, 
+          action:'add_douane'}, function( result ) {
+            window.location.href='douane';
+          });
+        }
+      })
+    </script>
   </body>
 </html>
-<?php
-  if(isset($_POST['douane_submit'])){
-    $data->insertdouane();
-  }
-?>

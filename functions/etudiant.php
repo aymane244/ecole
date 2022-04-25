@@ -29,16 +29,22 @@
             $formation = $_POST['nameformation'];
             $matieres = $_POST['matieres'];
             $note = $_POST['note'];
-            $result = $this->db->conn->query("INSERT INTO `note`(`not_formation`, `not_matiere`, 
-                `not_etudiant`, `not_note`) VALUES ('$formation','$matieres','$id','$note')");
-            if($result){
-                $_SESSION['status'] = "La note a été ajouté avec success";
+            if($matieres == ''){
+                $_SESSION['status_error'] ="Veuillez choisir un module";
                 echo "<script>window.location.href='saisir-notes?id=$id_get'</script>";
+            }else{
+                $result = $this->db->conn->query("INSERT INTO `note`(`not_formation`, `not_matiere`, 
+                `not_etudiant`, `not_note`) VALUES ('$formation','$matieres','$id','$note')");
+                if($result){
+                    $_SESSION['status'] = "La note a été ajoutée avec succès";
+                    echo "<script>window.location.href='saisir-notes?id=$id_get'</script>";
+                }
+                return $result;
             }
-            return $result;
+
         }
         public function getEtudiantFormation(){
-            $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `etudiant` ON for_id=etud_formation");
+            $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `etudiant` ON for_id=etud_formation ORDER BY etud_prenom ASC");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -176,7 +182,7 @@
             $result = $this->db->conn->query("UPDATE `note` SET `not_note`='$note' WHERE not_id=$id");
             if($result){
                 echo "<script>window.location.href='modifier-note?id=$id'</script>";
-                $_SESSION['status'] = "Note a été modifier avec success";
+                $_SESSION['status'] = "La note a été modifiée avec succès";
             }else{
                 echo $this->db->conn->error;
             }
@@ -193,8 +199,8 @@
             $result = $this->db->conn->query("UPDATE `matiere` SET `mat_formation`='$formation_nom',`mat_nom`='$matiere_nom',
             `mat_nom_arab`='$matiere_nom_arab',`mat_duree`='$duree',`mat_prof`='$prof_nom',`mat_prof_arab`='$prof_nom_arab' WHERE mat_id=$id");
             if($result){
-                $_SESSION['status'] = "Matière a été modifier avec success";
-                echo "<script>window.location.href='matières'</script>";
+                $_SESSION['status'] = "Le module a été modifié avec succès";
+                echo "<script>window.location.href='module'</script>";
             }else{
                 echo $this->db->conn->error;
             }
@@ -220,7 +226,7 @@
                 WHERE for_id=$id");
             }
             if($result){
-                $_SESSION['status'] = "Formation a été modifier avec success";
+                $_SESSION['status'] = "La formation a été modifiée avec succès";
                 echo "<script>window.location.href='formations'</script>";
             }else{
                 echo "not". $this->db->conn->error;
@@ -259,7 +265,7 @@
                 `sal_service3_arab`='$salle_service3_arab', `sal_service4_arab`='$salle_service4_arab' WHERE sal_id=$id");
             }
             if($result){
-                $_SESSION['status'] = "Salle a été modifier avec success";
+                $_SESSION['status'] = "La salle a été modifiée avec succès";
                 echo "<script>window.location.href='salles'</script>";
             }else{
                 echo "not". $this->db->conn->error;
@@ -270,28 +276,44 @@
             $id = $_GET['id'];
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
+            $prenom_arab = $_POST['prenom_arab'];
+            $nom_arab = $_POST['nom_arab'];
+            $cin = $_POST['cin'];
             $phone = $_POST['phone'];
+            $email = $_POST['email'];
+            $adress = $_POST['adress'];
+            $lieu = $_POST['lieu'];
+            $permis = $_POST['permis'];
+            $obtenue = $_POST['obtenue'];
             $naissance = $_POST['naissance'];
+            $categorie = $_POST['categorie'];
+            $pro = $_POST['pro'];
             $image = basename($_FILES['image']['name']);
             $path = "./images/etudiants/";
             $allowed = array('jpg', 'png', 'jpeg');
             $ext = pathinfo($image, PATHINFO_EXTENSION); 
             if(!in_array($ext, $allowed) & $image != ""){
                 echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Le fichier que vous avez choisit est de type ".$ext.
-                        "<br>Nous supportant juste les fichiers type images 'jpg, png, jpeg'
+                        L'image que vous avez choisit est de type ".$ext.
+                        "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
                     </div>";
             }else{
                 if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
-                    $result = $this->db->conn->query("UPDATE `etudiant` SET `etud_nom`='$nom',`etud_prenom`='$prenom',`etud_naissance`='$naissance',
-                    `etud_telephone`='$phone',`etud_image`='$path$image' WHERE etud_id=$id");
+                    $result = $this->db->conn->query("UPDATE `etudiant` SET `etud_nom`='$nom',`etud_nom_arab`='$nom_arab',
+                    `etud_prenom`='$prenom',`etud_prenom_arabe`='$prenom_arab',`etud_email`='$email',`etud_telephone`='$phone',
+                    `etud_cin`='$cin',`etud_naissance`='$naissance',`etud_lieu_naissance`='$lieu',`etud_adress`='$adress',
+                    `etud_permis`='$permis',`etud_cat_permis`='$categorie',`etude_carte_pro`='$pro',`etud_permis_obt`='$obtenue',
+                    `etud_image`='$image' WHERE etud_id=$id");
                 }else{
-                    $result = $this->db->conn->query("UPDATE `etudiant` SET `etud_nom`='$nom',`etud_prenom`='$prenom',`etud_naissance`='$naissance',
-                    `etud_telephone`='$phone' WHERE etud_id=$id");
+                    $result = $this->db->conn->query("UPDATE `etudiant` SET `etud_nom`='$nom',`etud_nom_arab`='$nom_arab',
+                    `etud_prenom`='$prenom',`etud_prenom_arabe`='$prenom_arab',`etud_email`='$email',`etud_telephone`='$phone',
+                    `etud_cin`='$cin',`etud_naissance`='$naissance',`etud_lieu_naissance`='$lieu',`etud_adress`='$adress',
+                    `etud_permis`='$permis',`etud_cat_permis`='$categorie',`etude_carte_pro`='$pro',`etud_permis_obt`='$obtenue'
+                    WHERE etud_id=$id");
                 }
                 if($result){
-                    $_SESSION['status'] = "Votre profile a été modifié avec success";
-                    echo "<script>window.location.href='espace-etudiant'</script>";
+                    $_SESSION['status'] = "Le profile a été modifié avec succès";
+                    echo "<script>window.location.href='stagiaire'</script>";
                 }else{
                     echo "not good ".$this->db->conn->error;
                 }
@@ -316,7 +338,7 @@
                 $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img4`='$path$image4' WHERE img_id=$id");
             }
             if($result){
-                $_SESSION['status'] = "Image a été modifier avec success";
+                $_SESSION['status'] = "L'image a été modifiée avec succès";
                 echo "<script>window.location.href='salles'</script>";
             }else{
                 echo "not". $this->db->conn->error;
@@ -348,7 +370,7 @@
                     `art_texte_arab`='$texte_arab' WHERE art_id=$id");
             }
             if($result){
-                $_SESSION['status'] = "Article a été modifier avec success";
+                $_SESSION['status'] = "L'article a été modifié avec succès";
                 echo "<script>window.location.href='articles'</script>";
             }else{
                 echo "not". $this->db->conn->error;
@@ -376,8 +398,8 @@
         public function deleteMatieres($matiere_id = null){
             $result= $this->db->conn->query("DELETE FROM `matiere` WHERE mat_id=$matiere_id");
             if($result){
-                $_SESSION['status'] = "La matière a été supprimée avec success";
-                echo "<script>window.location.href='matières'</script>";
+                $_SESSION['status'] = "Le module a été supprimé avec succès";
+                echo "<script>window.location.href='module'</script>";
             }else{
                 echo $this->db->conn->error;
             }
@@ -386,7 +408,7 @@
             $id = $_GET['id'];
             $result= $this->db->conn->query("DELETE FROM `commentaire` WHERE com_id=$comment_id");
             if($result){
-                $_SESSION['status'] = "Le Commentaire a été supprimé avec success";
+                $_SESSION['status'] = "Le Commentaire a été supprimé avec succès";
                 echo "<script>window.location.href='article?id=$id'</script>";
             }else{
                 echo $this->db->conn->error;
@@ -407,7 +429,8 @@
             return $result;
         }
         public function getEtudiantNotes(){
-            $result = $this->db->conn->query("SELECT * FROM `etudiant` RIGHT JOIN `formation` ON etud_formation=for_id ");
+            $result = $this->db->conn->query("SELECT * FROM `etudiant` RIGHT JOIN `formation` ON etud_formation=for_id LEFT JOIN `promos`
+                        ON etud_promos=pro_id");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -438,26 +461,49 @@
             $scan_permis = basename($_FILES['scan_permis']['name']);
             $scan_visite = basename($_FILES['scan_visite']['name']);
             $image = basename($_FILES['image']['name']);
-            
-            //$ext = pathinfo($image, PATHINFO_EXTENSION);
-            //$ext2 = pathinfo($scan_cin, PATHINFO_EXTENSION);
+            $allowed = array('jpg', 'png', 'jpeg');
+            $allowed2 = array('pdf');
+            $ext = pathinfo($image, PATHINFO_EXTENSION);
+            $ext_cin = pathinfo($scan_cin, PATHINFO_EXTENSION);
+            $ext_permis = pathinfo($scan_permis, PATHINFO_EXTENSION);
+            $ext_visite = pathinfo($scan_visite, PATHINFO_EXTENSION);
             $age = date_diff(date_create($naissance), date_create($date));
             $result = $this->db->conn->query("SELECT `etud_email` FROM `etudiant` WHERE etud_email = '$email'");
             $result2 = $this->db->conn->query("SELECT `etud_cin` FROM `etudiant` WHERE etud_cin = '$cin'");
-            if(mysqli_num_rows($result)){
-                $_SESSION['status'] = "Email exist déja";
+            if($result->num_rows){
+                $_SESSION['status_error'] = "Email existe déja";
             }
-            else if(mysqli_num_rows($result2)){
-                $_SESSION['status'] = "CIN exist déja";
+            else if($result2->num_rows){
+                $_SESSION['status_error'] = "CIN existe déja";
             }else{
-                if($formation == ""){
+                if($prenom == ''){
                     echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Veuillez choisir une formation
-                        </div>";
-                }else if($categorie == ""){
+                        Veuillez saisir votre prénom en français
+                    </div>";
+                }else if($nom == ''){
                     echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Veuillez choisir une catégorie de permis
-                        </div>";
+                        Veuillez saisir votre nom en français
+                    </div>";
+                }else if($prenom_arab == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir votre prénom en arabe
+                    </div>";
+                }else if($nom_arab == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir votre nom en arabe
+                    </div>";
+                }else if($email == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir votre email
+                    </div>";
+                }else if($_POST['motdepasse'] == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir votre mot de passe
+                    </div>";
+                }else if($naissance == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir votre date de naissance
+                    </div>";
                 }else if($date < $naissance){
                     echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
                             Veuillez saisir une date de naissance correcte
@@ -466,13 +512,81 @@
                     echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
                             Votre age doit dépasser 18 ans veuillez vérifier la date de naissance
                         </div>";
+                }else if($lieu == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir votre lieu de naissance
+                    </div>";
+                }else if($cin == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir votre CIN
+                    </div>";
+                }else if($telephone == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir votre numéro de téléphone
+                    </div>";
+                }else if($adresse == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir votre adresse
+                    </div>";
+                }else if($formation == ""){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            Veuillez choisir une formation
+                        </div>";
+                }else if($permis == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir votre numéro de permis
+                    </div>";
+                }else if($categorie == ""){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            Veuillez choisir une catégorie de permis
+                        </div>";
+                }else if($obtenir == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            Veuillez saisir la date d'obtention de votre permis
+                        </div>";
                 }else if($date < $obtenir){
                     echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            La date d'obtention ne dois pas dépasser la date d'aujourd'hui ".$date." 
+                            La date d'obtention ne dois pas dépasser la date d'aujourd'hui ".date("d/m/Y")." 
                         </div>";
+                }else if($scan_cin == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez charger un scan de votre CIN
+                    </div>";
+                }else if(!in_array($ext_cin, $allowed2)){
+                    echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                                Le fichier que vous avez chargé ".$scan_cin." est de type ".$ext.
+                                "<br>Nous supportons juste les fichiers de type 'pdf'
+                            </div>";
+                }else if($scan_permis == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez charger un scan de votre permis
+                    </div>";
+                }else if(!in_array($ext_permis, $allowed2)){
+                    echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                                Le fichier que vous avez chargé ".$scan_permis." est de type ".$ext.
+                                "<br>Nous supportons juste les fichiers de type 'pdf'
+                            </div>";
+                }else if($scan_visite == ''){
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez charger un scan de votre visite médicale
+                    </div>";
+                }else if(!in_array($ext_visite, $allowed2)){
+                    echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                                Le fichier que vous avez chargé ".$scan_visite." est de type ".$ext.
+                                "<br>Nous supportons juste les fichiers de type 'pdf'
+                            </div>";
+                }else if(!in_array($ext, $allowed) & $image != ""){
+                    echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                                L'image que vous avez chargé ".$image." est de type ".$ext.
+                                "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+                            </div>";
                 }else{
                     mkdir("dossiers-stagiaires/".$prenom."-".$nom,0777,true);
                     $path = "./dossiers-stagiaires/$prenom-$nom/";
+                    $imagelink = "image-";
+                    $cinlink = "cin-";
+                    $permislink = "permis-";
+                    $visitelink = "visite-";
                     if($path){
                         move_uploaded_file($_FILES['image']['tmp_name'], $path."image-".$image);
                         move_uploaded_file($_FILES['scan_cin']['tmp_name'], $path."cin-".$scan_cin);
@@ -484,15 +598,59 @@
                         `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, 
                         `etud_scan_cin`, `etud_scan_permis`, `etud_scan_visite`, `etud_promos`, `etud_image`, `etud_inscription`) VALUES ('$nom','$nom_arab',
                         '$prenom','$prenom_arab','$email','$telephone','$motdepasse','$cin','$formation','$naissance','$lieu','$adresse',
-                        '$permis','$categorie','$profesionnel','$obtenir','$path$scan_cin','$path$scan_permis','$path$scan_visite','$promos','$path$image',NOW())");
-                    if($res){
-                        $_SESSION['status_login'] = "Votre inscription a été bien effectué";
-                    }
+                        '$permis','$categorie','$profesionnel','$obtenir','$path$cinlink$scan_cin','$path$permislink$scan_permis',
+                        '$path$visitelink$scan_visite','$promos','$path$imagelink$image',NOW())");
+                        /*$to = $_POST['email'];
+                        $subject = "Confirmation d'inscription";
+                        $headers = 'Content-type: text/html';
+                        $msg = "<img class='img-fluid' src='http://localhost/ecole/images/logo.jpeg' 
+                                style='width:16rem; height:60px' alt='logo'>
+                                <div style='text-align:center; align-items:center;'>
+                                    <h1>Confirmation d'inscription</h1><br>
+                                    <p><b>Merci d'avoir choisit notre institut.<b></p><br>
+                                    Veuillez trouvez ci-dessous vos identifiants:
+                                    <ul>
+                                        <li>idenatidiant: ".$_POST['cin']."</li>
+                                        <li>Mot de passe: ".$_POST['motdepasse']."</li>
+                                    </ul>
+                                    Pour plus d'information merci de visiter notre .<br>    
+                                    <a href='http://localhost/ecole/'>Click here</a>
+                                </div>";
+                        mail($to, $subject, $msg, $headers);*/
+                        //echo "<script>window.location.href='login'</script>";
+                        $_SESSION['status_login'] = "Votre inscription a été bien effectué Veuillez vérifier votre email<br>
+                                                    Veuillez se connecter <a href='login'>ICI</a>";
                     return $res;
-                }
+                } 
+            }
+        }
+        public function deleteEtudiant($etudiant_id = null){
+            $result= $this->db->conn->query("DELETE FROM `etudiant` WHERE etud_id=$etudiant_id");
+            if($result){
+                $_SESSION['status'] = "Le Commentaire a été supprimé avec succès";
+                echo "<script>window.location.href='etudiant'</script>";
+            }else{
+                echo $this->db->conn->error;
             }
         }
         public function getFormationMatiereEtudiant(){
+            @$promotion = $_POST['promotion'];
+            if(isset($_POST['promotion_submit'])){
+                if($promotion == ''){
+                    $_SESSION['status_error'] = "Merci de choisir une promotion pour poursuivre";
+                }else{
+                    $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
+                    INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation WHERE etud_promos = '$promotion' ORDER BY mat_nom");
+                    $resultArray = array();
+                    // fetch product data one by one
+                    while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                        $resultArray[] = $item;
+                    }
+                    return $resultArray;
+                }
+            }
+        }
+        public function getEtudiantFormationPromotion(){
             $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
                 INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation ORDER BY mat_nom");
             $resultArray = array();
@@ -513,23 +671,56 @@
             return $resultArray;
         }
         public function insertAbsence(){
+            $id = $_GET['id'];
+            $date = date("Y-m-d");
             $absence_formation = $_POST['absence_formation'];
             $absence_matiere = $_POST['absence_matiere'];
             $absence_date = $_POST['absence_date'];
             $absence_etudiant = $_POST['absence_etudiant'];
             $absence = $_POST['absence'];
             $number_etudiant = $_POST['number_etudiant'];
-            for($i=0;$i<$number_etudiant; $i++){
-                $result = $this->db->conn->query("INSERT INTO `absence`(`abs_etudiant`, `abs_date`, `abs_formation`, `abs_matiere`, `abs_absence`) 
-                VALUES ('$absence_etudiant[$i]','$absence_date','$absence_formation','$absence_matiere','$absence[$i]')");
+            $checkdate = $this->db->conn->query("SELECT `abs_date`, `abs_formation` FROM `absence` WHERE abs_date='$absence_date' AND 
+                        abs_formation='$absence_formation'");
+            if($absence_date == ''){
+                $_SESSION['status_error'] = 'Veuillez choisir une date';
+                echo "<script>window.location.href='marquer-absence?id=$id'</script>";
+            }else if($absence_date > $date){
+                $_SESSION['status_error'] = "La date saisit ne doit pas être supérieure à la date d'ajourd'hui";
+                echo "<script>window.location.href='marquer-absence?id=$id'</script>";
+            }else if($checkdate->num_rows){
+                $_SESSION['status_error'] = "Date déjà saisit veuillez choisir une autre";
+                echo "<script>window.location.href='marquer-absence?id=$id'</script>";
+            }else{
+                for($i=0;$i<$number_etudiant; $i++){
+                    $result = $this->db->conn->query("INSERT INTO `absence`(`abs_etudiant`, `abs_date`, `abs_formation`, `abs_matiere`, `abs_absence`) 
+                    VALUES ('$absence_etudiant[$i]','$absence_date','$absence_formation','$absence_matiere','$absence[$i]')");
+                    if($result){
+                        $_SESSION['status'] = "Les données sont bien enregistrées";
+                        echo "<script>window.location.href='marquer-absence?id=$id'</script>";
+                    }else{
+                        echo $this->db->conn->error;
+                    }
+                }
+                return $result;
+            }
+
+        }
+        public function insertPromotion(){
+            $promotion_name =  mysqli_escape_string($this->db->conn, $_POST['promotion_name']);
+            $checkresult = $this->db->conn->query("SELECT `pro_année` FROM `promos` WHERE pro_année='$promotion_name'");
+            if($checkresult->num_rows){
+                $_SESSION['status_danger'] = "Nom existe déjà veuillez choisir un autre";
+                echo "<script>window.location.href='ajouter-promotion'</script>";
+            }else{
+                $result = $this->db->conn->query("INSERT INTO `promos`(`pro_année`) VALUES ('$promotion_name')");
                 if($result){
-                    $_SESSION['status'] = "Les données sont bien enregistrées";
-                    //echo "<script>window.location.href='absence'</script>";
+                    $_SESSION['status'] = "La promotion a été ajoutée avec succès";
+                    echo "<script>window.location.href='ajouter-promotion'</script>";
                 }else{
                     echo $this->db->conn->error;
                 }
+                return $result;
             }
-            return $result;
         }
         public function getEtudiantForma(){
             $result = $this->db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON etud_formation=for_id");
@@ -597,7 +788,7 @@
                 );
                 $result = $this->insertIntoDiplome($params);
                 if ($result){
-                    $_SESSION['status'] = "Votre demande de diplome a été envoyé avec succes";
+                    $_SESSION['status'] = "Votre demande de diplome a été envoyée avec succès";
                     echo "<script>window.location.href='espace-etudiant'</script>";
                 }else{
                     echo $this->db->conn->error;
@@ -625,7 +816,7 @@
                 );
                 $result = $this->insertIntoAttestation($params);
                 if ($result){
-                    $_SESSION['status'] = "Votre demande de d'attestation a été envoyé avec succes";
+                    $_SESSION['status'] = "Votre demande de d'attestation a été envoyée avec succès";
                     echo "<script>window.location.href='espace-etudiant'</script>";
                 }else{
                     echo $this->db->conn->error;
@@ -640,7 +831,7 @@
             $result = $this->db->conn->query("INSERT INTO `douane`(`dou_nom`, `dou_res_nom`, `dou_res_email`, `dou_res_message`, `dou_res_date`) 
                 VALUES ('$douane_categorie','$douane_nom','$douane_email','$douane_message', NOW())");
             if($result){
-                $_SESSION['status'] = "Votre demande de catégorisation douane a été envoyée avec success";
+                $_SESSION['status'] = "Votre demande de catégorisation douane a été envoyée avec succès";
                 echo "<script>window.location.href='douane'</script>";
             }
             return $result;
@@ -648,14 +839,14 @@
         public function deleteDiplome($diplome_id = null){
             $result= $this->db->conn->query("DELETE FROM `diplome` WHERE dip_id=$diplome_id");
             if($result){
-                $_SESSION['status'] = "La demande a été supprimé avec success";
+                $_SESSION['status'] = "La demande de diplôme a été supprimée avec succès";
                 echo "<script>window.location.href='demandes-etudiant'</script>";
             }
         }
         public function deleteAttestation($attestation_id = null){
             $result= $this->db->conn->query("DELETE FROM `attestation` WHERE att_id=$attestation_id");
             if($result){
-                $_SESSION['status'] = "La demande a été supprimé avec success";
+                $_SESSION['status'] = "La demanded'attestation  a été supprimée avec succès";
                 echo "<script>window.location.href='demandes-etudiant'</script>";
             }
         }
@@ -667,7 +858,7 @@
                 $result = $this->db->conn->query("UPDATE `diplome` SET `dip_image`='$path$image' WHERE dip_etudiant=$id");
             }
             if($result){
-                $_SESSION['status'] = "Diplome envoyé avec success";
+                $_SESSION['status'] = "Le ocument a été envoyé avec succès";
                 echo "<script>window.location.href='demandes-etudiant'</script>";
             }else{
                 echo "not". $this->db->conn->error;
@@ -682,7 +873,7 @@
                 $result = $this->db->conn->query("UPDATE `attestation` SET `att_image`='$path$image' WHERE att_etudiant=$id");
             }
             if($result){
-                $_SESSION['status'] = "Attestation envoyé avec success";
+                $_SESSION['status'] = "Le document a été envoyé avec succès";
                 echo "<script>window.location.href='demandes-etudiant'</script>";
             }else{
                 echo "not". $this->db->conn->error;
@@ -787,7 +978,7 @@
         public function getReservationsDate(){
             $date = date("Y-m-d");
             $result = $this->db->conn->query("SELECT COUNT(res_id) AS 'reservations_date' FROM `reservation` INNER JOIN `salle` 
-                ON sal_id=res_salle WHERE res_date='$date'");
+                ON sal_id=res_salle WHERE res_ajout='$date'");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -798,7 +989,7 @@
         public function deleteReservations($reservation_id = null){
             $result= $this->db->conn->query("DELETE FROM `reservation` WHERE res_id=$reservation_id");
             if($result){
-                $_SESSION['status'] = "La réservation a été supprimé avec success";
+                $_SESSION['status'] = "La réservation de la salle a été supprimée avec succès";
                 echo "<script>window.location.href='dashboard'</script>";
             }
         }
@@ -814,7 +1005,7 @@
         public function deleteContacts($contact_id = null){
             $result= $this->db->conn->query("DELETE FROM `contact` WHERE con_id=$contact_id");
             if($result){
-                $_SESSION['status'] = "Le message a été supprimé avec success";
+                $_SESSION['status'] = "Le message a été supprimé avec succès";
                 echo "<script>window.location.href='contacts'</script>";
             }
         }
@@ -823,18 +1014,19 @@
             $iso_email = $_POST['iso_email'];
             $iso_message = mysqli_escape_string($this->db->conn, $_POST['iso_message']);
             $iso_categorie= $_POST['iso_categorie'];
-            $result = $this->db->conn->query("INSERT INTO `iso`(`iso_nom`, `iso_res_nom`, `iso_res_email`, `iso_res_message`, `iso_res_date`) 
+                $result = $this->db->conn->query("INSERT INTO `iso`(`iso_nom`, `iso_res_nom`, `iso_res_email`, `iso_res_message`, `iso_res_date`) 
                 VALUES ('$iso_categorie','$iso_nom','$iso_email','$iso_message', NOW())");
-            if($result){
-                $_SESSION['status'] = "Votre demande d'accompagnement ISO a été envoyée avec success";
-                echo "<script>window.location.href='conseil'</script>";
-            }
-            return $result;
+                if($result){
+                    $_SESSION['status'] = "Votre demande d'accompagnement ISO a été envoyée avec succès";
+                    echo "<script>window.location.href='conseil'</script>";
+                }
+                return $result;
+            
         }
         public function deleteArticle($id = null){
             $result= $this->db->conn->query("DELETE FROM `article` WHERE art_id=$id");
             if($result){
-                $_SESSION['status'] = "Le message a été supprimé avec success";
+                $_SESSION['status'] = "L'article a été supprimé avec succès";
                 echo "<script>window.location.href='articles'</script>";
             }else{
                 echo $this->db->conn->error ; 
@@ -903,7 +1095,7 @@
                 '$salle_prix','$salle_personne','$path$image','$salle_service1','$salle_service2','$salle_service3','$salle_service4',
                 '$salle_service1_arab','$salle_service2_arab','$salle_service3_arab','$salle_service4_arab')");
                 if($result){
-                    $_SESSION['status'] = "Salle a été ajouté avec success";
+                    $_SESSION['status'] = "La Salle a été ajoutée avec succès";
                     echo "<script>window.location.href='salles'</script>";
                 }else{
                     echo "not good ".$this->db->conn->error;
@@ -923,8 +1115,8 @@
                 $result = $this->db->conn->query("INSERT INTO `matiere`(`mat_formation`, `mat_nom`, `mat_nom_arab`, `mat_duree`, `mat_prof`, 
                 `mat_prof_arab`) VALUES ('$formation','$matiere[$i]','$matiere_arab[$i]','$duree[$i]','$prof[$i]','$prof_arab[$i]')");
                 if($result){
-                    $_SESSION['status'] = "Matière a été ajouté avec success";
-                    echo "<script>window.location.href='matières'</script>";
+                    $_SESSION['status'] = "Le module a été ajouté avec succès";
+                    echo "<script>window.location.href='module'</script>";
                 }else{
                     echo $this->db->conn->error;
                 }
@@ -940,12 +1132,40 @@
             $description_arabe = mysqli_escape_string($this->db->conn, $_POST['description_arabe']);
             $image = $_FILES['image']['name'];
             $path="./images/formation/";
-            if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
+            if($nom_formation == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir un nom de formation en français
+                    </div>";
+            }else if($presentation == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir une présentation de la formation en français
+                    </div>";
+            }else if($description == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir une description de la formation en français
+                    </div>";
+            }else if($nom_formation_arabe == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir un nom de formation en arabe
+                    </div>";
+            }else if($presentation_arabe == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir une présentation de la formation en arabe
+                    </div>";
+            }else if($description_arabe == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir une description de la formation en arabe
+                    </div>";
+            }else if($image == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez choisir une image
+                    </div>";
+            }else if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
                 $result = $this->db->conn->query("INSERT INTO `formation`(`for_nom`, `for_nom_arab`, `for_pres`, `for_pres_arab`, `for_descr`, 
                     `for_desc_arab`, `for_image`) VALUES ('$nom_formation','$nom_formation_arabe','$presentation','$presentation_arabe',
                     '$description','$description_arabe','$path$image')");
                 if($result){
-                    $_SESSION['status'] = "La formation a été ajouté avec success";
+                    $_SESSION['status'] = "La formation a été ajouté avec succès";
                     echo "<script>window.location.href='formations'</script>";
                 }else{
                     echo $this->db->conn->error ;
@@ -964,7 +1184,7 @@
                 $result = $this->db->conn->query("INSERT INTO `article`(`art_titre`, `art_titre_arab`, `art_texte`, `art_texte_arab`, 
                 `art_image`, `art_ajout`) VALUES ('$titre','$titre_arab','$texte','$texte_arab','$path$image',NOW())");
                 if($result){
-                    $_SESSION['status'] = "Article a été ajouté avec success";
+                    $_SESSION['status'] = "L'article a été ajouté avec succès";
                     echo "<script>window.location.href='articles'</script>";
                 }else{
                     echo "not good ".$this->db->conn->error;
@@ -986,7 +1206,7 @@
                 $result = $this->db->conn->query("INSERT INTO `img_salle`(`img_salle`, `img1`, `img2`, `img3`, `img4`) VALUES 
                     ('$nom_salle','$path$image1','$path$image2','$path$image3','$path$image4')"); 
             if($result){
-                $_SESSION['status'] = "Images a été modifier avec success";
+                $_SESSION['status'] = "L'image a été modifiée avec succès";
                 echo "<script>window.location.href='salles'</script>";
             }else{
                 echo "not". $this->db->conn->error;
@@ -1061,15 +1281,35 @@
         public function getabsence(){
             @$get_matiere = $_POST['get_matiere'];
             @$absence_date = $_POST['absence_date'];
-            $result = $this->db->conn->query("SELECT * FROM `absence` INNER JOIN `etudiant` 
-                ON absence.abs_etudiant=etudiant.etud_id INNER JOIN `formation` ON absence.abs_formation=formation.for_id 
-                WHERE abs_matiere='$get_matiere' AND abs_date='$absence_date' GROUP BY etud_id, abs_date");
-            $resultArray = array();
-            // fetch product data one by one
-            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                $resultArray[] = $item;
+            if(isset($_POST['absence_submit'])){
+                if($get_matiere == ''){
+                    $_SESSION['status_error'] = "Veuillez saisir un module";
+                }else if($absence_date == ''){
+                    $_SESSION['status_error'] = "Veuillez saisir une date";
+                }else{
+                    $checkresdate = $this->db->conn->query("SELECT `abs_date`,`abs_matiere` FROM `absence` WHERE abs_date !='$absence_date' AND abs_matiere='$get_matiere'");
+                    $checkresmodule = $this->db->conn->query("SELECT `abs_date`,`abs_matiere` FROM `absence` WHERE abs_date ='$absence_date' AND abs_matiere!='$get_matiere'");
+                    $checkresmoduledate = $this->db->conn->query("SELECT `abs_date`,`abs_matiere` FROM `absence` WHERE abs_date !='$absence_date' AND abs_matiere!='$get_matiere'");
+                    if($checkresdate->num_rows){
+                        $_SESSION['status_error'] = "La date que vous avez saisit ne corresponds à aucune date de cours";
+                    }else if($checkresmodule->num_rows){
+                        $_SESSION['status_error'] = "Le module que vous avez saisit ne correspands pas à cette date d'absence ".$absence_date;
+                    }else if($checkresmoduledate->num_rows){
+                        $_SESSION['status_error'] = "Aucune donnée ne correspand à votre recherche";
+                    }else{
+                        $result = $this->db->conn->query("SELECT * FROM `absence` INNER JOIN `etudiant` 
+                        ON absence.abs_etudiant=etudiant.etud_id INNER JOIN `formation` ON absence.abs_formation=formation.for_id 
+                        WHERE abs_matiere='$get_matiere' AND abs_date='$absence_date' GROUP BY etud_id, abs_date");  
+                        $resultArray = array();
+                        // fetch product data one by one
+                        while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                            $resultArray[] = $item;
+                        }
+                        return $resultArray;
+                    }
+                }
             }
-            return $resultArray;
+            
         }
         public function getabsenceetudiant(){
             $id = $_SESSION['id'];
@@ -1120,6 +1360,7 @@
             $sujet = mysqli_escape_string($this->db->conn, $_POST['sujet']);
             $result = $this->db->conn->query("INSERT INTO `contact`(`con_nom`, `con_email`, `con_sujet`, `con_message`, `con_envoie`)
                 VALUES ('$nom','$email','$sujet','$message',NOW())");
+            echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre message a été envoyé avec succes <i class="fas fa-times font-close" onclick="fermer()"></i></div>'; 
             return $result;
         }
         public function insertReservation(){
@@ -1132,30 +1373,26 @@
             $time_fin = $_POST['time_fin'];
             $commentaire_reservation = mysqli_escape_string($this->db->conn, $_POST['commentaire_reservation']);
             $date = date("Y-m-d");
-            $result = $this->db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$salle_id AND res_date='$date_salle'");
-            $result2 = $this->db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$salle_id AND time_debut>='$time_debut' AND time_debut <'$time_fin'");
-            if($date_salle === ""){
+            $result = $this->db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$salle_id AND res_date='$date_salle' AND (time_debut>='$time_debut' AND time_debut <'$time_fin')");
+            //$result2 = $this->db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$salle_id AND time_debut>='$time_debut' AND time_debut <'$time_fin'");
+            if($date_salle < $date){
                 echo '<div class="alert alert-danger text-center mt-2" role="alert">
                         Réservation échouée svp vérifier les données entrées
                     </div>';
-            }else if($date_salle < $date){
-                echo '<div class="alert alert-danger text-center mt-2" role="alert">
-                        Réservation échouée svp vérifier les données entrées
-                    </div>';
-            }else if(mysqli_num_rows($result) && mysqli_num_rows($result2)){
+            }else if($result->num_rows){
                 echo "<div class='alert alert-danger text-center mt-2' role='alert'>
                         Heure réservée, Merci de prendre une nouvelle heure
                     </div>";
             }else if($time_fin < $time_debut){
                 echo "<div class='alert alert-danger text-center mt-2' role='alert'>
-                        L'heure de fin doit toujours être supérieur à la date de début
+                        L'heure de fin doit toujours être supérieure à la date de début
                     </div>";
             }else{
                 $result3 = $this->db->conn->query("INSERT INTO `reservation`(`res_nom`, `res_telephone`, `res_email`, `res_salle`, 
                 `res_commentaire`, `res_date`, `time_debut`, `time_fin`) 
                 VALUES ('$reservation_nom','$reservation_telephone','$email_reservation','$salle_id','$commentaire_reservation'
                 ,'$date_salle','$time_debut','$time_fin')");
-                echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre réservation a été envoyé avec succes <i class="fas fa-times font-close2" onclick="fermer()"></i></div>';   
+                echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre réservation a été effectuée avec succès <i class="fas fa-times font-close2" onclick="fermer()"></i></div>';   
                 return $result3;
             }
         }
@@ -1189,7 +1426,7 @@
             $result = $this->db->conn->query("INSERT INTO `commentaire`(`com_nom`, `com_prenom`, `com_comentaire`, `com_article`, `com_time`) VALUES ('$nom','$prenom','$commentaire',
                 '$article_id',NOW())");
             if($result){
-                $_SESSION['status'] = "Votre commentaire a été poster avec success";
+                $_SESSION['status'] = "Votre commentaire a été publié avec succès";
             }else{
                 echo $this->db->conn->error;
             }
@@ -1199,8 +1436,22 @@
             $password = md5($_POST['password']);
             $email =  $_POST['email'];
             $result = $this->db->conn->query("UPDATE `etudiant` SET `etud_motdepasse`='$password' WHERE etud_email='$email'");
+            $to = $_POST['email'];
+            $subject = "Nouveau mot de passe";
+            $headers = 'Content-type: text/html';
+            $msg = "<img class='img-fluid' src='http://localhost/ecole/images/logo.jpeg' 
+                    style='width:16rem; height:60px' alt='logo'>
+                    <div style='text-align:center; align-items:center;'>
+                        <h1>Confirmation d'inscription</h1><br>
+                        <p><b>Veuillez trouvez ci-dessous le nouveau mot de passe de votre compte.<b></p><br>
+                        <ul>
+                            <li>Mot de passe: ".$_POST['password']."</li>
+                        </ul>
+                        <p><b>Veuillez ne communiquer ce mot de passe à perseonne .<b></p><br>
+                    </div>";
+            mail($to, $subject, $msg, $headers);
             if($result){
-                $_SESSION['status'] = "Votre mot de passe à été modifié avec success";
+                $_SESSION['status'] = "Votre mot de passe à été modifié avec succès Le nouveau mot de passe a été envoyé à votre boite email";
             }
             return $result;
         }
@@ -1227,7 +1478,7 @@
             $result =$this->db->conn->query("UPDATE `etudiant` SET `etud_promos`='$promotion' WHERE etud_id='$id'");
             if($result){
                 echo '<script>window.location.href="gérer-promotion"</script>';
-                $_SESSION['status'] = "Promotion a été modifiée avec success";
+                $_SESSION['status'] = "La promotion a été modifiée avec succès";
             }else{
                 echo $this->db->conn->error;
             }
