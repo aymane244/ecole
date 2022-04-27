@@ -5,35 +5,35 @@
     $etudiants=$data->getEtudiant();
     $formations = $data->getformation();
 ?>
-<div class="foot-bg text-color text-center pt-3">
-    <div class="d-flex justify-content-around">
+<div class="foot-bg text-color pt-3">
+    <div class="responsive-bar">
         <div class="text-white"><i class="fas fa-home"></i> <?php echo $navbar['adresse'] ?></div>
-        <div class="text-white">
-            <b><i class="fas fa-mobile"></i> </b><span class="pr-2">+212664159137 </span>
-            <b><i class="fas fa-phone"></i> </b><span class="pr-2">+212539320395 </span>
-            <b><i class="fas fa-envelope"></i> </b><span class="pr-2">artl.nord.tanger@gmail.com </span>
+        <div class="text-white block">
+            <b><i class="fas fa-mobile display-2 pr-1"></i> </b><span class="pr-2 display-2 font">+212664159137 </span>
+            <b><i class="fas fa-phone pr-1"></i> </b><span class="pr-2">+212539320395 </span>
+            <b><i class="fas fa-envelope display pr-1"></i> </b><span class="pr-2 display">artl.nord.tanger@gmail.com </span>
         </div>
         <!--<div id="google_translate_element"></div>-->
-        <div>
-            <div class="dropdown">
+        <div class="">
+            <!--<div class="dropdown">
                 <h6 class="text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?php echo $lang['langue'] ?>
-                </h6>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <?php //echo $lang['langue'] ?>
+                </h6>-->
+                <!--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
                     <form action="" method="POST">
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" name="fr" style="background-color:transparent; border:none;" data-toggle="tooltip" data-placement="bottom" title="<?php echo $lang['francais'] ?>">
-                                <img src='images/Flag_of_France.svg.png' style='max-width:40px' class="img-fluid">
+                        <div class="text-white">
+                            <button type="submit" name="fr" class='text-white' style="background-color:transparent; border:none" data-toggle="tooltip" data-placement="bottom" title="<?php echo $lang['francais'] ?>">
+                                <!--<img src='images/Flag_of_France.svg.png' style='max-width:40px' class="img-fluid">-->
                                 <span class=""> <?php echo $lang['fr'] ?></span>
-                            </button>
-                            <button type="submit" name="ar" style="background-color:transparent; border:none;" data-toggle="tooltip" data-placement="bottom" title="<?php echo $lang['arabe'] ?>">
-                                <img src='images/Flag_of_the_Arab_League.svg.png' style='max-width:40px' class="img-fluid">
+                            </button> ||
+                            <button type="submit" name="ar" class='text-white' style="background-color:transparent; border:none;" data-toggle="tooltip" data-placement="bottom" title="<?php echo $lang['arabe'] ?>">
+                                <!--<img src='images/Flag_of_the_Arab_League.svg.png' style='max-width:40px' class="img-fluid">-->
                                 <span > <?php echo $lang['ar'] ?></span>
                             </button>
                         </div>
                     </form>
-                </div>
-            </div>
+                <!--</div>
+            </div>-->
         </div>
     </div>
 </div>

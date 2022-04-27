@@ -9,9 +9,9 @@
                     <p><a href="formations" class="link-color">Formations<i class="fas fa-school awesome-padding float-right"></i></a></p>
                     <p><a href="module" class="link-color">Modules<i class="fas fa-book-open awesome-padding float-right"></i></a></p>
                     <p><a href="stagiaire" class="link-color">Stagiaires<i class="fas fa-user-graduate awesome-padding float-right"></i></a></p>
-                    <p><a href="demandes-etudiant" class="link-color">Demandes<i class="fas fa-graduation-cap awesome-padding float-right"></i></a></p>
+                    <p><a href="demandes" class="link-color">Demandes<i class="fas fa-graduation-cap awesome-padding float-right"></i></a></p>
                     <p><a href="salles" class="link-color">Salles<i class="fas fa-chalkboard-teacher awesome-padding float-right"></i></a></p>
-                    <p><a href="accomagnement-conseil" class="link-color">Accompa. & conseil<i class="fas fa-question awesome-padding float-right"></i></a></p>
+                    <p><a href="accompagnement-conseil" class="link-color">Accompa. & conseil<i class="fas fa-question awesome-padding float-right"></i></a></p>
                     <p><a href="articles" class="link-color">Articles<i class="fas fa-newspaper awesome-padding float-right"></i></a></p>
                     <p><a href="contacts" class="link-color">Contacts<i class="fas fa-address-card awesome-padding float-right"></i></a></p>
                     <p><a href="index" class="link-color">Accueil<i class="fas fa-home awesome-padding float-right"></i></a></p>

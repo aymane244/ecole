@@ -213,6 +213,12 @@
             z-index: 10;
         }
         .foot-bg{
+            background-color: #0D2735;
+        }
+        .display{
+            display: none;
+        }
+        .display-2{
             display: none;
         }
         .foot-bg select{
@@ -245,6 +251,9 @@
         }
         .show-this{
             left: 20px;
+        }
+        .organigram{
+            display: none;
         }
     }
     @media only screen and (min-width: 600px){
@@ -287,7 +296,18 @@
             z-index: 10;
         }
         .foot-bg{
+            background-color: #0D2735;
+        }
+        .display{
             display: none;
+        }
+        .display-2{
+            display: none;
+        }
+        .responsive-bar{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
         }
         .img-width{
             height: 200px;
@@ -315,6 +335,9 @@
         .show-this{
             font-size: small;
             top: 4px;
+        }
+        .organigram{
+            display: none;
         }
     }
     @media only screen and (min-width: 768px){
@@ -373,6 +396,17 @@
         .show-this{
             font-size: large;
             top: 6px;
+        }
+        .display{
+            display: block;
+        }
+        .block{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .organigram{
+            display: block;
         }
     }
     @media only screen and (min-width: 992px){
@@ -459,6 +493,14 @@
         .show-this{
             font-size: large;
             top: 2px;
+        }
+        .display-2{
+            display: block;
+            font-size: 14px;
+            
+        }
+        .font{
+            font-weight: 400;
         }
     }
     @media only screen and (min-width: 1200px){
@@ -1444,6 +1486,13 @@
         background-position: center;
         background-size: cover;
         margin-left: 24.5rem;
+    }
+    .display_image_salle{
+        width:100%;
+        height: 200px;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        border: 1px solid black;
     }
     .text-length3{
         display: -webkit-box;

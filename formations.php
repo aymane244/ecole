@@ -74,9 +74,21 @@
                                 </a>
                             </td>
                             <td class="row-style"> 
-                                <a href="modifier-formation?id=<?php echo $formation['for_id'] ?>" target="_blank"> 
-                                    <i class="fas fa-edit text-success awesome-size"></i>
-                                </a>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <a href="modifier-formation?id=<?php echo $formation['for_id'] ?>" target="_blank"> 
+                                            <i class="fas fa-edit text-success awesome-size"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <form action="" method="POST">
+                                            <input type="hidden" name="formation_id" value="<?php echo $formation['for_id'] ?>">
+                                            <button type="submit" class="btn-style" name="submit_formation" onclick='return confirm("Voulez-vous supprimer cette formation \nATTENTION!! tous les étudiants seront supprimés")'>
+                                                <i class="fas fa-trash-alt text-danger awesome-size"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <?php
@@ -120,9 +132,21 @@
                                 </a>
                             </td>
                             <td class="row-style"> 
-                                <a href="modifier-formation?id=<?php echo $formation['for_id'] ?>" target="_blank"> 
-                                    <i class="fas fa-edit text-success awesome-size"></i>
-                                </a>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <a href="modifier-formation?id=<?php echo $formation['for_id'] ?>" target="_blank"> 
+                                            <i class="fas fa-edit text-success awesome-size"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <form action="" method="POST">
+                                            <input type="hidden" name="formation_id" value="<?php echo $formation['for_id'] ?>">
+                                            <button type="submit" class="btn-style" name="submit_formation" onclick='return confirm("Voulez-vous supprimer cette formation \nATTENTION!! tous les étudiants seront supprimés")'>
+                                                <i class="fas fa-trash-alt text-danger awesome-size"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <?php
@@ -135,3 +159,8 @@
         </div>
     </body>
 </html>
+<?php
+    if(isset($_POST['submit_formation'])){
+        $data->deleteFormation($_POST['formation_id']);
+    }
+?>

@@ -58,7 +58,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-user position-awesome"></i>
-                                                        <input id="prenom" type="text" class="form-control pl-5" name="prenom" autocomplete="prenom" placeholder="Votre prénom" autofocus value="<?php echo isset($_POST['prenom']) ? $_POST['prenom'] : ''; ?>">
+                                                        <input id="prenom" type="text" class="form-control pl-5" name="prenom" autocomplete="prenom" placeholder="Votre prénom" value="<?php echo isset($_POST['prenom']) ? $_POST['prenom'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -69,7 +69,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-user position-awesome"></i>
-                                                        <input id="nom" type="text" class="form-control pl-5" name="nom" autocomplete="nom" placeholder="Votre nom" autofocus value="<?php echo isset($_POST['nom']) ? $_POST['nom'] : ''; ?>">
+                                                        <input id="nom" type="text" class="form-control pl-5" name="nom" autocomplete="nom" placeholder="Votre nom" value="<?php echo isset($_POST['nom']) ? $_POST['nom'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -80,7 +80,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-user position-awesome"></i>
-                                                        <input id="prenom_arab" type="text" class="form-control pl-5" name="prenom_arab" autocomplete="prenom" placeholder="الاسم الشخصي" autofocus value="<?php echo isset($_POST['prenom_arab']) ? $_POST['prenom_arab'] : ''; ?>">
+                                                        <input id="prenom_arab" type="text" class="form-control pl-5" name="prenom_arab" autocomplete="prenom" placeholder="الاسم الشخصي" value="<?php echo isset($_POST['prenom_arab']) ? $_POST['prenom_arab'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -91,7 +91,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-user position-awesome"></i>
-                                                        <input id="nom_arab" type="text" class="form-control pl-5" name="nom_arab" autocomplete="nom_arab" placeholder="الاسم العائلي" autofocus value="<?php echo isset($_POST['nom_arab']) ? $_POST['nom_arab'] : ''; ?>">
+                                                        <input id="nom_arab" type="text" class="form-control pl-5" name="nom_arab" autocomplete="nom_arab" placeholder="الاسم العائلي" value="<?php echo isset($_POST['nom_arab']) ? $_POST['nom_arab'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -102,7 +102,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-envelope position-awesome"></i>
-                                                        <input id="email" type="email" class="form-control pl-5" name="email" autocomplete="email" placeholder="Votre email" autofocus value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
+                                                        <input id="email" type="email" class="form-control pl-5" name="email" autocomplete="email" placeholder="Votre email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,7 +113,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-lock position-awesome"></i>
-                                                        <input id="motdepasse" type="password" class="form-control pl-5" name="motdepasse" placeholder="Votre mot de passe" autofocus value="<?php echo isset($_POST['motdepasse']) ? $_POST['motdepasse'] : ''; ?>">
+                                                        <input id="motdepasse" type="password" class="form-control pl-5" name="motdepasse" placeholder="Votre mot de passe" value="<?php echo isset($_POST['motdepasse']) ? $_POST['motdepasse'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -135,7 +135,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-map-marker-alt position-awesome"></i>
-                                                        <input id="lieu" type="text" class="form-control pl-5" name="lieu" placeholder='Lieu de naissance' autofocus value="<?php echo isset($_POST['lieu']) ? $_POST['lieu'] : ''; ?>">
+                                                        <input id="lieu" type="text" class="form-control pl-5" name="lieu" placeholder='Lieu de naissance' value="<?php echo isset($_POST['lieu']) ? $_POST['lieu'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,7 +146,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-file-alt position-awesome"></i>
-                                                        <input id="cin" type="text" class="form-control pl-5" name="cin" autocomplete="cin" placeholder="Votre CIN" autofocus value="<?php echo isset($_POST['cin']) ? $_POST['cin'] : ''; ?>">
+                                                        <input id="cin" type="text" class="form-control pl-5" name="cin" autocomplete="cin" placeholder="Votre CIN" value="<?php echo isset($_POST['cin']) ? $_POST['cin'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -168,7 +168,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-map-marker-alt position-awesome"></i>
-                                                        <input id="adresse" type="text" class="form-control pl-5" name="adresse" autocomplete="adresse" placeholder="Votre Adresse" autofocus value="<?php echo isset($_POST['adresse']) ? $_POST['adresse'] : ''; ?>">
+                                                        <input id="adresse" type="text" class="form-control pl-5" name="adresse" autocomplete="adresse" placeholder="Votre Adresse" value="<?php echo isset($_POST['adresse']) ? $_POST['adresse'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,7 +207,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-id-badge position-awesome"></i>
-                                                        <input id="permis" type="text" class="form-control pl-5" name="permis" autocomplete="permis" placeholder="Votre numéro de permis" autofocus value="<?php echo isset($_POST['permis']) ? $_POST['permis'] : ''; ?>">
+                                                        <input id="permis" type="text" class="form-control pl-5" name="permis" autocomplete="permis" placeholder="Votre numéro de permis" value="<?php echo isset($_POST['permis']) ? $_POST['permis'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -234,7 +234,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-calendar position-awesome"></i>
-                                                        <input id="obtenir" type="date" class="form-control pl-5" name="obtenir" autocomplete="obtenir" autofocus value="<?php echo isset($_POST['obtenir']) ? $_POST['obtenir'] : ''; ?>">
+                                                        <input id="obtenir" type="date" class="form-control pl-5" name="obtenir" autocomplete="obtenir" value="<?php echo isset($_POST['obtenir']) ? $_POST['obtenir'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -247,7 +247,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-address-card position-awesome"></i>
-                                                        <input id="profesionnel" type="text" class="form-control pl-5" name="profesionnel" autocomplete="profesionnel" placeholder="Votre numéro de la carte professionelle" autofocus value="<?php echo isset($_POST['profesionnel']) ? $_POST['profesionnel'] : ''; ?>">
+                                                        <input id="profesionnel" type="text" class="form-control pl-5" name="profesionnel" autocomplete="profesionnel" placeholder="Votre numéro de la carte professionelle" value="<?php echo isset($_POST['profesionnel']) ? $_POST['profesionnel'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -259,7 +259,7 @@
                                                 <i class="fas fa-file-upload position-awesome-upload"></i> &nbsp;
                                                 <?php echo $inscription['scan_cin']?>
                                             </label>
-                                            <input id="scan_cin" type="file" class="form-control-file file" name="scan_cin" autofocus>
+                                            <input id="scan_cin" type="file" class="form-control-file file" name="scan_cin">
                                             <div id="showimage4" class="showpdf"></div>
                                             <div id="show4" class="text-center"></div>
                                         </div>
@@ -268,7 +268,7 @@
                                                 <i class="fas fa-file-upload position-awesome-upload"></i> &nbsp;
                                                 <?php echo $inscription['scan_permis']?>
                                             </label>
-                                            <input id="scan_permis" type="file" class="form-control-file file" name="scan_permis" autofocus>
+                                            <input id="scan_permis" type="file" class="form-control-file file" name="scan_permis">
                                             <div id="showimage3" class="showpdf"></div>
                                             <div id="show3" class="text-center"></div>
                                         </div>
@@ -277,7 +277,7 @@
                                                 <i class="fas fa-file-upload position-awesome-upload"></i> &nbsp;
                                                 <?php echo $inscription['scan_visite']?>
                                             </label>
-                                            <input id="scan_visite" type="file" class="form-control-file file" name="scan_visite" autofocus>
+                                            <input id="scan_visite" type="file" class="form-control-file file" name="scan_visite">
                                             <div id="showimage2" class="showpdf"></div>
                                             <div id="show2" class="text-center"></div>
                                         </div>
@@ -286,8 +286,8 @@
                                                 <i class="fas fa-file-upload position-awesome-upload"></i> &nbsp;
                                                 <?php echo $inscription['image']?>
                                             </label>
-                                            <input id="image" type="file" class="form-control-file file" name="image" autofocus>
-                                            <div id="showimage"></div>
+                                            <input id="image" type="file" class="form-control-file file" name="image">
+                                            <div id="showimage" style="background-size:100% 100%; background-repeat:no-repeat"></div>
                                             <div id="show" class="text-center"></div>
                                         </div>
                                     </div>

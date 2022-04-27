@@ -31,13 +31,26 @@
     <body>
         <?php include_once "navbar-admin.php";?>
             <div class="container" id="div-push">
-                <div class="text-center pt-3 mb-4">
+                <div class="text-center py-3">
                     <h2>Gestion de la formation</h2>
                 </div>
-                <div class="text-center mt-3">
-                    <a href="gérer-promotion" target="_blank" class="btn btn-primary">Gérer les promotion</a>
-                    <a href="absence?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Gérer l'absence</a>
-                    <a href="notes?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Afficher les notes</a>
+                <div class="text-center mt-4">
+                    <?php 
+                        foreach($etudiants as $etudiant){
+                            if($etudiant['for_id'] == $id){
+                                if($etudiant['etud_formation'] != $etudiant['for_id']){
+                                    $class = 'd-none';
+                                }else{
+                                    $class = 'd-block';
+                                }
+                            }
+                        }
+                    ?>
+                    <div class="<?php echo $class ?>">
+                        <!--<a href="gérer-promotion" target="_blank" class="btn btn-primary">Gérer les promotion</a>-->
+                        <a href="absence?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Gérer l'absence</a>
+                        <a href="notes?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Afficher les notes</a>
+                    </div>
                 </div>
                 <div class="text-center pt-5 pb-3">
                     <h3>Liste des stagiaires</h3>
@@ -53,7 +66,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nom complet</th>
-                            <th scope="col">Promotion</th>
+                            <!--<th scope="col">Promotion</th>-->
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -73,19 +86,7 @@
                         <tr>
                             <th scope="row"><?php echo $i++ ?></th>
                             <td><?php echo $etudiant['etud_prenom']." ".$etudiant['etud_nom'];?></td>
-                            <td><?php echo $etudiant['pro_année'] ?></td>
-                            <!--<td>
-                                <a download="<?php //echo $etudiant['etud_diplome']?>" href="<?php //echo $etudiant['etud_diplome']?>">
-                                    <?php
-                                        //if($etudiant['etud_diplome'] == ''){      
-                                    ?>
-                                    <?php
-                                        //}else{
-                                        //    echo '<img src="images/PDF_file_icon.svg" style="width:30px">';
-                                        //}
-                                    ?>
-                                </a>
-                            </td>-->
+                            <!--<td><?php //echo $etudiant['pro_année'] ?></td>-->
                             <td>
                                 <button type="button" class="btn btn-primary btn-id" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $etudiant['etud_id'] ?>">Détails</button>
                                 <a href="saisir-notes?id=<?php echo $etudiant['etud_id'] ?>" target="_blank" class="btn btn-primary">Saisir les notes</a>

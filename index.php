@@ -67,7 +67,7 @@
                         neque alias maxime repellat corrupti iure? Velit, natus?
                     </p>
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 mt-2">
                             <div class="border bg-white py-3">
                                 <div class="py-3"><i class="fas fa-award awesome-font pt-2"></i></div>
                                 <h2><?php echo $index['qualite'] ?></h2>
@@ -76,7 +76,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 mt-2">
                         <div class="border bg-white py-3">
                                 <div class="py-3"><i class="fas fa-user-tie awesome-font pt-2"></i></div>
                                 <h2><?php echo $index['profes'] ?></h2>
@@ -85,7 +85,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 mt-2">
                         <div class="border bg-white py-3">
                             <div class="py-3"><i class="fas fa-address-card awesome-font pt-2"></i></div>
                                 <h2><?php echo $index['carte'] ?></h2>
@@ -187,16 +187,17 @@
                             ?>
                             <div class="col-lg-6 col-md-12">
                                 <div class="text-center pt-3 text-color">
-                                    <h2 class="pt-4 text-length3">
-                                        <?php 
-                                            if($_SESSION['lang'] =="ar"){
-                                                echo $formation['for_nom_arab'];
+                                    <?php 
+                                        if($_SESSION['lang'] =="ar"){
+                                    ?>
+                                    <h2 class="pt-4 text-truncate" data-toggle="tooltip" data-placement="bottom" title="<?php echo $formation['for_nom_arab'] ?>"><?php echo $formation['for_nom_arab'] ?></h2>
+                                    <?php 
                                             }else{
-                                                echo $formation['for_nom'];
-                                            }
-                                        ?>
-                                    </h2>
-                                    <hr class="hr-width">
+                                    ?>
+                                    <h2 class="pt-4 text-truncate" data-toggle="tooltip" data-placement="bottom" title="<?php echo $formation['for_nom'] ?>"><?php echo $formation['for_nom'] ?></h2>
+                                    <?php         
+                                        }
+                                    ?>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 mt-lg-4 col-md-6 col-sm-12">

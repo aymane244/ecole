@@ -45,7 +45,7 @@
                     unset($_SESSION['status']);
                 }
             ?>
-            <div class="row justify-content-center my-3">
+            <div class="row justify-content-center my-4">
                 <div class="col-md-6">
                     <div class="dropdown">
                         <p class="bg-white p-2 border rounded" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

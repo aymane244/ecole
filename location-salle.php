@@ -44,8 +44,8 @@
                                                 </h5>
                                             </a>
                                         </div>
-                                        <div class="col-lg-8">
-                                            <p class="text-length-2 text-justify">
+                                        <div class="col-lg-8 text-length-2">
+                                            <p class="text-justify">
                                                 <?php 
                                                     if($_SESSION['lang'] =="ar"){
                                                         echo $image['sal_desc_arab'];
@@ -55,14 +55,14 @@
                                                 ?>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 mt-3">
                                             <p>
                                                 <?php echo $image['sal_prix']?> <?php echo $salle['dirhams'] ?> <br>
                                                 <?php echo $image['sal_personne']?> <?php echo $salle['personne'] ?>
                                             </p>
                                         </div>
                                     </div>
-                                    <a href="salle?id=<?php echo $image['sal_id'] ?>" class="btn btn-primary rounded-0"><?php echo $salle['reservez'] ?></a>
+                                    <a href="salle?id=<?php echo $image['sal_id'] ?>" class="btn btn-primary rounded-0 mt-3"><?php echo $salle['reservez'] ?></a>
                                 </div>
                             </div>
                         </div>

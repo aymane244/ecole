@@ -6,7 +6,7 @@
             $this->db = $db;
         }
         public function getImage(){
-            $result = $this->db->conn->query("SELECT * FROM `img_salle` INNER JOIN `salle` ON sal_id=img_salle");
+            $result = $this->db->conn->query("SELECT * FROM `img_salle` RIGHT JOIN `salle` ON sal_id=img_salle");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -36,7 +36,7 @@
                 $result = $this->db->conn->query("INSERT INTO `note`(`not_formation`, `not_matiere`, 
                 `not_etudiant`, `not_note`) VALUES ('$formation','$matieres','$id','$note')");
                 if($result){
-                    $_SESSION['status'] = "La note a été ajoutée avec succès";
+                    $_SESSION['status'] = "La note a été bien ajoutée";
                     echo "<script>window.location.href='saisir-notes?id=$id_get'</script>";
                 }
                 return $result;
@@ -182,7 +182,7 @@
             $result = $this->db->conn->query("UPDATE `note` SET `not_note`='$note' WHERE not_id=$id");
             if($result){
                 echo "<script>window.location.href='modifier-note?id=$id'</script>";
-                $_SESSION['status'] = "La note a été modifiée avec succès";
+                $_SESSION['status'] = "La note a été bien modifiée";
             }else{
                 echo $this->db->conn->error;
             }
@@ -199,7 +199,7 @@
             $result = $this->db->conn->query("UPDATE `matiere` SET `mat_formation`='$formation_nom',`mat_nom`='$matiere_nom',
             `mat_nom_arab`='$matiere_nom_arab',`mat_duree`='$duree',`mat_prof`='$prof_nom',`mat_prof_arab`='$prof_nom_arab' WHERE mat_id=$id");
             if($result){
-                $_SESSION['status'] = "Le module a été modifié avec succès";
+                $_SESSION['status'] = "Le module a été bien modifié";
                 echo "<script>window.location.href='module'</script>";
             }else{
                 echo $this->db->conn->error;
@@ -215,23 +215,32 @@
             $presentation_arab = mysqli_escape_string($this->db->conn, $_POST['presentation_arab']);
             $description_arab = mysqli_escape_string($this->db->conn, $_POST['description_arab']);
             $image = basename($_FILES['image']['name']);
+            $allowed = array('jpg', 'png', 'jpeg');
+            $ext = pathinfo($image, PATHINFO_EXTENSION); 
             $path = "./images/etudiants/";
-            if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
-                $result = $this->db->conn->query("UPDATE `formation` SET `for_nom`='$formation_nom',`for_nom_arab`='$formation_nom_arab',
-                `for_pres`='$presentation',`for_pres_arab`='$presentation_arab',`for_descr`='$description',`for_desc_arab`='$description_arab',
-                `for_image`='$path$image' WHERE for_id=$id");
+            if(!in_array($ext, $allowed) && $image != ""){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    L'image que vous avez choisit ".$image." est de type ".$ext.
+                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+                </div>";
             }else{
-                $result = $this->db->conn->query("UPDATE `formation` SET `for_nom`='$formation_nom',`for_nom_arab`='$formation_nom_arab',
-                `for_pres`='$presentation',`for_pres_arab`='$presentation_arab',`for_descr`='$description',`for_desc_arab`='$description_arab'
-                WHERE for_id=$id");
+                if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
+                    $result = $this->db->conn->query("UPDATE `formation` SET `for_nom`='$formation_nom',`for_nom_arab`='$formation_nom_arab',
+                    `for_pres`='$presentation',`for_pres_arab`='$presentation_arab',`for_descr`='$description',`for_desc_arab`='$description_arab',
+                    `for_image`='$path$image' WHERE for_id=$id");
+                }else{
+                    $result = $this->db->conn->query("UPDATE `formation` SET `for_nom`='$formation_nom',`for_nom_arab`='$formation_nom_arab',
+                    `for_pres`='$presentation',`for_pres_arab`='$presentation_arab',`for_descr`='$description',`for_desc_arab`='$description_arab'
+                    WHERE for_id=$id");
+                }
+                if($result){
+                    $_SESSION['status'] = "La formation a été bien modifiée";
+                    echo "<script>window.location.href='formations'</script>";
+                }else{
+                    echo "not". $this->db->conn->error;
+                }
+                return $result;
             }
-            if($result){
-                $_SESSION['status'] = "La formation a été modifiée avec succès";
-                echo "<script>window.location.href='formations'</script>";
-            }else{
-                echo "not". $this->db->conn->error;
-            }
-            return $result;
         }
         public function updateSalle(){
             $id = $_GET['id'];
@@ -250,27 +259,36 @@
             $salle_desc = mysqli_escape_string($this->db->conn, $_POST['salle_descr']);
             $salle_desc_arab = mysqli_escape_string($this->db->conn, $_POST['salle_descr_arab']);            
             $image = basename($_FILES['salle_image']['name']);
+            $allowed = array('jpg', 'png', 'jpeg');
+            $ext = pathinfo($image, PATHINFO_EXTENSION); 
             $path = "./images/salles/";
-            if(move_uploaded_file($_FILES['salle_image']['tmp_name'], $path.$image)){
-                $result = $this->db->conn->query("UPDATE `salle` SET `sal_nom`='$nom_salle',`sal_nom_arab`='$nom_salle_arab',
-                `sal_desc`='$salle_desc',`sal_desc_arab`='$salle_desc_arab',`sal_prix`='$salle_prix',`sal_personne`='$salle_personne',
-                `sal_image`='$path$image',`sal_service`='$salle_service1',`sal_service2`='$salle_service2',`sal_service3`='$salle_service3',
-                `sal_service4`='$salle_service4',`sal_service_arab`='$salle_service1_arab',`sal_service2_arab`='$salle_service2_arab',
-                `sal_service3_arab`='$salle_service3_arab', `sal_service4_arab`='$salle_service4_arab' WHERE sal_id=$id");
+            if(!in_array($ext, $allowed) && $image != ""){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    L'image que vous avez choisit ".$image." est de type ".$ext.
+                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+                </div>";
             }else{
-                $result = $this->db->conn->query("UPDATE `salle` SET `sal_nom`='$nom_salle',`sal_nom_arab`='$nom_salle_arab',
-                `sal_desc`='$salle_desc',`sal_desc_arab`='$salle_desc_arab',`sal_prix`='$salle_prix',`sal_personne`='$salle_personne',
-                `sal_service`='$salle_service1',`sal_service2`='$salle_service2',`sal_service3`='$salle_service3',
-                `sal_service4`='$salle_service4',`sal_service_arab`='$salle_service1_arab',`sal_service2_arab`='$salle_service2_arab',
-                `sal_service3_arab`='$salle_service3_arab', `sal_service4_arab`='$salle_service4_arab' WHERE sal_id=$id");
+                if(move_uploaded_file($_FILES['salle_image']['tmp_name'], $path.$image)){
+                    $result = $this->db->conn->query("UPDATE `salle` SET `sal_nom`='$nom_salle',`sal_nom_arab`='$nom_salle_arab',
+                    `sal_desc`='$salle_desc',`sal_desc_arab`='$salle_desc_arab',`sal_prix`='$salle_prix',`sal_personne`='$salle_personne',
+                    `sal_image`='$path$image',`sal_service`='$salle_service1',`sal_service2`='$salle_service2',`sal_service3`='$salle_service3',
+                    `sal_service4`='$salle_service4',`sal_service_arab`='$salle_service1_arab',`sal_service2_arab`='$salle_service2_arab',
+                    `sal_service3_arab`='$salle_service3_arab', `sal_service4_arab`='$salle_service4_arab' WHERE sal_id=$id");
+                }else{
+                    $result = $this->db->conn->query("UPDATE `salle` SET `sal_nom`='$nom_salle',`sal_nom_arab`='$nom_salle_arab',
+                    `sal_desc`='$salle_desc',`sal_desc_arab`='$salle_desc_arab',`sal_prix`='$salle_prix',`sal_personne`='$salle_personne',
+                    `sal_service`='$salle_service1',`sal_service2`='$salle_service2',`sal_service3`='$salle_service3',
+                    `sal_service4`='$salle_service4',`sal_service_arab`='$salle_service1_arab',`sal_service2_arab`='$salle_service2_arab',
+                    `sal_service3_arab`='$salle_service3_arab', `sal_service4_arab`='$salle_service4_arab' WHERE sal_id=$id");
+                }
+                if($result){
+                    $_SESSION['status'] = "La salle a été bien modifiée";
+                    echo "<script>window.location.href='salles'</script>";
+                }else{
+                    echo "not". $this->db->conn->error;
+                }
+                return $result;
             }
-            if($result){
-                $_SESSION['status'] = "La salle a été modifiée avec succès";
-                echo "<script>window.location.href='salles'</script>";
-            }else{
-                echo "not". $this->db->conn->error;
-            }
-            return $result;
         }
         public function updateEtudiant(){
             $id = $_GET['id'];
@@ -292,7 +310,7 @@
             $path = "./images/etudiants/";
             $allowed = array('jpg', 'png', 'jpeg');
             $ext = pathinfo($image, PATHINFO_EXTENSION); 
-            if(!in_array($ext, $allowed) & $image != ""){
+            if(!in_array($ext, $allowed) && $image != ""){
                 echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
                         L'image que vous avez choisit est de type ".$ext.
                         "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
@@ -312,7 +330,7 @@
                     WHERE etud_id=$id");
                 }
                 if($result){
-                    $_SESSION['status'] = "Le profile a été modifié avec succès";
+                    $_SESSION['status'] = "Le profile a été bien modifié";
                     echo "<script>window.location.href='stagiaire'</script>";
                 }else{
                     echo "not good ".$this->db->conn->error;
@@ -327,23 +345,53 @@
             $image2 = basename($_FILES['image2']['name']);
             $image3 = basename($_FILES['image3']['name']);      
             $image4 = basename($_FILES['image4']['name']);
+            $allowed = array('jpg', 'png', 'jpeg');
+            $ext_image1 = pathinfo($image1, PATHINFO_EXTENSION);
+            $ext_image2 = pathinfo($image2, PATHINFO_EXTENSION);
+            $ext_image3 = pathinfo($image3, PATHINFO_EXTENSION);
+            $ext_image4 = pathinfo($image4, PATHINFO_EXTENSION);   
             $path = "./images/salles/";
-            if(move_uploaded_file($_FILES['image1']['tmp_name'], $path.$image1)){
-                $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom', `img1`='$path$image1' WHERE img_id=$id");
-            }else if(move_uploaded_file($_FILES['image2']['tmp_name'], $path.$image2)){
-                $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img2`='$path$image2' WHERE img_id=$id");
-            }else if(move_uploaded_file($_FILES['image3']['tmp_name'], $path.$image3)){
-                $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img3`='$path$image3' WHERE img_id=$id");
-            }else if(move_uploaded_file($_FILES['image4']['tmp_name'], $path.$image4)){
-                $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img4`='$path$image4' WHERE img_id=$id");
-            }
-            if($result){
-                $_SESSION['status'] = "L'image a été modifiée avec succès";
-                echo "<script>window.location.href='salles'</script>";
+            if(!in_array($ext_image1, $allowed) & $image1 != ""){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    L'image que vous avez choisit ".$image1." est de type ".$ext_image1.
+                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+                </div>";
+            }else if(!in_array($ext_image2, $allowed) & $image2 != ""){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    L'image que vous avez choisit ".$image2." est de type ".$ext_image2.
+                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+                </div>";
+            }else if(!in_array($ext_image3, $allowed) & $image3 != ""){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    L'image que vous avez choisit ".$image3." est de type ".$ext_image3.
+                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+                </div>";
+            }else if(!in_array($ext_image4, $allowed) & $image4 != ""){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    L'image que vous avez choisit ".$image4." est de type ".$ext_image4.
+                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+                </div>";
             }else{
-                echo "not". $this->db->conn->error;
+                if(move_uploaded_file($_FILES['image1']['tmp_name'], $path.$image1)){
+                    $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img1`='$path$image1' WHERE img_id=$id");
+                }else if(move_uploaded_file($_FILES['image2']['tmp_name'], $path.$image2)){
+                    $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img2`='$path$image2' WHERE img_id=$id");
+                }else if(move_uploaded_file($_FILES['image3']['tmp_name'], $path.$image3)){
+                    $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img3`='$path$image3' WHERE img_id=$id");
+                }else if(move_uploaded_file($_FILES['image4']['tmp_name'], $path.$image4)){
+                    $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img4`='$path$image4' WHERE img_id=$id");
+                }else{
+                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Opération échouée
+                    </div>";
+                    $result = '';
+                }
+                if($result){
+                    $_SESSION['status_image'] = "L'image a été bien modifiée";
+                    echo '<script>window.location.href="salles"</script>';
+                }
+                return $result;
             }
-            return $result;
         }
         public function getArticle(){
             $result = $this->db->conn->query("SELECT * FROM `article`");
@@ -361,21 +409,30 @@
             $titre_arab = $_POST['art_titre_arab'];
             $texte_arab = $_POST['art_texte_arab'];            
             $image = basename($_FILES['image']['name']);
+            $allowed = array('jpg', 'png', 'jpeg');
+            $ext = pathinfo($image, PATHINFO_EXTENSION);
             $path = "./images/etudiants/";
-            if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
-                $result = $this->db->conn->query("UPDATE `article` SET `art_titre`='$titre',`art_titre_arab`='$titre_arab',`art_texte`='$texte',
-                    `art_texte_arab`='$texte_arab',`art_image`='$path$image' WHERE art_id=$id");
+            if(!in_array($ext, $allowed) && $image != ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    L'image que vous avez choisit ".$image." est de type ".$ext.
+                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+                </div>";
             }else{
-                $result = $this->db->conn->query("UPDATE `article` SET `art_titre`='$titre',`art_titre_arab`='$titre_arab',`art_texte`='$texte',
-                    `art_texte_arab`='$texte_arab' WHERE art_id=$id");
+                if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
+                    $result = $this->db->conn->query("UPDATE `article` SET `art_titre`='$titre',`art_titre_arab`='$titre_arab',`art_texte`='$texte',
+                        `art_texte_arab`='$texte_arab',`art_image`='$path$image' WHERE art_id=$id");
+                }else{
+                    $result = $this->db->conn->query("UPDATE `article` SET `art_titre`='$titre',`art_titre_arab`='$titre_arab',`art_texte`='$texte',
+                        `art_texte_arab`='$texte_arab' WHERE art_id=$id");
+                }
+                if($result){
+                    $_SESSION['status'] = "L'article a été bien modifié";
+                    echo "<script>window.location.href='articles'</script>";
+                }else{
+                    echo "not". $this->db->conn->error;
+                }
+                return $result;
             }
-            if($result){
-                $_SESSION['status'] = "L'article a été modifié avec succès";
-                echo "<script>window.location.href='articles'</script>";
-            }else{
-                echo "not". $this->db->conn->error;
-            }
-            return $result;
         }
         public function getDiplome(){
             $result = $this->db->conn->query("SELECT * FROM `diplome` INNER JOIN `etudiant` ON etud_id=dip_etudiant");
@@ -398,8 +455,35 @@
         public function deleteMatieres($matiere_id = null){
             $result= $this->db->conn->query("DELETE FROM `matiere` WHERE mat_id=$matiere_id");
             if($result){
-                $_SESSION['status'] = "Le module a été supprimé avec succès";
+                $_SESSION['status'] = "Le module a été bien supprimé";
                 echo "<script>window.location.href='module'</script>";
+            }else{
+                echo $this->db->conn->error;
+            }
+        }
+        public function deleteIso($iso_id = null){
+            $result= $this->db->conn->query("DELETE FROM `iso` WHERE iso_id=$iso_id");
+            if($result){
+                $_SESSION['status'] = "La demande de l'accompagenement ISO a été bien supprimé";
+                echo "<script>window.location.href='accompagnement-conseil'</script>";
+            }else{
+                echo $this->db->conn->error;
+            }
+        }
+        public function deleteDouane($douane_id = null){
+            $result= $this->db->conn->query("DELETE FROM `douane` WHERE dou_id=$douane_id");
+            if($result){
+                $_SESSION['status'] = "La demande de la catégorisation douane a été bien supprimé";
+                echo "<script>window.location.href='accompagnement-conseil'</script>";
+            }else{
+                echo $this->db->conn->error;
+            }
+        }
+        public function deleteSalle($salle_id = null){
+            $result= $this->db->conn->query("DELETE FROM `salle` WHERE sal_id=$salle_id");
+            if($result){
+                $_SESSION['status'] = "La salle a été bien supprimée";
+                echo "<script>window.location.href='salles'</script>";
             }else{
                 echo $this->db->conn->error;
             }
@@ -408,7 +492,7 @@
             $id = $_GET['id'];
             $result= $this->db->conn->query("DELETE FROM `commentaire` WHERE com_id=$comment_id");
             if($result){
-                $_SESSION['status'] = "Le Commentaire a été supprimé avec succès";
+                $_SESSION['status'] = "Le Commentaire a été bien supprimé";
                 echo "<script>window.location.href='article?id=$id'</script>";
             }else{
                 echo $this->db->conn->error;
@@ -627,28 +711,28 @@
         public function deleteEtudiant($etudiant_id = null){
             $result= $this->db->conn->query("DELETE FROM `etudiant` WHERE etud_id=$etudiant_id");
             if($result){
-                $_SESSION['status'] = "Le Commentaire a été supprimé avec succès";
-                echo "<script>window.location.href='etudiant'</script>";
+                $_SESSION['status'] = "Le stagiaire a été bien supprimé";
+                echo "<script>window.location.href='stagiaire'</script>";
             }else{
                 echo $this->db->conn->error;
             }
         }
         public function getFormationMatiereEtudiant(){
-            @$promotion = $_POST['promotion'];
-            if(isset($_POST['promotion_submit'])){
-                if($promotion == ''){
-                    $_SESSION['status_error'] = "Merci de choisir une promotion pour poursuivre";
-                }else{
+            //@$promotion = $_POST['promotion'];
+            //if(isset($_POST['promotion_submit'])){
+            //    if($promotion == ''){
+            //        $_SESSION['status_error'] = "Merci de choisir une promotion pour poursuivre";
+            //    }else{
                     $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
-                    INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation WHERE etud_promos = '$promotion' ORDER BY mat_nom");
+                    INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation /*WHERE etud_promos = 'promotion'*/ ORDER BY mat_nom");
                     $resultArray = array();
                     // fetch product data one by one
                     while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                         $resultArray[] = $item;
                     }
                     return $resultArray;
-                }
-            }
+            //    }
+            //}
         }
         public function getEtudiantFormationPromotion(){
             $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
@@ -661,8 +745,9 @@
             return $resultArray;
         }
         public function etudiantTotal(){
+            $id = $_GET['id'];
             $result = $this->db->conn->query("SELECT *, COUNT(etud_nom) AS 'total_etudiant' FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
-            INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation GROUP BY mat_nom");
+            INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation WHERE mat_id =$id GROUP BY mat_nom");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -714,7 +799,7 @@
             }else{
                 $result = $this->db->conn->query("INSERT INTO `promos`(`pro_année`) VALUES ('$promotion_name')");
                 if($result){
-                    $_SESSION['status'] = "La promotion a été ajoutée avec succès";
+                    $_SESSION['status'] = "La promotion a été bien ajoutée";
                     echo "<script>window.location.href='ajouter-promotion'</script>";
                 }else{
                     echo $this->db->conn->error;
@@ -788,7 +873,7 @@
                 );
                 $result = $this->insertIntoDiplome($params);
                 if ($result){
-                    $_SESSION['status'] = "Votre demande de diplome a été envoyée avec succès";
+                    $_SESSION['status'] = "Votre demande de document 1 a été bien envoyée";
                     echo "<script>window.location.href='espace-etudiant'</script>";
                 }else{
                     echo $this->db->conn->error;
@@ -816,7 +901,7 @@
                 );
                 $result = $this->insertIntoAttestation($params);
                 if ($result){
-                    $_SESSION['status'] = "Votre demande de d'attestation a été envoyée avec succès";
+                    $_SESSION['status'] = "Votre demande de document 2 a été bien envoyée";
                     echo "<script>window.location.href='espace-etudiant'</script>";
                 }else{
                     echo $this->db->conn->error;
@@ -831,7 +916,7 @@
             $result = $this->db->conn->query("INSERT INTO `douane`(`dou_nom`, `dou_res_nom`, `dou_res_email`, `dou_res_message`, `dou_res_date`) 
                 VALUES ('$douane_categorie','$douane_nom','$douane_email','$douane_message', NOW())");
             if($result){
-                $_SESSION['status'] = "Votre demande de catégorisation douane a été envoyée avec succès";
+                $_SESSION['status'] = "Votre demande de catégorisation douane a été bien envoyée";
                 echo "<script>window.location.href='douane'</script>";
             }
             return $result;
@@ -839,15 +924,15 @@
         public function deleteDiplome($diplome_id = null){
             $result= $this->db->conn->query("DELETE FROM `diplome` WHERE dip_id=$diplome_id");
             if($result){
-                $_SESSION['status'] = "La demande de diplôme a été supprimée avec succès";
-                echo "<script>window.location.href='demandes-etudiant'</script>";
+                $_SESSION['status'] = "La demande de document 1 a été bien supprimée";
+                echo "<script>window.location.href='demandes'</script>";
             }
         }
         public function deleteAttestation($attestation_id = null){
             $result= $this->db->conn->query("DELETE FROM `attestation` WHERE att_id=$attestation_id");
             if($result){
-                $_SESSION['status'] = "La demanded'attestation  a été supprimée avec succès";
-                echo "<script>window.location.href='demandes-etudiant'</script>";
+                $_SESSION['status'] = "La demande de document 2 a été bien supprimée";
+                echo "<script>window.location.href='demandes'</script>";
             }
         }
         public function updateDiplome(){
@@ -858,8 +943,8 @@
                 $result = $this->db->conn->query("UPDATE `diplome` SET `dip_image`='$path$image' WHERE dip_etudiant=$id");
             }
             if($result){
-                $_SESSION['status'] = "Le ocument a été envoyé avec succès";
-                echo "<script>window.location.href='demandes-etudiant'</script>";
+                $_SESSION['status'] = "Le document a été bien envoyé";
+                echo "<script>window.location.href='demandes'</script>";
             }else{
                 echo "not". $this->db->conn->error;
             }
@@ -873,8 +958,8 @@
                 $result = $this->db->conn->query("UPDATE `attestation` SET `att_image`='$path$image' WHERE att_etudiant=$id");
             }
             if($result){
-                $_SESSION['status'] = "Le document a été envoyé avec succès";
-                echo "<script>window.location.href='demandes-etudiant'</script>";
+                $_SESSION['status'] = "Le document a été bien envoyé";
+                echo "<script>window.location.href='demandes'</script>";
             }else{
                 echo "not". $this->db->conn->error;
             }
@@ -989,8 +1074,8 @@
         public function deleteReservations($reservation_id = null){
             $result= $this->db->conn->query("DELETE FROM `reservation` WHERE res_id=$reservation_id");
             if($result){
-                $_SESSION['status'] = "La réservation de la salle a été supprimée avec succès";
-                echo "<script>window.location.href='dashboard'</script>";
+                $_SESSION['status'] = "La réservation de la salle a été bien supprimée";
+                echo "<script>window.location.href='salles'</script>";
             }
         }
         public function getContacts(){
@@ -1005,7 +1090,7 @@
         public function deleteContacts($contact_id = null){
             $result= $this->db->conn->query("DELETE FROM `contact` WHERE con_id=$contact_id");
             if($result){
-                $_SESSION['status'] = "Le message a été supprimé avec succès";
+                $_SESSION['status'] = "Le message a été bien supprimé";
                 echo "<script>window.location.href='contacts'</script>";
             }
         }
@@ -1017,7 +1102,7 @@
                 $result = $this->db->conn->query("INSERT INTO `iso`(`iso_nom`, `iso_res_nom`, `iso_res_email`, `iso_res_message`, `iso_res_date`) 
                 VALUES ('$iso_categorie','$iso_nom','$iso_email','$iso_message', NOW())");
                 if($result){
-                    $_SESSION['status'] = "Votre demande d'accompagnement ISO a été envoyée avec succès";
+                    $_SESSION['status'] = "Votre demande d'accompagnement ISO a été bien envoyée";
                     echo "<script>window.location.href='conseil'</script>";
                 }
                 return $result;
@@ -1026,7 +1111,7 @@
         public function deleteArticle($id = null){
             $result= $this->db->conn->query("DELETE FROM `article` WHERE art_id=$id");
             if($result){
-                $_SESSION['status'] = "L'article a été supprimé avec succès";
+                $_SESSION['status'] = "L'article a été bien supprimé";
                 echo "<script>window.location.href='articles'</script>";
             }else{
                 echo $this->db->conn->error ; 
@@ -1087,15 +1172,82 @@
             $salle_desc = mysqli_escape_string($this->db->conn, $_POST['salle_desc']);
             $salle_desc_arab = mysqli_escape_string($this->db->conn, $_POST['salle_desc_arab']);
             $image = basename($_FILES['salle_image']['name']);
+            $allowed = array('jpg', 'png', 'jpeg');
+            $ext = pathinfo($image, PATHINFO_EXTENSION);
             $path = "./images/salles/";
-            if(move_uploaded_file($_FILES['salle_image']['tmp_name'], $path.$image)){
+            if($nom_salle == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir un nom en français pour la salle
+                    </div>";
+            }else if($nom_salle_arab == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir un nom en arabe pour la salle
+                    </div>";
+            }else if($salle_desc == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir une description en français pour la salle
+                    </div>";
+            }else if($salle_desc_arab == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir une description en arabe pour la salle
+                    </div>";
+            }else if($salle_prix == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir un prix pour la salle
+                    </div>";
+            }else if($salle_personne == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir le nombre maximum de personne pour la salle
+                    </div>";
+            }else if($salle_service1 == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir le service 1 de la salle
+                    </div>";
+            }else if($salle_service2 == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir le service 2 de la salle
+                    </div>";
+            }else if($salle_service3 == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir le service 3 de la salle
+                    </div>";
+            }else if($salle_service4 == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir le service 4 de la salle
+                    </div>";
+            }else if($salle_service1_arab == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir le service 1 en arabe de la salle
+                    </div>";
+            }else if($salle_service2_arab == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir le service 2 en arabe de la salle
+                    </div>";
+            }else if($salle_service3_arab == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir le service 3 en arabe de la salle
+                    </div>";
+            }else if($salle_service4_arab == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez saisir le service 4 en arabe de la salle
+                    </div>";
+            }else if($image == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        Veuillez choisir une image pour la salle
+                    </div>";
+            }else if(!in_array($ext, $allowed)){
+                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    L'image que vous avez choisit ".$image." est de type ".$ext.
+                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+                    </div>";
+            }else if(move_uploaded_file($_FILES['salle_image']['tmp_name'], $path.$image)){
                 $result = $this->db->conn->query("INSERT INTO `salle`(`sal_nom`, `sal_nom_arab`, `sal_desc`, `sal_desc_arab`, `sal_prix`, 
                 `sal_personne`, `sal_image`, `sal_service`, `sal_service2`, `sal_service3`, `sal_service4`, `sal_service_arab`, 
                 `sal_service2_arab`, `sal_service3_arab`, `sal_service4_arab`) VALUES ('$nom_salle','$nom_salle_arab','$salle_desc','$salle_desc_arab',
                 '$salle_prix','$salle_personne','$path$image','$salle_service1','$salle_service2','$salle_service3','$salle_service4',
                 '$salle_service1_arab','$salle_service2_arab','$salle_service3_arab','$salle_service4_arab')");
                 if($result){
-                    $_SESSION['status'] = "La Salle a été ajoutée avec succès";
+                    $_SESSION['status'] = "La Salle a été bien ajoutée";
                     echo "<script>window.location.href='salles'</script>";
                 }else{
                     echo "not good ".$this->db->conn->error;
@@ -1115,7 +1267,7 @@
                 $result = $this->db->conn->query("INSERT INTO `matiere`(`mat_formation`, `mat_nom`, `mat_nom_arab`, `mat_duree`, `mat_prof`, 
                 `mat_prof_arab`) VALUES ('$formation','$matiere[$i]','$matiere_arab[$i]','$duree[$i]','$prof[$i]','$prof_arab[$i]')");
                 if($result){
-                    $_SESSION['status'] = "Le module a été ajouté avec succès";
+                    $_SESSION['status'] = "Le module a été bien ajouté";
                     echo "<script>window.location.href='module'</script>";
                 }else{
                     echo $this->db->conn->error;
@@ -1131,6 +1283,8 @@
             $presentation_arabe = mysqli_escape_string($this->db->conn, $_POST['presentation_arabe']);
             $description_arabe = mysqli_escape_string($this->db->conn, $_POST['description_arabe']);
             $image = $_FILES['image']['name'];
+            $allowed = array('jpg', 'png', 'jpeg');
+            $ext = pathinfo($image, PATHINFO_EXTENSION);
             $path="./images/formation/";
             if($nom_formation == ''){
                 echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
@@ -1160,12 +1314,17 @@
                 echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
                         Veuillez choisir une image
                     </div>";
+            }else if(!in_array($ext, $allowed)){
+                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    Le fichier que vous avez choisit ".$image." est de type ".$ext.
+                    "<br>Nous supportant juste les images de type 'jpg, png, jpeg'
+                </div>";
             }else if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
                 $result = $this->db->conn->query("INSERT INTO `formation`(`for_nom`, `for_nom_arab`, `for_pres`, `for_pres_arab`, `for_descr`, 
                     `for_desc_arab`, `for_image`) VALUES ('$nom_formation','$nom_formation_arabe','$presentation','$presentation_arabe',
                     '$description','$description_arabe','$path$image')");
                 if($result){
-                    $_SESSION['status'] = "La formation a été ajouté avec succès";
+                    $_SESSION['status'] = "La formation a été bien ajouté";
                     echo "<script>window.location.href='formations'</script>";
                 }else{
                     echo $this->db->conn->error ;
@@ -1179,17 +1338,46 @@
             $texte = mysqli_escape_string($this->db->conn, $_POST['texte']);
             $texte_arab = mysqli_escape_string($this->db->conn, $_POST['texte_arab']);
             $image = basename($_FILES['image']['name']);
+            $allowed = array('jpg', 'png', 'jpeg');
+            $ext = pathinfo($image, PATHINFO_EXTENSION);
             $path = "./images/articles/";
-            if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
-                $result = $this->db->conn->query("INSERT INTO `article`(`art_titre`, `art_titre_arab`, `art_texte`, `art_texte_arab`, 
-                `art_image`, `art_ajout`) VALUES ('$titre','$titre_arab','$texte','$texte_arab','$path$image',NOW())");
-                if($result){
-                    $_SESSION['status'] = "L'article a été ajouté avec succès";
-                    echo "<script>window.location.href='articles'</script>";
-                }else{
-                    echo "not good ".$this->db->conn->error;
+            if($titre == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    Veuillez saisir le nom de l'article
+                </div>";
+            }else if($texte == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    Veuillez saisir l'article
+                </div>";
+            }else if($titre_arab == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    Veuillez saisir le nom de l'article en arabe
+                </div>";
+            }else if($texte_arab == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    Veuillez saisir l'article en arabe
+                </div>";
+            }else if($image == ''){
+                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    Veuillez choisir une image
+                </div>";
+            }else if(!in_array($ext, $allowed)){
+                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                    Le fichier que vous avez choisit ".$image." est de type ".$ext.
+                    "<br>Nous supportant juste les images de type 'jpg, png, jpeg'
+                </div>";
+            }else{
+                if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
+                    $result = $this->db->conn->query("INSERT INTO `article`(`art_titre`, `art_titre_arab`, `art_texte`, `art_texte_arab`, 
+                    `art_image`, `art_ajout`) VALUES ('$titre','$titre_arab','$texte','$texte_arab','$path$image',NOW())");
+                    if($result){
+                        $_SESSION['status'] = "L'article a été bien ajouté";
+                        echo "<script>window.location.href='articles'</script>";
+                    }else{
+                        echo "not good ".$this->db->conn->error;
+                    }
+                    return $result;
                 }
-                return $result;
             }
         } 
         public function insertImages(){
@@ -1198,20 +1386,51 @@
             $image2 = basename($_FILES['image2']['name']);
             $image3 = basename($_FILES['image3']['name']);         
             $image4 = basename($_FILES['image4']['name']);
+            $allowed = array('jpg', 'png', 'jpeg');
+            $ext_image1 = pathinfo($image1, PATHINFO_EXTENSION);
+            $ext_image2 = pathinfo($image2, PATHINFO_EXTENSION);
+            $ext_image3 = pathinfo($image3, PATHINFO_EXTENSION);
+            $ext_image4 = pathinfo($image4, PATHINFO_EXTENSION);
             $path = "./images/salles/";
-            move_uploaded_file($_FILES['image1']['tmp_name'], $path.$image1);
-            move_uploaded_file($_FILES['image2']['tmp_name'], $path.$image2);
-            move_uploaded_file($_FILES['image3']['tmp_name'], $path.$image3);
-            move_uploaded_file($_FILES['image4']['tmp_name'], $path.$image4);
-                $result = $this->db->conn->query("INSERT INTO `img_salle`(`img_salle`, `img1`, `img2`, `img3`, `img4`) VALUES 
-                    ('$nom_salle','$path$image1','$path$image2','$path$image3','$path$image4')"); 
-            if($result){
-                $_SESSION['status'] = "L'image a été modifiée avec succès";
-                echo "<script>window.location.href='salles'</script>";
+            if($image1 == '' && $image2 == '' && $image3 == '' && $image4 == ''){
+                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            Veuillez choisir une image
+                        </div>";
+            }else if(!in_array($ext_image1, $allowed)){
+                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            Le fichier que vous avez choisit ".$image1." est de type ".$ext_image1.
+                            "<br>Nous supportant juste les images de type 'jpg, png, jpeg'
+                        </div>";
+            }else if(!in_array($ext_image2, $allowed)){
+                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            Le fichier que vous avez choisit ".$image2."  est de type ".$ext_image2.
+                            "<br>Nous supportant juste les images de type 'jpg, png, jpeg'
+                        </div>";
+            }else if(!in_array($ext_image3, $allowed)){
+                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            Le fichier que vous avez choisit ".$image3."  est de type ".$ext_image3.
+                            "<br>Nous supportant juste les images de 'jpg, png, jpeg'
+                        </div>";
+            }else if(!in_array($ext_image4, $allowed)){
+                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            Le fichier que vous avez choisit ".$image4."  est de type ".$ext_image4.
+                            "<br>Nous supportant juste les images de type 'jpg, png, jpeg'
+                        </div>";
             }else{
-                echo "not". $this->db->conn->error;
+                move_uploaded_file($_FILES['image1']['tmp_name'], $path.$image1);
+                move_uploaded_file($_FILES['image2']['tmp_name'], $path.$image2);
+                move_uploaded_file($_FILES['image3']['tmp_name'], $path.$image3);
+                move_uploaded_file($_FILES['image4']['tmp_name'], $path.$image4);
+                    $result = $this->db->conn->query("INSERT INTO `img_salle`(`img_salle`, `img1`, `img2`, `img3`, `img4`) VALUES 
+                        ('$nom_salle','$path$image1','$path$image2','$path$image3','$path$image4')"); 
+                if($result){
+                    $_SESSION['status'] = "L'image a été bien insérée";
+                    echo "<script>window.location.href='salles'</script>";
+                }else{
+                    echo "not". $this->db->conn->error;
+                }
+                return $result;
             }
-            return $result;
         }
         public function getiso(){
             $result = $this->db->conn->query("SELECT * FROM `iso`");
@@ -1294,9 +1513,9 @@
                         $_SESSION['status_error'] = "La date que vous avez saisit ne corresponds à aucune date de cours";
                     }else if($checkresmodule->num_rows){
                         $_SESSION['status_error'] = "Le module que vous avez saisit ne correspands pas à cette date d'absence ".$absence_date;
-                    }else if($checkresmoduledate->num_rows){
+                    }/*else if($checkresmoduledate->num_rows){
                         $_SESSION['status_error'] = "Aucune donnée ne correspand à votre recherche";
-                    }else{
+                    }*/else{
                         $result = $this->db->conn->query("SELECT * FROM `absence` INNER JOIN `etudiant` 
                         ON absence.abs_etudiant=etudiant.etud_id INNER JOIN `formation` ON absence.abs_formation=formation.for_id 
                         WHERE abs_matiere='$get_matiere' AND abs_date='$absence_date' GROUP BY etud_id, abs_date");  
@@ -1478,11 +1697,18 @@
             $result =$this->db->conn->query("UPDATE `etudiant` SET `etud_promos`='$promotion' WHERE etud_id='$id'");
             if($result){
                 echo '<script>window.location.href="gérer-promotion"</script>';
-                $_SESSION['status'] = "La promotion a été modifiée avec succès";
+                $_SESSION['status'] = "La promotion a été bien modifiée";
             }else{
                 echo $this->db->conn->error;
             }
             return $result;
+        }
+        public function deleteFormation($formation_id = null){
+            $result= $this->db->conn->query("DELETE FROM `formation` WHERE for_id=$formation_id");
+            if($result){
+                $_SESSION['status'] = "La formation a été bien supprimée";
+                echo "<script>window.location.href='formations'</script>";
+            }
         }
         /*public function getEtudiantSearch(){
             $nom = $_POST['nom'];
@@ -1604,7 +1830,6 @@
                 echo "<script>window.location.href='salles'</script>";
             }
         }
-
         public function getReservationsId(){
             $result = $this->db->conn->query("SELECT * FROM `reservation`");
             $resultArray = array();

@@ -39,6 +39,9 @@
     <body>
         <?php include_once "navbar-admin.php";?>
             <div class="container" id="div-push">
+                <div class="text-center py-3">
+                    <h2><i class="fas fa-user-graduate"></i> Page stagiaire</h2>
+                </div>
                 <?php
                     if(isset($_SESSION['status'])){
                 ?>
@@ -47,10 +50,7 @@
                         unset($_SESSION['status']);
                     }
                 ?>
-                <div class="text-center py-5">
-                    <h2><i class="fas fa-user-graduate"></i> Page stagiaire</h2>
-                </div>
-                <div class="d-flex mt-3">
+                <div class="d-flex mt-4">
                     <i class="fas fa-search position-awesome"></i>
                     <input type="text" class="form-control px-5" id="search" placeholder="Chercher un stagiaire" name="nom">
                 </div>
@@ -84,20 +84,20 @@
                             <td><?php echo $etudiant['etud_prenom']." ".$etudiant['etud_nom'];?></td>
                             <td>
                                 <div class="row align-items-center">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <a href="modifier-stagiaire?id=<?php echo $etudiant['etud_id'] ?>" target="_blank"> 
                                             <i class="fas fa-edit text-success awesome-size"></i>
                                         </a>
                                     </div>
-                                    <!--<div class="col-md-6">
+                                    <div class="col-md-3">
                                         <form action="" method="POST">
-                                            <input type="hidden" name="etudiant_id" value="<?php //echo $etudiant['etud_id'] ?>">
-                                            <button type="submit" class="btn-style" name="submit_etudiant" onclick='return confirm("Voulez-vous supprimer cet étudiant")'>
+                                            <input type="hidden" name="etudiant_id" value="<?php echo $etudiant['etud_id'] ?>">
+                                            <button type="submit" class="btn-style" name="submit_etudiant" onclick='return confirm("Voulez-vous supprimer ce stagiaire")'>
                                                 <i class="fas fa-trash-alt text-danger awesome-size"></i>
                                             </button>
                                         </form>
-                                    </div>-->
-                                    <div class="col-md-8">
+                                    </div>
+                                    <div class="col-md-4">
                                         <button type="button" class="btn btn-primary btn-id" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $etudiant['etud_id'] ?>">Détails</button>
                                     </div>
                                 </div>

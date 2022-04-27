@@ -22,7 +22,7 @@
     <body>
         <?php include_once "navbar-admin.php";?>
             <div class="container" id="div-push">
-                <div class="text-center py-5">
+                <div class="text-center py-3">
                     <h2><i class="fas fa-graduation-cap"></i> Page Demandes</h2>
                 </div>
                 <?php
@@ -33,16 +33,16 @@
                         unset($_SESSION['status']);
                     }
                 ?>
-                <div class="mt-4 align-items-center d-flex justify-content-around mb-4">
-                    <input type="button" class="btn btn-primary" onclick="diplome()" value="Demande Diplome">
-                    <input type="button" class="btn btn-primary" onclick="attestation()" value="Demande Attestation">
+                <div class="mt-4 align-items-center d-flex justify-content-center mb-4">
+                    <input type="button" class="btn btn-primary" onclick="diplome()" value="Demande Document 1">
+                    <input type="button" class="btn btn-primary ml-3" onclick="attestation()" value="Demande Document 2">
                 </div>
                 <div class="row">
                     <div class="col-md-12" id="diplome">
                         <table class="table bg-white table-bordered">
                             <thead class="text-center">
                                 <tr>
-                                    <th scope="col" colspan="5">Demande diplome</th>
+                                    <th scope="col" colspan="5">Demande document 1</th>
                                 </tr>
                                 <tr>
                                     <th>#</th>
@@ -54,8 +54,15 @@
                             </thead>
                             <tbody class="text-center">
                                 <?php
-                                    $i=1;
-                                    foreach($diplomes as $diplome){
+                                    if(empty($diplomes)){
+                                ?>
+                                <tr>
+                                    <th scope="row" colspan="5"><h1>Pas de demande</h1></th>
+                                </tr>
+                                <?php
+                                    }else{
+                                        $i=1;
+                                        foreach($diplomes as $diplome){
                                 ?>
                                 <tr>
                                     <td><?= $i++?></td>
@@ -69,11 +76,11 @@
                                     </td>
                                     <td>
                                         <?php
-                                            if($diplome['dip_image'] == ''){
-                                                echo '<p class="text-primary">Demande reçue</p>';
-                                            }else if($diplome['dip_image'] == $diplome['dip_image']){
-                                                echo '<p class="text-success">Diplome envoyé</p>';
-                                            }
+                                                if($diplome['dip_image'] == ''){
+                                                    echo '<p class="text-primary">Demande reçue</p>';
+                                                }else if($diplome['dip_image'] == $diplome['dip_image']){
+                                                    echo '<p class="text-success">Document 1 envoyé</p>';
+                                                }
                                         ?>
                                     </td>
                                     <td class="row-style">
@@ -86,6 +93,7 @@
                                     </td>
                                 </tr>
                                 <?php
+                                        }
                                     }
                                 ?>
                             </tbody>
@@ -95,7 +103,7 @@
                         <table class="table table-hover bg-white table-bordered">
                             <thead class="text-center">
                                 <tr>
-                                    <th scope="col" colspan="5">Demande d'attestation</th>
+                                    <th scope="col" colspan="5">Demande document 2</th>
                                 </tr>
                                 <tr>
                                     <th>#</th>
@@ -107,8 +115,15 @@
                             </thead>
                             <tbody class="text-center">
                                 <?php
-                                    $i=1;
-                                    foreach($attestations as $attestation){
+                                    if(empty($attestations)){
+                                ?>
+                                <tr>
+                                    <th scope="row" colspan="5"><h1>Pas de demande</h1></th>
+                                </tr>
+                                <?php
+                                    }else{
+                                        $i=1;
+                                        foreach($attestations as $attestation){
                                 ?>
                                 <tr>
                                     <td><?= $i++?></td>
@@ -125,7 +140,7 @@
                                             if($attestation['att_image'] == ''){
                                                 echo '<p class="text-primary">Demande reçu</p>';
                                             }else if($attestation['att_image'] == $attestation['att_image']){
-                                                echo '<p class="text-success">Attestation envoyée</p>';
+                                                echo '<p class="text-success">Document 2 envoyé</p>';
                                             }
                                         ?>
                                     </td>
@@ -139,6 +154,7 @@
                                     </td>
                                 </tr>
                                 <?php
+                                        }
                                     }
                                 ?>
                             </tbody>

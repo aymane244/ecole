@@ -40,9 +40,14 @@
                 <div class="text-center py-3">
                     <h2><i class="fas fa-edit"></i> Modifier la formation</h2>
                 </div>
+                <?php
+                    if(isset($_POST['submit'])){
+                        $data->updateFormation();
+                    }
+                ?>
                 <form action="" method="POST" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-md-12 mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 mt-5">
                             <h3 class="text-center mb-3">Modification en Français</h3>
                             <div class="card card-position pb-5">
                                 <div class="card-header text-center link-font"><i class="fas fa-edit"></i> Editer votre formation</div>
@@ -52,14 +57,14 @@
                                         <div class="col-md-12">
                                             <div class="d-flex">
                                                 <i class="fas fa-tag position-awesome"></i>
-                                                <input id="formationom" type="text" class="form-control pl-5" name="formation_nom" value="<?php echo $forma ?>" autocomplete="matiere" autofocus required>
+                                                <input id="formationom" type="text" class="form-control pl-5" name="formation_nom" value="<?php echo $forma ?>" autocomplete="matiere" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="presentation" class="col-md-12 col-form-label text-md-end">Présentation</label>
                                         <div class="col-md-12">
-                                            <textarea id="editor2" type="text" rows="10" class="form-control" name="presentation" autocomplete="presentation" autofocus required><?php echo $presentation ?></textarea>
+                                            <textarea id="editor2" type="text" rows="10" class="form-control" name="presentation" autocomplete="presentation" required><?php echo $presentation ?></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -81,7 +86,7 @@
                                         <div class="col-md-12">
                                             <div class="d-flex">
                                                 <i class="fas fa-tag position-awesome"></i>
-                                                <input id="formationom" type="text" class="form-control pl-5" name="formation_nom_arab" value="<?php echo $forma_arab ?>" autocomplete="matiere" autofocus required>
+                                                <input id="formationom" type="text" class="form-control pl-5" name="formation_nom_arab" value="<?php echo $forma_arab ?>" autocomplete="matiere" required>
                                             </div>
                                         </div>
                                     </div>
@@ -102,11 +107,11 @@
                                         <div class="col-md-6">
                                             <div class="d-flex">
                                                 <i class="fas fa-camera position-awesome-image"></i>
-                                                <input id="image_2" type="file" class="form-control-file pl-5" name="image" autofocus>
+                                                <input id="image_2" type="file" class="form-control-file pl-5" name="image">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div id="display_image_2" class="display_image" style="display:none;"></div>
+                                            <div id="display_image_2" class="display_image" style="display:none;background-size:100% 100%; background-repeat:no-repeat"></div>
                                             <img src="<?php echo $image ?>" alt="" style="width:400px; height:225px" id="image_display">
                                         </div>
                                     </div>
@@ -143,8 +148,3 @@
         </script>
     </body>
 </html>
-<?php
-    if(isset($_POST['submit'])){
-        $data->updateFormation();
-    }
-?>

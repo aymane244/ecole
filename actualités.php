@@ -50,7 +50,8 @@
                                                 ?> 
                                             </a>
                                         </h5>
-                                        <p class="pt-3 pl-4 text-length text-justify">
+                                        <div class="text-length pl-4">
+                                        <p class=" text-length text-justify">
                                             <?php 
                                                 if($_SESSION['lang'] =="ar"){
                                                     echo $article['art_texte_arab'];
@@ -59,6 +60,8 @@
                                                 } 
                                             ?>
                                         </p>
+                                        </div>
+
                                         <div class="d-flex">
                                             <p style="color:#BBBBBB"><i class="fas fa-clock pt-3 pl-4"></i><span> <?php echo date("F j, Y",strtotime($article['art_ajout']))?></span></p> 
                                             <p style="color:#BBBBBB"><i class="fas fa-comment-dots pt-3 pl-4"></i><span> <?php echo $article['commentaires']?></span></p> 

@@ -21,7 +21,7 @@
     <body>
         <?php include_once "navbar-admin.php";?>
             <div class="container" id="div-push">
-                <div class="text-center py-5">
+                <div class="text-center py-3">
                     <h2><i class="fas fa-address-card"></i> Page Contacts</h2>
                 </div>
                 <?php

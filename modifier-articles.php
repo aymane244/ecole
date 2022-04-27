@@ -34,10 +34,18 @@
     <body>
         <?php include_once "navbar-admin.php";?>
         <div class="container">
+            <div class="text-center py-3">
+                <h2><i class="fas fa-edit"></i> Editer l'article</h2>
+            </div>
+        <?php
+            if(isset($_POST['submit'])){
+                $data->updateArticle();
+            }
+        ?>
             <form action="" method="POST" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col-md-12 mt-5">
-                        <h3 class="text-center mb-3">Modifier en Français</h3>
+                <div class="row justify-content-center">
+                    <div class="col-md-10 mt-5">
+                        <h3 class="text-center mb-3">Modification en Français</h3>
                         <div class="card card-position">
                             <div class="card-header text-center link-font"><i class="fas fa-edit"></i> Editer votre Article</div>
                                 <div class="card-body py-5">
@@ -61,7 +69,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 mt-5">
-                        <h3 class="text-center mb-3">Modifier en Arabe</h3>
+                        <h3 class="text-center mb-3">Modification en Arabe</h3>
                         <div class="card card-position">
                             <div class="card-header text-center link-font"><i class="fas fa-edit"></i> تعديل المقال</div>
                                 <div class="card-body py-5">
@@ -89,8 +97,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div id="display_image_2" class="display_image" style="display:none;"></div>
-                                            <img src="<?php echo $image ?>" alt="" style="width:400px; height:225px" id="image_display">
+                                            <div id="display_image_2" class="display_image" style="display:none;background-size:100% 100%; background-repeat:no-repeat"></div>
+                                            <img src="<?php echo $image ?>" alt="" style="width:400px; height:225px;" id="image_display">
                                         </div>            
                                     </div>
                                     <div class="row mb-0 text-center">
@@ -125,8 +133,3 @@
         </script>
     </body>
 </html>
-<?php
-    if(isset($_POST['submit'])){
-        $data->updateArticle();
-    }
-?>

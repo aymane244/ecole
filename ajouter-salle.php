@@ -20,13 +20,17 @@
     <body>
         <?php include_once "navbar-admin.php";?>
             <div class="container">
-                <div class="text-center py-5">
+                <div class="text-center py-3">
                     <h2><i class="fas fa-plus-square"></i> Ajouter une salle</h2>
                 </div>
+                <?php
+                    if(isset($_POST['submit_salle'])){
+                        $data->insertSalle();
+                    }
+                ?>
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="row">    
                         <div class="col-md-12 my-5">
-                            <h3 class="text-center mb-3">Ajout en Français</h3>
                             <div class="card card-position">
                                 <div class="card-header text-center link-font align-items-center"><i class="fas fa-plus-square"></i> Ajouter une salle</div>
                                 <div class="card-body py-5 w-100">
@@ -37,7 +41,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-tag position-awesome"></i>
-                                                        <input id="titre" type="text" class="form-control pl-5" name="nom_salle" value="" autocomplete="titre" autofocus placeholder="Nom de la salle" required>
+                                                        <input id="titre" type="text" class="form-control pl-5" name="nom_salle" autocomplete="titre" placeholder="Nom de la salle" value="<?php echo isset($_POST['nom_salle']) ? $_POST['nom_salle'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -48,7 +52,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-tag position-awesome"></i>
-                                                        <input id="titre_arab" type="text" class="form-control pl-5" name="nom_salle_arab" value="" autocomplete="titre" placeholder="اسم القاعة" autofocus required>
+                                                        <input id="titre_arab" type="text" class="form-control pl-5" name="nom_salle_arab" value="<?php echo isset($_POST['nom_salle_arab']) ? $_POST['nom_salle_arab'] : ''; ?>" autocomplete="titre" placeholder="اسم القاعة">
                                                     </div>
                                                 </div>
                                             </div>
@@ -59,7 +63,7 @@
                                             <div class="row mb-3">
                                                 <label for="desc" class="col-md-12 col-form-label text-md-end">Description</label>
                                                 <div class="col-md-12">
-                                                    <textarea id="editor" type="text" rows="10" class="form-control position-text-area" name="salle_desc" value="" autocomplete="texte" autofocus required></textarea>
+                                                    <textarea id="editor" type="text" rows="10" class="form-control position-text-area" name="salle_desc" autocomplete="texte"><?php echo isset($_POST['salle_desc']) ? $_POST['salle_desc'] : ''; ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -67,7 +71,7 @@
                                             <div class="row mb-3">
                                                 <label for="desc_arab" class="col-md-12 col-form-label text-md-end">وصف القاعة</label>
                                                 <div class="col-md-12">
-                                                    <textarea id="editor2" type="text" rows="10" class="form-control position-text-area" name="salle_desc_arab" value="" autocomplete="texte" autofocus required></textarea>
+                                                    <textarea id="editor2" type="text" rows="10" class="form-control position-text-area" name="salle_desc_arab" autocomplete="texte"><?php echo isset($_POST['salle_desc_arab']) ? $_POST['salle_desc_arab'] : ''; ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -77,7 +81,7 @@
                                         <div class="col-md-12">
                                             <div class="d-flex">
                                                 <i class="fas fa-dollar-sign position-awesome"></i>
-                                                <input id="salle_prix" type="number" class="form-control pl-5" name="salle_prix" autocomplete="prix" min="1" placeholder="Prix" autofocus required>
+                                                <input id="salle_prix" type="number" class="form-control pl-5" name="salle_prix" autocomplete="prix" min="1" placeholder="Prix" value="<?php echo isset($_POST['salle_prix']) ? $_POST['salle_prix'] : ''; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -86,7 +90,7 @@
                                         <div class="col-md-12">
                                             <div class="d-flex">
                                                 <i class="fas fa-users position-awesome"></i>
-                                                <input id="salle_personne" type="number" class="form-control pl-5" name="salle_personne" autocomplete="titre" placeholder="Personnes" min="1" autofocus required>
+                                                <input id="salle_personne" type="number" class="form-control pl-5" name="salle_personne" autocomplete="titre" placeholder="Personnes" min="1" value="<?php echo isset($_POST['salle_personne']) ? $_POST['salle_personne'] : ''; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -97,7 +101,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-check position-awesome"></i>
-                                                        <input id="salle-service1" type="text" class="form-control pl-5" name="salle_service1" autocomplete="prenom" placeholder="Service 1" autofocus>
+                                                        <input id="salle-service1" type="text" class="form-control pl-5" name="salle_service1" autocomplete="prenom" placeholder="Service 1" value="<?php echo isset($_POST['salle_service1']) ? $_POST['salle_service1'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -108,7 +112,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-check position-awesome"></i>
-                                                        <input id="salle-service2" type="text" class="form-control pl-5" name="salle_service2" autocomplete="nom" placeholder="Service 2" autofocus>
+                                                        <input id="salle-service2" type="text" class="form-control pl-5" name="salle_service2" autocomplete="nom" placeholder="Service 2" value="<?php echo isset($_POST['salle_service2']) ? $_POST['salle_service2'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,7 +123,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-check position-awesome"></i>
-                                                        <input id="salle-service3" type="text" class="form-control pl-5" name="salle_service3" autocomplete="prenom" placeholder="Service 3" autofocus>
+                                                        <input id="salle-service3" type="text" class="form-control pl-5" name="salle_service3" autocomplete="prenom" placeholder="Service 3" value="<?php echo isset($_POST['salle_service3']) ? $_POST['salle_service3'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,7 +134,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-check position-awesome"></i>
-                                                        <input id="salle-service4" type="text" class="form-control pl-5" name="salle_service4" autocomplete="nom" placeholder="Service 4" autofocus>
+                                                        <input id="salle-service4" type="text" class="form-control pl-5" name="salle_service4" autocomplete="nom" placeholder="Service 4" value="<?php echo isset($_POST['salle_service4']) ? $_POST['salle_service4'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,7 +145,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-check position-awesome"></i>
-                                                        <input id="salle-service1_arab" type="text" class="form-control pl-5" name="salle_service1_arab" autocomplete="nom" placeholder="خدمة 1" autofocus>
+                                                        <input id="salle-service1_arab" type="text" class="form-control pl-5" name="salle_service1_arab" autocomplete="nom" placeholder="خدمة 1" value="<?php echo isset($_POST['salle_service1_arab']) ? $_POST['salle_service1_arab'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -152,7 +156,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-check position-awesome"></i>
-                                                        <input id="salle-service2_arab" type="text" class="form-control pl-5" name="salle_service2_arab" autocomplete="nom" placeholder="خدمة 2" autofocus>
+                                                        <input id="salle-service2_arab" type="text" class="form-control pl-5" name="salle_service2_arab" autocomplete="nom" placeholder="خدمة 2" value="<?php echo isset($_POST['salle_service2_arab']) ? $_POST['salle_service2_arab'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -163,7 +167,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-check position-awesome"></i>
-                                                        <input id="salle-service3_arab" type="text" class="form-control pl-5" name="salle_service3_arab" autocomplete="nom" placeholder="خدمة 3" autofocus>
+                                                        <input id="salle-service3_arab" type="text" class="form-control pl-5" name="salle_service3_arab" autocomplete="nom" placeholder="خدمة 3" value="<?php echo isset($_POST['salle_service3_arab']) ? $_POST['salle_service3_arab'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -174,7 +178,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-check position-awesome"></i>
-                                                        <input id="salle-service4_arab" type="text" class="form-control pl-5" name="salle_service4_arab" autocomplete="nom" placeholder="خدمة 4" autofocus>
+                                                        <input id="salle-service4_arab" type="text" class="form-control pl-5" name="salle_service4_arab" autocomplete="nom" placeholder="خدمة 4" value="<?php echo isset($_POST['salle_service4_arab']) ? $_POST['salle_service4_arab'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,11 +189,11 @@
                                         <div class="col-md-6">
                                             <div class="d-flex">
                                                 <i class="fas fa-camera position-awesome-image"></i>
-                                                <input id="image" type="file" class="form-control-file pl-5" name="salle_image" autofocus required>
+                                                <input id="image" type="file" class="form-control-file pl-5" name="salle_image">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div id="display_image" class="display_image"></div>
+                                            <div id="display_image" class="display_image" style="background-size:100% 100%; background-repeat:no-repeat"></div>
                                         </div>
                                     </div>
                                     <div class="row mb-0">
@@ -221,8 +225,3 @@
         </script>
     </body>
 </html>
-<?php
-    if(isset($_POST['submit_salle'])){
-        $data->insertSalle();
-    }
-?>

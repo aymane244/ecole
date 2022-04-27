@@ -17,17 +17,17 @@
         ?>
         <title>Ajouter un article</title>
     </head>
-    <?php
-        if(isset($_POST['submit'])){
-            $data->insertArticle();
-        }
-    ?>
     <body>
         <?php include_once "navbar-admin.php";?>
         <div class="container">
-            <div class="text-center py-5">
-                <h2><i class="fas fa-plus-square"></i> Ajouter Un article</h2>
+            <div class="text-center py-3">
+                <h2><i class="fas fa-plus-square"></i> Ajouter article</h2>
             </div>
+            <?php
+                if(isset($_POST['submit'])){
+                    $data->insertArticle();
+                }
+            ?>
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-12 my-5">
@@ -40,14 +40,14 @@
                                         <div class="col-md-12">
                                             <div class="d-flex">
                                                 <i class="fas fa-tag position-awesome"></i>
-                                                <input id="titre" type="text" class="form-control pl-5" name="titre" value="" autocomplete="titre" placeholder="Titre de l'article" autofocus required>
+                                                <input id="titre" type="text" class="form-control pl-5" name="titre" value="<?php echo isset($_POST['titre']) ? $_POST['titre'] : ''; ?>" autocomplete="titre" placeholder="Titre de l'article">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="prof" class="col-md-12 col-form-label text-md-end">Zone de texte</label>
                                         <div class="col-md-12">
-                                            <textarea type="text" rows="10" class="form-control position-text-area" id="editor2" name="texte" value="" autocomplete="texte" autofocus required></textarea>
+                                            <textarea type="text" rows="10" class="form-control position-text-area" id="editor2" name="texte" value="<?php echo isset($_POST['texte']) ? $_POST['texte'] : ''; ?>" autocomplete="texte"><?php echo isset($_POST['texte']) ? $_POST['texte'] : ''; ?></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -64,14 +64,14 @@
                                         <div class="col-md-12">
                                             <div class="d-flex">
                                                 <i class="fas fa-tag position-awesome"></i>
-                                                <input id="titre_arab" type="text" class="form-control pl-5" name="titre_arab" value="" placeholder="عنوان المقال" autocomplete="titre" autofocus required>
+                                                <input id="titre_arab" type="text" class="form-control pl-5" name="titre_arab" value="<?php echo isset($_POST['titre_arab']) ? $_POST['titre_arab'] : ''; ?>" placeholder="عنوان المقال" autocomplete="titre">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="texte_arab" class="col-md-12 col-form-label text-md-end">كتابة المقال</label>
                                         <div class="col-md-12">
-                                            <textarea type="text" rows="10" class="form-control position-text-area" id="editor" name="texte_arab" value="" autocomplete="texte" autofocus required></textarea>
+                                            <textarea type="text" rows="10" class="form-control position-text-area" id="editor" name="texte_arab" value="" autocomplete="texte"><?php echo isset($_POST['texte_arab']) ? $_POST['texte_arab'] : ''; ?></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3 align-items-center">
@@ -79,11 +79,11 @@
                                         <div class="col-md-6">
                                             <div class="d-flex">
                                                 <i class="fas fa-camera position-awesome-image"></i>
-                                                <input id="image" type="file" class="form-control-file pl-5" name="image" autofocus required>
+                                                <input id="image" type="file" class="form-control-file pl-5" name="image">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div id="display_image" class="display_image"></div>
+                                            <div id="display_image" class="display_image" style="background-size:100% 100%; background-repeat:no-repeat"></div>
                                         </div>
                                     </div>
                                     <div class="row text-center">

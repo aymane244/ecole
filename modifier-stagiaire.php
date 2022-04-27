@@ -46,16 +46,17 @@
     </head>
     <body>
         <?php include_once "navbar-admin.php";?>
-        <div class="container py-5">
+        <div class="container">
+            <div class="text-center py-3">
+                <h2><i class="fas fa-edit"></i> Modifier le stagiaire</h2>
+            </div>
             <div class="row justify-content-center">
-                <div class="col-md-10">
+                <div class="col-md-10 mt-5">
                     <div class="card card-position">
-                        <div class="card-header text-center link-font">
-                            <h3><i class="fas fa-user-edit"></i> Modifier profile</h3>
-                        </div>
+                    <div class="card-header text-center link-font"><i class="fas fa-edit"></i> Editer le profile</div>
                         <div class="card-body py-5">
                             <div class="text-center mb-3">
-                                <div id="display_image" class="display_image_profile" style="display:none;"></div>
+                                <div id="display_image" class="display_image_profile" style="display:none;background-size:100% 100%; background-repeat:no-repeat"></div>
                                 <?php
                                     if($image == "./images/etudiants/"){
                                         echo "<img src='images/etudiants/unknown_person.jpg' class='rounded-circle img-fluid' style='max-width: 5rem' id='image_display'>";
@@ -189,7 +190,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-0">
-                                    <div class="col-md-8">
+                                    <div class="col-md-12 text-center">
                                         <button type="submit" class="btn btn-primary" name="submit">Modifier</button>
                                     </div>
                                 </div>

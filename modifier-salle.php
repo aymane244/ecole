@@ -44,11 +44,16 @@
     <body>
         <?php include_once "navbar-admin.php";?>
             <div class="container">
-                <div class="text-center py-5">
-                    <h2><i class="fas fa-edit"></i> Editer la salle</h2>
+                <div class="text-center py-3">
+                    <h2><i class="fas fa-edit"></i> Modifier la salle</h2>
                 </div>
-                <div class="row">
-                    <div class="col-md-12 my-5">
+                <?php
+                    if(isset($_POST['submit_salle'])){
+                        $data->updateSalle();
+                    }
+                ?>
+                <div class="row justify-content-center">
+                    <div class="col-md-10 my-5">
                         <div class="card card-position">
                             <div class="card-header text-center link-font"><i class="fas fa-edit"></i> Editer votre salle</div>
                             <div class="card-body py-5 w-100">
@@ -160,7 +165,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-check position-awesome"></i>
-                                                        <input id="salle-service1_arab" type="text" class="form-control pl-5" value="<?php echo $salle_service1_arab?>" name="salle-service1_arab" autocomplete="prenom" placeholder="Service 5" autofocus>
+                                                        <input id="salle-service1_arab" type="text" class="form-control pl-5" value="<?php echo $salle_service1_arab?>" name="salle_service1_arab" autocomplete="prenom" placeholder="Service 5" autofocus>
                                                     </div>
                                                 </div>
                                             </div>
@@ -171,7 +176,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-check position-awesome"></i>
-                                                        <input id="salle-service2_arab" type="text" class="form-control pl-5" value="<?php echo $salle_service2_arab?>" name="salle-service2_arab" autocomplete="nom" placeholder="Service 6" autofocus>
+                                                        <input id="salle-service2_arab" type="text" class="form-control pl-5" value="<?php echo $salle_service2_arab?>" name="salle_service2_arab" autocomplete="nom" placeholder="Service 6" autofocus>
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,7 +187,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-check position-awesome"></i>
-                                                        <input id="salle-service3_arab" type="text" class="form-control pl-5" value="<?php echo $salle_service3_arab?>" name="salle-service3_arab" autocomplete="prenom" placeholder="Service 7" autofocus>
+                                                        <input id="salle-service3_arab" type="text" class="form-control pl-5" value="<?php echo $salle_service3_arab?>" name="salle_service3_arab" autocomplete="prenom" placeholder="Service 7" autofocus>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,7 +198,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-check position-awesome"></i>
-                                                        <input id="salle-service4_arab" type="text" class="form-control pl-5" value="<?php echo $salle_service4_arab?>" name="salle-service4_arab" autocomplete="nom" placeholder="Service 8" autofocus>
+                                                        <input id="salle-service4_arab" type="text" class="form-control pl-5" value="<?php echo $salle_service4_arab?>" name="salle_service4_arab" autocomplete="nom" placeholder="Service 8" autofocus>
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,7 +207,7 @@
                                     <div class="text-center">
                                         
                                     </div>
-                                    <div class="row mb-3">
+                                    <div class="row mb-3 align-items-center">
                                         <label for="prof" class="col-md-12 col-form-label text-md-end">Image</label>
                                         <div class="col-md-6">
                                             <div class="d-flex">
@@ -211,7 +216,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div id="display_image" class="display_image" style="display:none;"></div>
+                                            <div id="display_image" class="display_image" style="display:none;background-size:100% 100%; background-repeat:no-repeat"></div>
                                             <img src="<?php echo $image ?>" alt="" style="width:400px; height:225px" id="image_display">
                                         </div>
                                     </div>
@@ -246,8 +251,3 @@
         </script>
     </body>
 </html>
-<?php
-    if(isset($_POST['submit_salle'])){
-        $data->updateSalle();
-    }
-?>

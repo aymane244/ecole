@@ -89,7 +89,7 @@
                                             dolorem excepturi deleniti architecto voluptatum voluptas reiciendis provident aliquid, 
                                             neque alias maxime repellat corrupti iure? Velit, natus?
                                         </p>
-                                    </div>
+                                    </div>  
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12">
@@ -161,11 +161,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center pt-3 text-color">
+                <div class="text-center pt-3 text-color organigram">
                     <h2 class="pt-4"><?php echo $ARTLN['organigramme'] ?></h2>
                     <hr class="hr-width">
                 </div>
-                <div class="bg-white pb-4 bg-height">
+                <div class="bg-white pb-4 bg-height organigram">
                     <div class="content">
                         <figure class="org-chart cf">
                             <ul class="administration">

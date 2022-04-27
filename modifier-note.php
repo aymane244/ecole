@@ -51,7 +51,7 @@
                     }
                 ?>
                 <div class="row justify-content-center">
-                    <div class="col-md-12 mt-5">
+                    <div class="col-md-10 mt-5">
                         <div class="card card-position">
                             <div class="card-header text-center link-font"><i class="fas fa-edit"></i> Modifier les notes</div>
                             <div class="card-body py-5">

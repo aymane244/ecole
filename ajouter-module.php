@@ -110,7 +110,7 @@
                                             }
                                 ?>
                                 <div class="row mb-0" id="divbtn">
-                                    <div class="col-md-8">
+                                    <div class="col-md-12 text-center">
                                         <input type="submit" name="submit_module" class="btn btn-primary" id='submit_module' value="Ajouter le module" id="ajout">
                                     </div>
                                 </div>

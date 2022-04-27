@@ -88,9 +88,8 @@
                     unset($_SESSION['status']);
                 }
             ?>
-            <div class="text-center pt-3 text-color mb-4">
-                <h2 class="pt-4"><i class="fas fa-tachometer-alt"></i> Tableau de bord de l'institut</h2>
-                <hr class="hr-width">
+            <div class="text-center pt-3 text-color py-4">
+                <h2><i class="fas fa-tachometer-alt"></i> Tableau de bord de l'institut</h2>
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -270,7 +269,6 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Telephone</th>
                                 <th scope="col">Message</th>
-                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
@@ -286,15 +284,6 @@
                                 <td><?php echo $reservation['res_email'];?></td>
                                 <td><?php echo $reservation['res_telephone'];?></td>
                                 <td><?php echo $reservation['res_commentaire'];?></td>
-                                <td class="row-style">
-                                    <form action="" method="POST">
-                                        <input type="hidden" name="reservation_id" value="<?php echo $reservation['res_id']?>">
-                                        <input type="hidden" name="salle_id" value="<?php echo $reservation['sal_id']?>">
-                                        <button type="submit" class="btn-style" name="submit_res" onclick='return confirm("Voulez-vous supprimer cette réservation")'>
-                                            <i class="fas fa-trash-alt text-danger awesome-size"></i>
-                                        </button>
-                                    </form>
-                                </td>
                             </tr>
                             <?php
                                 }
@@ -500,8 +489,5 @@
     }
     if(isset($_POST['att-btn'])){
         $data->updateAttestation();
-    }
-    if(isset($_POST['submit_res'])){
-        $data->deleteReservations($_POST['reservation_id']);
     }
 ?>

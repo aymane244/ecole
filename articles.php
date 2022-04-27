@@ -21,7 +21,7 @@
     <body>
         <?php include_once "navbar-admin.php";?>
             <div class="container" id="div-push">
-                <div class="text-center py-5">
+                <div class="text-center py-3">
                     <h2><i class="fas fa-newspaper"></i> Page Articles</h2>
                 </div>
                 <?php
@@ -73,7 +73,7 @@
                                         <div class="col-md-6">
                                             <form action="" method="POST">
                                                 <input type="hidden" name="article_id" value="<?php echo $article['art_id']?>">
-                                                <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer ce message")'>
+                                                <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer cet article")'>
                                                     <i class="fas fa-trash-alt text-danger awesome-size"></i>
                                                 </button>
                                             </form>
@@ -121,7 +121,7 @@
                                         <div class="col-md-6">
                                             <form action="" method="POST">
                                                 <input type="hidden" name="article_id" value="<?php echo $article['art_id']?>">
-                                                <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer ce message")'>
+                                                <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer cet article")'>
                                                     <i class="fas fa-trash-alt text-danger awesome-size"></i>
                                                 </button>
                                             </form>

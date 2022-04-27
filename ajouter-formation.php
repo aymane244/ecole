@@ -42,20 +42,20 @@
                                         <div class="col-md-12">
                                             <div class="d-flex">
                                                 <i class="fas fa-tag position-awesome"></i>
-                                                <input id="titre" type="text" class="form-control pl-5" name="titre" value="<?php echo isset($_POST['titre']) ? $_POST['titre'] : ''; ?>" autocomplete="titre" autofocus>
+                                                <input id="titre" type="text" class="form-control pl-5" name="titre" value="<?php echo isset($_POST['titre']) ? $_POST['titre'] : ''; ?>" autocomplete="titre">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="presentation" class="col-md-12 col-form-label text-md-end">Présentation</label>
                                         <div class="col-md-12">
-                                            <textarea id="editor2"rows="10" class="form-control position-text-area" name="presentation" value="<?php echo isset($_POST['presentation']) ? $_POST['presentation'] : ''; ?>" autocomplete="presentation" autofocus><?php echo isset($_POST['presentation']) ? $_POST['presentation'] : ''; ?></textarea>
+                                            <textarea id="editor2"rows="10" class="form-control position-text-area" name="presentation" value="<?php echo isset($_POST['presentation']) ? $_POST['presentation'] : ''; ?>" autocomplete="presentation"><?php echo isset($_POST['presentation']) ? $_POST['presentation'] : ''; ?></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="prof" class="col-md-12 col-form-label text-md-end">Déscription</label>
                                         <div class="col-md-12">
-                                            <textarea rows="10" class="form-control position-text-area" id="editor" name="description" value="<?php echo isset($_POST['description']) ? $_POST['description'] : ''; ?>" autocomplete="description" autofocus><?php echo isset($_POST['description']) ? $_POST['description'] : ''; ?></textarea>
+                                            <textarea rows="10" class="form-control position-text-area" id="editor" name="description" value="<?php echo isset($_POST['description']) ? $_POST['description'] : ''; ?>" autocomplete="description"><?php echo isset($_POST['description']) ? $_POST['description'] : ''; ?></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -71,20 +71,20 @@
                                             <div class="col-md-12">
                                                 <div class="d-flex">
                                                     <i class="fas fa-tag position-awesome"></i>
-                                                    <input id="titre" type="text" class="form-control pl-5" name="titre_arabe" value="<?php echo isset($_POST['titre_arabe']) ? $_POST['titre_arabe'] : ''; ?>" autocomplete="titre" autofocus>
+                                                    <input id="titre" type="text" class="form-control pl-5" name="titre_arabe" value="<?php echo isset($_POST['titre_arabe']) ? $_POST['titre_arabe'] : ''; ?>" autocomplete="titre">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <label for="presentation" class="col-md-12 col-form-label text-md-end">مقدمة عن التكوين</label>
                                             <div class="col-md-12">
-                                                <textarea id="editor3"rows="10" class="form-control position-text-area" name="presentation_arabe" value="<?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?>" autocomplete="presentation" autofocus><?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?></textarea>
+                                                <textarea id="editor3"rows="10" class="form-control position-text-area" name="presentation_arabe" value="<?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?>" autocomplete="presentation"><?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <label for="prof" class="col-md-12 col-form-label text-md-end">وصف التكوين</label>
                                             <div class="col-md-12">
-                                                <textarea rows="10" class="form-control position-text-area" id="editor4" name="description_arabe" value="<?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?>" autocomplete="description" autofocus><?php echo isset($_POST['description_arabe']) ? $_POST['description_arabe'] : ''; ?></textarea>
+                                                <textarea rows="10" class="form-control position-text-area" id="editor4" name="description_arabe" value="<?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?>" autocomplete="description"><?php echo isset($_POST['description_arabe']) ? $_POST['description_arabe'] : ''; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="row mb-3 align-items-center">
@@ -92,11 +92,11 @@
                                             <div class="col-md-6">
                                                 <div class="d-flex">
                                                     <i class="fas fa-camera position-awesome-image"></i>
-                                                    <input id="image_input" type="file" class="form-control-file pl-5" name="image" autofocus>
+                                                    <input id="image_input" type="file" class="form-control-file pl-5" name="image">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div id="display_image" class="display_image"></div>
+                                                <div id="display_image" class="display_image" style="background-size:100% 100%; background-repeat:no-repeat"></div>
                                             </div>
                                         </div>
                                         <div class="row mb-0 text-center">
