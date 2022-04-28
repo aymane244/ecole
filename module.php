@@ -73,8 +73,15 @@
                         </thead>
                         <tbody class="text-center">
                             <?php
-                                for($i=0; $i<sizeof($matieres); $i++){
-                                    $formationom = $formationame[$i];
+                                if(empty($formations)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="7"><h2>Aucun module n'est enregistrée veuillez ajouter un module</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    for($i=0; $i<sizeof($matieres); $i++){
+                                        $formationom = $formationame[$i];
                             ?>
                             <tr>
                                 <?php
@@ -107,6 +114,7 @@
                                 </td>
                             </tr>
                             <?php
+                                    }
                                 }
                             ?>
                         </tbody>    
@@ -145,8 +153,15 @@
                         </thead>
                         <tbody class="text-center">
                             <?php
-                                for($i=0; $i<sizeof($matieres_arab); $i++){
-                                    $formationom_arab = $formationame_arab[$i];
+                                if(empty($formations)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="7"><h2>لم يتم  حفظ أي وحدة يرجى إضافة وحدة جديدة</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    for($i=0; $i<sizeof($matieres_arab); $i++){
+                                        $formationom_arab = $formationame_arab[$i];
                             ?>
                             <tr>
                                 <?php
@@ -179,6 +194,7 @@
                                 </td>
                             </tr>
                             <?php
+                                    }
                                 }
                             ?>
                         </tbody>    

@@ -53,8 +53,15 @@
                     </thead>
                     <tbody class="text-center">
                         <?php
-                            $i=1;
-                            foreach($contacts as $contact){
+                            if(empty($contacts)){
+                        ?>
+                        <tr>
+                            <th scope="row" colspan="6"><h2>Pas de message reçu</h2></th>
+                        </tr>
+                        <?php
+                            }else{
+                                $i=1;
+                                foreach($contacts as $contact){
                         ?>
                         <tr>
                             <th scope="row"><?php echo $i++ ?></th>
@@ -72,6 +79,7 @@
                             </td>
                         </tr>
                         <?php
+                                }
                             }
                         ?>
                     </tbody>

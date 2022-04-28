@@ -71,7 +71,7 @@
                             if($result->num_rows <= 0){
                         ?>
                         <tr>
-                            <th scope="col" colspan="4"><h1>Pas d'étudiants</h1></th>
+                            <th scope="col" colspan="4"><h2>Pas de statgiaire</h2></th>
                         </tr>
                         <?php
                             }else{

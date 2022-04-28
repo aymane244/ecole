@@ -53,10 +53,17 @@
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <?php
-                                $i=1;
-                                foreach($articles as $article){
+                                if(empty($articles)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="5"><h2>Pas d'article publié veuillez ajouter un article</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    $i=1;
+                                    foreach($articles as $article){
                             ?>
                             <tr>
                                 <th scope="row"><?php echo $i++ ?></th>
@@ -82,6 +89,7 @@
                                 </td>
                             </tr>
                             <?php
+                                    }
                                 }
                             ?>
                         </tbody>
@@ -101,10 +109,17 @@
                                 <th scope="col">إجراءات</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <?php
-                                $i=1;
-                                foreach($articles as $article){
+                                if(empty($articles)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="5"><h2>لم يتم نشر أي مقال ، يرجى إضافة مقال</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    $i=1;
+                                    foreach($articles as $article){
                             ?>
                             <tr>
                                 <th scope="row"><?php echo $i++ ?></th>
@@ -130,6 +145,7 @@
                                 </td>
                             </tr>
                             <?php
+                                    }
                                 }
                             ?>
                         </tbody>

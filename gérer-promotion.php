@@ -56,7 +56,7 @@
                         foreach($etudiants as $etudiant){
                             if($etudiant['etud_id'] == ''){
                     ?>
-                    <th scope="row" colspan="4"><h1>Pas d'étudiants</h1></th>
+                    <th scope="row" colspan="4"><h1>Pas de stagiaire</h1></th>
                     <?php       
                             }else{
                     ?>

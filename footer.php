@@ -124,7 +124,7 @@
     </div>
     <div class="bg-white text-center pb-4">
         <hr>
-        <i class="far fa-copyright size-awesome"></i> Copyright Aimane, Chaimae, Yasmina. All right reserved
+        <i class="far fa-copyright size-awesome"></i> Copyright Aimane Chnaif. All right reserved
     </div>
 </div>
 <script>

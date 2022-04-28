@@ -45,7 +45,7 @@
                 <table class="table table-bordered mt-5 bg-white">
                     <thead class="text-center">
                         <tr>
-                            <th scope="col" colspan="10">ARTL Nord</th>
+                            <th scope="col" colspan="7">ARTL Nord</th>
                         </tr>
                         <tr>
                             <th scope="col">#</th>
@@ -59,8 +59,15 @@
                     </thead>
                     <tbody class="text-center">
                         <?php
-                            $i=1;
-                            foreach($formations as $formation){
+                            if(empty($formations)){
+                        ?>
+                        <tr>
+                            <th scope="row" colspan="7"><h2>Aucune formation n'est enregistrée veuillez ajouter une formation</h2></th>
+                        </tr>
+                        <?php
+                            }else{
+                                $i=1;
+                                foreach($formations as $formation){
                         ?>
                         <tr>
                             <td class="row-style"><?php echo $i ?></td>          
@@ -92,7 +99,8 @@
                             </td>
                         </tr>
                         <?php
-                            $i++;
+                                $i++;
+                                }
                             }
                         ?>
                     </tbody>    
@@ -117,8 +125,15 @@
                     </thead>
                     <tbody class="text-center">
                         <?php
-                            $i=1;
-                            foreach($formations as $formation){
+                            if(empty($formations)){
+                        ?>
+                        <tr>
+                            <th scope="row" colspan="7"><h2>لم يتم تسجيل أي تكوين يرجى إضافة تكوين جديد</h2></th>
+                        </tr>
+                        <?php
+                            }else{
+                                $i=1;
+                                foreach($formations as $formation){
                         ?>
                         <tr>
                             <td class="row-style"><?php echo $i ?></td>          
@@ -150,7 +165,8 @@
                             </td>
                         </tr>
                         <?php
-                            $i++;
+                                $i++;
+                                }
                             }
                         ?>
                     </tbody>    

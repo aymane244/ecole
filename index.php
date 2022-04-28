@@ -192,7 +192,7 @@
                                     ?>
                                     <h2 class="pt-4 text-truncate" data-toggle="tooltip" data-placement="bottom" title="<?php echo $formation['for_nom_arab'] ?>"><?php echo $formation['for_nom_arab'] ?></h2>
                                     <?php 
-                                            }else{
+                                        }else{
                                     ?>
                                     <h2 class="pt-4 text-truncate" data-toggle="tooltip" data-placement="bottom" title="<?php echo $formation['for_nom'] ?>"><?php echo $formation['for_nom'] ?></h2>
                                     <?php         

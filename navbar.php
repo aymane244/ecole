@@ -136,7 +136,7 @@
                     <?php
                         }else{
                     ?>
-                    <a class="text-color btn-etudiant rounded" id="btn-etudiant" href="espace-etudiant"><i class="fas fa-user "></i></i> <?php echo $navbar['espace'] ?></a>
+                    <a class="text-color btn-etudiant rounded" id="btn-etudiant" href="espace-stagiaire"><i class="fas fa-user "></i></i> <?php echo $navbar['espace'] ?></a>
                     <?php
                         }
                     ?>

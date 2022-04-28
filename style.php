@@ -250,10 +250,13 @@
             background-color: black !important;
         }
         .show-this{
-            left: 20px;
+            display: none;
         }
         .organigram{
             display: none;
+        }
+        .div-background{
+            background-color: transparent;
         }
     }
     @media only screen and (min-width: 600px){
@@ -321,23 +324,28 @@
             height: 120px;
         }
         .div-menu{
-            left:-200px;
+            left:-120px;
             transition: 0.4s;
             margin-top: 60px;
             z-index: -1;
+            width: 100%;
         }
         .menu-show{
             left:0px;
+            padding-right: 100px;
+            padding-left: 40px;
             transition: 0.4s;
             background-color: black !important;
-            font-size: small;
         }
         .show-this{
-            font-size: small;
+            
             top: 4px;
         }
         .organigram{
             display: none;
+        }
+        .div-background{
+            background-color: #F3F8FA;
         }
     }
     @media only screen and (min-width: 768px){

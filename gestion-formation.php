@@ -78,7 +78,7 @@
                                     if($etudiant['etud_formation'] != $etudiant['for_id']){
                         ?>  
                         <tr>
-                            <th scope="row" colspan="4"><h1>Pas de stagiaires</h1></th>
+                            <th scope="row" colspan="4"><h2>Pas de stagiaires</h2></th>
                         </tr>
                         <?php
                             }else{

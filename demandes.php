@@ -57,7 +57,7 @@
                                     if(empty($diplomes)){
                                 ?>
                                 <tr>
-                                    <th scope="row" colspan="5"><h1>Pas de demande</h1></th>
+                                    <th scope="row" colspan="5"><h2>Pas de demande</h2></th>
                                 </tr>
                                 <?php
                                     }else{
@@ -118,7 +118,7 @@
                                     if(empty($attestations)){
                                 ?>
                                 <tr>
-                                    <th scope="row" colspan="5"><h1>Pas de demande</h1></th>
+                                    <th scope="row" colspan="5"><h2>Pas de demande</h2></th>
                                 </tr>
                                 <?php
                                     }else{

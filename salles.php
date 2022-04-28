@@ -69,8 +69,15 @@
                         </thead>
                         <tbody class="text-center">
                             <?php
-                                $i=1;
-                                foreach($images as $image){
+                                if(empty($images)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="9"><h2>Pas de salles enregistrées veuillez ajouter une salle</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    $i=1;
+                                    foreach($images as $image){
                             ?>
                             <tr>
                                 <th scope="row"><?php echo $i++ ?></th>
@@ -111,6 +118,7 @@
                                 </td>
                             </tr>
                             <?php
+                                    }
                                 }
                             ?>
                         </tbody>
@@ -135,8 +143,15 @@
                         </thead>
                         <tbody class="text-center">
                             <?php
-                                $i=1;
-                                foreach($images as $image){
+                                if(empty($images)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="9"><h2>لا توجد غرف مسجلة يرجى إضافة غرفة جديدة</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    $i=1;
+                                    foreach($images as $image){
                             ?>
                             <tr>
                                 <th scope="row"><?php echo $i++ ?></th>
@@ -177,6 +192,7 @@
                                 </td>
                             </tr>
                             <?php
+                                    }
                                 }
                             ?>
                         </tbody>
@@ -202,8 +218,15 @@
                         </thead>
                         <tbody class="text-center">
                             <?php
-                                $i=1;
-                                foreach($reservations as $reservation){
+                                if(empty($reservations)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="7"><h2>Aucune réservation est effectuée</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    $i=1;
+                                    foreach($reservations as $reservation){
                             ?>
                             <tr>
                                 <th scope="row"><?php echo $i++ ?></th>
@@ -224,6 +247,7 @@
                                 </td>
                             </tr>
                             <?php
+                                    }
                                 }
                             ?>
                         </tbody>
@@ -248,7 +272,14 @@
                         </thead>
                         <tbody class="text-center">
                             <?php
-                                $i=1;
+                                if(empty($images)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="7"><h2>Aucune image est ajoutée veuillez ajouter les images des salles</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    $i=1;
                                     foreach($images as $image){
                             ?>
                             <tr>
@@ -277,6 +308,7 @@
                                 ?>
                             </tr>
                             <?php
+                                    }
                                 }
                             ?>
                         </tbody>

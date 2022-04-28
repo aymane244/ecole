@@ -59,8 +59,15 @@
                         </thead>
                         <tbody class="text-center">
                             <?php
-                                $i=1;
-                                foreach($iso as $item){
+                                if(empty($iso)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="6"><h2>Pas de demande</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    $i=1;
+                                    foreach($iso as $item){
                             ?>
                             <tr>
                                 <th scope="row"><?php echo $i++ ?></th>
@@ -79,6 +86,7 @@
                                 </td>
                             </tr>
                             <?php
+                                    }
                                 }
                             ?>
                         </tbody>
@@ -106,8 +114,15 @@
                         </thead>
                         <tbody class="text-center">
                             <?php
-                                $i=1;
-                                foreach($douane as $item){
+                                if(empty($douane)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="6"><h2>Pas de demande</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    $i=1;
+                                    foreach($douane as $item){
                             ?>
                             <tr>
                                 <th scope="row"><?php echo $i++ ?></th>
@@ -126,6 +141,7 @@
                                 </td>
                             </tr>
                             <?php
+                                    }
                                 }
                             ?>
                         </tbody>

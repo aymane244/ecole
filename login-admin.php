@@ -34,7 +34,7 @@
                     <div class="col-md-8">
                         <div class="card card-position">
                             <div class="card-header text-center link-font">
-                                <h3><i class="fas fa-user"></i> Login</h3>
+                                <h3><i class="fas fa-user"></i> Connexion</h3>
                             </div>
                             <div class="card-body py-5">
                                 <form action="" method="POST">
@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="row mb-0">
                                         <div class="col-md-8 offset-md-4">
-                                            <button type="submit" class="btn btn-primary" name="submit">Login</button>
+                                            <button type="submit" class="btn btn-primary" name="submit">Connexion</button>
                                         </div>
                                     </div>
                                 </form>

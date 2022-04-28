@@ -131,7 +131,14 @@
                         </thead>
                         <tbody class="text-center">
                             <?php
-                                foreach($etudiantsinscrit as $inscrit){
+                                if(empty($etudiantsinscrit)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="3"><h2>Pas d'étudiant inscrit</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    foreach($etudiantsinscrit as $inscrit){
                             ?>
                             <tr>
                                 <th scope="row"><?php echo $i ?></th>
@@ -140,6 +147,7 @@
                             </tr>
                             <?php
                                     $i++;
+                                    }
                                 }
                             ?>
                         </tbody>
@@ -162,23 +170,31 @@
                         </thead>
                         <tbody class="text-center">
                             <?php
-                                foreach($diplomes as $diplome){
-                                    if($diplome['dip_image'] == ''){
+                                if(empty($diplomes) && empty($attestations)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="3"><h2>Pas de demandes envoyées</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    foreach($diplomes as $diplome){
+                                        if($diplome['dip_image'] == ''){
                             ?>
                             <tr>
                                 <td><?= $diplome['etud_prenom']." ".$diplome['etud_nom']?></td>
                                 <td>Diplôme</td>
                             </tr>
                             <?php
-                                    }
-                                }foreach($attestations as $attestation){
-                                    if($attestation['att_image'] == ''){
+                                        }
+                                    }foreach($attestations as $attestation){
+                                        if($attestation['att_image'] == ''){
                             ?>
                             <tr>
                                 <td><?= $attestation['etud_prenom']." ".$attestation['etud_nom']?></td>
                                 <td>Attestation</td>
                             </tr>
                             <?php
+                                        }
                                     }
                                 }
                             ?>
@@ -200,21 +216,29 @@
                         </thead>
                         <tbody class="text-center">
                             <?php
-                                foreach($iso as $item){
+                                if(empty($iso) && empty($douane)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="2"><h2>Pas de demandes envoyées</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    foreach($iso as $item){
                             ?>
                             <tr>
                                 <td><?= $item['iso_res_nom']?></td>
                                 <td><?= $item['iso_nom']?></td>
                             </tr>
                             <?php
-                                }
-                                foreach($douane as $item){
+                                    }
+                                    foreach($douane as $item){
                             ?>
                             <tr>
                                 <td><?= $item['dou_res_nom']?></td>
                                 <td><?= $item['dou_nom']?></td>
                             </tr>
                             <?php
+                                    }
                                 }
                             ?>
                         </tbody>
@@ -226,7 +250,17 @@
                         <hr class="hr-width mb-3">
                     </div>
                     <div class="bg-white py-3">
+                    <?php
+                        if(empty($etudparforma)){
+                    ?>
+                        <h2>Pas encore d'étudiant inscrit sur aucune formation</h2>
+                    <?php
+                        }else{
+                    ?>
                         <canvas class="myChart px-5"></canvas>
+                    <?php
+                        }
+                    ?>
                     </div>
                 </div>
                 <div class="col-md-5 text-center">
@@ -259,7 +293,7 @@
                     <table class="table bg-white mt-4">
                         <thead class="text-center">
                             <tr>
-                                <th scope="col" colspan="9">ALT Nord</th>
+                                <th scope="col" colspan="7">ALT Nord</th>
                             </tr>
                             <tr>
                                 <th scope="col">#</th>
@@ -273,8 +307,15 @@
                         </thead>
                         <tbody class="text-center">
                             <?php
-                                $i=1;
-                                foreach($reservations as $reservation){
+                                if(empty($reservations)){
+                            ?>
+                            <tr>
+                                <th scope="row" colspan="7"><h2>Pas de réservation effectuées</h2></th>
+                            </tr>
+                            <?php
+                                }else{
+                                    $i=1;
+                                    foreach($reservations as $reservation){
                             ?>
                             <tr>
                                 <th scope="row"><?php echo $i++ ?></th>
@@ -286,6 +327,7 @@
                                 <td><?php echo $reservation['res_commentaire'];?></td>
                             </tr>
                             <?php
+                                    }
                                 }
                             ?>
                         </tbody>
@@ -308,12 +350,12 @@
                     hoverOffset: 4
                 }]
             };
-            /*const labels = <?php echo json_encode($formation)?>;
+            /*const labels = <?php //echo json_encode($formation)?>;
             const data = {
                 labels: labels,
                 datasets: [{
                     label: 'Formation',
-                    data: <?php echo json_encode($nombreEtudiant)?>,
+                    data: <?php //echo json_encode($nombreEtudiant)?>,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(255, 159, 64, 0.2)',
