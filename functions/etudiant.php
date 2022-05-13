@@ -1846,9 +1846,7 @@
         public function loginAdmin(){
             $username = $_POST['username'];
             $password = $_POST['pwrd'];
-            if($username == "aymane" && $password == "aymane" || 
-            $username == "chaimae" && $password == "chaimae" ||
-            $username == "yasmina" && $password == "yasmina"){
+            if($username == "aymane" && $password == "aymane"){
                 $_SESSION['username'] = $username;
                 $_SESSION['pwd'] = $password;
                 echo "<script>window.location.href='dashboard'</script>";
