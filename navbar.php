@@ -38,19 +38,19 @@
     </div>
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-white w-100" id="navbar">    
-    <a class="navbar-brand pl-3"  href="index" ><img class="img-fluid" src="images/logo.jpeg" style="width:16rem; height:60px"></a>
+    <a class="navbar-brand"  href="index" ><img class="img-fluid" src="images/logo.jpeg" style="width:14rem; height:60px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
         <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
+            <li class="nav-item navbar-font">
                 <a class="nav-link pr-3 text-color" href="index"><?php echo $navbar['Accueil'] ?><span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item pr-3 space-link">
+            <li class="nav-item pr-3 space-link navbar-font">
                 <a class="nav-link text-color " href="ARTL-Nord">ARTLN</a>
             </li>    
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown navbar-font">
                 <a class="nav-link dropdown-toggle pr-3 text-color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                     <?php echo $navbar['Formations'] ?>
                 </a>
@@ -72,28 +72,28 @@
                     ?>
                 </div>
             </li>
-            <li class="nav-item dropdown space-link">
+            <li class="nav-item dropdown space-link navbar-font">
                 <a class="nav-link dropdown-toggle pr-3 text-color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                     <?php echo $navbar['Conseil'] ?>
                 </a>
-                <div class="dropdown-menu pr-3" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu pr-3 navbar-font" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="conseil"><?php echo $navbar['Accompagnement'] ?></a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="douane"><?php echo $navbar['Categorisation'] ?></a>
                 </div>
             </li>
-            <li class="nav-item pr-3">
+            <li class="nav-item pr-3 navbar-font">
                 <a class="nav-link text-color" href="location-salle"><?php echo $navbar['salles'] ?></a>
             </li>
-            <li class="nav-item pr-3 space-link">
+            <li class="nav-item pr-3 space-link navbar-font">
                 <a class="nav-link text-color" href="actualités"><?php echo $navbar['Actualites'] ?></a>
             </li>
-            <li class="nav-item pr-3">
+            <li class="nav-item pr-3 navbar-font">
                 <a class="nav-link text-color" href="#contactez-nous"  role="button"><?php echo $navbar['Contact'] ?></a>
             </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav navbar-font">
                 <li class="nav-item dropdown mr-4">
                     <?php
                         if(isset($_SESSION['etud_cin']) && isset($_SESSION['etud_motdepasse'])){
@@ -108,7 +108,7 @@
                         <?php
                             }else{
                         ?>
-                        <i class="fas fa-user "></i> <?php echo $etudiant['etud_prenom']." ". $etudiant['etud_nom'] ?>
+                        <i class="fas fa-user"></i> <?php echo $etudiant['etud_prenom']." ". $etudiant['etud_nom'] ?>
                         <?php        
                             }   
                         ?>
@@ -125,10 +125,10 @@
                     <?php
                         }else if(isset($_SESSION['username']) && isset($_SESSION['pwd'])){
                     ?>
-                    <a class="dropdown-toggle text-color btn-etudiant mr-3 rounded" id="btn-etudiant" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <a class="dropdown-toggle text-color btn-etudiant rounded mr-5" id="btn-etudiant" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user "></i> <?php echo $navbar['admin'] ?>
                     </a>
-                    <div class="dropdown-menu mt-3 menu-padding" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu mt-3" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="dashboard"><?php echo $navbar['dashboard'] ?></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout"><?php echo $navbar['deconnexion'] ?></a>

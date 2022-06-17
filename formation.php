@@ -42,19 +42,22 @@
     <body>
         <?php include_once "navbar.php";?>
         <div class="div-background">
-            <h1 class="text-center pt-3 text-color" id="top">
-                <?php
-                    if($_SESSION['lang'] =="ar"){
-                        echo $for_nom_arab;
-                    }else{
-                        echo $for_nom;
-                    }
-                ?>
-            </h1>
-            <div class="text-center mt-5">
-                <p><img src="<?php echo $for_image ?>" alt="" class="img-fluid" style="width:34rem; height:350px"></p>
+            <div class="text-white text-center text-big div-header" id="top">
+                <h1 class="text-center pt-3" id="top">
+                    <?php
+                        if($_SESSION['lang'] =="ar"){
+                            echo $for_nom_arab;
+                        }else{
+                            echo $for_nom;
+                        }
+                    ?>
+                </h1>
             </div>
-            <div class="container-fluid">
+            <div style="height: 100%; position:relative">
+                <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
+                <img src="images/school.png" alt="" class="d-block img-fluid" style="width:100%;">
+            </div>
+            <div class="container-fluid mt-5">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="py-4 px-3 mt-5 mb-lg-4 border text-justify bg-white">

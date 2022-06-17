@@ -1,49 +1,55 @@
-<?php include_once "session.php";?>
+<?php include_once "session.php"; ?>
 <?php
-    if(!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])){
-        echo "<script>window.location.href='login-admin'</script>";
+if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
+    echo "<script>window.location.href='login-admin'</script>";
+}
+$etudiants = $data->getEtudiantFormationID();
+$seances = $data->getFormationMatiere();
+$formations = $data->getformation();
+$states = $data->getabsence();
+if (!isset($_GET['id'])) {
+    echo "<script>window.location.href='formations'</script>";
+}
+$id = $_GET['id'];
+foreach ($formations as $formations) {
+    if ($formations['for_id'] == $id) {
+        $formation_nom =  $formations['for_nom'];
+        $formation_id =  $formations['for_id'];
     }
-    $etudiants = $data->getEtudiantFormationID();
-    $seances = $data->getFormationMatiere();
-    $formations = $data->getformation();
-    $states = $data->getabsence();
-    if(!isset($_GET['id'])){
-        echo "<script>window.location.href='formations'</script>";
-    }
-    $id = $_GET['id'];
-    foreach($formations as $formations){
-        if($formations['for_id'] == $id){
-            $formation_nom =  $formations['for_nom'];
-            $formation_id =  $formations['for_id'];
-        }
-    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <?php 
-            include_once "header.php";  
-            include_once "style.php";
-            include_once "scripts.php";
-        ?>
-        <title>Absence</title>
-    </head>
-    <body>
-        <?php include_once "navbar-admin.php";?>
-        <div class="container" id="div-push">
-            <div class="text-center py-3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+    include_once "header.php";
+    include_once "style.php";
+    include_once "scripts.php";
+    ?>
+    <title>Absence</title>
+</head>
+
+<body>
+    <?php include_once "navbar-admin.php"; ?>
+    <div class="main-content">
+        <header>
+            <?php include 'admin.php' ?>
+        </header>
+        <div class="container mt-5 py-5">
+            <div class="text-center">
                 <h2><i class="fas fa-user-check"></i> Marquer l'absence</h2>
             </div>
             <?php
-                if(isset($_SESSION['status'])){
+            if (isset($_SESSION['status'])) {
             ?>
-            <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
+                <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status'] ?></div>
             <?php
-                    unset($_SESSION['status']);
-                }
+                unset($_SESSION['status']);
+            }
             ?>
             <div class="row justify-content-center my-4">
                 <div class="col-md-6">
@@ -53,13 +59,13 @@
                         </p>
                         <div class="dropdown-menu w-100 m-0 border-top-0" aria-labelledby="dropdownMenuButton">
                             <?php
-                                foreach($seances as $seance){
-                                    if($seance['for_id'] == $id){
+                            foreach ($seances as $seance) {
+                                if ($seance['for_id'] == $id) {
                             ?>
-                            <a href="marquer-absence?id=<?php echo $seance['mat_id'] ?>" class="text-dark pl-5" target="blank"><?php echo $seance['mat_nom'].'<br>' ?></a>
+                                    <a href="marquer-absence?id=<?php echo $seance['mat_id'] ?>" class="text-dark pl-5" target="blank"><?php echo $seance['mat_nom'] . '<br>' ?></a>
                             <?php
-                                    }
                                 }
+                            }
                             ?>
                         </div>
                     </div>
@@ -69,12 +75,12 @@
                 <h2 class=" pt-3"><i class="fas fa-user-check"></i> Etat d'absence</h2>
             </div>
             <?php
-                if(isset($_SESSION['status_error'])){
+            if (isset($_SESSION['status_error'])) {
             ?>
-            <div class='alert alert-danger text-center mt-2' role='alert'><?php echo $_SESSION['status_error']?></div>
+                <div class='alert alert-danger text-center mt-2' role='alert'><?php echo $_SESSION['status_error'] ?></div>
             <?php
-                    unset($_SESSION['status_error']);
-                }
+                unset($_SESSION['status_error']);
+            }
             ?>
             <form action="" method="POST">
                 <div class="row pt-3">
@@ -84,13 +90,13 @@
                             <select class="custom-select px-5" name="get_matiere">
                                 <option selected value="">--Choisir la module--</option>
                                 <?php
-                                    foreach($seances as $seance){
-                                        if($seance['for_id'] == $id){
+                                foreach ($seances as $seance) {
+                                    if ($seance['for_id'] == $id) {
                                 ?>
-                                <option value="<?php echo $seance['mat_id'] ?>"><?php echo $seance['mat_nom'] ?></option>
+                                        <option value="<?php echo $seance['mat_id'] ?>"><?php echo $seance['mat_nom'] ?></option>
                                 <?php
-                                        }
                                     }
+                                }
                                 ?>
                             </select>
                         </div>
@@ -118,28 +124,31 @@
                 </thead>
                 <tbody class="text-center">
                     <?php
-                        if(isset($_POST['absence_submit'])){
-                            if(is_array($states) || is_object($states)){
-                                foreach($states as $state){
+                    if (isset($_POST['absence_submit'])) {
+                        if (is_array($states) || is_object($states)) {
+                            foreach ($states as $state) {
                     ?>
-                    <tr>
-                        <td><?php echo $state['etud_nom']." ".$state['etud_prenom'] ?> </td>
-                        <td><?php echo $state['abs_absence'] ?></td>
-                        <td><?php echo $state['abs_date'] ?></td>
-                    </tr>
-                    <?php   
-                                }
+                                <tr>
+                                    <td><?php echo $state['etud_nom'] . " " . $state['etud_prenom'] ?> </td>
+                                    <td><?php echo $state['abs_absence'] ?></td>
+                                    <td><?php echo $state['abs_date'] ?></td>
+                                </tr>
+                        <?php
                             }
-                        }else{
-                    ?>
-                    <tr>
-                        <th scope="col" colspan="5"><h1> Veuillez choisir une date</h1></th>
-                    </tr>
-                    <?php
                         }
+                    } else {
+                        ?>
+                        <tr>
+                            <th scope="col" colspan="5">
+                                <h1> Veuillez choisir une date</h1>
+                            </th>
+                        </tr>
+                    <?php
+                    }
                     ?>
-                </tbody>    
+                </tbody>
             </table>
         </div>
-    </body>
+    </div>
+</body>
 </html>

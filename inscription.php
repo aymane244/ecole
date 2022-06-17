@@ -264,7 +264,7 @@
                                             <div id="show4" class="text-center"></div>
                                         </div>
                                         <div class="col-md-3 mt-3">
-                                            <label for="scan_permis" class="text-md-end d-flex justify-content-center file-label py-3 rounded">
+                                            <label for="scan_permis" class="text-md-end d-flex justify-content-center file-label py-3 rounded font-inscr">
                                                 <i class="fas fa-file-upload position-awesome-upload"></i> &nbsp;
                                                 <?php echo $inscription['scan_permis']?>
                                             </label>

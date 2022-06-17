@@ -16,7 +16,6 @@
         <title>Admin</title>
     </head>
     <body>
-        <?php include_once "navbar-admin.php";?>
         <div class="div-background">
             <div class="container py-4">
                 <div class="text-center py-5">

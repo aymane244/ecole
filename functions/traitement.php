@@ -84,7 +84,7 @@ if(isset($_POST['action'])){
                     <div class="row align-items-center justify-content-center">
                         <div class="col-md-12 font-style">
                         <h4 class="text-center pb-2">Information personnelle</h4>
-                            <div class="d-flex align-items-center justify-content-between">';
+                            <div class="d-flex align-items-center justify-content-center">';
                                 if($detail['etud_image'] === "./images/etudiants/"){
                                     echo '<img src="images/etudiants/unknown_person.jpg"  class="card-image-2">';
                                 }else{
@@ -198,7 +198,7 @@ if(isset($_POST['action'])){
                         L'heure de fin doit toujours être supérieure à la date de début
                     </div>";
         }else{
-            $result = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND res_date='$date_salle' AND (time_debut>='$time_debut' AND time_debut <'$time_fin')");
+            $result = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle='$reservation_salle' AND res_date='$date_salle' AND (time_debut>='$time_debut' AND time_debut <'$time_fin')");
            // $result2 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND time_fin BETWEEN '$time_debut' AND '$time_fin'");
             //$result3 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND time_debut BETWEEN '$time_debut' AND '$time_fin'");
             $result2 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle ");
@@ -242,6 +242,7 @@ if(isset($_POST['action'])){
     if ($_POST['action']=='search_student') {
         $data->getEtudiantNotesSearch();
         $i=1;
+        $message = 'Voulez vous supprimer ce statgiaire';
         foreach($data->getEtudiantNotesSearch() as $search){
             echo "<tr>
                 <td>".$i++."</td>
@@ -249,12 +250,20 @@ if(isset($_POST['action'])){
                 <td>".$search['etud_prenom']." ".$search['etud_nom']."</td>
                 <td>
                     <div class='row align-items-center'>
-                        <div class='col-md-4'>
+                        <div class='col-md-3'>
                             <a href='modifier-stagiaire?id=".$search['etud_id']."' target='_blank'> 
                                 <i class='fas fa-edit text-success awesome-size'></i>
                             </a>
                         </div>
-                        <div class='col-md-8'>
+                        <div class='col-md-3'>
+                        <form action='' method='POST'>
+                            <input type='hidden' name='etudiant_id' value='".$search['etud_id']."'>
+                            <button type='submit' class='btn-style' name='submit_etudiant' onclick='return confirm(".$message.")'> 
+                                <i class='fas fa-trash-alt text-danger awesome-size'></i>
+                            </button>
+                        </form>
+                    </div>
+                        <div class='col-md-4'>
                             <button type='button' class='btn btn-primary btn-id' id='btn-id' data-toggle='modal' data-target='#exampleModal' data-id=".$search['etud_id'].">Détails</button>
                         </div>
                     </div>

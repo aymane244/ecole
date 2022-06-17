@@ -507,7 +507,7 @@
                 $_SESSION['etud_motdepasse'] = $etudiant['etud_motdepasse'];
                 $_SESSION['id'] = $etudiant['etud_id'];
                 $_SESSION['nom'] = $etudiant['etud_nom'];
-                echo "<script>window.location.href='espace-etudiant'</script>";
+                echo "<script>window.location.href='espace-stagiaire'</script>";
             }
             $_SESSION['status'] = "CIN ou mot de passe incorrecte";
             return $result;
@@ -874,7 +874,7 @@
                 $result = $this->insertIntoDiplome($params);
                 if ($result){
                     $_SESSION['status'] = "Votre demande de document 1 a été bien envoyée";
-                    echo "<script>window.location.href='espace-etudiant'</script>";
+                    echo "<script>window.location.href='espace-stagiaire'</script>";
                 }else{
                     echo $this->db->conn->error;
                 }
@@ -902,7 +902,7 @@
                 $result = $this->insertIntoAttestation($params);
                 if ($result){
                     $_SESSION['status'] = "Votre demande de document 2 a été bien envoyée";
-                    echo "<script>window.location.href='espace-etudiant'</script>";
+                    echo "<script>window.location.href='espace-stagiaire'</script>";
                 }else{
                     echo $this->db->conn->error;
                 }

@@ -112,12 +112,12 @@
                 <h4 class="text-color-footer"><?php echo $footer['propos'] ?></h4>
                 <div class="text-white">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis reprehenderit doloribus odit praesentium.</p>
-                    <div class="d-flex pb-3 justify-content-center">
+                    <!-- <div class="d-flex pb-3 justify-content-center">
                         <div class="social-media social-div"><a href="#" class="text-white"><i class="fab fa-facebook-f facebook-position"></i></a></div>
                         <div class="social-media"><a href="#" class="text-white"><i class="fab fa-instagram instagram-position"></i></a></div>
                         <div class="social-media"><a href="#" class="text-white"><i class="fab fa-linkedin-in linkedin-position"></i></a></div>
                         <div class="social-media"><a href="#" class="text-white"><i class="fab fa-whatsapp whatsapp-position"></i></a></div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

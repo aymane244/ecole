@@ -1,23 +1,76 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="position-fixed mt-5 menu-show-admin">
-            <h3 class="mt-3 pl-4 py-1 float-right div-background" id="menu"><i class="fas fa-bars pr-lg-4 font-pointer" id="bar-toggle" onclick="menudisplay()"></i></h3>
-            <div class="col-md-2 col-sm-2 position-fixed bg-dark div-menu" id="div-show">
-                <h3 id="menu-show" class="show-this text-dark">Menu</h3>
-                <div class="mt-4 ml-lg-5 pt-4 div-menu-width">
-                    <p><a href="dashboard" class="link-color">Dashboard<i class="fas fa-tachometer-alt awesome-padding float-right"></i></a></p>
-                    <p><a href="formations" class="link-color">Formations<i class="fas fa-school awesome-padding float-right"></i></a></p>
-                    <p><a href="module" class="link-color">Modules<i class="fas fa-book-open awesome-padding float-right"></i></a></p>
-                    <p><a href="stagiaire" class="link-color">Stagiaires<i class="fas fa-user-graduate awesome-padding float-right"></i></a></p>
-                    <p><a href="demandes" class="link-color">Demandes<i class="fas fa-graduation-cap awesome-padding float-right"></i></a></p>
-                    <p><a href="salles" class="link-color">Salles<i class="fas fa-chalkboard-teacher awesome-padding float-right"></i></a></p>
-                    <p><a href="accompagnement-conseil" class="link-color">Accompa. & conseil<i class="fas fa-question awesome-padding float-right"></i></a></p>
-                    <p><a href="articles" class="link-color">Articles<i class="fas fa-newspaper awesome-padding float-right"></i></a></p>
-                    <p><a href="contacts" class="link-color">Contacts<i class="fas fa-address-card awesome-padding float-right"></i></a></p>
-                    <p><a href="index" class="link-color">Accueil<i class="fas fa-home awesome-padding float-right"></i></a></p>
-                    <p><a href="logout" class="link-color">Déconnexion<i class="fas fa-sign-out-alt awesome-padding float-right"></i></a></p>
-                </div>
-            </div>
-        </div>
+<input type="checkbox" id="nav-toggle">
+<div class="sidebar overflow-auto">
+    <div class="sidebar-brand">
+        <!-- <img src="images/logo.jpeg" alt="" class="img-fluid img-respo" style="width:13rem"> -->
+    </div>
+    <div class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="dashboard">
+                    <span class="fas fa-tachometer-alt"></span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="formations">
+                    <span class="fas fa-school"></span>
+                    <span>Formations</span>
+                </a>
+            </li>
+            <li>
+                <a href="module">
+                    <span class="fas fa-book-open"></span>
+                    <span>Modules</span>
+                </a>
+            </li>
+            <li>
+                <a href="stagiaire">
+                    <span class="fas fa-user-graduate"></span>
+                    <span>Stagiaires</span>
+                </a>
+            </li>
+            <li>
+                <a href="demandes">
+                    <span class="fas fa-graduation-cap"></span>
+                    <span>Demandes</span>
+                </a>
+            </li>
+            <li>
+                <a href="salles">
+                    <span class="fas fa-chalkboard-teacher"></span>
+                    <span>Salles</span>
+                </a>
+            </li>
+            <li>
+                <a href="accompagnement-conseil" class="mr-2">
+                    <span class="fas fa-question"></span>
+                    <span>Accomp. & conseil</span>
+                </a>
+            </li>
+            <li>
+                <a href="articles">
+                    <span class="fas fa-newspaper"></span>
+                    <span>Articles</span>
+                </a>
+            </li>
+            <li>
+                <a href="contacts">
+                    <span class="fas fa-address-card"></span>
+                    <span>Contacts</span>
+                </a>
+            </li>
+            <li>
+                <a href="index">
+                    <span class="fas fa-home"></span>
+                    <span>Accueil</span>
+                </a>
+            </li>
+            <li>
+                <a href="logout">
+                    <span class="fas fa-sign-out-alt"></span>
+                    <span>Déconnexion</span>
+                </a>
+            </li>
+        </ul>
     </div>
 </div>

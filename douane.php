@@ -15,6 +15,13 @@
   <body>
     <?php include_once "navbar.php";?>
     <div class="div-background" id='top'>
+      <div class="text-white text-center text-big div-header">
+        <h2><?php echo $douane['categorisation'] ?></h2>
+      </div>
+      <div style="height: 100%; position:relative">
+        <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
+        <img src="images/douane.png" alt="" class="d-block img-fluid" style="width:100%;">
+      </div>
       <?php
         if(isset($_SESSION['status'])){
       ?>
@@ -23,12 +30,8 @@
           unset($_SESSION['status']);
         }
       ?>
-      <header class="header">
+      <header class="header mt-5">
         <div class="container">
-          <div class="text-center pt-3 text-color ">
-            <h2 class="pt-4"><?php echo $douane['categorisation'] ?></h2>
-            <hr class="hr-width">
-          </div>
           <div class="row">
             <div class="col-md-12 mt-4 col-lg-6 bg-white py-3 ">
               <img src="images/630.jpg" class="img-fluid">
@@ -48,7 +51,7 @@
         </div>
         <br>
       </div>
-      <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+      <!-- <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -85,7 +88,7 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </button>
-      </div>
+      </div> -->
       <br><br>
       <div class="container">
         <div class="row">

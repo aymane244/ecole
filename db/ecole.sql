@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 29 avr. 2022 à 00:06
+-- Généré le : ven. 17 juin 2022 à 17:41
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -41,13 +41,9 @@ CREATE TABLE `absence` (
 --
 
 INSERT INTO `absence` (`abs_id`, `abs_etudiant`, `abs_date`, `abs_formation`, `abs_matiere`, `abs_absence`) VALUES
-(2, 1, '2022-03-14', 1, 1, 'Présent'),
 (3, 96, '2022-03-14', 1, 1, 'Présent'),
-(4, 1, '2022-03-11', 1, 2, 'Absent'),
 (5, 96, '2022-03-11', 1, 2, 'Présent'),
-(6, 1, '2022-03-15', 1, 1, 'Absent'),
 (7, 96, '2022-03-15', 1, 1, 'Absent'),
-(8, 1, '2022-03-10', 1, 2, 'Absent'),
 (9, 96, '2022-03-10', 1, 2, 'Absent'),
 (10, 90, '2022-03-10', 2, 5, 'Présent'),
 (11, 91, '2022-03-10', 2, 5, 'Absent'),
@@ -61,7 +57,6 @@ INSERT INTO `absence` (`abs_id`, `abs_etudiant`, `abs_date`, `abs_formation`, `a
 (25, 90, '2022-04-11', 2, 5, 'Absent'),
 (26, 91, '2022-04-11', 2, 5, 'Absent'),
 (27, 95, '2022-04-11', 2, 5, 'Présent'),
-(30, 1, '2022-04-12', 1, 2, 'Présent'),
 (31, 96, '2022-04-12', 1, 2, 'Absent'),
 (32, 90, '2022-04-05', 2, 69, 'Absent'),
 (33, 91, '2022-04-05', 2, 69, 'Présent'),
@@ -103,13 +98,6 @@ CREATE TABLE `attestation` (
   `att_etudiant` int(11) NOT NULL,
   `att_image` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `attestation`
---
-
-INSERT INTO `attestation` (`att_id`, `att_etudiant`, `att_image`) VALUES
-(9, 1, '');
 
 -- --------------------------------------------------------
 
@@ -171,7 +159,22 @@ INSERT INTO `contact` (`con_id`, `con_nom`, `con_email`, `con_sujet`, `con_messa
 (12, 'Aimane', 'Chnaif', 'Test', 'Test message', '2022-02-20'),
 (13, 'Aimane', 'Chnaif', 'Test', 'Test message', '2022-02-20'),
 (33, 'aimane', 'a.chnaif2010@gmail.com', 'Reclamation', '', '2022-04-20'),
-(36, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'wqsdqsd', 'wxcwxcwxcwxc', '2022-04-21');
+(36, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'wqsdqsd', 'wxcwxcwxcwxc', '2022-04-21'),
+(37, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'xcvxcv', 'xcvxcvxcv', '2022-05-02'),
+(38, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'xcvxcv', 'xcvxcvxcv', '2022-05-02'),
+(39, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'xcvxcv', 'xcvxcvxcvxcv', '2022-05-02'),
+(40, 'Aimane Chnaif', 'xcvxcv', 'xcvxcv', 'qsdqsdqsd', '2022-05-02'),
+(41, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'wxcwxc', 'wxcwxcwxcwxcqsdazeaze', '2022-05-02'),
+(42, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'Reclamation', 'wxcwxcwxcwxc', '2022-05-03'),
+(43, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'wxcwxc', 'wxcwxcwxcwxcwxc', '2022-05-03'),
+(44, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'Reclamationwxcwx', 'wxcwxcwxcwxcwxc', '2022-05-03'),
+(45, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'Reclamation', 'hjklmljhgfdsq', '2022-05-03'),
+(46, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'Reclamation', 'sdfgh,nbvcx', '2022-05-03'),
+(47, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'vbn,', 'sdfghjk', '2022-05-03'),
+(48, 'Aymane Chnaif', 'a.chnaif2010@gmail.com', 'bn,;', 'dfghj,nbvcx', '2022-05-03'),
+(49, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'Reclamation', 'qsdfghj,nbvcx', '2022-05-03'),
+(50, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'a.chnaif2010@gmail.com', 'wXWXWxWXWx', '2022-05-04'),
+(51, 'Aimane Chnaif', 'a.chnaif2010@gmail.com', 'Reclamation', 'XWxWxWXWxW', '2022-05-04');
 
 -- --------------------------------------------------------
 
@@ -246,7 +249,6 @@ CREATE TABLE `etudiant` (
 --
 
 INSERT INTO `etudiant` (`etud_id`, `etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, `etud_scan_cin`, `etud_scan_permis`, `etud_scan_visite`, `etud_promos`, `etud_image`, `etud_inscription`) VALUES
-(1, 'Chnaif', 'شنايف', 'Aimane', 'أيمن', 'a.chnaif201@gmail.com', '0644776612', 'ab4f63f9ac65152575886860dde480a1', 'G621092', 1, '1999-11-26', 'Kénitra', 'Riad Ahlan', 'N7777', 'B', '', '2022-04-13', '', '', '', 1, './images/etudiants/DSC_27762.jpg', '2022-02-03'),
 (90, 'Aboussabr', '', 'Othmane', '', 'aboussabryanina@gmail.com', '0606118291', '25f9e794323b453885f5181f1b624d0b', 'G621097', 2, '1991-11-26', '', '', '', '', '', '2022-04-13', '', '', '', 1, './images/etudiants/IMG_20191229_020502_262.jpg', '2022-02-01'),
 (91, 'Souiri', '', 'Chaimae', '', 'chaimaesouiri8@gmail.com', '0659499427', '25f9e794323b453885f5181f1b624d0b', 'G621099', 2, '2001-02-11', '', '', '', '', '', '2022-04-13', '', '', '', 1, './images/etudiants/', '2022-02-04'),
 (95, 'Aboussabr', '', 'Yasmina', '', 'q.chnaif@gmail.com', '+212644776612', 'azerty', 'G111', 2, '1999-11-11', '', '', '', '', '', '2022-04-13', './diplomes/Accounting Certificate.pdf', '', '', 1, './images/etudiants/', '2022-03-04'),
@@ -405,10 +407,7 @@ INSERT INTO `note` (`not_id`, `not_formation`, `not_matiere`, `not_etudiant`, `n
 (53, 2, 69, 91, 13),
 (60, 1, 1, 96, 18),
 (64, 1, 2, 96, 17),
-(65, 1, 77, 96, 13),
-(68, 1, 1, 1, 14),
-(69, 1, 2, 1, 14),
-(70, 1, 77, 1, 14);
+(65, 1, 77, 96, 13);
 
 -- --------------------------------------------------------
 
@@ -464,7 +463,8 @@ INSERT INTO `reservation` (`res_id`, `res_nom`, `res_telephone`, `res_email`, `r
 (45, 'sdqsd', '+212644776612', 'a.chnaif2010@gmail.com', 1, 'wsdqsdqsd', '2022-04-27', '08:00', '09:00', '2022-04-20'),
 (46, 'Aimane', '0644776612', 'a.chnaif2010@gmail.com', 1, 'hello', '2022-04-26', '11:00', '12:00', '2022-04-20'),
 (47, 'Chnaif', '+212644776612', 'a.chnaif2010@gmail.com', 4, 'comm', '2022-04-28', '11:00', '12:00', '2022-04-21'),
-(48, 'Chnaif', '+212644776612', 'a.chnaif2010@gmail.com', 4, 'lllllllll', '2022-04-28', '08:00', '09:00', '2022-04-21');
+(48, 'Chnaif', '+212644776612', 'a.chnaif2010@gmail.com', 4, 'lllllllll', '2022-04-28', '08:00', '09:00', '2022-04-21'),
+(49, 'Aymane', 'Chnaif', 'a.chnaif2010@gmail.com', 1, 'Salut', '2022-06-20', '11:00', '12:00', '2022-06-17');
 
 -- --------------------------------------------------------
 
@@ -649,13 +649,13 @@ ALTER TABLE `commentaire`
 -- AUTO_INCREMENT pour la table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `con_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `con_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT pour la table `diplome`
 --
 ALTER TABLE `diplome`
-  MODIFY `dip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `dip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `douane`
@@ -709,7 +709,7 @@ ALTER TABLE `promos`
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT pour la table `salle`

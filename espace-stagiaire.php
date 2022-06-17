@@ -62,13 +62,13 @@
                     }
                 ?>
             </div>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="text-center py-3 text-color mb-3">
                     <h2 class="pt-3 mb-3"><?php echo $navbar['etudiant']?></h2>
                     <hr class="hr-width">
                 </div>
-                <div class="row bg-white py-3">
-                    <div class="col-lg-6">
+                <div class="row py-3 justify-content-around">
+                    <div class="col-lg-6 bg-white raduis">
                         <hr class="bg-light">
                         <div class="text-center">
                             <?php
@@ -162,7 +162,7 @@
                         </div>
                         <hr class="bg-light">
                     </div>
-                    <div class="col-lg-6 py-3">
+                    <div class="col-lg-5 py-3 bg-white raduis">
                         <div class="d-flex justify-content-around">
                             <div class="text-center">
                                 <a href="mes-notes"><h3 class="text-color"><?php echo $espaceetudiant['notes']?></h3></a>

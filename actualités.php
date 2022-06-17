@@ -18,8 +18,15 @@
     </head>
     <body>
         <?php include_once "navbar.php";?>
-        <div class="div-background py-3" id="top">
-            <div class="container">
+        <div class="div-background pb-3" id="top">
+            <div class="text-white text-center text-big div-header">
+                <h1><?php echo $artic['actualites'] ?></h1>
+            </div>
+            <div style="height: 100%; position:relative">
+                <div style="background-color: black;opacity: 0.7;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
+                <img src="images/news.png" alt="" class="d-block img-fluid" style="width:100%;">
+            </div>
+            <div class="container mt-5">
                 <div class="d-flex justify-content-between align-items-center">
                     <h5><?php echo $artic['actualites'] ?></h5>
                     <h6>

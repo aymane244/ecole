@@ -16,11 +16,14 @@
     <body>
         <?php include_once "navbar.php";?>
         <div class="div-background" id="top">
-            <div class="container-fluid">
-                <div class="text-center pt-3 text-color">
-                    <h2 class="pt-4"><?php echo $salle['location'] ?></h2>
-                    <hr class="hr-width">
-                </div>
+            <div class="text-white text-center text-big div-header">
+                <h2><?php echo $salle['location'] ?></h2>
+            </div>
+            <div style="height: 100%; position:relative">
+                <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
+                <img src="images/rooms.png" alt="" class="d-block img-fluid" style="width:100%;">
+            </div>
+            <div class="container-fluid mt-5">
                 <div class="row">
                     <?php
                         foreach($images as $image){
