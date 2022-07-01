@@ -29,6 +29,7 @@
             $etud_cin = $etudiant['etud_cin'];
             $etud_image =$etudiant["etud_image"];
             $etud_formation =$etudiant["for_nom"];
+            $etud_formation_arab =$etudiant["for_nom_arab"];
             $etud_age =  $etudiant['etud_naissance'];
             $date= date("Y-m-d");
             $naissance = date("Y-m-d", strtotime($etud_age));
@@ -72,7 +73,7 @@
                         <hr class="bg-light">
                         <div class="text-center">
                             <?php
-                                if($etud_image === "./images/etudiants/"){
+                                if($etud_image === "./dossiers-stagiaires/$etud_prenom-$etud_nom/image-"){
                                     echo '<img src="images/etudiants/unknown_person.jpg" alt="" class="card-image">';
                                 }
                             ?>
@@ -80,25 +81,36 @@
                             <!--<a href="modifier-profile?id=<?php //echo $etudiant['etud_id'] ?>" class="btn btn-info" target="_blank"><i class="fas fa-edit"></i> Modifier mon profile</a>-->
                         </div>
                         <hr class="bg-light">
+                        <?php
+                            if($_SESSION['lang'] == 'ar'){
+                        ?>
+                        <h5 class="text-center pb-3"> التكوين: <?php echo $etud_formation_arab ?></h5>
+                        <?php
+                            }else{
+                        ?>
+                        <h5 class="text-center pb-3">Formation: <?php echo $etud_formation ?></h5>
+                        <?php
+                            }
+                        ?>
                         <div class="d-flex justify-content-between">
                             <div>
                                 <h5 class="pl-4">Nom: <?php echo $etud_nom ?></h5>
                                 <h5 class="pl-4">Prénom: <?php echo $etud_prenom ?></h5>
                             </div>
                             <div>
-                                <h5 class="pl-4">الاسم العائلي:  <?php echo $etud_nom_arab ?></h5>
-                                <h5 class="pl-4">الاسم الشخصي: <?php echo $etud_prenom_arab ?></h5>
+                                <h5 class="pr-4 text-right">الاسم العائلي:  <?php echo $etud_nom_arab ?></h5>
+                                <h5 class="pr-4 text-right">الاسم الشخصي: <?php echo $etud_prenom_arab ?></h5>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h5 class="pl-4">Age: <?php echo $age->format('%y');?> ans</h5>
-                            <h5 class="pl-4">السن: <?php echo $age->format('%y');?> سنة</h5>
+                            <h5 class="pr-4 text-right">السن: <?php echo $age->format('%y');?> سنة</h5>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h5 class="pl-4">CIN: <?php echo $etud_cin ?></h5>
-                            <h5 class="pl-4"><?php echo $etud_cin ?> :ر.ب.و</h5>
+                            <h5 class="pr-4 text-right"><?php echo $etud_cin ?> :ر.ب.و</h5>
                         </div>
-                        <h5 class="pl-4">Formation: <?php echo $etud_formation ?></h5>
+
                         <hr class="bg-light">
                         <div class="d-flex align-items-center">
                             <?php

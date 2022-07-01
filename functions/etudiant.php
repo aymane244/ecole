@@ -84,8 +84,10 @@
             return $resultArray;
         }
         public function getForMatEtud(){
-            $result = $this->db->conn->query("SELECT `for_nom`, `for_id`, `mat_id`, `mat_nom`
-                FROM `formation` INNER JOIN `matiere` ON for_id=mat_formation INNER JOIN `etudiant` ON for_id=etud_formation");
+            $id = $_SESSION['id'];
+            $result = $this->db->conn->query("SELECT `for_nom`, `for_id`, `mat_id`, `mat_nom`, `etud_id`
+                FROM `formation` INNER JOIN `matiere` ON for_id=mat_formation INNER JOIN `etudiant` ON for_id=etud_formation WHERE etud_id=$id ORDER BY mat_id ASC
+                ");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -104,7 +106,8 @@
             return $resultArray;
         }
         public function getNotesEtud(){
-            $result = $this->db->conn->query("SELECT * FROM `note` INNER JOIN etudiant ON etud_id=not_etudiant ORDER BY not_matiere ASC");
+            $id = $_SESSION['id'];
+            $result = $this->db->conn->query("SELECT * FROM `note` INNER JOIN etudiant ON etud_id=not_etudiant WHERE etud_id=$id ORDER BY not_matiere ASC");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){

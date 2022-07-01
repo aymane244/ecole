@@ -222,4 +222,10 @@
         "fax" => "Fax",
         "email_footer" => "Email"
     );
+    $pasnotes = array(
+        "pas_notes" => "Pas de note",
+        "resussi" => "Félicitaion vous avez bien passé votre module",
+        "ratrappage" => "Vous devez passer votre ratrappage",
+        "inscription" => "Inscrivez-vous pour la formation des conducteurs professionnels ci-dessous",
+    )
 ?>

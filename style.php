@@ -179,6 +179,13 @@
         margin-left: 26rem;
         z-index: 2;
     }
+    .position-awesome_arab_note{
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 27rem;
+        z-index: 2;
+    }
     .position-awesome_arab_full{
         position: absolute;
         font-size: 23px;

@@ -15,18 +15,19 @@
         if($_SESSION['id'] == $etudiant['etud_id']){
             $etudnom = $etudiant['etud_nom'];
             $etudprenom = $etudiant['etud_prenom'];
+            $etudnom_arab = $etudiant['etud_nom_arab'];
+            $etudprenom_arab = $etudiant['etud_prenom_arabe'];
             $fornom = $etudiant['for_nom'];
             $fornom_arab = $etudiant['for_nom_arab'];
-
-        }
-        $etud_id = $etudiant['not_etudiant'];
-    }
-    foreach($notes as $note){
-        if($note['etud_id'] == $_SESSION['id']){
-            print_r(array_column($matieresMessage, 'mat_id')). "<br>";
-            print_r(array_column($notesMessage, 'not_matiere'));
+            $etud_id = $etudiant['not_etudiant'];
         }
     }
+    // foreach($notes as $note){
+    //     if($note['etud_id'] == $_SESSION['id']){
+    //         print_r(array_column($matieresMessage, 'mat_id')). "<br>";
+    //         print_r(array_column($notesMessage, 'not_matiere'));
+    //     }
+    // }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,22 +59,59 @@
                     if($_SESSION['id'] == @$etud_id){
                 ?>
                 <table class="table table-hover mt-5 bg-white">
+                    <?php
+                        if($_SESSION['lang'] =="ar"){
+                    ?>
                     <thead class="text-center">
                         <tr>
                             <th scope="col" colspan="9"><?php echo $title['titre']?></th>
                         </tr>
                         <tr>
-                        <?php
-                            if($_SESSION['lang'] =="ar"){
-                        ?>
                             <th scope="col" colspan="9"><?php echo $fornom_arab?></th>
+                        </tr>
+                        <tr>
+                            <th scope="col" colspan="9"><?php echo @$etudprenom_arab." ".@$etudnom_arab?></th>
+                        </tr>
+                        <tr>
+                            <th scope="col"><?php echo $espaceetudiant['note']?></th>
+                            <th scope="col"><?php echo $forma['matieres']?></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
                         <?php
-                            }else{
+                            foreach($matieres as $matiere){
+                                if($_SESSION['id'] == $matiere['etud_id']){
                         ?>
-                         <th scope="col" colspan="9"><?php echo @$fornom?></th>
-                        <?php      
+                        <tr>
+                            <td><?php echo $matiere['not_note']?></td>
+                            <td scope="row"><?php echo $matiere['mat_nom_arab'] ?></td>
+                        </tr>
+                        <?php
+                                }
                             }
                         ?>
+                        <tr>
+                            <?php
+                                foreach($notes as $note){
+                                    if($note['etud_id'] == $_SESSION['id']){
+                            ?>
+                            <td><b><?php echo $note['notegenerale']?></b></td>
+                            <?php
+                                    }
+                                }
+                            ?>
+                            <td><b><?php echo $espaceetudiant['general']?></b></td>
+                        </tr>
+                    </tbody>
+                    <?php
+                        }else{
+                    ?>
+                    <thead class="text-center">
+                        <tr>
+                            <th scope="col" colspan="9"><?php echo $title['titre']?></th>
+                        </tr>
+                        <tr>
+                            <th scope="col" colspan="9"><?php echo @$fornom?></th>
                         </tr>
                         <tr>
                             <th scope="col" colspan="9"><?php echo @$etudprenom." ".@$etudnom?></th>
@@ -89,17 +127,7 @@
                                 if($_SESSION['id'] == $matiere['etud_id']){
                         ?>
                         <tr>
-                            <?php
-                                if($_SESSION['lang'] =="ar"){
-                            ?>
-                            <td scope="row"><?php echo $matiere['mat_nom_arab'] ?></td>
-                            <?php
-                                }else{
-                            ?>
                             <td scope="row"><?php echo $matiere['mat_nom'] ?></td>
-                            <?php      
-                                }
-                            ?>
                             <td><?php echo $matiere['not_note']?></td>
                         </tr>
                         <?php
@@ -119,11 +147,14 @@
                             ?>
                         </tr>
                     </tbody>
+                    <?php      
+                        }
+                    ?>
                 </table>
                 <?php                
                     }else{
                 ?>
-                <h3 class="text-center">Pas de note</h3> 
+                <h3 class="text-center"><?php echo $pasnotes['pas_notes']?></h3> 
                 <?php                       
                     }
                 ?>
@@ -133,34 +164,64 @@
                         if($note['etud_id'] == $_SESSION['id']){
                             if($note['notegenerale'] >= 10 && $note1 == $note2){
                 ?>
-                <h5 class="text-success"> Félicitaion vous avez bien passé votre module</h5>
+                <h5 class="text-success"> <?php echo $pasnotes['resussi']?></h5>
                 <?php
                             }else if($note['notegenerale'] < 10 && $note1 == $note2){
                 ?>
-                <h5 class="text-danger"> Vous devez passer votre ratrappage</h5>
+                <h5 class="text-danger"> <?php echo $pasnotes['ratrappage']?></h5>
                 <?php                
                             }
-                            if($note['not_formation'] == 1){
+                            if($note['not_formation'] == 1 && $note1 == $note2 && $note['notegenerale'] >= 10) {
                 ?>
-                <h5 class="my-3"> Inscrivez-vous pour la formation des conducteurs professionnels ci-dessous</h5>
+                <h5 class="my-3"> <?php echo $pasnotes['inscription']?></h5>
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Inscription
+                    <?php echo $login['inscrire']?>
                 </button>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Inscription </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                <?php
+                                    if($_SESSION['lang'] == 'ar'){
+                                ?>
+                                <div class="text-left">
+                                    <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true" class="text-left">&times;</span>
+                                    </button>
+                                </div>
+                                <h5 class="modal-title" id="exampleModalLabel"><?php echo $login['inscrire']?> </h5>
+                                <?php
+                                    }else{
+                                ?>
+                                <h5 class="modal-title" id="exampleModalLabel"><?php echo $login['inscrire']?> </h5>
+                                <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" class="text-left">&times;</span>
                                 </button>
+                                <?php                
+                                    }
+                                ?>
                             </div>
                             <div class="modal-body">
                                 <form action="" method="post">
                                     <div class="row">
-                                        <div class="col-md-12" id="div-carte">
+                                        <div class="col-md-12">
+                                            <?php
+                                                if($_SESSION['lang'] == 'ar'){
+                                            ?>
+                                            <div class="row mb-3 text-right">
+                                                <label for="profesionnel" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['profesionnel']?></label>
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-address-card position-awesome_arab_note"></i>
+                                                        <input id="profesionnel" type="text" class="form-control pr-5 text-right" name="profesionnel" autocomplete="profesionnel" placeholder="رقم البطاقة الوطنية">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php
+                                                }else{
+                                            ?>
                                             <div class="row mb-3">
                                                 <label for="profesionnel" class="col-md-8 col-form-label text-md-end"><?php echo $inscription['profesionnel']?></label>
                                                 <div class="col-md-12">
@@ -170,6 +231,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php                
+                                                }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="row justify-content-center mt-3">
@@ -208,8 +272,8 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <div class="modal-footer text-left">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $accompagenemt['fermer'] ?></button>
                             </div>
                         </div>
                     </div>
