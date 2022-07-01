@@ -13,9 +13,10 @@
         <title><?php echo $title['titre'] ?></title>
     </head>
     <body>
+        <div id="top"></div>
         <?php include_once "navbar.php";?>
         <div class="div-background">
-            <div class="text-white text-center text-big div-header" id="top">
+            <div class="text-white text-center text-big div-header">
                 <h1 class="h1-size-big"><?php echo $index['banner_1'] ?> <br> <?php echo $index['banner_2'] ?><br>ARTLN</h1>
             </div>
             <div style="height: 100%; position:relative">

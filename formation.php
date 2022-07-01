@@ -14,7 +14,6 @@
             $for_nom_arab = $formation['for_nom_arab'];
             $for_pres_arab = $formation['for_pres_arab'];
             $for_desc_arab = $formation['for_desc_arab'];
-            $for_image = $formation['for_image'];
         }
     }
 ?>
@@ -40,9 +39,10 @@
         </title>
     </head>
     <body>
+        <div id="top"></div>
         <?php include_once "navbar.php";?>
         <div class="div-background">
-            <div class="text-white text-center text-big div-header" id="top">
+            <div class="text-white text-center text-big div-header">
                 <h1 class="text-center pt-3" id="top">
                     <?php
                         if($_SESSION['lang'] =="ar"){

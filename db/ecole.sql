@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 17 juin 2022 à 17:41
+-- Généré le : ven. 01 juil. 2022 à 13:39
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -41,26 +41,13 @@ CREATE TABLE `absence` (
 --
 
 INSERT INTO `absence` (`abs_id`, `abs_etudiant`, `abs_date`, `abs_formation`, `abs_matiere`, `abs_absence`) VALUES
-(3, 96, '2022-03-14', 1, 1, 'Présent'),
-(5, 96, '2022-03-11', 1, 2, 'Présent'),
-(7, 96, '2022-03-15', 1, 1, 'Absent'),
-(9, 96, '2022-03-10', 1, 2, 'Absent'),
-(10, 90, '2022-03-10', 2, 5, 'Présent'),
-(11, 91, '2022-03-10', 2, 5, 'Absent'),
-(12, 95, '2022-03-10', 2, 5, 'Absent'),
-(17, 90, '2022-04-20', 2, 5, 'Présent'),
-(18, 91, '2022-04-20', 2, 5, 'Présent'),
-(19, 95, '2022-04-20', 2, 5, 'Présent'),
-(21, 90, '2022-04-12', 2, 5, 'Présent'),
-(22, 91, '2022-04-12', 2, 5, 'Présent'),
-(23, 95, '2022-04-12', 2, 5, 'Présent'),
+(10, 127, '2022-03-10', 2, 5, 'Présent'),
+(17, 90, '2022-04-20', 2, 5, 'Absent'),
+(21, 90, '2022-04-12', 2, 5, 'Absent'),
 (25, 90, '2022-04-11', 2, 5, 'Absent'),
-(26, 91, '2022-04-11', 2, 5, 'Absent'),
-(27, 95, '2022-04-11', 2, 5, 'Présent'),
-(31, 96, '2022-04-12', 1, 2, 'Absent'),
-(32, 90, '2022-04-05', 2, 69, 'Absent'),
-(33, 91, '2022-04-05', 2, 69, 'Présent'),
-(34, 95, '2022-04-05', 2, 69, 'Présent');
+(32, 127, '2022-04-05', 2, 69, 'Absent'),
+(35, 134, '2022-06-20', 2, 5, 'Présent'),
+(36, 134, '2022-06-21', 2, 5, 'Absent');
 
 -- --------------------------------------------------------
 
@@ -203,15 +190,6 @@ CREATE TABLE `douane` (
   `dou_res_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `douane`
---
-
-INSERT INTO `douane` (`dou_id`, `dou_nom`, `dou_res_nom`, `dou_res_email`, `dou_res_message`, `dou_res_date`) VALUES
-(4, 'Classe B', 'Aimane', 'a.chnaif2010@gmail.com', 'sqdqsdqsd', '2022-03-01'),
-(5, 'Classe SS', 'qsdqsd', 'a.chnaif2010@gmail.com', 'qsdqsdqsd', '2022-04-12'),
-(6, 'Classe B', 'sqd', 'ty@ghjg.com', 'jkkjlkjl', '2022-04-12');
-
 -- --------------------------------------------------------
 
 --
@@ -237,9 +215,12 @@ CREATE TABLE `etudiant` (
   `etude_carte_pro` varchar(200) NOT NULL,
   `etud_permis_obt` date NOT NULL DEFAULT current_timestamp(),
   `etud_scan_cin` varchar(200) NOT NULL,
+  `etud_cin_name` varchar(100) NOT NULL,
   `etud_scan_permis` varchar(200) NOT NULL,
+  `etud_permis_name` varchar(100) NOT NULL,
   `etud_scan_visite` varchar(200) NOT NULL,
-  `etud_promos` int(11) NOT NULL,
+  `etud_visite_name` varchar(100) NOT NULL,
+  `etud_promos` int(11) DEFAULT NULL,
   `etud_image` varchar(500) NOT NULL,
   `etud_inscription` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -248,11 +229,13 @@ CREATE TABLE `etudiant` (
 -- Déchargement des données de la table `etudiant`
 --
 
-INSERT INTO `etudiant` (`etud_id`, `etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, `etud_scan_cin`, `etud_scan_permis`, `etud_scan_visite`, `etud_promos`, `etud_image`, `etud_inscription`) VALUES
-(90, 'Aboussabr', '', 'Othmane', '', 'aboussabryanina@gmail.com', '0606118291', '25f9e794323b453885f5181f1b624d0b', 'G621097', 2, '1991-11-26', '', '', '', '', '', '2022-04-13', '', '', '', 1, './images/etudiants/IMG_20191229_020502_262.jpg', '2022-02-01'),
-(91, 'Souiri', '', 'Chaimae', '', 'chaimaesouiri8@gmail.com', '0659499427', '25f9e794323b453885f5181f1b624d0b', 'G621099', 2, '2001-02-11', '', '', '', '', '', '2022-04-13', '', '', '', 1, './images/etudiants/', '2022-02-04'),
-(95, 'Aboussabr', '', 'Yasmina', '', 'q.chnaif@gmail.com', '+212644776612', 'azerty', 'G111', 2, '1999-11-11', '', '', '', '', '', '2022-04-13', './diplomes/Accounting Certificate.pdf', '', '', 1, './images/etudiants/', '2022-03-04'),
-(96, 'Chnaif', '', 'Ayoub', '', 'a.chnaif20hh10@gmail.com', '655778899', '25f9e794323b453885f5181f1b624d0b', 'G555', 1, '1999-11-11', '', '', '', '', '', '2022-04-13', './diplomes/Attestation 1001 Evasions.pdf', '', '', 1, './images/etudiants/', '2022-03-04');
+INSERT INTO `etudiant` (`etud_id`, `etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, `etud_scan_cin`, `etud_cin_name`, `etud_scan_permis`, `etud_permis_name`, `etud_scan_visite`, `etud_visite_name`, `etud_promos`, `etud_image`, `etud_inscription`) VALUES
+(90, 'Aboussabr', '', 'Othmane', '', 'aboussabryanina@gmail.com', '0606118291', '25f9e794323b453885f5181f1b624d0b', 'G621097', 2, '1991-11-26', '', '', '', '', 'azertyuiop', '2022-04-13', '', '', '', '', '', '', 1, './images/etudiants/IMG_20191229_020502_262.jpg', '2022-02-01'),
+(127, 'Aboussabr', '', 'Othmane', '', 'aboussabryanina@gmail.com', '0606118291', '25f9e794323b453885f5181f1b624d0b', 'G621097', 2, '1991-11-26', '', '', '', '', '123456789', '2022-04-13', '', '', '', '', '', '', 1, './images/etudiants/IMG_20191229_020502_262.jpg', '2022-02-01'),
+(128, 'Chnaif', 'اشنايف', 'Aimane', 'أيمن', 'a.chnaif2010@gmail.com', '0644776612', '25f9e794323b453885f5181f1b624d0b', 'G621092', 1, '1991-11-26', 'Kénitra', 'Riad Ahlan', 'GH67688', 'B', '', '2015-06-29', './dossiers-stagiaires/Aimane-Chnaif/cin-Cahier des charges.pdf', 'cin-Cahier des charges.pdf', './dossiers-stagiaires/Aimane-Chnaif/permis-null (1).pdf', '', './dossiers-stagiaires/Aimane-Chnaif/visite-CV Aimane chnaif.pdf', '', 5, './dossiers-stagiaires/Aimane-Chnaif/image-IMG_20191229_020502_262.jpg', '2022-06-23'),
+(132, 'Metaab', 'متعب', 'Imad', 'عماد', 'imad@gmail.com', '0644776612', 'ab4f63f9ac65152575886860dde480a1', 'Y78990', 1, '1997-08-11', 'Tanger', 'Residence AL Houda', 'TH66667', 'B', '', '2022-06-13', './dossiers-stagiaires/Imad-Metaab/cin-Cahier des charges.pdf', 'cin-Cahier des charges.pdf', './dossiers-stagiaires/Imad-Metaab/permis-Liste des informations.pdf', 'permis-Liste des informations.pdf', './dossiers-stagiaires/Imad-Metaab/visite-Cahier des charges.pdf', 'visite-Cahier des charges.pdf', 5, './dossiers-stagiaires/Imad-Metaab/image-Logo ARTL.jpeg', '2022-06-23'),
+(134, 'Chnaif', 'اشنايف', 'Aimane', 'أيمن', 'a.chnaif2010@gmail.com', '0644776612', '25f9e794323b453885f5181f1b624d0b', 'G621092', 2, '1991-11-26', 'Kénitra', 'Riad Ahlan', 'GH67688', 'B', '234567', '2015-06-29', './dossiers-stagiaires/Aimane-Chnaif/cin-Cahier des charges.pdf', 'cin-Cahier des charges.pdf', './dossiers-stagiaires/Aimane-Chnaif/permis-null (1).pdf', 'permis-null (1).pdf', './dossiers-stagiaires/Aimane-Chnaif/visite-CV Aimane chnaif.pdf', 'visite-CV Aimane chnaif.pdf', 3, './dossiers-stagiaires/Aimane-Chnaif/image-IMG_20191229_020502_262.jpg', '2022-06-27'),
+(135, 'Bou', 'بو', 'Hicham', 'هشام', 'hicham@gmail.com', '0644776612', 'ab4f63f9ac65152575886860dde480a1', 'L676543', 1, '1998-08-12', 'Tanger', 'HAY AHLAN', 'HY76543', 'B', '', '2022-06-23', './dossiers-stagiaires/Hicham-Bou/cin-CV Aimane chnaif.pdf', 'cin-CV Aimane chnaif.pdf', './dossiers-stagiaires/Hicham-Bou/permis-CV Aimane chnaif.pdf', 'permis-CV Aimane chnaif.pdf', './dossiers-stagiaires/Hicham-Bou/visite-CV Aimane chnaif.pdf', 'visite-CV Aimane chnaif.pdf', 5, './dossiers-stagiaires/Hicham-Bou/image-', '2022-07-01');
 
 -- --------------------------------------------------------
 
@@ -267,18 +250,17 @@ CREATE TABLE `formation` (
   `for_pres` varchar(200) NOT NULL,
   `for_pres_arab` varchar(200) NOT NULL,
   `for_descr` text NOT NULL,
-  `for_desc_arab` text NOT NULL,
-  `for_image` varchar(200) NOT NULL
+  `for_desc_arab` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `formation`
 --
 
-INSERT INTO `formation` (`for_id`, `for_nom`, `for_nom_arab`, `for_pres`, `for_pres_arab`, `for_descr`, `for_desc_arab`, `for_image`) VALUES
-(1, 'Formation Qualifiante Initiale Minimum Obligatoire (FQIMO) des conducteurs professionnels', 'الحد الأدنى الإلزامي من تدريب التأهيل الأولي للسائقين المحترفين (FQIMO)', '<p><strong>Formation pour toute personne </strong>int&eacute;ress&eacute;e d&#39;avoir un permis de conduite professionnel des grands camions et petit</p>\r\n', '<p>تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية بالنسبة للشاحنات الكبرى والصغرى</p>\r\n', '<p>Tout conducteur de v&eacute;hicule de transport de marchandises dont le poids total autoris&eacute; en charge (PTAC) exc&egrave;de 3,5 tonnes doit avoir satisfait, pr&eacute;alablement &agrave; l&rsquo;exercice de son activit&eacute; de conduite, &agrave; une obligation de qualification initiale. Cette qualification initiale est obtenue &agrave; l&rsquo;issue d&rsquo;une formation professionnelle qui peut &ecirc;tre longue ou acc&eacute;l&eacute;r&eacute;e. La qualification initiale peut &ecirc;tre obtenue &agrave; l&rsquo;issue d&rsquo;une formation professionnelle longue de 280 heures minimum, sanctionn&eacute;e par l&rsquo;obtention d&rsquo;un titre professionnel de conduite routi&egrave;re ou d&rsquo;un dipl&ocirc;me de niveau V de conducteur routier. Sont ainsi vis&eacute;s :</p>\r\n\r\n<p>- le Certificat d&rsquo;Aptitude Professionnelle (CAP) conducteur routier de marchandises,</p>\r\n\r\n<p>- le Brevet d&rsquo;&Eacute;tudes Professionnelles (BEP) conduite et services dans le transport routier,</p>\r\n\r\n<p>- le titre professionnel de Conducteur du Transport Routier de Marchandises sur tous V&eacute;hicules (CTRMV) d&eacute;livr&eacute; par le Ministre charg&eacute; de l&rsquo;emploi et de la formation professionnelle, - le titre professionnel de Conducteur du Transport Routier de Marchandises sur Porteur (CTRMP) d&eacute;livr&eacute; par le Ministre charg&eacute; de l&rsquo;emploi et de la formation professionnelle.</p>\r\n\r\n<p>L&rsquo;obtention de l&rsquo;un de ces titres ou dipl&ocirc;mes permet &agrave; son titulaire de conduire, d&egrave;s l&rsquo;&acirc;ge de 18 ans, les v&eacute;hicules pour lesquels un permis de conduire des cat&eacute;gories C ou EC est requis. Au vu du dipl&ocirc;me ou du titre professionnel, le pr&eacute;fet du d&eacute;partement dans lequel a &eacute;t&eacute; d&eacute;livr&eacute; le titre ou le dipl&ocirc;me, d&eacute;livre au conducteur, apr&egrave;s avoir v&eacute;rifi&eacute; la validit&eacute; de son permis de conduire, une carte de qualification de conducteur (mod&egrave;le &agrave; para&icirc;tre prochainement). Cette carte doit &ecirc;tre renouvel&eacute;e tous les 5 ans apr&egrave;s chaque session de formation continue</p>\r\n', '<p>تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية</p>\r\n', './images/etudiants/library.jpg'),
-(2, 'Formation des conducteurs professionnels', 'تدريب السائقين المحترفين', 'Formation pour toute personne intéreseé d\'avoir un permis de conduite professionnel des camions', 'تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية', 'Tout conducteur de véhicule de transport de marchandises dont le poids total autorisé en charge (PTAC) excède 3,5 tonnes doit avoir satisfait, préalablement à l’exercice de son activité de conduite, à une obligation de qualification initiale. Cette qualification initiale est\r\nobtenue à l’issue d’une formation professionnelle qui peut être longue ou accélérée. La qualification initiale peut être obtenue à l’issue d’une formation professionnelle longue de 280 heures minimum, sanctionnée par l’obtention d’un titre professionnel de conduite routière ou d’un diplôme de niveau V de conducteur routier.\r\nSont ainsi visés :\r\n- le Certificat d’Aptitude Professionnelle (CAP) conducteur routier de marchandises,\r\n- le Brevet d’Études Professionnelles (BEP) conduite et services dans le transport routier,\r\n- le titre professionnel de Conducteur du Transport Routier de Marchandises sur tous Véhicules (CTRMV) délivré par le Ministre chargé de l’emploi et de la \r\n   formation professionnelle,\r\n- le titre professionnel de Conducteur du Transport Routier de Marchandises sur Porteur (CTRMP) délivré par le Ministre chargé de l’emploi et de la \r\n   formation professionnelle.\r\n\r\nL’obtention de l’un de ces titres ou diplômes permet à son titulaire de conduire, dès l’âge de 18 ans, les véhicules pour lesquels un permis de conduire des catégories C ou EC est requis.\r\nAu vu du diplôme ou du titre professionnel, le préfet du département dans lequel a été délivré le titre ou le diplôme, délivre au conducteur, après avoir vérifié la validité de son permis de conduire, une carte de qualification de conducteur (modèle à paraître prochainement). Cette carte doit être renouvelée tous les 5 ans après chaque session de formation continue', 'تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية', './images/etudiants/library.jpg'),
-(10, 'Nouvelle Formation', 'تكوين جديد', '<p>C&#39;est une nouvelle formation</p>\r\n', '<p>تكوين جديد</p>\r\n', '<p>Une nouvelle formation</p>\r\n\r\n<p>Pour les &eacute;tudiants int&eacute;ress&eacute; de voyager &agrave; l&#39;&eacute;tranger pour continuer leurs &eacute;tudes.</p>\r\n', '<p>تكوين لصالح الطلبة المهتمين بالسفر إلى الخارج للدراسة</p>\r\n', './images/formation/630.jpg');
+INSERT INTO `formation` (`for_id`, `for_nom`, `for_nom_arab`, `for_pres`, `for_pres_arab`, `for_descr`, `for_desc_arab`) VALUES
+(1, 'Formation Qualifiante Initiale Minimum Obligatoire (FQIMO) des conducteurs professionnels', 'الحد الأدنى الإلزامي من تدريب التأهيل الأولي للسائقين المحترفين (FQIMO)', '<p><strong>Formation pour toute personne </strong>int&eacute;ress&eacute;e d&#39;avoir un permis de conduite professionnel des grands camions et petit</p>\r\n', '<p>تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية بالنسبة للشاحنات الكبرى والصغرى</p>\r\n', '<p>Tout conducteur de v&eacute;hicule de transport de marchandises dont le poids total autoris&eacute; en charge (PTAC) exc&egrave;de 3,5 tonnes doit avoir satisfait, pr&eacute;alablement &agrave; l&rsquo;exercice de son activit&eacute; de conduite, &agrave; une obligation de qualification initiale. Cette qualification initiale est obtenue &agrave; l&rsquo;issue d&rsquo;une formation professionnelle qui peut &ecirc;tre longue ou acc&eacute;l&eacute;r&eacute;e. La qualification initiale peut &ecirc;tre obtenue &agrave; l&rsquo;issue d&rsquo;une formation professionnelle longue de 280 heures minimum, sanctionn&eacute;e par l&rsquo;obtention d&rsquo;un titre professionnel de conduite routi&egrave;re ou d&rsquo;un dipl&ocirc;me de niveau V de conducteur routier. Sont ainsi vis&eacute;s :</p>\r\n\r\n<p>- le Certificat d&rsquo;Aptitude Professionnelle (CAP) conducteur routier de marchandises,</p>\r\n\r\n<p>- le Brevet d&rsquo;&Eacute;tudes Professionnelles (BEP) conduite et services dans le transport routier,</p>\r\n\r\n<p>- le titre professionnel de Conducteur du Transport Routier de Marchandises sur tous V&eacute;hicules (CTRMV) d&eacute;livr&eacute; par le Ministre charg&eacute; de l&rsquo;emploi et de la formation professionnelle, - le titre professionnel de Conducteur du Transport Routier de Marchandises sur Porteur (CTRMP) d&eacute;livr&eacute; par le Ministre charg&eacute; de l&rsquo;emploi et de la formation professionnelle.</p>\r\n\r\n<p>L&rsquo;obtention de l&rsquo;un de ces titres ou dipl&ocirc;mes permet &agrave; son titulaire de conduire, d&egrave;s l&rsquo;&acirc;ge de 18 ans, les v&eacute;hicules pour lesquels un permis de conduire des cat&eacute;gories C ou EC est requis. Au vu du dipl&ocirc;me ou du titre professionnel, le pr&eacute;fet du d&eacute;partement dans lequel a &eacute;t&eacute; d&eacute;livr&eacute; le titre ou le dipl&ocirc;me, d&eacute;livre au conducteur, apr&egrave;s avoir v&eacute;rifi&eacute; la validit&eacute; de son permis de conduire, une carte de qualification de conducteur (mod&egrave;le &agrave; para&icirc;tre prochainement). Cette carte doit &ecirc;tre renouvel&eacute;e tous les 5 ans apr&egrave;s chaque session de formation continue</p>\r\n', '<p>تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية</p>\r\n'),
+(2, 'Formation des conducteurs professionnels', 'تدريب السائقين المحترفين', 'Formation pour toute personne intéreseé d\'avoir un permis de conduite professionnel des camions', 'تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية', 'Tout conducteur de véhicule de transport de marchandises dont le poids total autorisé en charge (PTAC) excède 3,5 tonnes doit avoir satisfait, préalablement à l’exercice de son activité de conduite, à une obligation de qualification initiale. Cette qualification initiale est\r\nobtenue à l’issue d’une formation professionnelle qui peut être longue ou accélérée. La qualification initiale peut être obtenue à l’issue d’une formation professionnelle longue de 280 heures minimum, sanctionnée par l’obtention d’un titre professionnel de conduite routière ou d’un diplôme de niveau V de conducteur routier.\r\nSont ainsi visés :\r\n- le Certificat d’Aptitude Professionnelle (CAP) conducteur routier de marchandises,\r\n- le Brevet d’Études Professionnelles (BEP) conduite et services dans le transport routier,\r\n- le titre professionnel de Conducteur du Transport Routier de Marchandises sur tous Véhicules (CTRMV) délivré par le Ministre chargé de l’emploi et de la \r\n   formation professionnelle,\r\n- le titre professionnel de Conducteur du Transport Routier de Marchandises sur Porteur (CTRMP) délivré par le Ministre chargé de l’emploi et de la \r\n   formation professionnelle.\r\n\r\nL’obtention de l’un de ces titres ou diplômes permet à son titulaire de conduire, dès l’âge de 18 ans, les véhicules pour lesquels un permis de conduire des catégories C ou EC est requis.\r\nAu vu du diplôme ou du titre professionnel, le préfet du département dans lequel a été délivré le titre ou le diplôme, délivre au conducteur, après avoir vérifié la validité de son permis de conduire, une carte de qualification de conducteur (modèle à paraître prochainement). Cette carte doit être renouvelée tous les 5 ans après chaque session de formation continue', 'تدريب أي شخص مهتم بالحصول على رخصة قيادة شاحنة مهنية'),
+(10, 'Nouvelle Formation', 'تكوين جديد', '<p>C&#39;est une nouvelle formation</p>\r\n', '<p>تكوين جديد</p>\r\n', '<p>Une nouvelle formation</p>\r\n\r\n<p>Pour les &eacute;tudiants int&eacute;ress&eacute; de voyager &agrave; l&#39;&eacute;tranger pour continuer leurs &eacute;tudes.</p>\r\n', '<p>تكوين لصالح الطلبة المهتمين بالسفر إلى الخارج للدراسة</p>\r\n');
 
 -- --------------------------------------------------------
 
@@ -320,36 +302,6 @@ CREATE TABLE `iso` (
   `iso_res_message` text NOT NULL,
   `iso_res_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `iso`
---
-
-INSERT INTO `iso` (`iso_id`, `iso_nom`, `iso_presentation`, `iso_res_nom`, `iso_res_email`, `iso_res_message`, `iso_res_date`) VALUES
-(6, 'ISO 45001', '', 'Fahd', 'Houta@gmail.com', 'sqdqsdqsd', '2022-04-11'),
-(7, 'ISO 39001', '', 'Aimane', 'a.chnaif2010@gmail.com', 'hello', '2022-04-11'),
-(8, 'ISO 45001', '', 'qsdqsd', 'a.chnaif2010@gmail.com', 'qsdqsdqsd', '2022-04-12'),
-(32, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(33, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(34, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(35, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(36, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(37, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(38, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(39, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(40, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(41, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(42, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(43, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(44, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(45, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(46, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(47, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(48, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(49, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(50, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(51, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24'),
-(52, 'ISO 9001', '', 'dd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-04-24');
 
 -- --------------------------------------------------------
 
@@ -399,15 +351,13 @@ CREATE TABLE `note` (
 --
 
 INSERT INTO `note` (`not_id`, `not_formation`, `not_matiere`, `not_etudiant`, `not_note`) VALUES
-(29, 2, 69, 90, 12),
-(30, 2, 5, 90, 20),
-(50, 2, 5, 91, 12),
-(51, 2, 69, 95, 19),
-(52, 2, 5, 95, 12),
-(53, 2, 69, 91, 13),
-(60, 1, 1, 96, 18),
-(64, 1, 2, 96, 17),
-(65, 1, 77, 96, 13);
+(82, 2, 5, 90, 10),
+(83, 2, 69, 90, 10),
+(84, 1, 1, 128, 11),
+(85, 1, 2, 128, 14),
+(86, 1, 77, 128, 11),
+(87, 2, 5, 127, 12),
+(88, 2, 69, 127, 14);
 
 -- --------------------------------------------------------
 
@@ -417,18 +367,18 @@ INSERT INTO `note` (`not_id`, `not_formation`, `not_matiere`, `not_etudiant`, `n
 
 CREATE TABLE `promos` (
   `pro_id` int(11) NOT NULL,
-  `pro_année` varchar(200) NOT NULL
+  `pro_groupe` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `promos`
 --
 
-INSERT INTO `promos` (`pro_id`, `pro_année`) VALUES
-(1, 'promos 2022/2023'),
-(3, '2999'),
-(4, '2399'),
-(5, 'ss');
+INSERT INTO `promos` (`pro_id`, `pro_groupe`) VALUES
+(1, '1'),
+(3, '2'),
+(4, '3'),
+(5, '4');
 
 -- --------------------------------------------------------
 
@@ -561,7 +511,7 @@ ALTER TABLE `douane`
 ALTER TABLE `etudiant`
   ADD PRIMARY KEY (`etud_id`),
   ADD KEY `etud_form` (`etud_formation`),
-  ADD KEY `promotion` (`etud_promos`);
+  ADD KEY `etud_promos` (`etud_promos`);
 
 --
 -- Index pour la table `formation`
@@ -625,7 +575,7 @@ ALTER TABLE `salle`
 -- AUTO_INCREMENT pour la table `absence`
 --
 ALTER TABLE `absence`
-  MODIFY `abs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `abs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT pour la table `article`
@@ -667,7 +617,7 @@ ALTER TABLE `douane`
 -- AUTO_INCREMENT pour la table `etudiant`
 --
 ALTER TABLE `etudiant`
-  MODIFY `etud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `etud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- AUTO_INCREMENT pour la table `formation`
@@ -697,7 +647,7 @@ ALTER TABLE `matiere`
 -- AUTO_INCREMENT pour la table `note`
 --
 ALTER TABLE `note`
-  MODIFY `not_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `not_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT pour la table `promos`
@@ -752,7 +702,7 @@ ALTER TABLE `diplome`
 --
 ALTER TABLE `etudiant`
   ADD CONSTRAINT `etud_form` FOREIGN KEY (`etud_formation`) REFERENCES `formation` (`for_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `promotion` FOREIGN KEY (`etud_promos`) REFERENCES `promos` (`pro_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `etud_promos` FOREIGN KEY (`etud_promos`) REFERENCES `promos` (`pro_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `img_salle`

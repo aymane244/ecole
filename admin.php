@@ -2,7 +2,6 @@
     <label for="nav-toggle">
         <span class="fas fa-bars" style="cursor: pointer"></span>
     </label>
-    Dashboard
 </h2>
 <div class="user-wrapper">
     <img src="https://bit.ly/3bvT89p" width="40px" height="40px" alt="profile-img">

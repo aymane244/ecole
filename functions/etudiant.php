@@ -6,7 +6,7 @@
             $this->db = $db;
         }
         public function getImage(){
-            $result = $this->db->conn->query("SELECT * FROM `img_salle` RIGHT JOIN `salle` ON sal_id=img_salle");
+            $result = $this->db->conn->query("SELECT * FROM `salle`");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -41,7 +41,26 @@
                 }
                 return $result;
             }
-
+        }
+        public function insertEtudiant(){
+            $id = $_SESSION['id'];
+            $profesionnel = $_POST['profesionnel'];
+            $for_id = $_POST['for_id'];
+            $result = $this->db->conn->query("INSERT INTO `etudiant`(`etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, 
+                `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, `etud_lieu_naissance`, 
+                `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, `etud_scan_cin`, `etud_scan_permis`,
+                `etud_scan_visite`, `etud_promos`, `etud_image`, `etud_inscription`) SELECT `etud_nom`, `etud_nom_arab`, `etud_prenom`, 
+                `etud_prenom_arabe`, `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, '$for_id', `etud_naissance`, 
+                `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, '$profesionnel', `etud_permis_obt`, 
+                `etud_scan_cin`, `etud_scan_permis`,`etud_scan_visite`, '', `etud_image`, NOW() FROM `etudiant` 
+                WHERE etud_id=$id");
+            if($result){
+                $_SESSION['status'] = "Inscription bien effectuée";
+                echo "<script>window.location.href='espace-stagiaire'</script>";
+            }else{
+                echo $this->db->conn->error;
+            }
+            return $result;
         }
         public function getEtudiantFormation(){
             $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `etudiant` ON for_id=etud_formation ORDER BY etud_prenom ASC");
@@ -64,9 +83,28 @@
             }
             return $resultArray;
         }
+        public function getForMatEtud(){
+            $result = $this->db->conn->query("SELECT `for_nom`, `for_id`, `mat_id`, `mat_nom`
+                FROM `formation` INNER JOIN `matiere` ON for_id=mat_formation INNER JOIN `etudiant` ON for_id=etud_formation");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
         public function getNotes(){
             $id = $_GET['id'];
             $result = $this->db->conn->query("SELECT * FROM `note` INNER JOIN etudiant ON etud_id=not_etudiant WHERE etud_id=$id");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function getNotesEtud(){
+            $result = $this->db->conn->query("SELECT * FROM `note` INNER JOIN etudiant ON etud_id=not_etudiant ORDER BY not_matiere ASC");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -155,6 +193,15 @@
             }
             return $resultArray;
         }
+        public function getEtudiantPromos(){
+            $result = $this->db->conn->query("SELECT * FROM `etudiant` INNER JOIN `promos` ON etud_promos=pro_id");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
         public function getformation(){
             $result = $this->db->conn->query("SELECT * FROM `formation`");
             $resultArray = array();
@@ -188,6 +235,19 @@
             }
             return $result;
         }
+        public function updateEtudFormation(){
+            $id = $_SESSION['id'];
+            $profesionnel = $_POST['profesionnel'];
+            $for_id = $_POST['for_id'];
+            $result = $this->db->conn->query("UPDATE `etudiant` SET `etud_formation`='$for_id', `etude_carte_pro`='$profesionnel' WHERE etud_id=$id");
+            if($result){
+                echo "<script>window.location.href='espace-stagiaire'</script>";
+                $_SESSION['status'] = "Vous êtes bien inscrit";
+            }else{
+                echo $this->db->conn->error;
+            }
+            return $result;
+        }
         public function updateMatiere(){
             $id = $_GET['id'];
             $formation_nom = $_POST['formation_nom'];
@@ -214,33 +274,20 @@
             $formation_nom_arab = mysqli_escape_string($this->db->conn, $_POST['formation_nom_arab']) ;
             $presentation_arab = mysqli_escape_string($this->db->conn, $_POST['presentation_arab']);
             $description_arab = mysqli_escape_string($this->db->conn, $_POST['description_arab']);
-            $image = basename($_FILES['image']['name']);
-            $allowed = array('jpg', 'png', 'jpeg');
-            $ext = pathinfo($image, PATHINFO_EXTENSION); 
-            $path = "./images/etudiants/";
-            if(!in_array($ext, $allowed) && $image != ""){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                    L'image que vous avez choisit ".$image." est de type ".$ext.
-                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
-                </div>";
+            // $image = basename($_FILES['image']['name']);
+            // $allowed = array('jpg', 'png', 'jpeg');
+            // $ext = pathinfo($image, PATHINFO_EXTENSION); 
+            // $path = "./images/etudiants/";
+            $result = $this->db->conn->query("UPDATE `formation` SET `for_nom`='$formation_nom',`for_nom_arab`='$formation_nom_arab',
+            `for_pres`='$presentation',`for_pres_arab`='$presentation_arab',`for_descr`='$description',`for_desc_arab`='$description_arab'
+            WHERE for_id=$id");
+            if($result){
+                $_SESSION['status'] = "La formation a été bien modifiée";
+                echo "<script>window.location.href='formations'</script>";
             }else{
-                if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
-                    $result = $this->db->conn->query("UPDATE `formation` SET `for_nom`='$formation_nom',`for_nom_arab`='$formation_nom_arab',
-                    `for_pres`='$presentation',`for_pres_arab`='$presentation_arab',`for_descr`='$description',`for_desc_arab`='$description_arab',
-                    `for_image`='$path$image' WHERE for_id=$id");
-                }else{
-                    $result = $this->db->conn->query("UPDATE `formation` SET `for_nom`='$formation_nom',`for_nom_arab`='$formation_nom_arab',
-                    `for_pres`='$presentation',`for_pres_arab`='$presentation_arab',`for_descr`='$description',`for_desc_arab`='$description_arab'
-                    WHERE for_id=$id");
-                }
-                if($result){
-                    $_SESSION['status'] = "La formation a été bien modifiée";
-                    echo "<script>window.location.href='formations'</script>";
-                }else{
-                    echo "not". $this->db->conn->error;
-                }
-                return $result;
+                echo "not". $this->db->conn->error;
             }
+            return $result;
         }
         public function updateSalle(){
             $id = $_GET['id'];
@@ -452,6 +499,15 @@
             }
             return $resultArray;
         }
+        public function countNotes(){
+            $result = $this->db->conn->query("SELECT *, COUNT(not_id) AS 'total_not' FROM `note` INNER JOIN `etudiant` ON etud_id=not_etudiant");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
         public function deleteMatieres($matiere_id = null){
             $result= $this->db->conn->query("DELETE FROM `matiere` WHERE mat_id=$matiere_id");
             if($result){
@@ -460,6 +516,18 @@
             }else{
                 echo $this->db->conn->error;
             }
+        }
+        public function deleteNote($note_id = null){
+            $count = $_POST['not_count'];
+            for($i=0;$i<$count; $i++){
+                $result= $this->db->conn->query("DELETE FROM `note` WHERE not_id=$note_id[$i]");
+                if($result){
+    
+                }else{
+                    echo $this->db->conn->error;
+                }
+            }
+
         }
         public function deleteIso($iso_id = null){
             $result= $this->db->conn->query("DELETE FROM `iso` WHERE iso_id=$iso_id");
@@ -509,7 +577,11 @@
                 $_SESSION['nom'] = $etudiant['etud_nom'];
                 echo "<script>window.location.href='espace-stagiaire'</script>";
             }
-            $_SESSION['status'] = "CIN ou mot de passe incorrecte";
+            if($_SESSION['lang'] == 'ar'){
+                $_SESSION['status'] = "رقم البطاقة الوطنية أو القن السري غير صحيح";
+            }else{
+                $_SESSION['status'] = "CIN ou mot de passe incorrecte";
+            }
             return $result;
         }
         public function getEtudiantNotes(){
@@ -540,7 +612,7 @@
             $categorie = $_POST['categorie'];
             $obtenir = $_POST['obtenir'];
             $profesionnel = $_POST['profesionnel'];
-            $promos = $_POST['promos'];
+            // @$promos = $_POST['promos'];
             $scan_cin = basename($_FILES['scan_cin']['name']);
             $scan_permis = basename($_FILES['scan_permis']['name']);
             $scan_visite = basename($_FILES['scan_visite']['name']);
@@ -561,111 +633,180 @@
                 $_SESSION['status_error'] = "CIN existe déja";
             }else{
                 if($prenom == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir votre prénom en français
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدخال اسمك الأول بالفرنسية</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre prénom en français</div>";
+                    }
+
                 }else if($nom == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir votre nom en français
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدخال اسمك بالفرنسية</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre nom en français</div>";
+                    }
                 }else if($prenom_arab == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir votre prénom en arabe
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدخال اسمك الأول باللغة العربية</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre prénom en arabe</div>";
+                    }
                 }else if($nom_arab == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir votre nom en arabe
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدخال اسمك باللغة العربية</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre nom en arabe</div>";
+                    }
                 }else if($email == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir votre email
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>رجاءا أدخل بريدك الإلكتروني</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre email</div>";
+                    }
                 }else if($_POST['motdepasse'] == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir votre mot de passe
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدراج كلمة المرور الخاصة بك</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre mot de passe</div>";
+                    }
                 }else if($naissance == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir votre date de naissance
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء ادخال تاريخ ميلادك</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre date de naissance</div>";
+                    }
                 }else if($date < $naissance){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Veuillez saisir une date de naissance correcte
-                        </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدخال تاريخ الميلاد الصحيح</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir une date de naissance correcte</div>";
+                    }
                 }else if((int)$age->format('%y') < 18){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Votre age doit dépasser 18 ans veuillez vérifier la date de naissance
-                        </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>يجب أن يتجاوز عمرك 18 عامًا ، يرجى التحقق من تاريخ الميلاد</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Votre age doit dépasser 18 ans veuillez vérifier la date de naissance</div>";
+                    }
                 }else if($lieu == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir votre lieu de naissance
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدخال مسقط رأسك</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre lieu de naissance</div>";
+                    }
                 }else if($cin == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir votre CIN
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>المرجو إدخال رقم البطاقة الوطنية</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre CIN</div>";
+                    }
                 }else if($telephone == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir votre numéro de téléphone
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>يرجى إدخال رقم الهاتف الخاص بك</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre numéro de téléphone</div>";
+                    }
                 }else if($adresse == ''){
                     echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
                         Veuillez saisir votre adresse
                     </div>";
                 }else if($formation == ""){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Veuillez choisir une formation
-                        </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء اختيار التكوين</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez choisir une formation</div>";
+                    }
                 }else if($permis == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir votre numéro de permis
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدخال رقم رخصة السياقة</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre numéro de permis</div>";
+                    }
                 }else if($categorie == ""){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Veuillez choisir une catégorie de permis
-                        </div>";
+                    if($_SESSION['lnag'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء اختيار فئة رخصة السياقة</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez choisir une catégorie de permis</div>";
+                    }
                 }else if($obtenir == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Veuillez saisir la date d'obtention de votre permis
-                        </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدخال تاريخ الحصول على رخصة السياقة</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir la date d'obtention de votre permis</div>";
+                    }
                 }else if($date < $obtenir){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            La date d'obtention ne dois pas dépasser la date d'aujourd'hui ".date("d/m/Y")." 
-                        </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>".date("d/m/Y")." يجب ألا يتجاوز تاريخ الحصول على رخصة السياقة على تاريخ اليوم  </div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>La date d'obtention du permis ne dois pas dépasser la date d'aujourd'hui ".date("d/m/Y")." </div>";
+                    }
                 }else if($scan_cin == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez charger un scan de votre CIN
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء تحميل مسح بطاقاكم الوطنية</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez charger un scan de votre CIN</div>";
+                    }
                 }else if(!in_array($ext_cin, $allowed2)){
-                    echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                                Le fichier que vous avez chargé ".$scan_cin." est de type ".$ext.
-                                "<br>Nous supportons juste les fichiers de type 'pdf'
-                            </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        ".$ext." الملف الذي قمت باسمه هو من النوع
+                            <br>'pdf' نحن فقط ندعم الملفات
+                        </div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            Le fichier que vous avez chargé ".$scan_cin." est de type ".$ext.
+                            "<br>Nous supportons juste les fichiers de type 'pdf'
+                        </div>";
+                    }
                 }else if($scan_permis == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez charger un scan de votre permis
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء تحميل مسح رخصة سياقتكم</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez charger un scan de votre permis</div>";
+                    }
                 }else if(!in_array($ext_permis, $allowed2)){
-                    echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                                Le fichier que vous avez chargé ".$scan_permis." est de type ".$ext.
-                                "<br>Nous supportons juste les fichiers de type 'pdf'
-                            </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        ".$ext." الملف الذي قمت باسمه هو من النوع
+                            <br>'pdf' نحن فقط ندعم الملفات
+                        </div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            Le fichier que vous avez chargé ".$scan_permis." est de type ".$ext.
+                            "<br>Nous supportons juste les fichiers de type 'pdf'
+                        </div>";
+                    }
                 }else if($scan_visite == ''){
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez charger un scan de votre visite médicale
-                    </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'الرجاء تحميل مسح فحصكم الطبي</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez charger un scan de votre visite médicale</div>";
+                    }
                 }else if(!in_array($ext_visite, $allowed2)){
-                    echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                                Le fichier que vous avez chargé ".$scan_visite." est de type ".$ext.
-                                "<br>Nous supportons juste les fichiers de type 'pdf'
-                            </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        ".$ext." الملف الذي قمت باسمه هو من النوع 
+                            <br>'pdf' نحن فقط ندعم الملفات
+                        </div>";
+                    }else{
+                        echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                            Le fichier que vous avez chargé ".$scan_visite." est de type ".$ext.
+                            "<br>Nous supportons juste les fichiers de type 'pdf'
+                        </div>";
+                    }
                 }else if(!in_array($ext, $allowed) & $image != ""){
-                    echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                                L'image que vous avez chargé ".$image." est de type ".$ext.
-                                "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
-                            </div>";
+                    if($_SESSION['lang'] == 'ar'){
+                        echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        ".$ext." الصورة التي قمت بتحميلها من النوع
+                            <br>'jpg, png, jpeg' نحن فقط ندعم الصور نوع
+                        </div>";
+                    }else{
+                        echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                        L'image que vous avez chargé ".$image." est de type ".$ext.
+                        "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+                    </div>";
+                    }
                 }else{
-                    mkdir("dossiers-stagiaires/".$prenom."-".$nom,0777,true);
+                    @mkdir("dossiers-stagiaires/".$prenom."-".$nom,0777,true);
                     $path = "./dossiers-stagiaires/$prenom-$nom/";
                     $imagelink = "image-";
                     $cinlink = "cin-";
@@ -680,10 +821,10 @@
                     $res = $this->db->conn->query("INSERT INTO `etudiant`(`etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, 
                         `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, 
                         `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, 
-                        `etud_scan_cin`, `etud_scan_permis`, `etud_scan_visite`, `etud_promos`, `etud_image`, `etud_inscription`) VALUES ('$nom','$nom_arab',
+                        `etud_scan_cin`, `etud_cin_name`, `etud_scan_permis`, `etud_permis_name`, `etud_scan_visite`, `etud_visite_name`, `etud_image`, `etud_inscription`) VALUES ('$nom','$nom_arab',
                         '$prenom','$prenom_arab','$email','$telephone','$motdepasse','$cin','$formation','$naissance','$lieu','$adresse',
-                        '$permis','$categorie','$profesionnel','$obtenir','$path$cinlink$scan_cin','$path$permislink$scan_permis',
-                        '$path$visitelink$scan_visite','$promos','$path$imagelink$image',NOW())");
+                        '$permis','$categorie','$profesionnel','$obtenir','$path$cinlink$scan_cin','$cinlink$scan_cin','$path$permislink$scan_permis',
+                        '$permislink$scan_permis','$path$visitelink$scan_visite','$visitelink$scan_visite','$path$imagelink$image',NOW())");
                         /*$to = $_POST['email'];
                         $subject = "Confirmation d'inscription";
                         $headers = 'Content-type: text/html';
@@ -701,9 +842,8 @@
                                     <a href='http://localhost/ecole/'>Click here</a>
                                 </div>";
                         mail($to, $subject, $msg, $headers);*/
-                        //echo "<script>window.location.href='login'</script>";
-                        $_SESSION['status_login'] = "Votre inscription a été bien effectué Veuillez vérifier votre email<br>
-                                                    Veuillez se connecter <a href='login'>ICI</a>";
+                        echo "<script>window.location.href='login'</script>";
+                        $_SESSION['status_login'] = "Votre inscription a été bien effectué Veuillez ce connecter";
                     return $res;
                 } 
             }
@@ -718,21 +858,22 @@
             }
         }
         public function getFormationMatiereEtudiant(){
-            //@$promotion = $_POST['promotion'];
-            //if(isset($_POST['promotion_submit'])){
-            //    if($promotion == ''){
-            //        $_SESSION['status_error'] = "Merci de choisir une promotion pour poursuivre";
-            //    }else{
+            @$promotion = $_POST['promotion'];
+            if(isset($_POST['submit_promotion'])){
+                if($promotion == ''){
+                    $_SESSION['status_error'] = "Merci de choisir une promotion pour poursuivre";
+                }else{
+                    echo $promotion;
                     $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
-                    INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation /*WHERE etud_promos = 'promotion'*/ ORDER BY mat_nom");
+                    INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation  INNER JOIN `promos` ON pro_id=etud_promos WHERE etud_promos = '$promotion' ORDER BY pro_groupe");
                     $resultArray = array();
                     // fetch product data one by one
                     while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                         $resultArray[] = $item;
                     }
                     return $resultArray;
-            //    }
-            //}
+                }
+            }
         }
         public function getEtudiantFormationPromotion(){
             $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
@@ -747,7 +888,7 @@
         public function etudiantTotal(){
             $id = $_GET['id'];
             $result = $this->db->conn->query("SELECT *, COUNT(etud_nom) AS 'total_etudiant' FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
-            INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation WHERE mat_id =$id GROUP BY mat_nom");
+            INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation INNER JOIN `promos` ON etud_promos=pro_id WHERE mat_id =$id GROUP BY mat_nom");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -785,19 +926,20 @@
                     }else{
                         echo $this->db->conn->error;
                     }
+                    return $result;
                 }
-                return $result;
+
             }
 
         }
         public function insertPromotion(){
             $promotion_name =  mysqli_escape_string($this->db->conn, $_POST['promotion_name']);
-            $checkresult = $this->db->conn->query("SELECT `pro_année` FROM `promos` WHERE pro_année='$promotion_name'");
+            $checkresult = $this->db->conn->query("SELECT `pro_année` FROM `promos` WHERE pro_group='$promotion_name'");
             if($checkresult->num_rows){
                 $_SESSION['status_danger'] = "Nom existe déjà veuillez choisir un autre";
                 echo "<script>window.location.href='ajouter-promotion'</script>";
             }else{
-                $result = $this->db->conn->query("INSERT INTO `promos`(`pro_année`) VALUES ('$promotion_name')");
+                $result = $this->db->conn->query("INSERT INTO `promos`(`pro_group`) VALUES ('$promotion_name')");
                 if($result){
                     $_SESSION['status'] = "La promotion a été bien ajoutée";
                     echo "<script>window.location.href='ajouter-promotion'</script>";
@@ -916,7 +1058,11 @@
             $result = $this->db->conn->query("INSERT INTO `douane`(`dou_nom`, `dou_res_nom`, `dou_res_email`, `dou_res_message`, `dou_res_date`) 
                 VALUES ('$douane_categorie','$douane_nom','$douane_email','$douane_message', NOW())");
             if($result){
-                $_SESSION['status'] = "Votre demande de catégorisation douane a été bien envoyée";
+                if($_SESSION['lang'] == 'ar'){
+                    $_SESSION['status'] = "تم إرسال طلب تصنيف الجمارك بشكل جيد";
+                }else{
+                    $_SESSION['status'] = "Votre demande de catégorisation douane a été bien envoyée";
+                }
                 echo "<script>window.location.href='douane'</script>";
             }
             return $result;
@@ -1102,7 +1248,11 @@
                 $result = $this->db->conn->query("INSERT INTO `iso`(`iso_nom`, `iso_res_nom`, `iso_res_email`, `iso_res_message`, `iso_res_date`) 
                 VALUES ('$iso_categorie','$iso_nom','$iso_email','$iso_message', NOW())");
                 if($result){
-                    $_SESSION['status'] = "Votre demande d'accompagnement ISO a été bien envoyée";
+                    if($_SESSION['lang'] == 'ar'){
+                        $_SESSION['status'] = "ISO تم إرسال طلب المصاحبة";
+                    }else{
+                        $_SESSION['status'] = "Votre demande d'accompagnement ISO a été bien envoyée";
+                    }
                     echo "<script>window.location.href='conseil'</script>";
                 }
                 return $result;
@@ -1282,10 +1432,6 @@
             $nom_formation_arabe = $_POST['titre_arabe'];
             $presentation_arabe = mysqli_escape_string($this->db->conn, $_POST['presentation_arabe']);
             $description_arabe = mysqli_escape_string($this->db->conn, $_POST['description_arabe']);
-            $image = $_FILES['image']['name'];
-            $allowed = array('jpg', 'png', 'jpeg');
-            $ext = pathinfo($image, PATHINFO_EXTENSION);
-            $path="./images/formation/";
             if($nom_formation == ''){
                 echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
                         Veuillez saisir un nom de formation en français
@@ -1310,19 +1456,10 @@
                 echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
                         Veuillez saisir une description de la formation en arabe
                     </div>";
-            }else if($image == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez choisir une image
-                    </div>";
-            }else if(!in_array($ext, $allowed)){
-                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                    Le fichier que vous avez choisit ".$image." est de type ".$ext.
-                    "<br>Nous supportant juste les images de type 'jpg, png, jpeg'
-                </div>";
-            }else if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
+            }else{
                 $result = $this->db->conn->query("INSERT INTO `formation`(`for_nom`, `for_nom_arab`, `for_pres`, `for_pres_arab`, `for_descr`, 
-                    `for_desc_arab`, `for_image`) VALUES ('$nom_formation','$nom_formation_arabe','$presentation','$presentation_arabe',
-                    '$description','$description_arabe','$path$image')");
+                    `for_desc_arab`) VALUES ('$nom_formation','$nom_formation_arabe','$presentation','$presentation_arabe',
+                    '$description','$description_arabe')");
                 if($result){
                     $_SESSION['status'] = "La formation a été bien ajouté";
                     echo "<script>window.location.href='formations'</script>";
@@ -1552,6 +1689,17 @@
             }
             return $resultArray;
         }
+        public function getTotalAbsenceAdmin(){
+            $id = $_POST['id'];
+            $result = $this->db->conn->query("SELECT *, COUNT(abs_id) AS 'Total' FROM `absence` INNER JOIN `etudiant` 
+            ON absence.abs_etudiant=etudiant.etud_id WHERE abs_absence='Absent' AND etud_id='$id'");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
         public function getCommentsAjax(){
             $article_id = $_POST['article_id'];
             $result = $this->db->conn->query("SELECT * FROM `commentaire` WHERE com_article =$article_id");
@@ -1564,6 +1712,16 @@
         }
         public function getEtudiantNotesAjax(){
             $result = $this->db->conn->query("SELECT *, AVG(not_note) AS 'notegenerale' FROM `etudiant` LEFT JOIN `note` ON not_etudiant=etud_id 
+                LEFT JOIN `formation` ON etud_formation=for_id GROUP BY etud_id");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function getEtudiantsSearch(){
+            $result = $this->db->conn->query("SELECT * FROM `etudiant` LEFT JOIN `note` ON not_etudiant=etud_id 
                 INNER JOIN `formation` ON etud_formation=for_id GROUP BY not_etudiant");
             $resultArray = array();
             // fetch product data one by one
@@ -1579,7 +1737,11 @@
             $sujet = mysqli_escape_string($this->db->conn, $_POST['sujet']);
             $result = $this->db->conn->query("INSERT INTO `contact`(`con_nom`, `con_email`, `con_sujet`, `con_message`, `con_envoie`)
                 VALUES ('$nom','$email','$sujet','$message',NOW())");
-            echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre message a été envoyé avec succes <i class="fas fa-times font-close" onclick="fermer()"></i></div>'; 
+            if($_SESSION['lang'] =="ar"){
+                echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">تم ارسال رسالتك بنجاح <i class="fas fa-times font-close" onclick="fermer()"></i></div>'; 
+            }else{
+                echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre message a été envoyé avec succes <i class="fas fa-times font-close" onclick="fermer()"></i></div>'; 
+            }
             return $result;
         }
         public function insertReservation(){
@@ -1592,20 +1754,38 @@
             $time_fin = $_POST['time_fin'];
             $commentaire_reservation = mysqli_escape_string($this->db->conn, $_POST['commentaire_reservation']);
             $date = date("Y-m-d");
-            $result = $this->db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$salle_id AND res_date='$date_salle' AND (time_debut>='$time_debut' AND time_debut <'$time_fin')");
+            $result = $this->db->conn->query("SELECT * FROM `reservation` WHERE res_salle='$salle_id' AND res_date='$date_salle' AND (time_fin>'$time_debut' AND time_debut <'$time_fin')");
             //$result2 = $this->db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$salle_id AND time_debut>='$time_debut' AND time_debut <'$time_fin'");
             if($date_salle < $date){
-                echo '<div class="alert alert-danger text-center mt-2" role="alert">
+                if($_SESSION['lang'] == 'ar'){
+                    echo '<div class="alert alert-danger text-center mt-2" role="alert">
+                        يرجى التحقق من البيانات 
+                    </div>';
+                }else{
+                    echo '<div class="alert alert-danger text-center mt-2" role="alert">
                         Réservation échouée svp vérifier les données entrées
                     </div>';
+                }
             }else if($result->num_rows){
-                echo "<div class='alert alert-danger text-center mt-2' role='alert'>
+                if($_SESSION['lang'] == 'ar'){
+                    echo "<div class='alert alert-danger text-center mt-2' role='alert'>
+                        وقت محجوز ، يرجى أخذ ساعة جديدة
+                    </div>";
+                }else{
+                    echo "<div class='alert alert-danger text-center mt-2' role='alert'>
                         Heure réservée, Merci de prendre une nouvelle heure
                     </div>";
+                }
             }else if($time_fin < $time_debut){
-                echo "<div class='alert alert-danger text-center mt-2' role='alert'>
+                if($_SESSION['lang'] == 'ar'){
+                    echo "<div class='alert alert-danger text-center mt-2' role='alert'>
+                        يجب أن يكون وقت النهاية دائمًا أكبر من تاريخ البدء
+                    </div>";
+                }else{
+                    echo "<div class='alert alert-danger text-center mt-2' role='alert'>
                         L'heure de fin doit toujours être supérieure à la date de début
                     </div>";
+                }
             }else{
                 $result3 = $this->db->conn->query("INSERT INTO `reservation`(`res_nom`, `res_telephone`, `res_email`, `res_salle`, 
                 `res_commentaire`, `res_date`, `time_debut`, `time_fin`) 
@@ -1619,7 +1799,7 @@
             if(isset($_POST['nom'])){
                 $nom = $_POST['nom'];
                 $result = $this->db->conn->query("SELECT *, AVG(not_note) AS 'notegenerale' FROM `etudiant` LEFT JOIN `note` ON not_etudiant=etud_id 
-                    INNER JOIN `formation` ON etud_formation=for_id GROUP BY not_etudiant HAVING etud_nom LIKE '%".$nom."%' OR etud_prenom LIKE '%".$nom."%'");
+                    LEFT JOIN `formation` ON etud_formation=for_id GROUP BY not_etudiant HAVING etud_nom LIKE '%".$nom."%' OR etud_prenom LIKE '%".$nom."%'");
                 $resultArray = array();
                 // fetch product data one by one
                 while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -1661,7 +1841,7 @@
             $msg = "<img class='img-fluid' src='http://localhost/ecole/images/logo.jpeg' 
                     style='width:16rem; height:60px' alt='logo'>
                     <div style='text-align:center; align-items:center;'>
-                        <h1>Confirmation d'inscription</h1><br>
+                        <h1>Changement de mot de passe</h1><br>
                         <p><b>Veuillez trouvez ci-dessous le nouveau mot de passe de votre compte.<b></p><br>
                         <ul>
                             <li>Mot de passe: ".$_POST['password']."</li>
@@ -1670,13 +1850,14 @@
                     </div>";
             mail($to, $subject, $msg, $headers);
             if($result){
+                $_SESSION['status_arab'] = "تم تغيير كلمة المرور الخاصة بك بنجاح تم إرسال كلمة المرور الجديدة إلى مربع بريدك الإلكتروني";
                 $_SESSION['status'] = "Votre mot de passe à été modifié avec succès Le nouveau mot de passe a été envoyé à votre boite email";
             }
             return $result;
         }
         public function getEtudiantPromotion(){
-            $result = $this->db->conn->query("SELECT `etud_id`, `etud_nom`, `etud_prenom`, `pro_id`, `pro_année` FROM `promos` 
-                    INNER JOIN `etudiant` ON pro_id=etud_promos ORDER BY etud_prenom ASC");
+            $result = $this->db->conn->query("SELECT `etud_id`, `etud_nom`, `etud_prenom`, `pro_id`, `pro_groupe`, COUNT(etud_promos) AS 'total' FROM `promos` 
+                    LEFT JOIN `etudiant` ON pro_id=etud_promos GROUP BY pro_groupe ORDER BY pro_groupe ASC");
             $resultArray = array();
             while($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                 $resultArray [] = $item;
@@ -1692,12 +1873,13 @@
             return $resultArray;
         }
         public function updatePromotion(){
+            $id_for = $_GET['id'];
             $promotion = $_POST['promotion'];
-            $id = $_POST['id_etud'];
+            $id = $_POST['etudiant'];
             $result =$this->db->conn->query("UPDATE `etudiant` SET `etud_promos`='$promotion' WHERE etud_id='$id'");
             if($result){
-                echo '<script>window.location.href="gérer-promotion"</script>';
-                $_SESSION['status'] = "La promotion a été bien modifiée";
+                echo "<script>window.location.href='gestion-formation?id=$id_for'</script>";
+                $_SESSION['status'] = "La promotion a été bien saisit";
             }else{
                 echo $this->db->conn->error;
             }

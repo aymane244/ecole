@@ -7,7 +7,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +47,19 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-header text-center link-font">
-                                <h3><i class="fas fa-edit"></i> <?php echo $inscription['inscription']?></h3>
+                                <h3>
+                                    <?php
+                                        if($_SESSION['lang'] =="ar"){
+                                    ?>
+                                    <?php echo $inscription['inscription']?> <i class="fas fa-edit"></i> 
+                                    <?php        
+                                        }else{
+                                    ?>
+                                    <i class="fas fa-edit"></i> <?php echo $inscription['inscription']?>
+                                    <?php        
+                                        }
+                                    ?>
+                                </h3>
                             </div>
                             <div class="card-body py-5">
                                 <form action="" method="POST" enctype="multipart/form-data">
@@ -75,28 +87,49 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
-                                            <div class="row mb-3">
+                                            <div style="text-align: right;">
                                                 <label for="prenom_arab" class="col-md-12 col-form-label text-md-end">(بالعربية) الاسم الشخصي</label>
-                                                <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-user position-awesome"></i>
-                                                        <input id="prenom_arab" type="text" class="form-control pl-5" name="prenom_arab" autocomplete="prenom" placeholder="الاسم الشخصي" value="<?php echo isset($_POST['prenom_arab']) ? $_POST['prenom_arab'] : ''; ?>">
-                                                    </div>
-                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
                                             <div class="row mb-3">
-                                                <label for="nom_arab" class="col-md-12 col-form-label text-md-end">(بالعربية) الاسم العائلي</label>
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
-                                                        <i class="fas fa-user position-awesome"></i>
-                                                        <input id="nom_arab" type="text" class="form-control pl-5" name="nom_arab" autocomplete="nom_arab" placeholder="الاسم العائلي" value="<?php echo isset($_POST['nom_arab']) ? $_POST['nom_arab'] : ''; ?>">
+                                                        <i class="fas fa-user position-awesome_arab_modal"></i>
+                                                        <input id="prenom_arab" type="text" class="form-control pr-5" name="prenom_arab" style="text-align: right;" autocomplete="prenom" placeholder="الاسم الشخصي" value="<?php echo isset($_POST['prenom_arab']) ? $_POST['prenom_arab'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
+                                            <div class="text-right">
+                                                    <label for="nom_arab" class="col-md-12 col-form-label text-md-end">(بالعربية) الاسم العائلي</label>
+                                                </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-user position-awesome_arab_modal"></i>
+                                                        <input id="nom_arab" type="text" class="form-control pr-5 text-right" name="nom_arab" autocomplete="nom_arab" placeholder="الاسم العائلي" value="<?php echo isset($_POST['nom_arab']) ? $_POST['nom_arab'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <?php
+                                                if($_SESSION['lang'] == 'ar'){
+                                            ?>
+                                            <div class="text-right">
+                                                <label for="email" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['email']?></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-envelope position-awesome_arab_modal"></i>
+                                                        <input id="email" type="email" class="form-control pr-5 text-right" name="email" autocomplete="email" placeholder="بريدك الإلكتروني" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php        
+                                                }else{
+                                            ?>
                                             <div class="row mb-3">
                                                 <label for="email" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['email']?></label>
                                                 <div class="col-md-12">
@@ -106,8 +139,28 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php        
+                                                }
+                                            ?>
                                         </div>
                                         <div class="col-lg-6">
+                                            <?php
+                                                if($_SESSION['lang'] == 'ar'){
+                                            ?>
+                                            <div class="text-right">
+                                                <label for="motdepasse" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['passe']?></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-lock position-awesome_arab_modal"></i>
+                                                        <input id="motdepasse" type="password" class="form-control pr-5 text-right" name="motdepasse" placeholder="كلمة السر الخاصة بك" value="<?php echo isset($_POST['motdepasse']) ? $_POST['motdepasse'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php        
+                                                }else{
+                                            ?>
                                             <div class="row mb-3">
                                                 <label for="motdepasse" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['passe']?></label>
                                                 <div class="col-md-12">
@@ -117,8 +170,28 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php        
+                                                }
+                                            ?>
                                         </div>
                                         <div class="col-lg-4">
+                                            <?php
+                                                if($_SESSION['lang'] == 'ar'){
+                                            ?>
+                                            <div class="text-right">
+                                                <label for="naissance" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['date']?></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-calendar position-awesome"></i>
+                                                        <input id="naissance" type="date" class="form-control pl-5" name="naissance" autofocus value="<?php echo isset($_POST['naissance']) ? $_POST['naissance'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php        
+                                                }else{
+                                            ?>
                                             <div class="row mb-3">
                                                 <label for="naissance" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['date']?></label>
                                                 <div class="col-md-12">
@@ -128,8 +201,28 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php        
+                                                }
+                                            ?>
                                         </div>
                                         <div class="col-lg-4">
+                                            <?php
+                                                if($_SESSION['lang'] == 'ar'){
+                                            ?>
+                                            <div class="text-right">
+                                                <label for="lieu" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['lieu']?></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-map-marker-alt position-awesome_arab_insc"></i>
+                                                        <input id="lieu" type="text" class="form-control pr-5 text-right" name="lieu" placeholder='مكان الولادة' value="<?php echo isset($_POST['lieu']) ? $_POST['lieu'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php        
+                                                }else{
+                                            ?>
                                             <div class="row mb-3">
                                                 <label for="lieu" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['lieu']?></label>
                                                 <div class="col-md-12">
@@ -139,8 +232,28 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php        
+                                                }
+                                            ?>
                                         </div>
                                         <div class="col-lg-4">
+                                            <?php
+                                                if($_SESSION['lang'] == 'ar'){
+                                            ?>
+                                            <div class="text-right">
+                                                <label for="cin" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['cin']?></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-file-alt position-awesome_arab_insc"></i>
+                                                        <input id="cin" type="text" class="form-control pr-5 text-right" name="cin" autocomplete="cin" placeholder="رقم البطاقة الوطنية" value="<?php echo isset($_POST['cin']) ? $_POST['cin'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php        
+                                                }else{
+                                            ?>
                                             <div class="row mb-3">
                                                 <label for="cin" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['cin']?></label>
                                                 <div class="col-md-12">
@@ -150,8 +263,28 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php        
+                                                }
+                                            ?>
                                         </div>
                                         <div class="col-lg-6">
+                                            <?php
+                                                if($_SESSION['lang'] == 'ar'){
+                                            ?>
+                                            <div class="text-right">
+                                                <label for="telephone" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['telephone']?></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-phone position-awesome_arab_modal"></i>
+                                                        <input id="telephone-inscription" type="text" class="form-control pr-5 text-right" name="telephone" autocomplete="telephone" placeholder="رقم الهاتف" autofocus value="<?php echo isset($_POST['telephone']) ? $_POST['telephone'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php        
+                                                }else{
+                                            ?>
                                             <div class="row mb-3">
                                                 <label for="telephone" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['telephone']?></label>
                                                 <div class="col-md-12">
@@ -161,8 +294,28 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php        
+                                                }
+                                            ?>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-lg-6">
+                                            <?php
+                                                if($_SESSION['lang'] == 'ar'){
+                                            ?>
+                                            <div class="text-right">
+                                                <label for="adresse" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['adresse']?></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-map-marker-alt position-awesome_arab_modal"></i>
+                                                        <input id="adresse" type="text" class="form-control pr-5 text-right" name="adresse" autocomplete="adresse" placeholder="العنوان" value="<?php echo isset($_POST['adresse']) ? $_POST['adresse'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php        
+                                                }else{
+                                            ?>
                                             <div class="row mb-3">
                                                 <label for="adresse" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['adresse']?></label>
                                                 <div class="col-md-12">
@@ -172,9 +325,36 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php        
+                                                }
+                                            ?>                                            
                                         </div>
-                                        <label for="categorie" class="col-md-4 col-form-label text-md-end"><?php echo $inscription['formation']?></label>
+                                        <?php
+                                            if($_SESSION['lang'] =="ar"){
+                                        ?>
                                         <div class="col-md-12 mb-3">
+                                            <div class="text-right">
+                                                <label for="categorie" class="col-md-4 col-form-label text-md-end"><?php echo $inscription['formation']?></label>
+                                            </div>
+                                            <div class="d-flex">
+                                                <i class="fas fa-folder-open position-awesome_arab_full_insc"></i>
+                                                <select class="custom-select pr-5 text-right" name="formation" onchange="affichage()" id="formation" style="appearance: none;">
+                                                    <option selected value="">--<?php echo $inscription['choisir']?>--</option>
+                                                    <?php
+                                                        foreach($formations as $formation){
+                                                    ?>
+                                                    <option value="<?php echo $formation['for_id'] ?>"><?php echo $formation['for_nom_arab'] ?></option>
+                                                    <?php      
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <?php    
+                                            }else{
+                                        ?>
+                                        <div class="col-md-12 mb-3">
+                                            <label for="categorie" class="col-md-4 col-form-label text-md-end"><?php echo $inscription['formation']?></label>
                                             <div class="d-flex">
                                                 <i class="fas fa-folder-open position-awesome"></i>
                                                 <select class="custom-select pl-5" name="formation" onchange="affichage()" id="formation">
@@ -182,26 +362,34 @@
                                                     <?php
                                                         foreach($formations as $formation){
                                                     ?>
-                                                    <option value="<?php echo $formation['for_id'] ?>">
-                                                        <?php
-                                                            if($_SESSION['lang'] =="ar"){
-                                                        ?>
-                                                        <?php echo $formation['for_nom_arab'] ?>
-                                                        <?php    
-                                                            }else{
-                                                        ?>
-                                                        <?php echo $formation['for_nom'] ?>
-                                                        <?php      
-                                                            }
-                                                        ?>
-                                                    </option>
-                                                    <?php
+                                                    <option value="<?php echo $formation['for_id'] ?>"><?php echo $formation['for_nom_arab'] ?></option>
+                                                    <?php      
                                                         }
                                                     ?>
                                                 </select>
                                             </div>
                                         </div>
+                                        <?php
+                                            }
+                                        ?>
                                         <div class="col-md-4">
+                                            <?php
+                                                if($_SESSION['lang'] =="ar"){
+                                            ?>
+                                            <div class="text-right">
+                                                <label for="permis" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['permis']?></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-id-badge position-awesome_arab_insc"></i>
+                                                        <input id="permis" type="text" class="form-control pr-5 text-right" name="permis" autocomplete="permis" placeholder="رقم رخصة السياقة" value="<?php echo isset($_POST['permis']) ? $_POST['permis'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php    
+                                                }else{
+                                            ?>
                                             <div class="row mb-3">
                                                 <label for="permis" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['permis']?></label>
                                                 <div class="col-md-12">
@@ -211,14 +399,22 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php
+                                                }
+                                            ?>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="row mb-3">
+                                            <?php
+                                                if($_SESSION['lang'] =="ar"){
+                                            ?>
+                                            <div class="text-right">
                                                 <label for="adresse" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['categorie']?></label>
+                                            </div>
+                                            <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
-                                                        <i class="fas fa-bus position-awesome"></i>
-                                                        <select class="custom-select px-5" name="categorie" id="categorie">
+                                                        <i class="fas fa-bus position-awesome_arab_insc"></i>
+                                                        <select class="custom-select pr-5 text-right" name="categorie" id="categorie" style="text-indent: 5px;">
                                                             <option selected value="">--<?php echo $inscription['categorie_permis']?>--</option>
                                                             <option value="A">A</option>
                                                             <option value="B">B</option>
@@ -227,8 +423,45 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php    
+                                                }else{
+                                            ?>
+                                            <div class="row mb-3">
+                                                <label for="adresse" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['categorie']?></label>
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-bus position-awesome"></i>
+                                                        <select class="custom-select pl-5" name="categorie" id="categorie">
+                                                            <option selected value="">--<?php echo $inscription['categorie_permis']?>--</option>
+                                                            <option value="A">A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php
+                                                }
+                                            ?>
                                         </div>
                                         <div class="col-md-4">
+                                            <?php
+                                                if($_SESSION['lang'] =="ar"){
+                                            ?>
+                                            <div class="text-right">
+                                                <label for="obtenir" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['obtention']?></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-calendar position-awesome"></i>
+                                                        <input id="obtenir" type="date" class="form-control pl-5" name="obtenir" autocomplete="obtenir" value="<?php echo isset($_POST['obtenir']) ? $_POST['obtenir'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php    
+                                                }else{
+                                            ?>
                                             <div class="row mb-3">
                                                 <label for="obtenir" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['obtention']?></label>
                                                 <div class="col-md-12">
@@ -238,10 +471,30 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php
+                                                }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-5" id="div-carte" style="display:none;">
+                                        <div class="col-md-6" id="div-carte" style="display:none;">
+                                            <?php
+                                                if($_SESSION['lang'] =="ar"){
+                                            ?>
+                                            <div class="text-right">
+                                                <label for="profesionnel" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['profesionnel']?></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-address-card position-awesome_arab_modal"></i>
+                                                        <input id="profesionnel" type="text" class="form-control pr-5 text-right" name="profesionnel" autocomplete="profesionnel" placeholder="رقم البطاقة المهنية" value="<?php echo isset($_POST['profesionnel']) ? $_POST['profesionnel'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php    
+                                                }else{
+                                            ?>
                                             <div class="row mb-3">
                                                 <label for="profesionnel" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['profesionnel']?></label>
                                                 <div class="col-md-12">
@@ -251,13 +504,27 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php
+                                                }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mt-3">
                                             <label for="scan_cin" class="text-md-end d-flex justify-content-center file-label py-3 rounded">
+                                                <?php
+                                                    if($_SESSION['lang'] =="ar"){
+                                                ?>
+                                                <?php echo $inscription['scan_cin']?> &nbsp;
+                                                <i class="fas fa-file-upload position-awesome-upload"></i>
+                                                <?php    
+                                                    }else{
+                                                ?>
                                                 <i class="fas fa-file-upload position-awesome-upload"></i> &nbsp;
                                                 <?php echo $inscription['scan_cin']?>
+                                                <?php
+                                                    }
+                                                ?> 
                                             </label>
                                             <input id="scan_cin" type="file" class="form-control-file file" name="scan_cin">
                                             <div id="showimage4" class="showpdf"></div>
@@ -265,8 +532,19 @@
                                         </div>
                                         <div class="col-md-3 mt-3">
                                             <label for="scan_permis" class="text-md-end d-flex justify-content-center file-label py-3 rounded font-inscr">
+                                                <?php
+                                                    if($_SESSION['lang'] =="ar"){
+                                                ?>
+                                                <?php echo $inscription['scan_permis']?> &nbsp;
+                                                <i class="fas fa-file-upload position-awesome-upload"></i>
+                                                <?php    
+                                                    }else{
+                                                ?>
                                                 <i class="fas fa-file-upload position-awesome-upload"></i> &nbsp;
                                                 <?php echo $inscription['scan_permis']?>
+                                                <?php
+                                                    }
+                                                ?>
                                             </label>
                                             <input id="scan_permis" type="file" class="form-control-file file" name="scan_permis">
                                             <div id="showimage3" class="showpdf"></div>
@@ -274,8 +552,19 @@
                                         </div>
                                         <div class="col-md-3 mt-3">
                                             <label for="scan_visite" class="text-md-end d-flex justify-content-center file-label py-3 rounded">
+                                                <?php
+                                                    if($_SESSION['lang'] =="ar"){
+                                                ?>
+                                                <?php echo $inscription['scan_visite']?> &nbsp;
+                                                <i class="fas fa-file-upload position-awesome-upload"></i> 
+                                                <?php    
+                                                    }else{
+                                                ?>
                                                 <i class="fas fa-file-upload position-awesome-upload"></i> &nbsp;
                                                 <?php echo $inscription['scan_visite']?>
+                                                <?php
+                                                    }
+                                                ?>
                                             </label>
                                             <input id="scan_visite" type="file" class="form-control-file file" name="scan_visite">
                                             <div id="showimage2" class="showpdf"></div>
@@ -283,17 +572,29 @@
                                         </div>
                                         <div class="col-md-3 mt-3">
                                             <label for="image" class="text-md-end d-flex justify-content-center file-label py-3 rounded">
+                                                <?php
+                                                    if($_SESSION['lang'] =="ar"){
+                                                ?>
+                                                <?php echo $inscription['image']?> &nbsp;
+                                                <i class="fas fa-file-upload position-awesome-upload"></i>
+                                                <?php    
+                                                    }else{
+                                                ?>
                                                 <i class="fas fa-file-upload position-awesome-upload"></i> &nbsp;
                                                 <?php echo $inscription['image']?>
+                                                <?php
+                                                    }
+                                                ?>
                                             </label>
                                             <input id="image" type="file" class="form-control-file file" name="image">
                                             <div id="showimage" style="background-size:100% 100%; background-repeat:no-repeat"></div>
                                             <div id="show" class="text-center"></div>
+                                            <span id='error_image_arab' class="text-danger"></span>
+                                            <span id='error_image' class="text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="row justify-content-center mt-3">
                                         <div class="col-md-12 text-center">
-                                            <input type="hidden" name="promos" value="<?php echo $promoid ?>">
                                             <button type="submit" class="btn btn-primary" name="submit" id="submit_inscri"><?php echo $inscription['inscrire']?></button>
                                         </div>
                                     </div>
@@ -322,15 +623,25 @@
                 var output = event.srcElement;
                 var filee = output.files[0].name;
                 var extension = filee.split('.').pop();
-                //if(extension != "pdf"){
-                //    alert('Veuillez inserer un fichier de type pdf, le fichier insérer est de type '+extension)
+                if(extension != "pdf"){
+                    <?php 
+                        if($_SESSION['lang'] == 'ar'){    
+                    ?>
+                    alert(extension+' الملف الذي قمت بتحميله من نوع pdf يرجى إدخال ملف نوع')
+                    <?php 
+                        }else{    
+                    ?>
+                    alert('Veuillez inserer un fichier de type pdf, le fichier insérer est de type '+extension)
+                    <?php 
+                        } 
+                    ?>
+                }else{
                     const reader = new FileReader();
-                reader.addEventListener('load', () =>{
+                    reader.addEventListener('load', () =>{
                     document.getElementById("showimage4").style.backgroundImage = `url('images/Untitled-2.png')`;
-                });
-                reader.readAsDataURL(this.files[0]);
-                
-
+                    });
+                    reader.readAsDataURL(this.files[0]);
+                }
             });
         </script>
         <script>
@@ -339,14 +650,25 @@
                 var output = event.srcElement;
                 var filee = output.files[0].name;
                 var extension = filee.split('.').pop();
-                //if(extension != "pdf"){
-                //    alert('Veuillez inserer un fichier de type pdf, le fichier insérer est de type '+extension)
+                if(extension != "pdf"){
+                    <?php 
+                        if($_SESSION['lang'] == 'ar'){    
+                    ?>
+                    alert(extension+' الملف الذي قمت بتحميله من نوع pdf يرجى إدخال ملف نوع')
+                    <?php 
+                        }else{    
+                    ?>
+                    alert('Veuillez inserer un fichier de type pdf, le fichier insérer est de type '+extension)
+                    <?php 
+                        } 
+                    ?>
+                }else{
                     const reader = new FileReader();
-                reader.addEventListener('load', () =>{
+                    reader.addEventListener('load', () =>{
                     document.getElementById("showimage3").style.backgroundImage = `url('images/Untitled-2.png')`;
-                });
-                reader.readAsDataURL(this.files[0]);
-                
+                    });
+                    reader.readAsDataURL(this.files[0]);
+                }
             });
         </script>
         <script>
@@ -355,13 +677,25 @@
                 var output = event.srcElement;
                 var filee = output.files[0].name;
                 var extension = filee.split('.').pop();
-                //if(extension != "pdf"){
-                //    alert('Veuillez inserer un fichier de type pdf, le fichier insérer est de type '+extension)
+                if(extension != "pdf"){
+                    <?php 
+                        if($_SESSION['lang'] == 'ar'){    
+                    ?>
+                    alert(extension+' الملف الذي قمت بتحميله من نوع pdf يرجى إدخال ملف نوع')
+                    <?php 
+                        }else{    
+                    ?>
+                    alert('Veuillez inserer un fichier de type pdf, le fichier insérer est de type '+extension)
+                    <?php 
+                        } 
+                    ?>
+                }else{
                     const reader = new FileReader();
-                reader.addEventListener('load', () =>{
+                    reader.addEventListener('load', () =>{
                     document.getElementById("showimage2").style.backgroundImage = `url('images/Untitled-2.png')`;
-                });
-                reader.readAsDataURL(this.files[0]);
+                    });
+                    reader.readAsDataURL(this.files[0]);
+                }
             });
         </script>
         <script>
@@ -371,9 +705,20 @@
                 var output = event.srcElement;
                 var filee = output.files[0].name;
                 var extension = filee.split('.').pop();
-                //if(extension != "jpeg" && extension != "jpg" && extension != "png"){
-                //    alert('Veuillez inserer un fichier de type png, jpg ou jpeg, le fichier insérer est de type '+extension);
-                //    document.getElementById("showimage").classList.remove("showimage");
+                if(extension != "jpeg" && extension != "jpg" && extension != "png"){
+                    <?php 
+                        if($_SESSION['lang'] == 'ar'){    
+                    ?>
+                    alert(extension+' الملف الذي قمت بتحميله من نوع jpg, jpeg, png يرجى إدخال ملف نوع')
+                    <?php 
+                        }else{    
+                    ?>
+                    alert('Veuillez inserer un fichier de type jpg, jpeg, png, le fichier insérer est de type '+extension)
+                    <?php 
+                        } 
+                    ?>
+                    document.getElementById("showimage").classList.remove("showimage");
+                }else{
                     const reader = new FileReader();
                     reader.addEventListener('load', () =>{
                     uploaded_image = reader.result;
@@ -381,6 +726,7 @@
                     document.getElementById("showimage").classList.add("showimage");
                 });
                 reader.readAsDataURL(this.files[0]);
+                }
             });
         </script>
         <script>
@@ -391,9 +737,11 @@
                 var input_cin = e.srcElement;
                 var filName = input_cin.files[0].name;
                 var extension = filName.split('.').pop();
-                //if(extension != "pdf"){
-                //    infoArea_cin.innerHTML = '';
+                if(extension != "pdf"){
+                    infoArea_cin.innerHTML = '';
+                }else{
                     infoArea_cin.textContent = filName;
+                }
             }
         </script>
         <script>
@@ -404,9 +752,11 @@
                 var input_permis = e.srcElement;
                 var filName = input_permis.files[0].name;
                 var extension = filName.split('.').pop();
-                //if(extension != "pdf"){
-                //    infoArea_permis.innerHTML = '';
+                if(extension != "pdf"){
+                    infoArea_permis.innerHTML = '';
+                }else{
                     infoArea_permis.textContent = filName;
+                }
             }
         </script>
         <script>
@@ -417,9 +767,11 @@
                 var input_visite = e.srcElement;
                 var filName = input_visite.files[0].name;
                 var extension = filName.split('.').pop();
-                //if(extension != "pdf"){
-                //    infoArea_visite.innerHTML = '';
+                if(extension != "pdf"){
+                    infoArea_visite.innerHTML = '';
+                }else{
                     infoArea_visite.textContent = filName;
+                }
             }
         </script>
         <script>
@@ -430,9 +782,11 @@
                 var input = e.srcElement;
                 var filName = input.files[0].name;
                 var extension = filName.split('.').pop();
-                //if(extension != "png" && extension != "jpg" && extension != "jpeg"){
-                //    infoArea.innerHTML = '';
+                if(extension != "png" && extension != "jpg" && extension != "jpeg"){
+                    infoArea.innerHTML = '';
+                }else{
                     infoArea.textContent = filName;
+                }
             }
         </script>
         <script>

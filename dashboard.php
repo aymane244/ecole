@@ -96,7 +96,31 @@ foreach ($douanetotal as $count) {
             </header>
             <main>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 text-center">
+                        <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
+                            <h4>Date: <label id=""><?php echo date("d/m/Y") ?></label></h4>
+                            <h4 class="mt-5">Etudiants inscrits aujourd'hui: <br> <label id="value_etud_date"><?php echo $etudiantdate ?></label></h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="bg-white w-100 rounded px-3 py-3 text-color">
+                            <h4>Nombre de réservations salles total: <label id="sall_res"><?php echo $sallenumb ?></label></h4>
+                            <h4 class="mt-5">Réservations aujourd'hui: <br> <label id="sall_res_date"><?php echo $salledate ?></label></h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="bg-white w-100 rounded px-3 py-3 text-color">
+                            <h4>Nombre d'accompagnement total: <label id="res_iso"><?php echo $countiso ?></label></h4>
+                            <h4 class="mt-5">Réservations aujourd'hui: <br> <label id="res_iso_date"><?php echo $countisodate ?></label></h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mt-3">
+                        <div class="bg-white w-100 rounded px-3 py-3 text-color">
+                            <h4>Nombre de catégorisation total: <label id="res_douane"><?php echo $countdaounae ?></label></h4>
+                            <h4 class="mt-5">Réservations aujourd'hui: <br> <label id="res_douane_date"><?php echo $countdouanedate ?></label></h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-3">
                         <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
                             <h4>Total de stagiaires: <label id="value_etud"><?php echo $total_etud ?></label></h4>
                             <div class="div-progress mx-auto">
@@ -108,19 +132,13 @@ foreach ($douanetotal as $count) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-4 text-center mt-3">
                         <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
                             <h4>Articles publiés: <br> <label id="value_article"><?php echo $total_article ?></label></h4>
                             <h4 class="mt-3">Commentaires ecrits: <br><label id="value_comm"><?php echo $com_total ?></label></h4>
                         </div>
                     </div>
-                    <div class="col-md-4 text-center">
-                        <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
-                            <h4>Date: <label id=""><?php echo date("d/m/Y") ?></label></h4>
-                            <h4 class="mt-5">Etudiants inscrits aujourd'hui: <br> <label id="value_etud_date"><?php echo $etudiantdate ?></label></h4>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="text-center pt-3 text-color">
                             <h4 class="pt-4">Nouvels inscriptions</h4>
                         </div>
@@ -157,6 +175,24 @@ foreach ($douanetotal as $count) {
                                 ?>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="col-md-8 text-center">
+                        <div class="text-center pt-3 text-color">
+                            <h4 class="pt-4">Etudiant inscrit pour chaque formation</h4>
+                        </div>
+                        <div class="bg-white py-3">
+                            <?php
+                            if (empty($etudparforma)) {
+                            ?>
+                                <h2>Pas encore d'étudiant inscrit sur aucune formation</h2>
+                            <?php
+                            } else {
+                            ?>
+                                <canvas class="myChart px-5"></canvas>
+                            <?php
+                            }
+                            ?>
+                        </div>
                     </div>
                     <div class="col-md-4 text-center">
                         <div class="text-center pt-3 text-color">
@@ -251,44 +287,6 @@ foreach ($douanetotal as $count) {
                                 ?>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="col-md-7 text-center">
-                        <div class="text-center pt-3 text-color">
-                            <h4 class="pt-4">Etudiant inscrit pour chaque formation</h4>
-                        </div>
-                        <div class="bg-white py-3">
-                            <?php
-                            if (empty($etudparforma)) {
-                            ?>
-                                <h2>Pas encore d'étudiant inscrit sur aucune formation</h2>
-                            <?php
-                            } else {
-                            ?>
-                                <canvas class="myChart px-5"></canvas>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div class="col-md-5 text-center">
-                        <div class="text-center pt-3 text-color">
-                            <h4 class="pt-4">Réservation des salles</h4>
-                        </div>
-                        <div class="bg-white w-100 rounded px-3 py-3 text-color">
-                            <h4>Nombre de réservations total: <label id="sall_res"><?php echo $sallenumb ?></label></h4>
-                            <h4 class="mt-5">Réservations aujourd'hui: <br> <label id="sall_res_date"><?php echo $salledate ?></label></h4>
-                        </div>
-                        <div class="text-center text-color">
-                            <h4 class="pt-4">Accompagnement & Conseil</h4>
-                        </div>
-                        <div class="bg-white w-100 rounded px-3 py-3 text-color">
-                            <h4>Nombre d'accompagnement total: <label id="res_iso"><?php echo $countiso ?></label></h4>
-                            <h4 class="mt-5">Réservations aujourd'hui: <br> <label id="res_iso_date"><?php echo $countisodate ?></label></h4>
-                        </div>
-                        <div class="bg-white w-100 rounded px-3 py-3 text-color">
-                            <h4>Nombre de catégorisation total: <label id="res_douane"><?php echo $countdaounae ?></label></h4>
-                            <h4 class="mt-5">Réservations aujourd'hui: <br> <label id="res_douane_date"><?php echo $countdouanedate ?></label></h4>
-                        </div>
                     </div>
                     <div class="col-md-12">
                         <div class="text-center pt-3 text-color">

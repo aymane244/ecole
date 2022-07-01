@@ -26,38 +26,110 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
+                            <?php
+                                if ($_SESSION['lang'] == "ar") {
+                            ?>
+                            <div style="text-align: right;">
+                                <label for="exampleInputSuje1" class="text-white"><?php echo $footer['nom'] ?></label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="text" class="form-control pr-5" name="nom" id="contact_nom" placeholder="الاسم الكامل" style="text-align: right;" required>
+                                <i class="fas fa-user position-awesome_arab" style="text-align: right;"></i>
+                            </div>
+                            <?php
+                                } else {
+                            ?>
                             <label for="exampleInputSuje1" class="text-white"><?php echo $footer['nom'] ?></label>
                             <div class="d-flex">
                                 <i class="fas fa-user position-awesome"></i>
                                 <input type="text" class="form-control pl-5" name="nom" id="contact_nom" placeholder="Nom complet" required>
                             </div>
+                            <?php
+                                }
+                            ?>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
+                            <?php
+                                if ($_SESSION['lang'] == "ar") {
+                            ?>
+                            <div style="text-align: right;">
+                                <label for="exampleInputSuje1" class="text-white"><?php echo $footer['email'] ?></label>
+                            </div>
+
+                            <div class="d-flex">
+                                <i class="fas fa-envelope position-awesome_arab"></i>
+                                <input type="email" class="form-control pr-5" name="email" id="contact_email" placeholder="البريد الإلكتروني" style="text-align: right;" required>
+                            </div>
+                            <?php
+                                } else {
+                            ?>
                             <label for="exampleInputSuje1" class="text-white"><?php echo $footer['email'] ?></label>
                             <div class="d-flex">
                                 <i class="fas fa-envelope position-awesome-email"></i>
                                 <input type="email" class="form-control pl-5" name="email" id="contact_email" placeholder="email" required>
                             </div>
+                            <?php
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
+                    <?php
+                        if ($_SESSION['lang'] == "ar") {
+                    ?>
+                    <div style="text-align: right;">
+                        <label for="exampleInputSuje1" class="text-white"><?php echo $footer['sujet'] ?></label>                         
+                    </div>
+                    <div class="d-flex">
+                        <i class="fas fa-book-open position-awesome_arab_sujet"></i>
+                        <input type="text" class="form-control pr-5" id="exampleInputSuje1" name ="sujet" aria-describedby="emailSujet" style="text-align: right;" placeholder="الموضوع" required>
+                    </div>
+                    <?php
+                        } else {
+                    ?>
                     <label for="exampleInputSuje1" class="text-white"><?php echo $footer['sujet'] ?></label>
                     <div class="d-flex">
                         <i class="fas fa-book-open position-awesome-sujet"></i>
                         <input type="text" class="form-control pl-5" id="exampleInputSuje1" name ="sujet" aria-describedby="emailSujet" placeholder="Sujet" required>
                     </div>
+                    <?php
+                        }
+                    ?>
+
                 </div>
                 <div class="form-group">
+                    <?php
+                        if ($_SESSION['lang'] == "ar") {
+                    ?>
+                    <div style="text-align:right">
+                        <label for="exampleFormControlTextarea1" class="text-white"><?php echo $footer['message'] ?></label>
+                    </div>
+                    <?php
+                        } else {
+                    ?>
                     <label for="exampleFormControlTextarea1" class="text-white"><?php echo $footer['message'] ?></label>
+                    <?php
+                        }
+                    ?>
                     <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="6" required></textarea>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary" id="submit" name="submit"><?php echo $footer['btn_message'] ?></button>
                     <div id="res"></div>
+                    <?php
+                        if ($_SESSION['lang'] == "ar") {
+                    ?>
+                    <div id="errorr_arab"></div>
+                    <?php
+                        } else {
+                    ?>
                     <div id="errorr"></div>
+                    <?php
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -136,17 +208,24 @@
             var message = $("#exampleFormControlTextarea1").val();
             if((nom == '') && (email =='') && (sujet == '') && (message == '')){
                 $('#errorr').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez remplir tous les champs</div>');
+                $('#errorr_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">رجاءا اكمل جميع الحقول</div>');
             }else if(nom == ''){
                 $('#errorr').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre nom</div>');
+                $('#errorr_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">من فضلك أدخل إسمك</div>');
             }else if(email == ''){
                 $('#errorr').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre email</div>');
+                $('#errorr_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">رجاءا أدخل بريدك الإلكتروني</div>');
             }else if(sujet == ''){
                 $('#errorr').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre sujet</div>');
+                $('#errorr_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">الرجاء إدخال الموضوع</div>');
             }else if(message == ''){
                 $('#errorr').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre message</div>');
+                $('#errorr_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">أدرج رسالتك من فضلك</div>');
             }else{
                 $.post( "functions/traitement.php",{nom: nom, email: email, sujet:sujet, message:message, action:'add_message'}, function( result ) {
                     $('#res').html(result);
+                    $("#errorr").css("display", "none");
+                    $('#errorr_arab').css("display", "none");
                 });
                 $("#contact_nom").val('');
                 $("#contact_email").val('');

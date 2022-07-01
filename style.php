@@ -137,6 +137,62 @@
         margin-left: 8px;
         z-index: 2;
     }
+    .position-awesome_arab {
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 218px;
+        z-index: 2;
+    }
+    .position-awesome_arab_sujet {
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 31.4rem;
+        z-index: 2;
+    }
+    .position-awesome_arab_modal {
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 30.4rem;
+        z-index: 2;
+    }
+    .position-awesome_arab_salle{
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 19.8rem;
+        z-index: 2;
+    }
+    .position-awesome_arab_insc{
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 19rem;
+        z-index: 2;
+    }
+    .position-awesome_arab_login{
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 26rem;
+        z-index: 2;
+    }
+    .position-awesome_arab_full{
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 43.4rem;
+        z-index: 2;
+    }
+    .position-awesome_arab_full_insc{
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 64.6rem;
+        z-index: 2;
+    }
     .text-color-footer {
         color: #A2CCE3;
     }
@@ -1817,5 +1873,50 @@
     }
     .font-inscr{
         font-size: 15px;
+    }
+    .card-im {
+        display: block;
+        min-height: 24rem;
+        /* layout hack */
+        background: #fff center center no-repeat;
+        background-size: cover;
+        filter: blur(3px);
+        /* blur the lowres image */
+        transition: 0.4s;
+    }
+    .card-im>img {
+        display: block;
+        width: 100% !important;
+        opacity: 0;
+        border-radius: 100% !important;
+        /* visually hide the img element */
+    }
+    .card-im.is-loaded {
+        filter: none;
+        /* remove the blur on fullres image */
+        transition: filter 1s;
+    }
+    /* Layout Styles */
+    .card-list {
+        display: block;
+        font-size: 0;
+        text-align: center;
+        list-style: none;
+    }
+    .card-description {
+        display: block;
+        padding: 1em 0.5em;
+        color: black;
+        text-decoration: none;
+    }
+    .card-description:hover {
+        text-decoration: none;
+        color: black;
+    }
+    .card-description>h2 {
+        margin: 0 0 0.5em;
+    }
+    .card-description>p {
+        margin: 0;
     }
 </style>

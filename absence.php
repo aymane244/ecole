@@ -62,7 +62,7 @@ foreach ($formations as $formations) {
                             foreach ($seances as $seance) {
                                 if ($seance['for_id'] == $id) {
                             ?>
-                                    <a href="marquer-absence?id=<?php echo $seance['mat_id'] ?>" class="text-dark pl-5" target="blank"><?php echo $seance['mat_nom'] . '<br>' ?></a>
+                                <a href="marquer-absence?id=<?php echo $seance['mat_id'] ?>" class="text-dark pl-5" target="blank"><?php echo $seance['mat_nom'] . '<br>' ?></a>
                             <?php
                                 }
                             }

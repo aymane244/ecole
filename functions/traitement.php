@@ -16,58 +16,129 @@ if(isset($_POST['action'])){
     }
     if ($_POST['action']=='student_id') {
         $id = $_POST['id'];
+        $absences = $data->getTotalAbsenceAdmin();
+        foreach($absences as $absence){
+            $total = $absence['Total'];
+        }
         foreach ($data->getEtudiantNotesAjax() as $detail) {
             if($detail['etud_id'] == $id){
                 $date= date("Y-m-d");
                 $naissance = date("Y-m-d", strtotime($detail['etud_naissance']));
                 $age = date_diff(date_create($detail['etud_naissance']), date_create($date));
+                $nom = $detail['etud_nom'];
+                $prenom = $detail['etud_prenom'];
+                $cin = $detail['etud_cin_name'];
+                $permis = $detail['etud_permis_name'];
+                $visite = $detail['etud_visite_name'];
+                //$files = array($cin, $permis, $visite);
+                $file = "readme.txt";
+                $zip = new ZipArchive;
+                $zip_file = "$prenom-$nom.zip";
+                $path = "../dossiers-stagiaires/$prenom-$nom";
+                if($zip->open($zip_file, ZIPARCHIVE::CREATE)==true){
+                    file_put_contents($file, "Vous avez bien téléchargé vos fichiers \n".$cin."\n".$permis."\n".$visite);
+                    $zip->addFile("readme.txt");
+                    $file_path= "$path/$cin";
+                    $name =$cin;
+                    $zip->addFile($file_path, $name);
+                    $file_path= "$path/$permis";
+                    $name =$permis;
+                    $zip->addFile($file_path, $name);
+                    $file_path= "$path/$visite";
+                    $name =$visite;
+                    $zip->addFile($file_path, $name);
+                    $zip->extractTo($file_path, $name);
+                    @$zip->close();
+                }
                 echo '<div class="container-fluid">
-                        <div class="text-center">';
-                            if($detail['etud_image'] === "./images/etudiants/"){
-                                echo '<img src="images/etudiants/unknown_person.jpg"  class="card-image-2">';
-                            }else{
-                                echo '<img src="'.$detail['etud_image'].'" class="card-image-2">';
-                            };
-                        echo '</div>
-                        <div class="text-center mt-5 mb-4 font-style">
-                            <p>Formation: '.$detail['for_nom'].'</p>
+                    <div class="text-center">';
+                        if($detail['etud_image'] == "./dossiers-stagiaires/$prenom-$nom/image-"){
+                            echo '<img src="images/etudiants/unknown_person.jpg" class="card-image-2">';
+                        }else{
+                            echo '<img src="'.$detail['etud_image'].'" class="card-image-2">';
+                        };
+                    echo '</div>
+                    <div class="text-center mt-5 mb-4 font-style">
+                        <p>Formation: '.$detail['for_nom'].'</p>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <table class="table table-hover mt-5 font-style">
+                                <tr>
+                                    <td>Nom</td>
+                                    <td>'.$detail['etud_nom'].'</td>
+                                </tr>
+                                <tr>
+                                    <td>Prénom</td>
+                                    <td>'.$detail['etud_prenom'].'</td>
+                                </tr>
+                                <tr>
+                                    <td>Age</td>
+                                    <td>'.$age->format('%y').'</td>
+                                </tr>
+                                <tr>
+                                    <td>CIN</td>
+                                    <td>'.$detail['etud_cin'].'</td>
+                                </tr>
+                                <tr>
+                                    <td>Téléphone</td>
+                                    <td>'.$detail['etud_telephone'].'</td>
+                                </tr>
+                                <tr>
+                                    <td>Absences</td>
+                                    <td>'.$total;
+                                        if($total == 1 || $total == 0){
+                                            echo " Absence";
+                                        }else{
+                                            echo " Absences";
+                                        }
+                                    echo '</td>
+                                </tr>
+                                <tr>
+                                    <th>Note Générale</th>';
+                                    if(!$detail['not_id']){
+                                        echo '<th>0</th>';
+                                    }else{
+                                        echo '<th>'.$detail['notegenerale'].'</th>';
+                                    };
+                                echo '</tr>
+                                </tr>
+                            </table>
+                            <div class="text-center font-style mt-4">
+                                <a href="saisir_notes?id='.$detail['etud_id'].'" target="_blank" class="btn btn-primary">Saisir les notes</a>
+                            </div>
+                            <br>
                         </div>
-                        <table class="table table-hover mt-5 font-style">
-                            <tr>
-                                <td>Nom</td>
-                                <td>'.$detail['etud_nom'].'</td>
-                            </tr>
-                            <tr>
-                                <td>Prénom</td>
-                                <td>'.$detail['etud_prenom'].'</td>
-                            </tr>
-                            <tr>
-                                <td>Age</td>
-                                <td>'.$age->format('%y').'</td>
-                            </tr>
-                            <tr>
-                                <td>CIN</td>
-                                <td>'.$detail['etud_cin'].'</td>
-                            </tr>
-                            <tr>
-                                <td>Téléphone</td>
-                                <td>'.$detail['etud_telephone'].'</td>
-                            </tr>
-                            <tr>
-                                <th>Note Générale</th>';
-                                if(!$detail['not_id']){
-                                    echo '<th>0</th>';
-                                }else{
-                                    echo '<th>'.$detail['notegenerale'].'</th>';
-                                };
-                            echo '</tr>
-                        </tr>
-                        </table>
-                        <div class="text-center font-style mt-4">
-                            <a href="saisir_notes?id='.$detail['etud_id'].'" target="_blank" class="btn btn-primary">Saisir les notes</a>
+                        <div class="col-md-6 font-style">
+                            <h4 class="text-center pb-2">Documents scanés</h4>
+                            <div class="d-flex align-items-center justify-content-around">
+                                <p>
+                                    <a download="'.$detail['etud_scan_cin'].'" href="'.$detail['etud_scan_cin'].'">
+                                        CIN <br> <img src="images/PDF_file_icon.svg" style="width:30px" class="img-fluid">
+                                    </a>
+                                </p>
+                                <p>
+                                    <a download="'.$detail['etud_scan_permis'].'" href="'.$detail['etud_scan_permis'].'">
+                                        Permis <br> <img src="images/PDF_file_icon.svg" style="width:30px; margin-left:12px" class="img-fluid">
+                                    </a>
+                                </p>
+                                <p>
+                                    <a download="'.$detail['etud_scan_visite'].'" href="'.$detail['etud_scan_visite'].'">
+                                        Visite médicale <br> <img src="images/PDF_file_icon.svg" style="width:30px; margin-left:45px" class="img-fluid">
+                                    </a>
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <p>
+                                    <a download="'.$zip_file.'" href="functions/'.$zip_file.'">
+                                        Télécharger tous <br> <img src="images/winrar.png" style="width:40px; " class="img-fluid">
+                                    </a>
+                                </p>
+                            </div>
                         </div>
-                        <br>
-                    </div>';
+                    </div>
+                </div>';
             }
         }
     }
@@ -78,14 +149,39 @@ if(isset($_POST['action'])){
                 $date= date("Y-m-d");
                 $naissance = date("Y-m-d", strtotime($detail['etud_naissance']));
                 $age = date_diff(date_create($detail['etud_naissance']), date_create($date));
+                $nom = $detail['etud_nom'];
+                $prenom = $detail['etud_prenom'];
+                $cin = $detail['etud_cin_name'];
+                $permis = $detail['etud_permis_name'];
+                $visite = $detail['etud_visite_name'];
+                //$files = array($cin, $permis, $visite);
+                $file = "readme.txt";
+                $zip = new ZipArchive();
+                $zip_file = "$prenom-$nom.zip";
+                $path = "../dossiers-stagiaires/$prenom-$nom";
+                if($zip->open($zip_file, ZIPARCHIVE::CREATE)==true){
+                    file_put_contents($file, "Vous avez bien téléchargé vos fichiers \n".$cin."\n".$permis."\n".$visite);
+                    $zip->addFile("readme.txt");
+                    $file_path= "$path/$cin";
+                    $name =$cin;
+                    $zip->addFile($file_path, $name);
+                    $file_path= "$path/$permis";
+                    $name =$permis;
+                    $zip->addFile($file_path, $name);
+                    $file_path= "$path/$visite";
+                    $name =$visite;
+                    $zip->addFile($file_path, $name);
+                    $zip->extractTo($file_path, $name);
+                    //$zip->close();
+                }
                 echo '<br>';
                 echo '<div class="container-fluid">
                     <hr>
                     <div class="row align-items-center justify-content-center">
                         <div class="col-md-12 font-style">
-                        <h4 class="text-center pb-2">Information personnelle</h4>
-                            <div class="d-flex align-items-center justify-content-center">';
-                                if($detail['etud_image'] === "./images/etudiants/"){
+                            <h4 class="text-center pb-2">Information personnelle</h4>
+                            <div class="d-flex align-items-center justify-content-around">';
+                                if($detail['etud_image'] === "./dossiers-stagiaires/$prenom-$nom/image-"){
                                     echo '<img src="images/etudiants/unknown_person.jpg"  class="card-image-2">';
                                 }else{
                                     echo '<img src="'.$detail['etud_image'].'" class="card-image-2">';
@@ -129,7 +225,15 @@ if(isset($_POST['action'])){
                                 </p>
                                 <p>
                                     <a download="'.$detail['etud_scan_visite'].'" href="'.$detail['etud_scan_visite'].'">
-                                        Visite médicale <br> <img src="images/PDF_file_icon.svg" style="width:30px; margin-left:40px" class="img-fluid">
+                                        Visite médicale <br> <img src="images/PDF_file_icon.svg" style="width:30px; margin-left:45px" class="img-fluid">
+                                    </a>
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <p>
+                                    <a download="'.$zip_file.'" href="functions/'.$zip_file.'">
+                                        Télécharger tous <br> <img src="images/winrar.png" style="width:40px; " class="img-fluid">
                                     </a>
                                 </p>
                             </div>
@@ -138,6 +242,7 @@ if(isset($_POST['action'])){
                     <hr>
                     <br>
                 </div>';
+                //unlink($zip_file);
             }
         }
     }
@@ -182,34 +287,54 @@ if(isset($_POST['action'])){
         $reservation_salle = $_POST['reservation_salle'];
         $date = date("Y-m-d");
         if($date_salle === ""){
-            echo '<div class="alert alert-danger text-center mt-2" role="alert">
-                Veuillez choisir votre date
-            </div>';
+            if($_SESSION['lang'] == 'ar'){
+                echo '<div class="alert alert-danger text-center mt-2" role="alert">الرجاء اختيار تاريخك</div>';
+            }else{
+                echo '<div class="alert alert-danger text-center mt-2" role="alert">Veuillez choisir votre date</div>';
+            }
         }else if($date_salle < $date){
-            echo '<div class="alert alert-danger text-center mt-2" role="alert">
-                Date invalide
-            </div>';
+            if($_SESSION['lang'] == 'ar'){
+                echo '<div class="alert alert-danger text-center mt-2" role="alert">تاريخ غير صالح</div>';
+            }else{
+                echo '<div class="alert alert-danger text-center mt-2" role="alert">Date invalide</div>';
+            }
         }else if($time_fin === $time_debut){
-            echo "<div class='alert alert-danger text-center mt-2' role='alert'>
-            Heure incorrect merci de réessayé une nouvelle fois
-            </div>";
+            if($_SESSION['lang'] == 'ar'){
+                echo "<div class='alert alert-danger text-center mt-2' role='alert'>ساعة غير صحيحة ، شكرًا لك على المحاولة مرة أخرى</div>";
+            }else{
+                echo "<div class='alert alert-danger text-center mt-2' role='alert'>Heure incorrect merci de réessayé une nouvelle fois</div>";
+            }
         }else if($time_fin < $time_debut){
-                echo "<div class='alert alert-danger text-center mt-2' role='alert'>
-                        L'heure de fin doit toujours être supérieure à la date de début
-                    </div>";
+            if($_SESSION['lang'] == 'ar'){
+                echo "<div class='alert alert-danger text-center mt-2' role='alert'>يجب أن يكون وقت النهاية دائمًا أكبر من تاريخ البدء</div>";
+            }else{
+                echo "<div class='alert alert-danger text-center mt-2' role='alert'>L'heure de fin doit toujours être supérieure à la date de début</div>";
+            }
         }else{
-            $result = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle='$reservation_salle' AND res_date='$date_salle' AND (time_debut>='$time_debut' AND time_debut <'$time_fin')");
+            $result = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle='$reservation_salle' AND res_date='$date_salle' AND (time_fin>'$time_debut' AND time_debut <'$time_fin')");
            // $result2 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND time_fin BETWEEN '$time_debut' AND '$time_fin'");
             //$result3 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle AND time_debut BETWEEN '$time_debut' AND '$time_fin'");
-            $result2 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle ");
+            //$result2 = $db->conn->query("SELECT * FROM `reservation` WHERE res_salle=$reservation_salle ");
             if(mysqli_num_rows($result)){
-                echo "<div class='alert alert-danger text-center mt-2' role='alert'>
+                if($_SESSION["lang"] == 'ar'){
+                    echo "<div class='alert alert-danger text-center mt-2' role='alert'>
+                        وقت محجوز ، يرجى أخذ ساعة جديدة
+                    </div>";
+                }else{
+                    echo "<div class='alert alert-danger text-center mt-2' role='alert'>
                         Heure réservée, Merci de prendre une nouvelle heure
-                </div>";
+                    </div>";
+                }
             }else{
-                echo '<div class="alert alert-success text-center mt-2" role="alert">
+                if($_SESSION['lang'] == 'ar'){
+                    echo '<div class="alert alert-success text-center mt-2" role="alert">
+                        التاريخ والوقت متاحين ، يمكنك تحديد موعدك
+                    </div>';
+                }else{
+                    echo '<div class="alert alert-success text-center mt-2" role="alert">
                         Date et heure disponible, vous pouvez prendre votre rendez-vous
-                </div>';
+                    </div>';
+                }
             }
             $resultArray = array();
             // fetch product data one by one
@@ -240,9 +365,7 @@ if(isset($_POST['action'])){
        $data->insertReservation();
     }
     if ($_POST['action']=='search_student') {
-        $data->getEtudiantNotesSearch();
         $i=1;
-        $message = 'Voulez vous supprimer ce statgiaire';
         foreach($data->getEtudiantNotesSearch() as $search){
             echo "<tr>
                 <td>".$i++."</td>
@@ -258,7 +381,7 @@ if(isset($_POST['action'])){
                         <div class='col-md-3'>
                         <form action='' method='POST'>
                             <input type='hidden' name='etudiant_id' value='".$search['etud_id']."'>
-                            <button type='submit' class='btn-style' name='submit_etudiant' onclick='return confirm(".$message.")'> 
+                            <button type='submit' class='btn-style' name='submit_etudiant' onclick='return supprimer()'> 
                                 <i class='fas fa-trash-alt text-danger awesome-size'></i>
                             </button>
                         </form>
@@ -276,3 +399,8 @@ if(isset($_POST['action'])){
 
 }*/
 ?>
+<script>
+    function supprimer(){
+        return confirm('Voulez-vous supprimer cet étudiant');
+    }
+</script>

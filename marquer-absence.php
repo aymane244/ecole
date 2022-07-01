@@ -8,6 +8,7 @@ $promos = $data->getPromotion();
 $seances = $data->getFormationMatiere();
 $formations = $data->getformation();
 $total_etudiants = $data->etudiantTotal();
+$students = $data->getEtudiantPromos();
 if (!isset($_GET['id'])) {
     echo "<script>window.location.href='formations'</script>";
 }
@@ -67,72 +68,124 @@ foreach ($total_etudiants as $total_etudiant) {
                 unset($_SESSION['status_error']);
             }
             ?>
-            <form action="" method="POST">
-                <div class="text-center py-3">
-                    <h2><?php echo $formation_nom ?></h2>
-                    <input type="hidden" value="<?php echo $for_id ?>" name="absence_formation">
-                </div>
-                <div class="d-flex justify-content-around mt-3">
-                    <h2><?php echo $matiere_nom ?></h2>
-                    <input type="hidden" value="<?php echo $matiere_id ?>" name="absence_matiere">
-                    <div class="d-flex">
-                        <i class="fas fa-calendar position-awesome"></i>
-                        <input id="absence_date" type="date" class="form-control pl-5" name="absence_date">
+            <form action="" method="post">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="d-flex mt-4">
+                            <i class="fas fa-folder-open position-awesome"></i>
+                            <select class="custom-select pl-5" name="promotion" onchange="affichage()" id="promotion">
+                                <option selected value="">--Choisir la promotion--</option>
+                                <?php
+                                foreach ($promos as $promo) {
+                                ?>
+                                    <option value="<?php echo $promo['pro_id'] ?>">Promotion <?php echo $promo['pro_groupe'] ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1 mt-4">
+                        <button type='submit' class="btn btn-primary" name="submit_promotion">Choisir</button>
                     </div>
                 </div>
-                <table class="table table-bordered mt-5 bg-white">
-                    <thead class="text-center">
-                        <tr>
-                            <th scope="col" colspan="5">ARTL Nord</th>
-                        </tr>
-                        <tr>
-                            <th scope="col">Etudiants</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                        <tr>
-                            <th scope="col" colspan="5">
-                                Total etudiants: <?php echo $total ?>
-                                <input type="hidden" value="<?php echo $total ?>" name="number_etudiant">
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <?php
-                        foreach ($etudiants as $etudiant) {
-                            if ($etudiant['mat_id'] == $id) {
-                        ?>
-                                <tr>
-                                    <td>
-                                        <?php echo $etudiant['etud_nom'] . " " . $etudiant['etud_prenom'] ?>
-                                        <input type="hidden" value="<?php echo $etudiant['etud_id'] ?>" name="absence_etudiant[]">
-                                    </td>
-                                    <td>
-                                        <div class="row justify-content-center">
-                                            <div class="col-md-8">
-                                                <div class="d-flex">
-                                                    <i class="fas fa-user-check position-awesome"></i>
-                                                    <select class="custom-select pl-5" name="absence[]" id="absence">
-                                                        <option selected value="Présent">Présent</option>
-                                                        <option value="Absent">Absent</option>
-                                                    </select>
+            </form>
+            <?php
+            if (!isset($_POST['submit_promotion'])) {
+            ?>
+                <h3 class="text-center mt-4">Veuillez séléctionner une promotion avent de poursuivre</h3>
+            <?php
+                } else {
+                    if($_POST['promotion'] !=''){ 
+            ?>
+                <form action="" method="POST">
+                    <div class="text-center py-3">
+                        <h2><?php echo $formation_nom ?></h2>
+                        <input type="hidden" value="<?php echo $for_id ?>" name="absence_formation">
+                    </div>
+                    <div class="d-flex justify-content-around mt-3">
+                        <h2><?php echo $matiere_nom ?></h2>
+                        <input type="hidden" value="<?php echo $matiere_id ?>" name="absence_matiere">
+                        <div class="d-flex">
+                            <i class="fas fa-calendar position-awesome"></i>
+                            <input id="absence_date" type="date" class="form-control pl-5" name="absence_date">
+                        </div>
+                    </div>
+                    <table class="table table-bordered mt-5 bg-white">
+                        <thead class="text-center">
+                            <tr>
+                                <th scope="col" colspan="5">ARTL Nord</th>
+                            </tr>
+                            <tr>
+                                <th scope="col" colspan="5">
+                                    <?php 
+                                        foreach ($total_etudiants as $total_etudiant) {
+                                            if ($total_etudiant['mat_id'] == $id) {
+                                                if($total_etudiant['etud_promos'] == $_POST['promotion'] ){
+                                    ?>
+                                    Total etudiants: <?php echo $total ?>
+                                    <input type="hidden" value="<?php echo $total ?>" name="number_etudiant">
+                                    <?php 
+                                                }else{
+                                    ?>
+                                    Total etudiants : 0
+                                    <input type="hidden" value="<?php echo $total ?>" name="number_etudiant">
+                                    <?php  
+                                                }
+                                            }
+                                        }
+                                    ?>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Etudiants</th>
+                                <th scope="col">Promotion</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <?php   
+                                foreach ($etudiants as $etudiant) {
+                                    if ($etudiant['mat_id'] == $id) {
+                            ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo $etudiant['etud_nom'] . " " . $etudiant['etud_prenom'] ?>
+                                            <input type="hidden" value="<?php echo $etudiant['etud_id'] ?>" name="absence_etudiant[]">
+                                        </td>
+                                        <td>Promotion <?php echo $etudiant['pro_groupe'] ?></td>
+                                        <td>
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-8">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-user-check position-awesome"></i>
+                                                        <select class="custom-select pl-5" name="absence[]" id="absence">
+                                                            <option selected value="Présent">Présent</option>
+                                                            <option value="Absent">Absent</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                        <?php
-                            }
-                        }
-                        ?>
-                    </tbody>
-                </table>
-                <div class="text-center py-3">
-                    <button class="btn btn-primary" type="submit" name="absence_submit">Valider</button>
-                </div>
-            </form>
+                                        </td>
+                                    </tr>
+                            <?php 
+                                    }
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                    <div class="text-center py-3">
+                        <button class="btn btn-primary" type="submit" name="absence_submit">Valider</button>
+                    </div>
+                </form>
+            <?php
+                }
+            }
+            ?>
         </div>
     </div>
 </body>
+
 </html>
 <?php
 if (isset($_POST['absence_submit'])) {

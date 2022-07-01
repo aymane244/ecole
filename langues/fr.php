@@ -201,6 +201,7 @@
         "emailcheck" => "Insérez votre email",
         "email" => "Votre email",
         "envoyer" => "Envoyer",
+        "retour" => "Retour à la page de connexion",
     );
     $footer= array(
         "contactez" => "Contactez-nous",

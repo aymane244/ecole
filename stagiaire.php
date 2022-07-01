@@ -5,6 +5,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
 }
 //$etudiants = $data->getEtudiantForma();
 $result = $db->conn->query("SELECT `etud_id` FROM `etudiant` INNER JOIN `formation` ON for_id=etud_formation");
+
 $per_page = 20;
 $start = 0;
 $current_page = 1;
@@ -22,10 +23,10 @@ if (isset($_GET['page'])) {
 }
 $pages = ceil($record / $per_page);
 $result = $db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON for_id=etud_formation LIMIT $start, $per_page");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,7 +45,7 @@ $result = $db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON f
         <header>
             <?php include 'admin.php' ?>
         </header>
-        <div class="container mt-5 pt-5">
+        <div class="container-fluid mt-5 pt-5">
             <div class="text-center py-3">
                 <h2><i class="fas fa-user-graduate"></i> Page stagiaire</h2>
             </div>
@@ -156,9 +157,7 @@ $result = $db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON f
             $(document).ready(function() {
                 $(".btn-id").click(function() {
                     var ids = $(this).data('id');
-                    $.post("functions/traitement.php", {
-                        id: ids,
-                        action: "student_detail"
+                    $.post("functions/traitement.php", {id: ids, action: "student_detail"
                     }, function(data) {
                         $('#load_data').html(data);
                     })
@@ -174,6 +173,12 @@ $result = $db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON f
                         action: 'search_student'
                     }, function(result) {
                         $('#result').html(result);
+                        $(".btn-id").click(function() {
+                            var ids = $(this).data('id');
+                            $.post("functions/traitement.php", {id: ids, action: "student_detail"}, function(data) {
+                                $('#load_data').html(data);
+                            })
+                        });
                     });
                 });
             })

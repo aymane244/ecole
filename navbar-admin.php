@@ -42,7 +42,7 @@
                 </a>
             </li>
             <li>
-                <a href="accompagnement-conseil" class="mr-2">
+                <a href="accompagnement-conseil" class="pr-2">
                     <span class="fas fa-question"></span>
                     <span>Accomp. & conseil</span>
                 </a>
@@ -74,3 +74,11 @@
         </ul>
     </div>
 </div>
+<script>
+    const activePage = window.location.pathname;
+    const navLinks = document.querySelectorAll('ul li a').forEach(link => {
+        if(link.href.includes(`${activePage}`)){
+            link.classList.add('active');
+        }
+    })
+</script>
