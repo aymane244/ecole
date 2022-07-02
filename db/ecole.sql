@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 01 juil. 2022 à 13:39
+-- Généré le : sam. 02 juil. 2022 à 17:25
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -48,6 +48,29 @@ INSERT INTO `absence` (`abs_id`, `abs_etudiant`, `abs_date`, `abs_formation`, `a
 (32, 127, '2022-04-05', 2, 69, 'Absent'),
 (35, 134, '2022-06-20', 2, 5, 'Présent'),
 (36, 134, '2022-06-21', 2, 5, 'Absent');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `admin`
+--
+
+CREATE TABLE `admin` (
+  `adm_id` int(11) NOT NULL,
+  `adm_prenom` varchar(50) NOT NULL,
+  `adm_nom` varchar(50) NOT NULL,
+  `adm_email` varchar(50) NOT NULL,
+  `adm_password` varchar(50) NOT NULL,
+  `adm_image` varchar(100) NOT NULL,
+  `adm_registre` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `admin`
+--
+
+INSERT INTO `admin` (`adm_id`, `adm_prenom`, `adm_nom`, `adm_email`, `adm_password`, `adm_image`, `adm_registre`) VALUES
+(2, 'Aymane', 'Chnaif', 'a.chnaif2010@gmail.com', 'ab4f63f9ac65152575886860dde480a1', './images/admin/', '2022-07-01');
 
 -- --------------------------------------------------------
 
@@ -232,9 +255,9 @@ CREATE TABLE `etudiant` (
 INSERT INTO `etudiant` (`etud_id`, `etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, `etud_scan_cin`, `etud_cin_name`, `etud_scan_permis`, `etud_permis_name`, `etud_scan_visite`, `etud_visite_name`, `etud_promos`, `etud_image`, `etud_inscription`) VALUES
 (90, 'Aboussabr', '', 'Othmane', '', 'aboussabryanina@gmail.com', '0606118291', '25f9e794323b453885f5181f1b624d0b', 'G621097', 2, '1991-11-26', '', '', '', '', 'azertyuiop', '2022-04-13', '', '', '', '', '', '', 1, './images/etudiants/IMG_20191229_020502_262.jpg', '2022-02-01'),
 (127, 'Aboussabr', '', 'Othmane', '', 'aboussabryanina@gmail.com', '0606118291', '25f9e794323b453885f5181f1b624d0b', 'G621097', 2, '1991-11-26', '', '', '', '', '123456789', '2022-04-13', '', '', '', '', '', '', 1, './images/etudiants/IMG_20191229_020502_262.jpg', '2022-02-01'),
-(128, 'Chnaif', 'اشنايف', 'Aimane', 'أيمن', 'a.chnaif2010@gmail.com', '0644776612', '25f9e794323b453885f5181f1b624d0b', 'G621092', 1, '1991-11-26', 'Kénitra', 'Riad Ahlan', 'GH67688', 'B', '', '2015-06-29', './dossiers-stagiaires/Aimane-Chnaif/cin-Cahier des charges.pdf', 'cin-Cahier des charges.pdf', './dossiers-stagiaires/Aimane-Chnaif/permis-null (1).pdf', '', './dossiers-stagiaires/Aimane-Chnaif/visite-CV Aimane chnaif.pdf', '', 5, './dossiers-stagiaires/Aimane-Chnaif/image-IMG_20191229_020502_262.jpg', '2022-06-23'),
+(128, 'Chnaif', 'اشنايف', 'Aimane', 'أيمن', 'a.chnaif2010@gmail.com', '0644776612', 'ab4f63f9ac65152575886860dde480a1', 'G621092', 1, '1991-11-26', 'Kénitra', 'Riad Ahlan', 'GH67688', 'B', '', '2015-06-29', './dossiers-stagiaires/Aimane-Chnaif/cin-Cahier des charges.pdf', 'cin-Cahier des charges.pdf', './dossiers-stagiaires/Aimane-Chnaif/permis-null (1).pdf', '', './dossiers-stagiaires/Aimane-Chnaif/visite-CV Aimane chnaif.pdf', '', 5, './dossiers-stagiaires/Aimane-Chnaif/image-IMG_20191229_020502_262.jpg', '2022-06-23'),
 (132, 'Metaab', 'متعب', 'Imad', 'عماد', 'imad@gmail.com', '0644776612', 'ab4f63f9ac65152575886860dde480a1', 'Y78990', 1, '1997-08-11', 'Tanger', 'Residence AL Houda', 'TH66667', 'B', '', '2022-06-13', './dossiers-stagiaires/Imad-Metaab/cin-Cahier des charges.pdf', 'cin-Cahier des charges.pdf', './dossiers-stagiaires/Imad-Metaab/permis-Liste des informations.pdf', 'permis-Liste des informations.pdf', './dossiers-stagiaires/Imad-Metaab/visite-Cahier des charges.pdf', 'visite-Cahier des charges.pdf', 5, './dossiers-stagiaires/Imad-Metaab/image-Logo ARTL.jpeg', '2022-06-23'),
-(134, 'Chnaif', 'اشنايف', 'Aimane', 'أيمن', 'a.chnaif2010@gmail.com', '0644776612', '25f9e794323b453885f5181f1b624d0b', 'G621092', 2, '1991-11-26', 'Kénitra', 'Riad Ahlan', 'GH67688', 'B', '234567', '2015-06-29', './dossiers-stagiaires/Aimane-Chnaif/cin-Cahier des charges.pdf', 'cin-Cahier des charges.pdf', './dossiers-stagiaires/Aimane-Chnaif/permis-null (1).pdf', 'permis-null (1).pdf', './dossiers-stagiaires/Aimane-Chnaif/visite-CV Aimane chnaif.pdf', 'visite-CV Aimane chnaif.pdf', 3, './dossiers-stagiaires/Aimane-Chnaif/image-IMG_20191229_020502_262.jpg', '2022-06-27'),
+(134, 'Chnaif', 'اشنايف', 'Aimane', 'أيمن', 'a.chnaif2010@gmail.com', '0644776612', 'ab4f63f9ac65152575886860dde480a1', 'G621092', 2, '1991-11-26', 'Kénitra', 'Riad Ahlan', 'GH67688', 'B', '234567', '2015-06-29', './dossiers-stagiaires/Aimane-Chnaif/cin-Cahier des charges.pdf', 'cin-Cahier des charges.pdf', './dossiers-stagiaires/Aimane-Chnaif/permis-null (1).pdf', 'permis-null (1).pdf', './dossiers-stagiaires/Aimane-Chnaif/visite-CV Aimane chnaif.pdf', 'visite-CV Aimane chnaif.pdf', 3, './dossiers-stagiaires/Aimane-Chnaif/image-IMG_20191229_020502_262.jpg', '2022-06-27'),
 (135, 'Bou', 'بو', 'Hicham', 'هشام', 'hicham@gmail.com', '0644776612', 'ab4f63f9ac65152575886860dde480a1', 'L676543', 1, '1998-08-12', 'Tanger', 'HAY AHLAN', 'HY76543', 'B', '', '2022-06-23', './dossiers-stagiaires/Hicham-Bou/cin-CV Aimane chnaif.pdf', 'cin-CV Aimane chnaif.pdf', './dossiers-stagiaires/Hicham-Bou/permis-CV Aimane chnaif.pdf', 'permis-CV Aimane chnaif.pdf', './dossiers-stagiaires/Hicham-Bou/visite-CV Aimane chnaif.pdf', 'visite-CV Aimane chnaif.pdf', 5, './dossiers-stagiaires/Hicham-Bou/image-', '2022-07-01');
 
 -- --------------------------------------------------------
@@ -324,7 +347,7 @@ CREATE TABLE `matiere` (
 --
 
 INSERT INTO `matiere` (`mat_id`, `mat_formation`, `mat_nom`, `mat_nom_arab`, `mat_duree`, `mat_prof`, `mat_prof_arab`) VALUES
-(1, 1, 'Cours pratique', 'ذرس تطبيقي', 4, 'Hicham Louadi', 'هشام الوادي'),
+(1, 1, 'Cours pratique', 'درس تطبيقي', 4, 'Hicham Louadi', 'هشام الوادي'),
 (2, 1, 'Marketing', 'التسويق', 5, 'Yasmina Aboussabr', 'ياسمين أبوالصبر'),
 (5, 2, 'Cours pratique', 'درس تطبيقي', 4, 'Abderahmane Bouhouch', 'عبدالرحمان بوحوش'),
 (69, 2, 'Cours théorique', 'درس نظري', 3, 'Salim Guechich', 'سليم كشيش'),
@@ -357,7 +380,12 @@ INSERT INTO `note` (`not_id`, `not_formation`, `not_matiere`, `not_etudiant`, `n
 (85, 1, 2, 128, 14),
 (86, 1, 77, 128, 11),
 (87, 2, 5, 127, 12),
-(88, 2, 69, 127, 14);
+(88, 2, 69, 127, 14),
+(89, 2, 5, 134, 8),
+(90, 2, 69, 134, 7),
+(91, 1, 1, 135, 10),
+(92, 1, 2, 135, 10),
+(93, 1, 77, 135, 10);
 
 -- --------------------------------------------------------
 
@@ -465,6 +493,12 @@ ALTER TABLE `absence`
   ADD KEY `absence` (`abs_formation`),
   ADD KEY `absence_etudiant` (`abs_etudiant`),
   ADD KEY `absence_matiere` (`abs_matiere`);
+
+--
+-- Index pour la table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`adm_id`);
 
 --
 -- Index pour la table `article`
@@ -578,6 +612,12 @@ ALTER TABLE `absence`
   MODIFY `abs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
+-- AUTO_INCREMENT pour la table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `adm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT pour la table `article`
 --
 ALTER TABLE `article`
@@ -647,7 +687,7 @@ ALTER TABLE `matiere`
 -- AUTO_INCREMENT pour la table `note`
 --
 ALTER TABLE `note`
-  MODIFY `not_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `not_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT pour la table `promos`
