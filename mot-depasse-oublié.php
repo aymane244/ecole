@@ -7,7 +7,6 @@
 				$message = "Veuillez saisir votre email";
 				$message_arab = "رجاءا أدخل بريدك الإلكتروني";
 			}else if($etudiant['etud_email'] != $_POST['email']){
-				
 				$message = "Email ".$_POST['email']." n'existe pas dans nos données";
 				$message_arab = "غير موجود في بياناتنا".$_POST['email']."البريد الإلكتروني";
 			}else{
@@ -17,7 +16,7 @@
 	}
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -73,7 +72,7 @@
 				<div id="password">
 					<div class="row justify-content-center">
 						<div class="col-md-8">
-							<div class="card card-position">
+							<div class="card card-position" style="box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.2);">
 								<div class="card-header text-center link-font">
 									<h3>
 										<?php
@@ -144,7 +143,7 @@
 				<div id="email" style="display:none;">
 					<div class="row justify-content-center">
 						<div class="col-md-8">
-							<div class="card card-position">
+							<div class="card card-position" style="box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.2);">
 								<div class="card-header text-center link-font">
 									<div class="d-flex">
 										<i class="fa-solid fa-arrow-left"></i>
@@ -193,7 +192,7 @@
 												<input type="email" class="form-control pl-5" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" name="email">
 											</div>
 											<br>
-											<div class="pt-2 text-right">
+											<div class="pt-2">
 												<button type="submit" class="btn btn-primary" id="id-submit" name="submit_pwd"> <?php echo $password['envoyer'] ?></button>
 											</div>
 										</div>

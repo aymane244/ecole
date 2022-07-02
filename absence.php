@@ -112,7 +112,7 @@ foreach ($formations as $formations) {
             </form>
             <hr style="background-color: #DEE2E6;">
             <table class="table table-bordered mt-3 bg-white">
-                <thead class="text-center">
+                <thead class="text-center text-white" style="background-color: #11101d;">
                     <tr>
                         <th scope="col" colspan="5">ARTL Nord</th>
                     </tr>

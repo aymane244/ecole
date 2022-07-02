@@ -93,7 +93,7 @@ $promos = $data->getPromotion();
                 <h3>Liste des stagiaires</h3>
             </div>
             <table class="table table-hover bg-white">
-                <thead class="text-center">
+                <thead class="text-center text-white" style="background-color: #11101d;">
                     <tr>
                         <th scope="col" colspan="9">ARTL Nord</th>
                     </tr>

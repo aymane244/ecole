@@ -47,15 +47,15 @@ $articles = $data->getArticle();
             </div>
             <div id="frensh">
                 <table class="table bg-white mt-5 table-bordered">
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="9">ARTL Nord</th>
                         </tr>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Titre</th>
-                            <th scope="col">Texte</th>
-                            <th scope="col">Image</th>
+                            <!-- <th scope="col">Texte</th> -->
+                            <!-- <th scope="col">Image</th> -->
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -76,8 +76,8 @@ $articles = $data->getArticle();
                                 <tr>
                                     <th scope="row"><?php echo $i++ ?></th>
                                     <td><?php echo $article['art_titre']; ?></td>
-                                    <td class="text-length2"><?php echo $article['art_texte']; ?></td>
-                                    <td class="row-style"> <img src="<?php echo $article['art_image'] ?>" alt="" class="img-fluid" style="max-width:200px"> </td>
+                                    <!-- <td class="text-length2"><?php echo $article['art_texte']; ?></td> -->
+                                    <!-- <td class="row-style"> <img src="<?php echo $article['art_image'] ?>" alt="" class="img-fluid" style="max-width:200px"> </td> -->
                                     <td class="row-style">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -105,16 +105,16 @@ $articles = $data->getArticle();
             </div>
             <div id="arabe" style="display:none;">
                 <table class="table bg-white mt-5 table-bordered">
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="9">الأكاديمية الجهوية للنقل واللوجستيك بجهة طنجة</th>
                         </tr>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">العنوان</th>
-                            <th scope="col">النص</th>
-                            <th scope="col">الصورة</th>
                             <th scope="col">إجراءات</th>
+                            <!-- <th scope="col">الصورة</th> -->
+                            <!-- <th scope="col">النص</th> -->
+                            <th scope="col">العنوان</th>
+                            <th scope="col">#</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -132,10 +132,6 @@ $articles = $data->getArticle();
                             foreach ($articles as $article) {
                             ?>
                                 <tr>
-                                    <th scope="row"><?php echo $i++ ?></th>
-                                    <td><?php echo $article['art_titre_arab']; ?></td>
-                                    <td class="text-length2"><?php echo $article['art_texte_arab']; ?></td>
-                                    <td class="row-style"> <img src="<?php echo $article['art_image'] ?>" alt="" class="img-fluid" style="max-width:200px"> </td>
                                     <td class="row-style">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -153,6 +149,10 @@ $articles = $data->getArticle();
                                             </div>
                                         </div>
                                     </td>
+                                    <!-- <td class="row-style"> <img src="<?php echo $article['art_image'] ?>" alt="" class="img-fluid" style="max-width:200px"> </td> -->
+                                    <!-- <td class="text-length2"><?php echo $article['art_texte_arab']; ?></td> -->
+                                    <td><?php echo $article['art_titre_arab']; ?></td>
+                                    <th scope="row"><?php echo $i++ ?></th>
                                 </tr>
                         <?php
                             }

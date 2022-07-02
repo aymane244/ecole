@@ -61,7 +61,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
                                 <div class="row mb-3">
                                     <label for="prof" class="col-md-12 col-form-label text-md-end">Déscription</label>
                                     <div class="col-md-12">
-                                        <textarea rows="10" class="form-control position-text-area" id="editor" name="description" value="<?php echo isset($_POST['description']) ? $_POST['description'] : ''; ?>" autocomplete="description"><?php echo isset($_POST['description']) ? $_POST['description'] : ''; ?></textarea>
+                                        <textarea rows="10" class="form-control position-text-area" id="editor" style="text-align:right !important" name="description" value="<?php echo isset($_POST['description']) ? $_POST['description'] : ''; ?>" autocomplete="description"><?php echo isset($_POST['description']) ? $_POST['description'] : ''; ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -70,24 +70,24 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
                     <div class="col-md-12 my-5">
                         <h3 class="text-center mb-3">Ajout en Arabe</h3>
                         <div class="card card-position">
-                            <div class="card-header text-center link-font align-items-center"><i class="fas fa-plus-square"></i> أضف تكوين</div>
+                            <div class="card-header text-center link-font align-items-center"> أضف تكوين <i class="fas fa-plus-square"></i></div>
                             <div class="card-body py-5">
-                                <div class="row mb-3">
+                                <div class="row mb-3 text-right">
                                     <label for="titre" class="col-md-12 col-form-label text-md-end">اسم التكوين</label>
                                     <div class="col-md-12">
                                         <div class="d-flex">
-                                            <i class="fas fa-tag position-awesome"></i>
-                                            <input id="titre" type="text" class="form-control pl-5" name="titre_arabe" value="<?php echo isset($_POST['titre_arabe']) ? $_POST['titre_arabe'] : ''; ?>" autocomplete="titre">
+                                            <i class="fas fa-tag position-awesome_arab_dashboard"></i>
+                                            <input id="titre" type="text" class="form-control pr-5 text-right" placeholder="اسم التكوين" name="titre_arabe" value="<?php echo isset($_POST['titre_arabe']) ? $_POST['titre_arabe'] : ''; ?>" autocomplete="titre">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row mb-3 text-right">
                                     <label for="presentation" class="col-md-12 col-form-label text-md-end">مقدمة عن التكوين</label>
                                     <div class="col-md-12">
-                                        <textarea id="editor3" rows="10" class="form-control position-text-area" name="presentation_arabe" value="<?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?>" autocomplete="presentation"><?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?></textarea>
+                                        <textarea id="editor3" rows="10" class="form-control position-text-area text-right" name="presentation_arabe" value="<?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?>" autocomplete="presentation"><?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?></textarea>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row mb-3 text-right">
                                     <label for="prof" class="col-md-12 col-form-label text-md-end">وصف التكوين</label>
                                     <div class="col-md-12">
                                         <textarea rows="10" class="form-control position-text-area" id="editor4" name="description_arabe" value="<?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?>" autocomplete="description"><?php echo isset($_POST['description_arabe']) ? $_POST['description_arabe'] : ''; ?></textarea>
@@ -118,10 +118,52 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
         </div>
     </div>
     <script>
-        CKEDITOR.replace('editor');
-        CKEDITOR.replace('editor2');
-        CKEDITOR.replace('editor3');
-        CKEDITOR.replace('editor4');
+      tinymce.init({
+        selector: '#editor',
+        plugins: [
+          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+          'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+        ],
+        toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+          'alignleft aligncenter alignright alignjustify | ' +
+          'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+      });
+      tinymce.init({
+        selector: '#editor2',
+        plugins: [
+          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+          'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+        ],
+        toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+          'alignleft aligncenter alignright alignjustify | ' +
+          'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+      });
+      tinymce.init({
+        selector: '#editor3',
+        content_css : "mycontent.css",
+        plugins: [
+          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+          'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+        ],
+        toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+          'alignleft aligncenter alignright alignjustify | ' +
+          'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+      });
+      tinymce.init({
+        selector: '#editor4',
+        content_css : "mycontent.css",
+        plugins: [
+          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+          'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+        ],
+        toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+          'alignleft aligncenter alignright alignjustify | ' +
+          'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+      });
     </script>
     <script>
         const image_input = document.getElementById("image_input");

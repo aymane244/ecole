@@ -45,7 +45,7 @@
                 ?>
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
-                        <div class="card">
+                        <div class="card" style="box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);">
                             <div class="card-header text-center link-font">
                                 <h3>
                                     <?php

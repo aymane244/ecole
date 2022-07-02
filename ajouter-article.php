@@ -53,7 +53,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
                                 <div class="row mb-3">
                                     <label for="prof" class="col-md-12 col-form-label text-md-end">Zone de texte</label>
                                     <div class="col-md-12">
-                                        <textarea type="text" rows="10" class="form-control position-text-area" id="editor2" name="texte" value="<?php echo isset($_POST['texte']) ? $_POST['texte'] : ''; ?>" autocomplete="texte"><?php echo isset($_POST['texte']) ? $_POST['texte'] : ''; ?></textarea>
+                                        <textarea type="text" rows="10" class="form-control position-text-area" id="editor" name="texte" value="<?php echo isset($_POST['texte']) ? $_POST['texte'] : ''; ?>" autocomplete="texte"><?php echo isset($_POST['texte']) ? $_POST['texte'] : ''; ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -63,21 +63,21 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
                 <div class="col-md-12 my-5">
                     <h3 class="text-center mb-3">Ajout en Arabe</h3>
                     <div class="card card-position">
-                        <div class="card-header text-center link-font align-items-center"><i class="fas fa-plus-square"></i> أضف مقال</div>
+                        <div class="card-header text-center link-font align-items-center"> أضف مقال <i class="fas fa-plus-square"></i></div>
                         <div class="card-body py-5 w-100">
-                            <div class="row mb-3">
+                            <div class="row mb-3 text-right">
                                 <label for="titre_arab" class="col-md-12 col-form-label text-md-end">عنوان المقال</label>
                                 <div class="col-md-12">
-                                    <div class="d-flex">
-                                        <i class="fas fa-tag position-awesome"></i>
-                                        <input id="titre_arab" type="text" class="form-control pl-5" name="titre_arab" value="<?php echo isset($_POST['titre_arab']) ? $_POST['titre_arab'] : ''; ?>" placeholder="عنوان المقال" autocomplete="titre">
+                                    <div class="d-flex flt">
+                                        <i class="fas fa-tag position-awesome_arab_article"></i>
+                                        <input id="titre_arab" type="text" class="form-control pr-5 text-right" name="titre_arab" value="<?php echo isset($_POST['titre_arab']) ? $_POST['titre_arab'] : ''; ?>" placeholder="عنوان المقال" autocomplete="titre">
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row mb-3 text-right">
                                 <label for="texte_arab" class="col-md-12 col-form-label text-md-end">كتابة المقال</label>
                                 <div class="col-md-12">
-                                    <textarea type="text" rows="10" class="form-control position-text-area" id="editor" name="texte_arab" value="" autocomplete="texte"><?php echo isset($_POST['texte_arab']) ? $_POST['texte_arab'] : ''; ?></textarea>
+                                    <textarea type="text" rows="10" class="form-control position-text-area" id="editor2" name="texte_arab" value="" autocomplete="texte"><?php echo isset($_POST['texte_arab']) ? $_POST['texte_arab'] : ''; ?></textarea>
                                 </div>
                             </div>
                             <div class="row mb-3 align-items-center">
@@ -104,8 +104,29 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
         </div>
     </div>
     <script>
-        CKEDITOR.replace('editor');
-        CKEDITOR.replace('editor2');
+      tinymce.init({
+        selector: '#editor',
+        plugins: [
+          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+          'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+        ],
+        toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+          'alignleft aligncenter alignright alignjustify | ' +
+          'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+      });
+      tinymce.init({
+        selector: '#editor2',
+        content_css : "mycontent.css",
+        plugins: [
+          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+          'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+        ],
+        toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+          'alignleft aligncenter alignright alignjustify | ' +
+          'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+      });
     </script>
     <script>
         const image_input = document.getElementById("image");

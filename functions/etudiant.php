@@ -146,6 +146,11 @@
         }
         public function getEtudiantMatiereFormations(){
             $etudiant = $_POST['etudiants'];
+            $id = $_GET['id'];
+            if($etudiant == ''){
+                $_SESSION['status'] = "Veuillez choisir un étudiant";
+                echo "<script>window.location.href='notes?id=$id'</script>";
+            }
             $result = $this->db->conn->query("SELECT * FROM `note` INNER JOIN `matiere` ON not_matiere=mat_id
                 INNER JOIN `etudiant` ON not_etudiant=etud_id WHERE etud_id=$etudiant");
             $resultArray = array();
@@ -581,7 +586,7 @@
                 echo "<script>window.location.href='espace-stagiaire'</script>";
             }
             if($_SESSION['lang'] == 'ar'){
-                $_SESSION['status'] = "رقم البطاقة الوطنية أو القن السري غير صحيح";
+                $_SESSION['status'] = "رقم البطاقة الوطنية أو كلمة سر غير صحيحة";
             }else{
                 $_SESSION['status'] = "CIN ou mot de passe incorrecte";
             }
@@ -2028,18 +2033,91 @@
         */
     }
     class Admin{
-        public function loginAdmin(){
-            $username = $_POST['username'];
-            $password = $_POST['pwrd'];
-            if($username == "aymane" && $password == "aymane"){
-                $_SESSION['username'] = $username;
-                $_SESSION['pwd'] = $password;
-                echo "<script>window.location.href='dashboard'</script>";
-                
+        public $db = null;
+        public function __construct(DBController $db){
+            if(!isset($db->conn)) return null;
+            $this->db = $db;
+        }
+        public function insertAdmin(){
+            $prenom = $_POST['prenom'];
+            $nom = $_POST['nom'];
+            $email = $_POST['email'];
+            $motdepasse = md5($_POST['motdepasse']);
+            $image = basename($_FILES['image']['name']);
+            $path = "./images/admin/";
+            $allowed = array('jpg', 'png', 'jpeg');
+            $ext = pathinfo($image, PATHINFO_EXTENSION);
+            $result = $this->db->conn->query("SELECT `adm_email` FROM `admin` WHERE adm_email = '$email'");
+            if($result->num_rows){
+                $_SESSION['status'] = "email existe déjà";
             }else{
-                $_SESSION['status'] = "Mot de passe ou nom d'utilsateur incorrecte";
-                echo "<script>window.location.href='login-admin'</script>";
+                if(!in_array($ext, $allowed) & $image != ""){
+                    echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+                                Le fichier que vous avez choisit est de type ".$ext.
+                                "<br>Nous supportant juste les fichiers type images 'jpg, png, jpeg'
+                            </div>";
+                }else{
+                    move_uploaded_file($_FILES['image']['tmp_name'], $path.$image);
+                    $result = $this->db->conn->query("INSERT INTO `admin`(`adm_prenom`, `adm_nom`, `adm_email`, `adm_password`, `adm_image`, `adm_registre`) 
+                        VALUES ('$prenom','$nom','$email','$motdepasse','$path$image',NOW())");
+                        if($result){
+                            $_SESSION['success'] = "Inscription réussite";
+                            echo "<script>window.location.href='login-admin'</script>";
+                        }
+                    return $result;
+                }
             }
+
+        }
+        public function loginAdmin(){
+            $email = $_POST['email'];
+            $pwd = md5($_POST['pwrd']);
+            $result = $this->db->conn->query("SELECT * FROM `admin` WHERE adm_email = '$email' AND adm_password ='$pwd'");
+            while($admin = mysqli_fetch_assoc($result)){
+                $_SESSION['username'] = $admin['adm_email'];
+                $_SESSION['pwd'] = $admin['adm_password'];
+                $_SESSION['id'] = $admin['adm_id'];
+                $_SESSION['nom'] = $admin['adm_nom'];
+                $_SESSION['prenom'] = $admin['adm_prenom'];
+                $_SESSION['image'] = $admin['adm_image'];
+                echo "<script>window.location.href='dashboard'</script>";
+            }
+            echo "<script>window.location.href='login-admin'</script>";
+            $_SESSION['status'] = "Email ou mot de passe incorrecte";
+            return $result;
+        }
+        public function getAdmin(){
+            $result = $this->db->conn->query("SELECT * FROM `admin`");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function updatePassword(){
+            $password = md5($_POST['password']);
+            $email =  $_POST['email'];
+            $result = $this->db->conn->query("UPDATE `admin` SET `adm_password`='$password' WHERE adm_email='$email'");
+            $to = $_POST['email'];
+            $subject = "Nouveau mot de passe";
+            $headers = 'Content-type: text/html';
+            $msg = "<img class='img-fluid' src='http://localhost/ecole/images/logo.jpeg' 
+                    style='width:16rem; height:60px' alt='logo'>
+                    <div style='text-align:center; align-items:center;'>
+                        <h1>Changement de mot de passe</h1><br>
+                        <p><b>Veuillez trouvez ci-dessous le nouveau mot de passe de votre compte.<b></p><br>
+                        <ul>
+                            <li>Mot de passe: ".$_POST['password']."</li>
+                        </ul>
+                        <p><b>Veuillez ne communiquer ce mot de passe à perseonne .<b></p><br>
+                    </div>";
+            mail($to, $subject, $msg, $headers);
+            if($result){
+                echo "<script>window.location.href='login-admin'</script>";
+                $_SESSION['status'] = "Votre mot de passe à été modifié avec succès Le nouveau mot de passe a été envoyé à votre boite email";
+            }
+            return $result;
         }
     }
 ?>

@@ -62,7 +62,7 @@ $result = $db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON f
                 <input type="text" class="form-control px-5" id="search" placeholder="Chercher un stagiaire" name="nom">
             </div>
             <table class="table bg-white table-bordered mt-5">
-                <thead class="text-center">
+                <thead class="text-center text-white" style="background-color: #11101d;">
                     <tr>
                         <th scope="col" colspan="9">ARTL Nord</th>
                     </tr>

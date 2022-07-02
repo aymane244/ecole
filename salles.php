@@ -59,17 +59,17 @@ $reservations = $data->getReservations();
             <div id="frensh">
                 <h2 class="text-center mt-5">Les salles</h2>
                 <table class="table bg-white table-bordered">
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="9">ARTL Nord</th>
                         </tr>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Salle</th>
-                            <th scope="col">Déscription</th>
+                            <!-- <th scope="col">Déscription</th> -->
                             <th scope="col">Prix</th>
                             <th scope="col">Personnes</th>
-                            <th scope="col">Image</th>
+                            <!-- <th scope="col">Image</th> -->
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -90,10 +90,10 @@ $reservations = $data->getReservations();
                                 <tr>
                                     <th scope="row"><?php echo $i++ ?></th>
                                     <td class="row-style"><?php echo $image['sal_nom']; ?></td>
-                                    <td class="text-length2"><?php echo $image['sal_desc']; ?></td>
+                                    <!-- <td class="text-length2"><?php echo $image['sal_desc']; ?></td> -->
                                     <td class="row-style"><?php echo $image['sal_prix']; ?> Dhs</td>
                                     <td class="row-style"><?php echo $image['sal_personne']; ?> Personnes</td>
-                                    <td> <img src="<?php echo $image['sal_image'] ?>" alt="" class="img-fluid" class="img-fluid" style="width:12rem; height:180px"> </td>
+                                    <!-- <td> <img src="<?php echo $image['sal_image'] ?>" alt="" class="img-fluid" class="img-fluid" style="width:12rem; height:180px"> </td> -->
                                     <td class="row-style">
                                         <div class="row">
                                             <div class="col-md-5">
@@ -135,18 +135,18 @@ $reservations = $data->getReservations();
             <div id="arabe" style="display:none">
                 <h2 class="text-center mt-5">Les salles</h2>
                 <table class="table bg-white table-bordered">
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="9">الأكاديمية الجهوية للنقل واللوجستيك بجهة طنجة</th>
                         </tr>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">قاعة</th>
-                            <th scope="col">وصف القاعة</th>
-                            <th scope="col"> الثمن</th>
-                            <th scope="col"> الأشخاص</th>
-                            <th scope="col">صور</th>
                             <th scope="col">إجراءات</th>
+                            <!-- <th scope="col">صور</th> -->
+                            <th scope="col"> الأشخاص</th>
+                            <th scope="col"> الثمن</th>
+                            <!-- <th scope="col">وصف القاعة</th> -->
+                            <th scope="col">قاعة</th>
+                            <th scope="col">#</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -164,12 +164,6 @@ $reservations = $data->getReservations();
                             foreach ($images as $image) {
                             ?>
                                 <tr>
-                                    <th scope="row"><?php echo $i++ ?></th>
-                                    <td class="row-style"><?php echo $image['sal_nom_arab']; ?></td>
-                                    <td class="text-length2"><?php echo $image['sal_desc_arab']; ?></td>
-                                    <td class="row-style"><?php echo $image['sal_prix']; ?> درهم</td>
-                                    <td class="row-style"><?php echo $image['sal_personne']; ?> شخص</td>
-                                    <td> <img src="<?php echo $image['sal_image'] ?>" alt="" class="img-fluid" class="img-fluid" style="width:12rem; height:180px"> </td>
                                     <td class="row-style">
                                         <div class="row">
                                             <div class="col-md-5">
@@ -200,6 +194,12 @@ $reservations = $data->getReservations();
                                             </div> -->
                                         </div>
                                     </td>
+                                    <!-- <td> <img src="<?php echo $image['sal_image'] ?>" alt="" class="img-fluid" class="img-fluid" style="width:12rem; height:180px"> </td> -->
+                                    <td class="row-style"><?php echo $image['sal_personne']; ?> شخص</td>
+                                    <td class="row-style"><?php echo $image['sal_prix']; ?> درهم</td>
+                                    <!-- <td class="text-length2"><?php echo $image['sal_desc_arab']; ?></td> -->
+                                    <td class="row-style"><?php echo $image['sal_nom_arab']; ?></td>
+                                    <th scope="row"><?php echo $i++ ?></th>
                                 </tr>
                         <?php
                             }
@@ -211,7 +211,7 @@ $reservations = $data->getReservations();
             <div id="reservation">
                 <h2 class="text-center mt-5">Les réservations</h2>
                 <table class="table bg-white">
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="9">ALT Nord</th>
                         </tr>

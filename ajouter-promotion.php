@@ -1,43 +1,49 @@
-<?php include_once "session.php";?>
+<?php include_once "session.php"; ?>
 <?php
-    if(!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])){
-        echo "<script>window.location.href='login-admin'</script>";
-    }
+if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
+    echo "<script>window.location.href='login-admin'</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <?php 
-            include_once "header.php";  
-            include_once "style.php";
-            include_once "scripts.php";
-        ?>
-        <title>Ajouter une promotion</title>
-    </head>
-    <body>
-        <?php include_once "navbar-admin.php";?>
-        <div class="container">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+    include_once "header.php";
+    include_once "style.php";
+    include_once "scripts.php";
+    ?>
+    <title>Ajouter une promotion</title>
+</head>
+
+<body>
+    <?php include_once "navbar-admin.php"; ?>
+    <div class="main-content">
+        <header>
+            <?php include 'admin.php' ?>
+        </header>
+        <div class="container mt-5 pt-5">
             <div class="text-center mt-4 mb-5">
                 <h2>Ajouter promotion</h2>
             </div>
             <?php
-                if(isset($_SESSION['status'])){
+            if (isset($_SESSION['status'])) {
             ?>
-            <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status']?></div>
+                <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status'] ?></div>
             <?php
-                    unset($_SESSION['status']);
-                }
+                unset($_SESSION['status']);
+            }
             ?>
             <?php
-                if(isset($_SESSION['status_danger'])){
+            if (isset($_SESSION['status_danger'])) {
             ?>
-            <div class='alert alert-danger text-center mt-2' role='alert'><?php echo $_SESSION['status_danger']?></div>
+                <div class='alert alert-danger text-center mt-2' role='alert'><?php echo $_SESSION['status_danger'] ?></div>
             <?php
-                    unset($_SESSION['status_danger']);
-                }
+                unset($_SESSION['status_danger']);
+            }
             ?>
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-12">
@@ -65,10 +71,12 @@
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
 <?php
-    if(isset($_POST['submit_promotion'])){
-        $data->insertPromotion();
-    }
+if (isset($_POST['submit_promotion'])) {
+    $data->insertPromotion();
+}
 ?>

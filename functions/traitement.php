@@ -128,7 +128,7 @@ if(isset($_POST['action'])){
                                     </a>
                                 </p>
                             </div>
-                            <hr>
+                            <hr class="bg-light">
                             <div class="text-center">
                                 <p>
                                     <a download="'.$zip_file.'" href="functions/'.$zip_file.'">

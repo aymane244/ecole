@@ -49,7 +49,7 @@ $formations = $data->getFormation();
             </div>
             <div id="frensh">
                 <table class="table table-bordered mt-5 bg-white">
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="7">ARTL Nord</th>
                         </tr>
@@ -57,7 +57,7 @@ $formations = $data->getFormation();
                             <th scope="col">#</th>
                             <th scope="col">Formation</th>
                             <th scope="col">Présentation</th>
-                            <th scope="col">Description</th>
+                            <!-- <th scope="col">Description</th> -->
                             <!-- <th scope="col">Image</th> -->
                             <th scope="col">Gestion</th>
                             <th scope="col">Actions</th>
@@ -81,7 +81,7 @@ $formations = $data->getFormation();
                                     <td class="row-style"><?php echo $i ?></td>
                                     <td class="row-style"><?php echo $formation['for_nom'] ?></td>
                                     <td class="row-style"><?php echo $formation['for_pres'] ?></td>
-                                    <td class="row-style text-length2"><?php echo $formation['for_descr'] ?></td>
+                                    <!-- <td class="row-style text-length2"><?php echo $formation['for_descr'] ?></td> -->
                                     <!-- <td class="row-style"><img src="<?php echo $formation['for_image'] ?>" style='max-width: 5rem'></td> -->
                                     <td class="row-style">
                                         <a href="gestion-formation?id=<?php echo $formation['for_id'] ?>" target="_blank">
@@ -117,18 +117,18 @@ $formations = $data->getFormation();
             </div>
             <div id="arabe" style="display:none;">
                 <table class="table table-bordered bg-white mt-5">
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="10">الأكاديمية الجهوية للنقل واللوجستيك بجهة طنجة</th>
                         </tr>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">التكوين</th>
-                            <th scope="col">عرض التكوين</th>
-                            <th scope="col">وصف التكوين</th>
-                            <!-- <th scope="col">صورة</th> -->
-                            <th scope="col">المتدربون</th>
                             <th scope="col">إجراءات</th>
+                            <!-- <th scope="col">وصف التكوين</th> -->
+                            <!-- <th scope="col">صورة</th> -->
+                            <th scope="col">إدارة</th>
+                            <th scope="col">عرض التكوين</th>
+                            <th scope="col">التكوينات</th>
+                            <th scope="col">#</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -146,16 +146,6 @@ $formations = $data->getFormation();
                             foreach ($formations as $formation) {
                             ?>
                                 <tr>
-                                    <td class="row-style"><?php echo $i ?></td>
-                                    <td class="row-style"><?php echo $formation['for_nom_arab'] ?></td>
-                                    <td class="w-25 row-style"><?php echo $formation['for_pres_arab'] ?></td>
-                                    <td class="row-style text-length2"><?php echo $formation['for_desc_arab'] ?></td>
-                                    <!-- <td class="row-style"><img src="<?php echo $formation['for_image'] ?>" style='max-width: 5rem'></td> -->
-                                    <td class="row-style">
-                                        <a href="les-etudiants?id=<?php echo $formation['for_id'] ?>" target="_blank">
-                                            إدارة التدريب
-                                        </a>
-                                    </td>
                                     <td class="row-style">
                                         <div class="row">
                                             <div class="col-md-5">
@@ -173,9 +163,18 @@ $formations = $data->getFormation();
                                             </div>
                                         </div>
                                     </td>
+                                    <td class="row-style">
+                                        <a href="les-etudiants?id=<?php echo $formation['for_id'] ?>" target="_blank">
+                                            إدارة التدريب
+                                        </a>
+                                    </td>
+                                    <!-- <td class="row-style"><img src="<?php echo $formation['for_image'] ?>" style='max-width: 5rem'></td> -->
+                                    <!-- <td class="row-style text-length2"><?php echo $formation['for_desc_arab'] ?></td> -->
+                                    <td class="w-25 row-style"><?php echo $formation['for_pres_arab'] ?></td>
+                                    <td class="row-style"><?php echo $formation['for_nom_arab'] ?></td>
+                                    <td class="row-style"><?php echo $i++ ?></td>
                                 </tr>
                         <?php
-                                $i++;
                             }
                         }
                         ?>

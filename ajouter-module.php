@@ -72,48 +72,50 @@ $formations = $data->getformation();
                                         <?php
                                         for ($i = 1; $i <= $numbers; $i++) {
                                         ?>
-                                            <div>Cours # <?php echo $i ?></div>
+                                            <div><h5 class="text-center">Cours # <?php echo $i ?></h5> </div>
                                             <input type="hidden" name="nums" value="<?php echo $numbers ?>">
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <label for="matiere" class="col-md-12 col-form-label text-md-end">Nom du module</label>
                                                     <div class="d-flex">
                                                         <i class="fas fa-tag position-awesome"></i>
-                                                        <input id="matiere" type="text" class="form-control pl-5" name="matiere[]" placeholder="Nom du module" autocomplete="matiere" autofocus value="<?php echo isset($_POST['matiere']) ? $_POST['matiere'] : ''; ?>" required>
+                                                        <input id="matiere" type="text" class="form-control pl-5" name="matiere[]" placeholder="Nom du module" autocomplete="matiere" value="<?php echo isset($_POST['matiere']) ? $_POST['matiere'] : ''; ?>" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <label for="matiere_arab" class="col-md-12 col-form-label text-md-end">اسم الوحدة</label>
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-tag position-awesome_arab_module"></i>
+                                                        <input id="matiere_arab" type="text" class="form-control pr-5 text-right" name="matiere_arab[]" placeholder="اسم الوحدة" autocomplete="matiere" value="<?php echo isset($_POST['matiere_arab']) ? $_POST['matiere_arab'] : ''; ?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="prof" class="col-md-12 col-form-label text-md-end">Nom du formateur</label>
                                                     <div class="d-flex">
                                                         <i class="fas fa-user-tie position-awesome"></i>
-                                                        <input id="prof" type="text" class="form-control pl-5" name="prof[]" placeholder="Nom du formateur" autocomplete="prof" autofocus value="<?php echo isset($_POST['prof']) ? $_POST['prof'] : ''; ?>" required>
+                                                        <input id="prof" type="text" class="form-control pl-5" name="prof[]" placeholder="Nom du formateur" autocomplete="prof" value="<?php echo isset($_POST['prof']) ? $_POST['prof'] : ''; ?>" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <label for="matiere_arab" class="col-md-12 col-form-label text-md-end">اسم الوحدة</label>
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-tag position-awesome"></i>
-                                                        <input id="matiere_arab" type="text" class="form-control pl-5" name="matiere_arab[]" placeholder="اسم الوحدة" autocomplete="matiere" autofocus value="<?php echo isset($_POST['matiere_arab']) ? $_POST['matiere_arab'] : ''; ?>" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-6 text-right">
                                                     <label for="prof_arab" class="col-md-12 col-form-label text-md-end">اسم المؤطر</label>
                                                     <div class="d-flex">
-                                                        <i class="fas fa-user-tie position-awesome"></i>
-                                                        <input id="prof_arab" type="text" class="form-control pl-5" name="prof_arab[]" placeholder="اسم المؤطر" autocomplete="matiere" autofocus value="<?php echo isset($_POST['matiere_arab']) ? $_POST['matiere_arab'] : ''; ?>" required>
+                                                        <i class="fas fa-user-tie position-awesome_arab_module"></i>
+                                                        <input id="prof_arab" type="text" class="form-control pr-5 text-right" name="prof_arab[]" placeholder="اسم المؤطر" autocomplete="matiere" value="<?php echo isset($_POST['matiere_arab']) ? $_POST['matiere_arab'] : ''; ?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="duree" class="col-md-12 col-form-label text-md-end">Durée total du cours</label>
                                                     <div class="d-flex">
                                                         <i class="fas fa-poll position-awesome"></i>
-                                                        <input id="duree" type="number" min="1" class="form-control pl-5 w-25" name="duree[]" autocomplete="duree" autofocus value="<?php echo isset($_POST['duree']) ? $_POST['duree'] : ''; ?>" required>
+                                                        <input id="duree" type="number" min="1" class="form-control pl-5" name="duree[]" autocomplete="duree" value="<?php echo isset($_POST['duree']) ? $_POST['duree'] : ''; ?>" required>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <hr class="bg-light">
                                         <?php
                                         }
                                         ?>
+                                        
                                         <div class="row mb-0" id="divbtn">
                                             <div class="col-md-12 text-center">
                                                 <input type="submit" name="submit_module" class="btn btn-primary" id='submit_module' value="Ajouter le module" id="ajout">

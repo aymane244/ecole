@@ -6,4 +6,5 @@
     require("functions/etudiant.php");
     $db = new DBController();
     $data = new Etudiant($db);
+    $admin = new Admin($db);
 ?>

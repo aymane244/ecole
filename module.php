@@ -65,7 +65,7 @@ foreach ($formations as $row) {
             </div>
             <div id="frensh">
                 <table class="table table-bordered mt-5 bg-white">
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="5">ARTL Nord</th>
                         </tr>
@@ -73,7 +73,7 @@ foreach ($formations as $row) {
                             <th scope="col">Formation</th>
                             <th scope="col">Modules</th>
                             <th scope="col">Formateur</th>
-                            <th scope="col">Durée globale</th>
+                            <th scope="col">Durée</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -147,16 +147,16 @@ foreach ($formations as $row) {
             ?>
             <div id="arabe" style="display:none">
                 <table class="table table-bordered bg-white mt-5">
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="5">الأكاديمية الجهوية للنقل واللوجستيك بجهة طنجة</th>
                         </tr>
                         <tr>
-                            <th scope="col">اسم التكوين</th>
-                            <th scope="col">اسم الوحدة</th>
-                            <th scope="col">اسم المؤطر</th>
-                            <th scope="col">مدة دراسة الوحدة</th>
                             <th scope="col">إجراءات</th>
+                            <th scope="col">مدة دراسة الوحدة</th>
+                            <th scope="col">اسم المؤطر</th>
+                            <th scope="col">اسم الوحدة</th>
+                            <th scope="col">اسم التكوين</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -174,17 +174,6 @@ foreach ($formations as $row) {
                                 $formationom_arab = $formationame_arab[$i];
                             ?>
                                 <tr>
-                                    <?php
-                                    if ($arr_arab[$formationom_arab]['printed'] == 'no') {
-                                    ?>
-                                        <td class="row-style" rowspan="<?php echo $arr_arab[$formationom_arab]['rowspan'] ?>"><?php echo $formationom_arab ?></td>
-                                    <?php
-                                        $arr_arab[$formationom_arab]['printed'] = 'yes';
-                                    }
-                                    ?>
-                                    <td><?php echo $matieres_arab[$i] ?> </td>
-                                    <td><?php echo $prof_arab[$i] ?></td>
-                                    <td><?php echo $duree[$i] ?>h</td>
                                     <td>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -202,6 +191,17 @@ foreach ($formations as $row) {
                                             </div>
                                         </div>
                                     </td>
+                                    <td><?php echo $duree[$i] ?>h</td>
+                                    <td><?php echo $prof_arab[$i] ?></td>
+                                    <td><?php echo $matieres_arab[$i] ?> </td>
+                                    <?php
+                                    if ($arr_arab[$formationom_arab]['printed'] == 'no') {
+                                    ?>
+                                        <td class="row-style" rowspan="<?php echo $arr_arab[$formationom_arab]['rowspan'] ?>"><?php echo $formationom_arab ?></td>
+                                    <?php
+                                        $arr_arab[$formationom_arab]['printed'] = 'yes';
+                                    }
+                                    ?>
                                 </tr>
                         <?php
                             }

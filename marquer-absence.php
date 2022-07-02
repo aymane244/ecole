@@ -112,7 +112,7 @@ foreach ($total_etudiants as $total_etudiant) {
                         </div>
                     </div>
                     <table class="table table-bordered mt-5 bg-white">
-                        <thead class="text-center">
+                        <thead class="text-center text-white" style="background-color: #11101d;">
                             <tr>
                                 <th scope="col" colspan="5">ARTL Nord</th>
                             </tr>

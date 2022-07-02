@@ -44,7 +44,7 @@ $contacts = $data->getContacts();
                     </a>
                 </div>-->
             <table class="table bg-white mt-5 table-bordered">
-                <thead class="text-center">
+                <thead class="text-center text-white" style="background-color: #11101d;">
                     <tr>
                         <th scope="col" colspan="9">ARTL Nord</th>
                     </tr>

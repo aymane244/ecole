@@ -133,7 +133,7 @@ foreach ($etudiants as $etudiant) {
                 ?>
                 <div class="col-md-6">
                     <table class="table table-bordered mt-5 bg-white">
-                        <thead class="text-center">
+                        <thead class="text-center text-white" style="background-color: #11101d;">
                             <tr>
                                 <th scope="col" colspan="5">ALT Nord</th>
                             </tr>

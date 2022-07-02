@@ -54,13 +54,11 @@
         document.getElementById("frensh").style.display="block";
         document.getElementById("arabe").style.display="none";
         //document.getElementById("images").style.display="block";
-        document.getElementById("reservation").style.display="none";
     }
     function arabe(){
         document.getElementById("arabe").style.display="block";
         document.getElementById("frensh").style.display="none";
         //document.getElementById("images").style.display="block";
-        document.getElementById("reservation").style.display="none";
     }
 </script>
 <script>

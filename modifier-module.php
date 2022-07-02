@@ -47,9 +47,9 @@ foreach ($matieres as $matiere) {
             <div class="text-center py-3">
                 <h2><i class="fas fa-edit"></i> Modifier le module</h2>
             </div>
-            <div class="row pb-1 justify-content-center mt-5">
-                <div class="col-md-10">
-                    <div class="card card-position">
+            <div class="row justify-content-center">
+                <div class="col-md-12 mt-5">
+                    <div class="card card-position pb-3">
                         <div class="card-header text-center link-font"><i class="fas fa-edit"></i> Modifier votre module</div>
                         <div class="card-body py-5">
                             <form action="" method="POST" enctype="multipart/form-data">
@@ -75,38 +75,34 @@ foreach ($matieres as $matiere) {
                                     </div>
                                 </div>
                                 <div class="row mb-3 justify-content-center">
-                                    <div class="col-md-10">
+                                    <div class="col-md-5">
                                         <label for="matiere" class="col-md-12 col-form-label text-md-end">Module</label>
                                         <div class="d-flex">
                                             <i class="fas fa-tag position-awesome"></i>
                                             <input id="matiere" type="text" class="form-control pl-5" name="matiere_nom" value="<?php echo $mat ?>" autocomplete="matiere" autofocus required>
                                         </div>
                                     </div>
+                                    <div class="col-md-5 text-right">
+                                        <label for="matiere_arab" class="col-md-12 col-form-label text-md-end">الوحدة</label>
+                                        <div class="d-flex">
+                                            <i class="fas fa-tag position-awesome_arab_full_module"></i>
+                                            <input id="matiere_arab" type="text" class="form-control pr-5 text-right" name="matiere_nom_arab" value="<?php echo $mat_arab ?>" autocomplete="matiere" autofocus required>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row mb-3 justify-content-center">
-                                    <div class="col-md-10">
+                                    <div class="col-md-5">
                                         <label for="prof" class="col-md-12 col-form-label text-md-end">Formateur</label>
                                         <div class="d-flex">
                                             <i class="fas fa-user-tie position-awesome"></i>
                                             <input id="prof" type="text" class="form-control pl-5" name="prof_nom" value="<?php echo $prof ?>" autocomplete="profnom" autofocus required>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3 justify-content-center">
-                                    <div class="col-md-10">
-                                        <label for="matiere_arab" class="col-md-12 col-form-label text-md-end">الوحدة</label>
-                                        <div class="d-flex">
-                                            <i class="fas fa-tag position-awesome"></i>
-                                            <input id="matiere_arab" type="text" class="form-control pl-5" name="matiere_nom_arab" value="<?php echo $mat_arab ?>" autocomplete="matiere" autofocus required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3 justify-content-center">
-                                    <div class="col-md-10">
+                                    <div class="col-md-5 text-right">
                                         <label for="prof_arab" class="col-md-12 col-form-label text-md-end">المؤطر</label>
                                         <div class="d-flex">
-                                            <i class="fas fa-user-tie position-awesome"></i>
-                                            <input id="prof_arab" type="text" class="form-control pl-5" name="prof_nom_arab" value="<?php echo $prof_arab ?>" autocomplete="profnom" autofocus required>
+                                            <i class="fas fa-user-tie position-awesome_arab_full_module"></i>
+                                            <input id="prof_arab" type="text" class="form-control pr-5 text-right" name="prof_nom_arab" value="<?php echo $prof_arab ?>" autocomplete="profnom" autofocus required>
                                         </div>
                                     </div>
                                 </div>
@@ -119,9 +115,9 @@ foreach ($matieres as $matiere) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-0">
-                                    <div class="col-md-10 offset-md-4">
-                                        <button type="submit" name="submit" class="btn btn-primary mx-3">Modifier module</button>
+                                <div class="row mb-0 justify-content-center">
+                                    <div class="col-md-10 text-center">
+                                        <button type="submit" name="submit" class="btn btn-primary">Modifier module</button>
                                     </div>
                                 </div>
                             </form>

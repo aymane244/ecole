@@ -47,11 +47,11 @@ foreach ($etudiants as $etudiant) {
                 <h2><i class="fas fa-graduation-cap"></i> Notes</h2>
             </div>
             <?php
-            if (isset($_SESSION['status_error'])) {
+            if (isset($_SESSION['status'])) {
             ?>
-                <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status_error'] ?></div>
+                <div class='alert alert-danger text-center mt-2' role='alert'><?php echo $_SESSION['status'] ?></div>
             <?php
-                unset($_SESSION['status_error']);
+                unset($_SESSION['status']);
             }
             ?>
             <div class="row pb-2 justify-content-center">
@@ -77,6 +77,7 @@ foreach ($etudiants as $etudiant) {
                                         <div class="d-flex">
                                             <i class="fas fa-user-graduate position-awesome"></i>
                                             <select class="custom-select pl-5" name="etudiants">
+                                            <option value="">--Veuillez Choisir un stagiaire--</option>
                                                 <?php
                                                 foreach ($etudiants as $etudiant) {
                                                     if ($etudiant['for_id'] == $id) {
@@ -110,7 +111,7 @@ foreach ($etudiants as $etudiant) {
                 ?>
                 <div class="col-md-6">
                     <table class="table table-bordered mt-5 bg-white">
-                        <thead class="text-center">
+                        <thead class="text-center text-white" style="background-color: #11101d;">
                             <tr>
                                 <th scope="col" colspan="5">ALT Nord</th>
                             </tr>

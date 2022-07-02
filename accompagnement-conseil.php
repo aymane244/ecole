@@ -27,7 +27,7 @@ $douane = $data->getdouane();
         <header>
             <?php include 'admin.php' ?>
         </header>
-        <div class="container m-5 pt-5">
+        <div class="m-5 pt-5">
             <div class="text-center py-3">
                 <h2><i class="fas fa-question"></i> Page Accompagenment & conseil</h2>
             </div>
@@ -50,7 +50,7 @@ $douane = $data->getdouane();
                         </a>
                     </div>-->
                 <table class="table bg-white mt-5 table-bordered">
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="9">ARTL Nord</th>
                         </tr>
@@ -106,7 +106,7 @@ $douane = $data->getdouane();
                         </a>
                     </div>-->
                 <table class="table bg-white mt-5 table-bordered">
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="9">ARTL Nord</th>
                         </tr>

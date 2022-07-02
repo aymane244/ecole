@@ -97,9 +97,9 @@ foreach ($douanetotal as $count) {
             <main>
                 <div class="row">
                     <div class="col-md-4 text-center">
-                        <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
-                            <h4>Date: <label id=""><?php echo date("d/m/Y") ?></label></h4>
-                            <h4 class="mt-5">Etudiants inscrits aujourd'hui: <br> <label id="value_etud_date"><?php echo $etudiantdate ?></label></h4>
+                        <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height: 100%;">
+                            <h4 class="mb-5 mt-2">Date: <label id=""><?php echo date("d/m/Y") ?></label></h4>
+                            <h4 class="pt-5">Etudiants inscrits aujourd'hui: <br> <label id="value_etud_date"><?php echo $etudiantdate ?></label></h4>
                         </div>
                     </div>
                     <div class="col-md-4 text-center">
@@ -109,9 +109,9 @@ foreach ($douanetotal as $count) {
                         </div>
                     </div>
                     <div class="col-md-4 text-center">
-                        <div class="bg-white w-100 rounded px-3 py-3 text-color">
-                            <h4>Nombre d'accompagnement total: <label id="res_iso"><?php echo $countiso ?></label></h4>
-                            <h4 class="mt-5">Réservations aujourd'hui: <br> <label id="res_iso_date"><?php echo $countisodate ?></label></h4>
+                        <div class="w-100 rounded px-3 py-3 text-color" style="background-color: #11101d;">
+                            <h4 class="text-white">Nombre d'accompagnement total: <label id="res_iso"><?php echo $countiso ?></label></h4>
+                            <h4 class="mt-5 text-white">Réservations aujourd'hui: <br> <label id="res_iso_date"><?php echo $countisodate ?></label></h4>
                         </div>
                     </div>
                     <div class="col-md-4 text-center mt-3">
@@ -121,9 +121,9 @@ foreach ($douanetotal as $count) {
                         </div>
                     </div>
                     <div class="col-md-4 mt-3">
-                        <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
-                            <h4>Total de stagiaires: <label id="value_etud"><?php echo $total_etud ?></label></h4>
-                            <div class="div-progress mx-auto">
+                        <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%;">
+                            <h4 class="mt-2">Total de stagiaires: <label id="value_etud"><?php echo $total_etud ?></label></h4>
+                            <div class="div-progress mx-auto mb-5">
                                 <div id="myBar" class="bar"></div>
                             </div>
                             <h4 class="mt-4">Total des formateurs: <label id="value_prof"><?php echo $total_prof ?></label></h4>
@@ -133,9 +133,9 @@ foreach ($douanetotal as $count) {
                         </div>
                     </div>
                     <div class="col-md-4 text-center mt-3">
-                        <div class="bg-white w-100 rounded px-3 py-3 text-color" style="height:100%">
-                            <h4>Articles publiés: <br> <label id="value_article"><?php echo $total_article ?></label></h4>
-                            <h4 class="mt-3">Commentaires ecrits: <br><label id="value_comm"><?php echo $com_total ?></label></h4>
+                        <div class="w-100 rounded px-3 py-3 text-color" style="height:100%; background-color: #11101d;">
+                            <h4 class="text-white mt-2">Articles publiés: <br> <label id="value_article"><?php echo $total_article ?></label></h4>
+                            <h4 class="mt-5 text-white">Commentaires ecrits: <br><label id="value_comm"><?php echo $com_total ?></label></h4>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -143,7 +143,7 @@ foreach ($douanetotal as $count) {
                             <h4 class="pt-4">Nouvels inscriptions</h4>
                         </div>
                         <table class="table bg-white">
-                            <thead class="text-center">
+                            <thead class="text-center text-white" style="background-color: #11101d;">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nom et prénom</th>
@@ -199,10 +199,7 @@ foreach ($douanetotal as $count) {
                             <h4 class="pt-4">Demandes documents</h4>
                         </div>
                         <table class="table bg-white">
-                            <thead class="text-center">
-                                <tr>
-                                    <th scope="col" colspan="2">Demande diplome</th>
-                                </tr>
+                            <thead class="text-center text-white" style="background-color: #11101d;">
                                 <tr>
                                     <th>Nom et prénom</th>
                                     <th>Type de demande</th>
@@ -247,10 +244,7 @@ foreach ($douanetotal as $count) {
                             <h4 class="pt-4">Accompagnement</h4>
                         </div>
                         <table class="table bg-white">
-                            <thead class="text-center">
-                                <tr>
-                                    <th scope="col" colspan="2">Accompagnement</th>
-                                </tr>
+                            <thead class="text-center text-white" style="background-color: #11101d;">
                                 <tr>
                                     <th>Nom et prénom</th>
                                     <th>Type de d'accomp.</th>
@@ -293,10 +287,7 @@ foreach ($douanetotal as $count) {
                             <h2 class="pt-4">Réservations des salles</h2>
                         </div>
                         <table class="table bg-white mt-4">
-                            <thead class="text-center">
-                                <tr>
-                                    <th scope="col" colspan="7">ALT Nord</th>
-                                </tr>
+                            <thead class="text-center text-white" style="background-color: #11101d;">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Salle</th>

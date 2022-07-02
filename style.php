@@ -186,6 +186,13 @@
         margin-left: 27rem;
         z-index: 2;
     }
+    .position-awesome_arab_module{
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 29rem;
+        z-index: 2;
+    }
     .position-awesome_arab_full{
         position: absolute;
         font-size: 23px;
@@ -193,11 +200,32 @@
         margin-left: 43.4rem;
         z-index: 2;
     }
+    .position-awesome_arab_full_module{
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 23.6rem;
+        z-index: 2;
+    }
     .position-awesome_arab_full_insc{
         position: absolute;
         font-size: 23px;
         margin-top: 7px;
         margin-left: 64.6rem;
+        z-index: 2;
+    }
+    .position-awesome_arab_dashboard{
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 62rem;
+        z-index: 2;
+    }
+    .position-awesome_arab_article{
+        position: absolute;
+        font-size: 23px;
+        margin-top: 7px;
+        margin-left: 60rem;
         z-index: 2;
     }
     .text-color-footer {
@@ -1564,7 +1592,6 @@
         font-family: 'Poppins', sans-serif;
     }
     .sidebar {
-
         position: fixed;
         left: 0;
         top: 0;
@@ -1925,5 +1952,20 @@
     }
     .card-description>p {
         margin: 0;
+    }
+    .ck-editor__editable[role="textbox"] {
+        /* editing area */
+        min-height: 200px;
+    }
+    .ck-content .image {
+        /* block images */
+        max-width: 80%;
+        margin: 20px auto;
+    }
+    .aligns{
+        text-align: right !important;
+    }
+    #mytextarea{
+        text-align: right !important;
     }
 </style>

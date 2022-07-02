@@ -41,7 +41,7 @@
             ?>
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <div class="card card-position">
+                    <div class="card card-position" style="box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);">
                         <div class="card-header text-center link-font">
                             <h3>
                                 <?php
