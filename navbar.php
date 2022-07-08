@@ -1,7 +1,7 @@
 <?php
-    include_once "header.php";  
-    include_once "style.php";
-    include_once "scripts.php";
+    include_once "includes/header.php";  
+    include_once "includes/style.php";
+    include_once "includes/scripts.php";
     $etudiants=$data->getEtudiant();
     $formations = $data->getformation();
 ?>
@@ -127,14 +127,14 @@
             </li>
         </ul>
     </div>
-    <a class="navbar-brand"  href="index" ><img class="img-fluid" src="images/logo.jpeg" style="width:14rem; height:60px"></a>
+    <a class="navbar-brand"  href="index" ><img class="img-fluid" src="images/view/logo.jpeg" style="width:14rem; height:60px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <?php
         } else {
     ?>   
-    <a class="navbar-brand"  href="index" ><img class="img-fluid" src="images/logo.jpeg" style="width:14rem; height:60px"></a>
+    <a class="navbar-brand"  href="index" ><img class="img-fluid" src="images/view/logo.jpeg" style="width:14rem; height:60px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -200,7 +200,7 @@
                     <div class="dropdown-menu mt-3" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="espace-etudiant"><?php echo $navbar['etudiant'] ?></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="logout"><?php echo $navbar['deconnexion'] ?></a>
+                        <a class="dropdown-item" href="includes/logout"><?php echo $navbar['deconnexion'] ?></a>
                     </div>
                     <?php
                         }else if(isset($_SESSION['username']) && isset($_SESSION['pwd'])){
@@ -209,9 +209,9 @@
                         <i class="fas fa-user "></i> <?php echo $navbar['admin'] ?>
                     </a>
                     <div class="dropdown-menu mt-3" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="dashboard"><?php echo $navbar['dashboard'] ?></a>
+                        <a class="dropdown-item" href="admin/dashboard"><?php echo $navbar['dashboard'] ?></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="logout"><?php echo $navbar['deconnexion'] ?></a>
+                        <a class="dropdown-item" href="includes/logout-admin"><?php echo $navbar['deconnexion'] ?></a>
                     </div>
                     <?php
                         }else{

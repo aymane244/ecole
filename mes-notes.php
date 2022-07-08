@@ -36,9 +36,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php 
-            include_once "header.php";  
-            include_once "style.php";
-            include_once "scripts.php";
+            include_once "includes/header.php";  
+            include_once "includes/style.php";
+            include_once "includes/scripts.php";
         ?>
         <title><?php echo $espaceetudiant['notes']?></title>
     </head>
@@ -62,7 +62,7 @@
                     <?php
                         if($_SESSION['lang'] =="ar"){
                     ?>
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="9"><?php echo $title['titre']?></th>
                         </tr>
@@ -106,7 +106,7 @@
                     <?php
                         }else{
                     ?>
-                    <thead class="text-center">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
                             <th scope="col" colspan="9"><?php echo $title['titre']?></th>
                         </tr>
@@ -171,7 +171,7 @@
                 <h5 class="text-danger"> <?php echo $pasnotes['ratrappage']?></h5>
                 <?php                
                             }
-                            if($note['not_formation'] == 1 && $note1 == $note2 && $note['notegenerale'] >= 10) {
+                            if($note['not_formation'] == 16 && $note1 == $note2 && $note['notegenerale'] >= 10) {
                 ?>
                 <h5 class="my-3"> <?php echo $pasnotes['inscription']?></h5>
                 <!-- Button trigger modal -->
@@ -213,10 +213,10 @@
                                             <div class="row mb-3 text-right">
                                                 <label for="profesionnel" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['profesionnel']?></label>
                                                 <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-address-card position-awesome_arab_note"></i>
-                                                        <input id="profesionnel" type="text" class="form-control pr-5 text-right" name="profesionnel" autocomplete="profesionnel" placeholder="رقم البطاقة الوطنية">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-address-card position-awesome-arab"></i>
                                                     </div>
+                                                    <input id="profesionnel" type="text" class="form-control pr-5 text-right" name="profesionnel" autocomplete="profesionnel" placeholder="رقم البطاقة الوطنية">
                                                 </div>
                                             </div>
                                             <?php
@@ -241,14 +241,14 @@
                                             <?php
                                                 $formations = $data->getformation();                
                                                 foreach($formations as $formation){
-                                                    if($formation['for_id'] == 2){
+                                                    if($formation['for_id'] == 17){
                                             ?>
                                             <input type="hidden" name="for_id" value="<?php echo $formation['for_id'] ?>">
                                             <?php
                                                     }
                                                 }
                                             ?>
-                                            <?php              
+                                            <!-- <?php              
                                                 foreach($matieres as $matiere){
                                                     if($_SESSION['id'] == $matiere['etud_id']){
                                             ?>
@@ -262,17 +262,18 @@
                                                 foreach($counts as $count){
                                                     if($_SESSION['id'] == $count['etud_id']){
                                             ?>
-                                            <input type="text" name="not_count" value="<?php echo $count['total_not'] ?>">
+                                            <input type="hidden" name="not_count" value="<?php echo $count['total_not'] ?>">
                                             <?php
                                                     }
                                                 }
-                                            ?>
+                                            ?> -->
                                             <button type="submit" class="btn btn-primary" name="submit" id="submit_inscri"><?php echo $inscription['inscrire']?></button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
-                            <div class="modal-footer text-left">
+                            <hr class="bg-light">
+                            <div class="text-center pb-4">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $accompagenemt['fermer'] ?></button>
                             </div>
                         </div>
@@ -289,7 +290,7 @@
         <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">
             <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>
         </div>
-        <?php include_once "footer.php";?>
+        <?php include_once "includes/footer.php";?>
     </body>
 </html>
 <?php

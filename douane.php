@@ -1,28 +1,27 @@
 <?php include_once "session.php"; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php
-  include_once "header.php";
-  include_once "style.php";
-  include_once "scripts.php";
+  include_once "includes/header.php";
+  include_once "includes/style.php";
+  include_once "includes/scripts.php";
   ?>
   <style>
     .card {
-      width: 100% !important;        
+      width: 100% !important;
       font-size: 1rem;
       text-decoration: none;
       overflow: hidden;
       box-shadow: 0 0 3rem -1rem rgba(0, 0, 0, 0.5);
       transition: transform 0.1s ease-in-out, box-shadow 0.1s;
     }
-    .card:hover {
-      transform: translateY(-0.5rem) scale(1.0125);
-      box-shadow: 0 0.5em 3rem -1rem rgba(0, 0, 0, 0.5);
+    .card-im {
+      min-height: 17rem !important;
     }
   </style>
   <title><?php echo $title['Categoratsion'] ?></title>
@@ -35,9 +34,9 @@
     <div class="text-white text-center text-big div-header">
       <h2><?php echo $douane['categorisation'] ?></h2>
     </div>
-    <div style="height: 100%; position:relative">
+    <div style="position:relative">
       <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-      <img src="images/douane.png" alt="" class="d-block img-fluid" style="width:100%;">
+      <img src="images/view/customs.png" alt="" class="d-block img-fluid" style="width:100%;">
     </div>
     <?php
     if (isset($_SESSION['status'])) {
@@ -47,14 +46,26 @@
       unset($_SESSION['status']);
     }
     ?>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 mt-4 col-lg-6 bg-white py-3 ">
-          <img src="images/630.jpg" class="img-fluid">
+    <div class="container mt-5">
+      <div class="row align-items-center bg-white">
+        <div class="col-md-12 mt-4 col-lg-6 py-3">
+          <img src="images/view/630.jpg" class="img-fluid">
         </div>
-        <div class="col-md-12 mt-4 col-lg-6 bg-white py-3 ">
+        <div class="col-md-12 mt-4 col-lg-6 py-3 ">
           <h4 class="mb-4 text-center"><?php echo $douane['status'] ?></h4>
-          <p class="text-justify">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker..</p>
+          <p class="text-justify">
+            La catégorisation consiste à séléctionner les sociétés organisées, gérées d'une manière transparente et en situation régulière avec 
+            la douane, pour leur accorder des facilités douanières leur permettant de réaliser leurs opérations de dédouanement dans de 
+            meilleures conditions de compétitivité et de réactivité frâce à des procédures simplifiées et personnalisées. 
+            <br><br>
+            <strong>Quels sont les avantages de la catégorisation ?</strong> 
+            <ul>
+              <li>Un dédouanement rapide d’où des économies en termes de coût et de délais.</li>
+              <li>Des procédures simplifiées et personnalisées améliorant la compétitivité et la réactivité.</li>
+              <li>Une meilleure image de marque sur le marché international.</li>
+              <li>Une première étape vers le statut d’ « opérateur économique agréé » de l’OMD (Organisation Mondiale des Douanes).</li>
+            </ul>
+          </p>
         </div>
       </div>
     </div>
@@ -109,33 +120,39 @@
         <div class="row">
           <div class="col-md-4 mt-4">
             <li class="card pb-4">
-                <a class=" card-im" style="background-image: url(images/OFF.jpg);position: relative;">
-              <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
+              <a class=" card-im" style="background-image: url(images/view/OFF.jpg);position: relative;">
+                <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
               </a>
               <h1 class="text-white text-center" style="position: absolute; z-index:4 ; filter: none !important; margin-left: auto; margin-right:auto; width:100%; margin-top:150px;">Class A</h1>
-              <div class="card-description mt-3">
-                <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page
-                  avant de polices de texte.</p>
+              <div class="card-description mt-3 px-3">
+                <p>
+                  Statut d’Opérateur Economique Agréé (OEA) simplifications douanières : accordé pour les sociétés catégorisées classe « A », 
+                  dans un cadre conventionnel, permettant de jouir de la reconnaissance mutuelle par les administrations douanières à l’échelon 
+                  international.
+                </p>
               </div>
               <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
             </li>
           </div>
           <div class="col-md-4 mt-4">
             <li class="card pb-4">
-              <a class="card-im" style="background-image: url(images/OFF.jpg);position: relative;">
+              <a class="card-im" style="background-image: url(images/view/OFF.jpg);position: relative;">
                 <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
               </a>
               <h1 class="text-white text-center" style="position: absolute; z-index:4 ; filter: none !important; margin-left: auto; margin-right:auto; width:100%; margin-top:150px;">Class B</h1>
-              <div class="card-description mt-3">
-                <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page
-                  avant de polices de texte.</p>
+              <div class="card-description mt-3 px-3">
+                <p>
+                  Statut d’Opérateur Economique Agréé (OEA) sécurité et sûreté : attribué aux opérateurs qui remplissent les critères 
+                  exigés pour l’octroi du statut OEA simplifications douanières de niveau « A » et qui appliquent les normes appropriées en 
+                  matière de sécurité et de sûreté.  (en cours de mise en place).
+                </p>
               </div>
               <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
             </li>
           </div>
           <div class="col-md-4 mt-4">
             <li class="card pb-4">
-              <a class="card-im" style="background-image: url(images/OFF.jpg);position: relative;">
+              <a class="card-im" style="background-image: url(images/view/OFF.jpg);position: relative;">
                 <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
               </a>
               <h1 class="text-white text-center" style="position: absolute; z-index:4 ; filter: none !important; margin-left: auto; margin-right:auto; width:100%; margin-top:150px;">Class SS</h1>
@@ -156,100 +173,125 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title text-center" id="exampleModalLabel"><?php echo $douane['choisir_select'] ?></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <?php
+            if ($_SESSION['lang'] == "ar") {
+            ?>
+              <div style="float:left;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <h5 class="modal-title" id="exampleModalLabel"><?php echo $douane['choisir_select'] ?></h5>
+            <?php
+            } else {
+            ?>
+              <h5 class="modal-title" id="exampleModalLabel"><?php echo $douane['choisir_select'] ?></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <?php
+            }
+            ?>
           </div>
           <?php
-            if ($_SESSION['lang'] == "ar") {
+          if ($_SESSION['lang'] == "ar") {
           ?>
-          <div id="errors_arab"></div>
+            <div id="errors_arab"></div>
           <?php
-            } else {
+          } else {
           ?>
-          <div id="errors"></div>
+            <div id="errors"></div>
           <?php
-            }
+          }
           ?>
           <form action="" method="POST">
             <div class="row justify-content-center mt-3">
               <div class="col-md-8">
                 <div class="form-group">
                   <?php
-                    if ($_SESSION['lang'] == "ar") {
+                  if ($_SESSION['lang'] == "ar") {
                   ?>
-                  <div class="d-flex">
-                    <i class="fas fa-user position-awesome_arab_modal"></i>
+                    <div style="float: right;">
+                      <i class="fas fa-user position-awesome-arab"></i>
+                    </div>
                     <input type="text" class="form-control pr-5" name="douane_nom" id="douane_nom" placeholder="الاسم الكامل" style="text-align: right;">
-                  </div>
                   <?php
-                    } else {
+                  } else {
                   ?>
-                  <div class="d-flex">
-                    <i class="fas fa-user position-awesome"></i>
-                    <input type="text" class="form-control pl-5" name="douane_nom" id="douane_nom" placeholder="Nom complet">
-                  </div>
+                    <div class="d-flex">
+                      <i class="fas fa-user position-awesome"></i>
+                      <input type="text" class="form-control pl-5" name="douane_nom" id="douane_nom" placeholder="Nom complet">
+                    </div>
                   <?php
-                    }
+                  }
                   ?>
                 </div>
               </div>
               <div class="col-md-8">
                 <div class="form-group">
                   <?php
-                    if ($_SESSION['lang'] == "ar") {
+                  if ($_SESSION['lang'] == "ar") {
                   ?>
-                  <div class="d-flex">
-                    <i class="fas fa-envelope position-awesome_arab_modal"></i>
+                    <div style="float: right;">
+                      <i class="fas fa-envelope position-awesome-arab"></i>
+                    </div>
                     <input type="email" class="form-control pr-5" name="douane_email" id="douane_email" placeholder="البريد الإلكتروني" style="text-align: right;">
-                  </div>
                   <?php
-                    } else {
+                  } else {
                   ?>
-                  <div class="d-flex">
-                    <i class="fas fa-envelope position-awesome-email"></i>
-                    <input type="email" class="form-control pl-5" name="douane_email" id="douane_email" placeholder="Email">
-                  </div>
+                    <div class="d-flex">
+                      <i class="fas fa-envelope position-awesome-email"></i>
+                      <input type="email" class="form-control pl-5" name="douane_email" id="douane_email" placeholder="Email">
+                    </div>
                   <?php
-                    }
+                  }
                   ?>
                 </div>
               </div>
               <div class="col-md-8">
                 <div class="form-group">
                   <?php
-                    if ($_SESSION['lang'] == "ar") {
+                  if ($_SESSION['lang'] == "ar") {
                   ?>
-                  <div class="d-flex">
-                    <i class="fas fa-book-open position-awesome_arab_modal"></i>
+                    <div style="float: right;">
+                      <i class="fas fa-book-open position-awesome-arab"></i>
+                    </div>
                     <select class="custom-select pr-5" name="douane_categorie" id="douane_categorie" style="text-align: right;">
                       <option value="">--<?php echo $douane['choisir_select'] ?>--</option>
                       <option value="Classe A">Classe A</option>
                       <option value="Classe B">Classe B</option>
                       <option value="Classe SS">Classe SS</option>
                     </select>
-                  </div>
                   <?php
-                    } else {
+                  } else {
                   ?>
-                  <div class="d-flex">
-                    <i class="fas fa-book-open position-awesome-sujet"></i>
-                    <select class="custom-select pl-5" name="douane_categorie" id="douane_categorie">
-                      <option value="">--<?php echo $douane['choisir_select'] ?>--</option>
-                      <option value="Classe A">Classe A</option>
-                      <option value="Classe B">Classe B</option>
-                      <option value="Classe SS">Classe SS</option>
-                    </select>
-                  </div>
+                    <div class="d-flex">
+                      <i class="fas fa-book-open position-awesome-sujet"></i>
+                      <select class="custom-select pl-5" name="douane_categorie" id="douane_categorie">
+                        <option value="">--<?php echo $douane['choisir_select'] ?>--</option>
+                        <option value="Classe A">Classe A</option>
+                        <option value="Classe B">Classe B</option>
+                        <option value="Classe SS">Classe SS</option>
+                      </select>
+                    </div>
                   <?php
-                    }
+                  }
                   ?>
                 </div>
               </div>
               <div class="col-md-8">
                 <div class="form-group">
-                  <textarea class="form-control" id="douane_message" name="douane_message" rows="6"></textarea>
+                  <?php
+                  if ($_SESSION['lang'] == "ar") {
+                  ?>
+                    <textarea class="form-control text-right" id="douane_message" name="douane_message" rows="6"></textarea>
+                  <?php
+                  } else {
+                  ?>
+                    <textarea class="form-control" id="douane_message" name="douane_message" rows="6"></textarea>
+                  <?php
+                  }
+                  ?>
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary" id="douane_submit" name="douane_submit"><?php echo $douane['choisir_select'] ?></button>
@@ -260,14 +302,15 @@
           <div class="modal-body">
             <div id="load_data">
             </div>
-            <div class="modal-footer">
+            <hr class="bg-light">
+            <div class="text-center pb-4">
               <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $accompagenemt['fermer'] ?></button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <?php include_once "footer.php"; ?>
+    <?php include_once "includes/footer.php"; ?>
     <script>
       $('#douane_submit').click(function(e) {
         e.preventDefault();

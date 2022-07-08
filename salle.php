@@ -31,9 +31,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php 
-            include_once "header.php";  
-            include_once "style.php";
-            include_once "scripts.php";
+            include_once "includes/header.php";  
+            include_once "includes/style.php";
+            include_once "includes/scripts.php";
         ?>
         <title>
             <?php 
@@ -74,7 +74,7 @@
                 <div class="row mt-4 align-items-center bg-white">
                     <div class="col-md-6 py-3">
                         <div class="text-center">
-                            <img src="<?= $salle_image?>" alt="" class="img-fluid">
+                            <img src="images/salles/<?= $salle_image?>" alt="" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-md-6 bg-white py-3">
@@ -158,10 +158,10 @@
                             <div class="Gallery-box">
                                 <figure>
                                     <a href="images/salle1_artln.jpg" class="fancybox" rel="ligthbox">
-                                        <img src="images/salle1_artln.jpg" alt="" class="img-fluid img-width">
+                                        <img src="images/view/salle1_artln.jpg" alt="" class="img-fluid img-width">
                                     </a>
                                     <span class="hoverle">
-                                        <a href="images/salle1_artln.jpg" class="fancybox" rel="ligthbox">View</a>
+                                        <a href="images/view/salle1_artln.jpg" class="fancybox" rel="ligthbox">View</a>
                                     </span>
                                 </figure>
                             </div>
@@ -170,10 +170,10 @@
                             <div class="Gallery-box">
                                 <figure>
                                     <a href="images/salle2_artln.jpg" class="fancybox" rel="ligthbox">
-                                        <img src="images/salle2_artln.jpg" alt="" class="img-fluid img-width">
+                                        <img src="images/view/salle2_artln.jpg" alt="" class="img-fluid img-width">
                                     </a>
                                     <span class="hoverle">
-                                        <a href="images/salle2_artln.jpg" class="fancybox" rel="ligthbox">View</a>
+                                        <a href="images/view/salle2_artln.jpg" class="fancybox" rel="ligthbox">View</a>
                                     </span>
                                 </figure>
                             </div>
@@ -181,11 +181,11 @@
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 thumb">
                             <div class="Gallery-box">
                                 <figure>
-                                    <a href="images/salle3_artln.jpg" class="fancybox" rel="ligthbox">
-                                        <img src="images/salle3_artln.jpg" alt="" class="img-fluid img-width">
+                                    <a href="images/view/salle3_artln.jpg" class="fancybox" rel="ligthbox">
+                                        <img src="images/view/salle3_artln.jpg" alt="" class="img-fluid img-width">
                                     </a>
                                     <span class="hoverle">
-                                        <a href="images/salle3_artln.jpg" class="fancybox" rel="ligthbox">View</a>
+                                        <a href="images/view/salle3_artln.jpg" class="fancybox" rel="ligthbox">View</a>
                                     </span>
                                 </figure>
                             </div>
@@ -193,11 +193,11 @@
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 thumb">
                             <div class="Gallery-box">
                                 <figure>
-                                    <a href="images/salle4_artln.jpg" class="fancybox" rel="ligthbox">
-                                        <img src="images/salle4_artln.jpg" alt="" class="img-fluid img-width">
+                                    <a href="images/view/salle4_artln.jpg" class="fancybox" rel="ligthbox">
+                                        <img src="images/view/salle4_artln.jpg" alt="" class="img-fluid img-width">
                                     </a>
                                     <span class="hoverle">
-                                        <a href="images/salle4_artln.jpg" class="fancybox" rel="ligthbox">View</a>
+                                        <a href="images/view/salle4_artln.jpg" class="fancybox" rel="ligthbox">View</a>
                                     </span>
                                 </figure>
                             </div>
@@ -205,11 +205,11 @@
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 thumb">
                             <div class="Gallery-box">
                                 <figure>
-                                    <a href="images/salle5_artln.jpg" class="fancybox" rel="ligthbox">
-                                        <img src="images/salle5_artln.jpg" alt="" class="img-fluid img-width">
+                                    <a href="images/view/salle5_artln.jpg" class="fancybox" rel="ligthbox">
+                                        <img src="images/view/salle5_artln.jpg" alt="" class="img-fluid img-width">
                                     </a>
                                     <span class="hoverle">
-                                        <a href="images/salle5_artln.jpg" class="fancybox" rel="ligthbox">View</a>
+                                        <a href="images/view/salle5_artln.jpg" class="fancybox" rel="ligthbox">View</a>
                                     </span>
                                 </figure>
                             </div>
@@ -229,11 +229,11 @@
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 thumb">
                             <div class="Gallery-box">
                                 <figure>
-                                    <a href="images/salle7_artln.jpg" class="fancybox" rel="ligthbox">
-                                        <img src="images/salle7_artln.jpg" alt="" class="img-fluid img-width">
+                                    <a href="images/view/salle7_artln.jpg" class="fancybox" rel="ligthbox">
+                                        <img src="images/view/salle7_artln.jpg" alt="" class="img-fluid img-width">
                                     </a>
                                     <span class="hoverle">
-                                        <a href="images/salle7_artln.jpg" class="fancybox" rel="ligthbox">View</a>
+                                        <a href="images/view/salle7_artln.jpg" class="fancybox" rel="ligthbox">View</a>
                                     </span>
                                 </figure>
                             </div>
@@ -265,10 +265,10 @@
                                     <div style="text-align: right;">
                                         <label for="nom"><?php echo $salle['nom'] ?></label>
                                     </div>
-                                    <div class="d-flex">
-                                        <i class="fas fa-user position-awesome_arab_salle"></i>
-                                        <input type="text" class="form-control pr-5" name="reservation_nom" style="text-align: right;" id="reservation_nom" placeholder="اسمك" value="<?php echo isset($_POST['reservation_nom']) ? $_POST['reservation_nom'] : '' ?>">
+                                    <div style="float: right;">
+                                        <i class="fas fa-user position-awesome-arab"></i>
                                     </div>
+                                    <input type="text" class="form-control pr-5" name="reservation_nom" style="text-align: right;" id="reservation_nom" placeholder="اسمك" value="<?php echo isset($_POST['reservation_nom']) ? $_POST['reservation_nom'] : '' ?>">
                                     <?php
                                         }else{
                                     ?>
@@ -290,10 +290,10 @@
                                     <div style="text-align: right;">
                                         <label for="telephone"><?php echo $salle['num'] ?></label>
                                     </div>
-                                    <div class="d-flex">
-                                        <i class="fas fa-phone position-awesome_arab_salle"></i>
-                                        <input type="text" class="form-control pr-5" name="reservation_telephone" style="text-align: right;" id="reservation_telephone" placeholder="رقم هاتفك" value="<?php echo isset($_POST['reservation_telephone']) ? $_POST['reservation_telephone'] : '' ?>">
+                                    <div style="float: right;">
+                                        <i class="fas fa-phone-alt position-awesome-arab"></i>
                                     </div>
+                                    <input type="text" class="form-control pr-5" name="reservation_telephone" style="text-align: right;" id="reservation_telephone" placeholder="رقم هاتفك" value="<?php echo isset($_POST['reservation_telephone']) ? $_POST['reservation_telephone'] : '' ?>">
                                     <?php
                                         }else{
                                     ?>
@@ -315,10 +315,10 @@
                            <div style="text-align: right;">
                                 <label for="exampleInputEmail1" style="margin-left:40rem"><?php echo $salle['email'] ?></label>
                            </div>
-                            <div class="d-flex">
-                                <i class="fas fa-envelope position-awesome_arab_full"></i>
-                                <input type="email" class="form-control pr-5" id="email_reservation" style="text-align: right;" name="email_reservation" aria-describedby="emailHelp" placeholder="بريدك الإلكتروني" value="<?php echo isset($_POST['email_reservation']) ? $_POST['email_reservation'] : '' ?>">
+                            <div style="float: right;">
+                                <i class="fas fa-envelope position-awesome-arab"></i>
                             </div>
+                            <input type="email" class="form-control pr-5" id="email_reservation" style="text-align: right;" name="email_reservation" aria-describedby="emailHelp" placeholder="بريدك الإلكتروني" value="<?php echo isset($_POST['email_reservation']) ? $_POST['email_reservation'] : '' ?>">
                             <?php
                                 }else{
                             ?>
@@ -427,14 +427,15 @@
                                 if ($_SESSION['lang'] == "ar") {
                             ?>
                             <label for="commentaire_reservation" style="margin-left:41rem"><?php echo $salle['comment'] ?></label>
+                            <textarea class="form-control text-right" id="commentaire_reservation" name="commentaire_reservation" rows="6"><?php echo isset($_POST['commentaire_reservation']) ? $_POST['commentaire_reservation'] : '' ?></textarea>
                             <?php
                                 }else{
                             ?>
                             <label for="commentaire_reservation"><?php echo $salle['comment'] ?></label>
+                            <textarea class="form-control" id="commentaire_reservation" name="commentaire_reservation" rows="6"><?php echo isset($_POST['commentaire_reservation']) ? $_POST['commentaire_reservation'] : '' ?></textarea>
                             <?php
                                 }
                             ?>
-                            <textarea class="form-control" id="commentaire_reservation" name="commentaire_reservation" rows="6"><?php echo isset($_POST['commentaire_reservation']) ? $_POST['commentaire_reservation'] : '' ?></textarea>
                         </div>
                         <div class="text-center">
                             <input type="hidden" name="salle_id" id="salle_id" value="<?= $sal_id?>">
@@ -447,7 +448,7 @@
             <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">
                 <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>
             </div>
-            <?php include_once "footer.php";?>
+            <?php include_once "includes/footer.php";?>
         </div>
         <script>
             $(document).ready(function(){

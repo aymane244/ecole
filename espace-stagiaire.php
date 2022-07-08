@@ -44,9 +44,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php 
-            include_once "header.php";  
-            include_once "style.php";
-            include_once "scripts.php";
+            include_once "includes/header.php";  
+            include_once "includes/style.php";
+            include_once "includes/scripts.php";
         ?>
         <title><?php echo $navbar['etudiant']?></title>
     </head>
@@ -73,11 +73,11 @@
                         <hr class="bg-light">
                         <div class="text-center">
                             <?php
-                                if($etud_image === "./dossiers-stagiaires/$etud_prenom-$etud_nom/image-"){
+                                if($etud_image === ""){
                                     echo '<img src="images/etudiants/unknown_person.jpg" alt="" class="card-image">';
                                 }
                             ?>
-                            <p><img src="<?php echo $etud_image ?>" alt=""  class="card-image"></p>
+                            <p><img src="dossiers-stagiaires/<?php echo $etud_prenom.'-'.$etud_nom.'/'.$etud_image ?>" alt=""  class="card-image"></p>
                             <!--<a href="modifier-profile?id=<?php //echo $etudiant['etud_id'] ?>" class="btn btn-info" target="_blank"><i class="fas fa-edit"></i> Modifier mon profile</a>-->
                         </div>
                         <hr class="bg-light">
@@ -178,11 +178,11 @@
                         <div class="d-flex justify-content-around">
                             <div class="text-center">
                                 <a href="mes-notes"><h3 class="text-color"><?php echo $espaceetudiant['notes']?></h3></a>
-                                <a href="mes-notes"><img src="images/notes.png" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
+                                <a href="mes-notes"><img src="images/view/notes.png" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
                             </div>
                             <div class="text-center">
                                 <a href="mes-documents"><h3 class="text-color"><?php echo $espaceetudiant['documents']?></h3></a>
-                                <a href="mes-documents"><img src="images/documents.jpg" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
+                                <a href="mes-documents"><img src="images/view/documents.jpg" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
             <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">
                 <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>
             </div>
-            <?php include_once "footer.php";?>
+            <?php include_once "includes/footer.php";?>
         </div>
         <script>
             $(document).ready(function(){

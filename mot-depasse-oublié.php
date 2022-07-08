@@ -22,9 +22,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php 
-            include_once "header.php";  
-            include_once "style.php";
-            include_once "scripts.php";
+            include_once "includes/header.php";  
+            include_once "includes/style.php";
+            include_once "includes/scripts.php";
         ?>
         <title><?php echo $title['password'] ?></title>
     </head>
@@ -98,10 +98,10 @@
 											<div class="text-right">
 												<label for="motdepasse" class="col-md-8 col-form-label"><?php echo $password['nouveau'] ?></label>
 											</div>
-											<div class="d-flex">
-												<i class="fas fa-key position-awesome_arab_login"></i>
-												<input type="password" class="form-control pr-5 input-check text-right" id="exampleInputPassword" placeholder="كلمة السر" name="password">
+											<div style="float:right">
+												<i class="fas fa-key position-awesome-arab"></i>
 											</div>
+											<input type="password" class="form-control pr-5 input-check text-right" id="exampleInputPassword" placeholder="كلمة السر" name="password">
 											<p id="error_ara" style="text-align: right;"></p>
 											<div class="form-group form-check px-4 text-right">
 												<label class="form-check-label " for="exampleCheck1"><?php echo $password['afficher'] ?></label>
@@ -173,10 +173,10 @@
 											<div class="text-right">
 												<label for="email" class="col-md-8 col-form-label"><?php echo $password['email'] ?></label>
 											</div>
-											<div class="d-flex">
-												<i class="fas fa-at position-awesome_arab_login"></i>
-												<input type="email" class="form-control pr-5 text-right" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكتروني" name="email">
+											<div style="float:right">
+												<i class="fas fa-at position-awesome-arab"></i>
 											</div>
+											<input type="email" class="form-control pr-5 text-right" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكتروني" name="email">
 											<br>
 											<div class="pt-2 text-right">
 												<button type="submit" class="btn btn-primary" id="id-submit" name="submit_pwd"> <?php echo $password['envoyer'] ?></button>

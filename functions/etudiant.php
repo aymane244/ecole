@@ -233,10 +233,11 @@
         }
         public function updateNote(){
             $id = $_GET['id'];
+            $etudiant = $_POST['etudiants'];
             $note = $_POST['note'];
             $result = $this->db->conn->query("UPDATE `note` SET `not_note`='$note' WHERE not_id=$id");
             if($result){
-                echo "<script>window.location.href='modifier-note?id=$id'</script>";
+                echo "<script>window.location.href='saisir-notes?id=$etudiant'</script>";
                 $_SESSION['status'] = "La note a été bien modifiée";
             }else{
                 echo $this->db->conn->error;
@@ -276,7 +277,7 @@
         }
         public function updateFormation(){
             $id = $_GET['id'];
-            $formation_nom = mysqli_escape_string($this->db->conn, $_POST['formation_nom']) ;
+            $formation_nom = $_POST['formation_nom'] ;
             $presentation = mysqli_escape_string($this->db->conn, $_POST['presentation']);
             $description = mysqli_escape_string($this->db->conn, $_POST['description']);
             $formation_nom_arab = mysqli_escape_string($this->db->conn, $_POST['formation_nom_arab']) ;
@@ -316,7 +317,7 @@
             $image = basename($_FILES['salle_image']['name']);
             $allowed = array('jpg', 'png', 'jpeg');
             $ext = pathinfo($image, PATHINFO_EXTENSION); 
-            $path = "./images/salles/";
+            $path = "../images/salles/";
             if(!in_array($ext, $allowed) && $image != ""){
                 echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
                     L'image que vous avez choisit ".$image." est de type ".$ext.
@@ -326,7 +327,7 @@
                 if(move_uploaded_file($_FILES['salle_image']['tmp_name'], $path.$image)){
                     $result = $this->db->conn->query("UPDATE `salle` SET `sal_nom`='$nom_salle',`sal_nom_arab`='$nom_salle_arab',
                     `sal_desc`='$salle_desc',`sal_desc_arab`='$salle_desc_arab',`sal_prix`='$salle_prix',`sal_personne`='$salle_personne',
-                    `sal_image`='$path$image',`sal_service`='$salle_service1',`sal_service2`='$salle_service2',`sal_service3`='$salle_service3',
+                    `sal_image`='$image',`sal_service`='$salle_service1',`sal_service2`='$salle_service2',`sal_service3`='$salle_service3',
                     `sal_service4`='$salle_service4',`sal_service_arab`='$salle_service1_arab',`sal_service2_arab`='$salle_service2_arab',
                     `sal_service3_arab`='$salle_service3_arab', `sal_service4_arab`='$salle_service4_arab' WHERE sal_id=$id");
                 }else{
@@ -362,7 +363,7 @@
             $categorie = $_POST['categorie'];
             $pro = $_POST['pro'];
             $image = basename($_FILES['image']['name']);
-            $path = "./images/etudiants/";
+            $path = "../dossiers-stagiaires/$prenom-$nom/";
             $allowed = array('jpg', 'png', 'jpeg');
             $ext = pathinfo($image, PATHINFO_EXTENSION); 
             if(!in_array($ext, $allowed) && $image != ""){
@@ -393,61 +394,61 @@
                 return $result;
             }
         }
-        public function updateImage(){
-            $id = $_GET['id'];
-            $salle_nom = $_POST['salle_id'];
-            $image1 = basename($_FILES['image1']['name']);
-            $image2 = basename($_FILES['image2']['name']);
-            $image3 = basename($_FILES['image3']['name']);      
-            $image4 = basename($_FILES['image4']['name']);
-            $allowed = array('jpg', 'png', 'jpeg');
-            $ext_image1 = pathinfo($image1, PATHINFO_EXTENSION);
-            $ext_image2 = pathinfo($image2, PATHINFO_EXTENSION);
-            $ext_image3 = pathinfo($image3, PATHINFO_EXTENSION);
-            $ext_image4 = pathinfo($image4, PATHINFO_EXTENSION);   
-            $path = "./images/salles/";
-            if(!in_array($ext_image1, $allowed) & $image1 != ""){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                    L'image que vous avez choisit ".$image1." est de type ".$ext_image1.
-                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
-                </div>";
-            }else if(!in_array($ext_image2, $allowed) & $image2 != ""){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                    L'image que vous avez choisit ".$image2." est de type ".$ext_image2.
-                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
-                </div>";
-            }else if(!in_array($ext_image3, $allowed) & $image3 != ""){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                    L'image que vous avez choisit ".$image3." est de type ".$ext_image3.
-                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
-                </div>";
-            }else if(!in_array($ext_image4, $allowed) & $image4 != ""){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                    L'image que vous avez choisit ".$image4." est de type ".$ext_image4.
-                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
-                </div>";
-            }else{
-                if(move_uploaded_file($_FILES['image1']['tmp_name'], $path.$image1)){
-                    $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img1`='$path$image1' WHERE img_id=$id");
-                }else if(move_uploaded_file($_FILES['image2']['tmp_name'], $path.$image2)){
-                    $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img2`='$path$image2' WHERE img_id=$id");
-                }else if(move_uploaded_file($_FILES['image3']['tmp_name'], $path.$image3)){
-                    $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img3`='$path$image3' WHERE img_id=$id");
-                }else if(move_uploaded_file($_FILES['image4']['tmp_name'], $path.$image4)){
-                    $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img4`='$path$image4' WHERE img_id=$id");
-                }else{
-                    echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Opération échouée
-                    </div>";
-                    $result = '';
-                }
-                if($result){
-                    $_SESSION['status_image'] = "L'image a été bien modifiée";
-                    echo '<script>window.location.href="salles"</script>';
-                }
-                return $result;
-            }
-        }
+        // public function updateImage(){
+        //     $id = $_GET['id'];
+        //     $salle_nom = $_POST['salle_id'];
+        //     $image1 = basename($_FILES['image1']['name']);
+        //     $image2 = basename($_FILES['image2']['name']);
+        //     $image3 = basename($_FILES['image3']['name']);      
+        //     $image4 = basename($_FILES['image4']['name']);
+        //     $allowed = array('jpg', 'png', 'jpeg');
+        //     $ext_image1 = pathinfo($image1, PATHINFO_EXTENSION);
+        //     $ext_image2 = pathinfo($image2, PATHINFO_EXTENSION);
+        //     $ext_image3 = pathinfo($image3, PATHINFO_EXTENSION);
+        //     $ext_image4 = pathinfo($image4, PATHINFO_EXTENSION);   
+        //     $path = "../images/salles/";
+        //     if(!in_array($ext_image1, $allowed) & $image1 != ""){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //             L'image que vous avez choisit ".$image1." est de type ".$ext_image1.
+        //             "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+        //         </div>";
+        //     }else if(!in_array($ext_image2, $allowed) & $image2 != ""){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //             L'image que vous avez choisit ".$image2." est de type ".$ext_image2.
+        //             "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+        //         </div>";
+        //     }else if(!in_array($ext_image3, $allowed) & $image3 != ""){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //             L'image que vous avez choisit ".$image3." est de type ".$ext_image3.
+        //             "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+        //         </div>";
+        //     }else if(!in_array($ext_image4, $allowed) & $image4 != ""){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //             L'image que vous avez choisit ".$image4." est de type ".$ext_image4.
+        //             "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+        //         </div>";
+        //     }else{
+        //         if(move_uploaded_file($_FILES['image1']['tmp_name'], $path.$image1)){
+        //             $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img1`='$path$image1' WHERE img_id=$id");
+        //         }else if(move_uploaded_file($_FILES['image2']['tmp_name'], $path.$image2)){
+        //             $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img2`='$path$image2' WHERE img_id=$id");
+        //         }else if(move_uploaded_file($_FILES['image3']['tmp_name'], $path.$image3)){
+        //             $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img3`='$path$image3' WHERE img_id=$id");
+        //         }else if(move_uploaded_file($_FILES['image4']['tmp_name'], $path.$image4)){
+        //             $result = $this->db->conn->query("UPDATE `img_salle` SET `img_salle`='$salle_nom',`img4`='$path$image4' WHERE img_id=$id");
+        //         }else{
+        //             echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Opération échouée
+        //             </div>";
+        //             $result = '';
+        //         }
+        //         if($result){
+        //             $_SESSION['status_image'] = "L'image a été bien modifiée";
+        //             echo '<script>window.location.href="salles"</script>';
+        //         }
+        //         return $result;
+        //     }
+        // }
         public function getArticle(){
             $result = $this->db->conn->query("SELECT * FROM `article`");
             $resultArray = array();
@@ -459,14 +460,14 @@
         }
         public function updateArticle(){
             $id = $_GET['id'];
-            $titre = $_POST['art_titre'];
-            $texte = $_POST['art_texte'];
-            $titre_arab = $_POST['art_titre_arab'];
-            $texte_arab = $_POST['art_texte_arab'];            
+            $titre = mysqli_real_escape_string($this->db->conn ,$_POST['art_titre']);
+            $texte = mysqli_real_escape_string($this->db->conn ,$_POST['art_texte']);
+            $titre_arab = mysqli_real_escape_string($this->db->conn ,$_POST['art_titre_arab']);
+            $texte_arab = mysqli_real_escape_string($this->db->conn ,$_POST['art_texte_arab']) ;            
             $image = basename($_FILES['image']['name']);
             $allowed = array('jpg', 'png', 'jpeg');
             $ext = pathinfo($image, PATHINFO_EXTENSION);
-            $path = "./images/etudiants/";
+            $path = "../images/articles/";
             if(!in_array($ext, $allowed) && $image != ''){
                 echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
                     L'image que vous avez choisit ".$image." est de type ".$ext.
@@ -475,7 +476,7 @@
             }else{
                 if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
                     $result = $this->db->conn->query("UPDATE `article` SET `art_titre`='$titre',`art_titre_arab`='$titre_arab',`art_texte`='$texte',
-                        `art_texte_arab`='$texte_arab',`art_image`='$path$image' WHERE art_id=$id");
+                        `art_texte_arab`='$texte_arab',`art_image`='$image' WHERE art_id=$id");
                 }else{
                     $result = $this->db->conn->query("UPDATE `article` SET `art_titre`='$titre',`art_titre_arab`='$titre_arab',`art_texte`='$texte',
                         `art_texte_arab`='$texte_arab' WHERE art_id=$id");
@@ -815,24 +816,30 @@
                     }
                 }else{
                     @mkdir("dossiers-stagiaires/".$prenom."-".$nom,0777,true);
-                    $path = "./dossiers-stagiaires/$prenom-$nom/";
-                    $imagelink = "image-";
-                    $cinlink = "cin-";
-                    $permislink = "permis-";
-                    $visitelink = "visite-";
+                    $path = "dossiers-stagiaires/$prenom-$nom/";
+                    // $imagelink = "image-";
+                    // $cinlink = "cin-";
+                    // $permislink = "permis-";
+                    // $visitelink = "visite-";
+                    $tempcin = explode(".", $_FILES["scan_cin"]["name"]);
+                    $newcin = 'CIN' . '.' . end($tempcin);
+                    $temppermis = explode(".", $_FILES["scan_permis"]["name"]);
+                    $newpermis = 'Permis' . '.' . end($temppermis);
+                    $tempvisit = explode(".", $_FILES["scan_visite"]["name"]);
+                    $newvisit = 'Visite' . '.' . end($tempvisit);
                     if($path){
-                        move_uploaded_file($_FILES['image']['tmp_name'], $path."image-".$image);
-                        move_uploaded_file($_FILES['scan_cin']['tmp_name'], $path."cin-".$scan_cin);
-                        move_uploaded_file($_FILES['scan_permis']['tmp_name'], $path."permis-".$scan_permis);
-                        move_uploaded_file($_FILES['scan_visite']['tmp_name'], $path."visite-".$scan_visite);   
+                        move_uploaded_file($_FILES['image']['tmp_name'], $path.$image);
+                        move_uploaded_file($_FILES['scan_cin']['tmp_name'], $path.$newcin);
+                        move_uploaded_file($_FILES['scan_permis']['tmp_name'], $path.$newpermis);
+                        move_uploaded_file($_FILES['scan_visite']['tmp_name'], $path.$newvisit);   
                     }
                     $res = $this->db->conn->query("INSERT INTO `etudiant`(`etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, 
                         `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, 
                         `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, 
-                        `etud_scan_cin`, `etud_cin_name`, `etud_scan_permis`, `etud_permis_name`, `etud_scan_visite`, `etud_visite_name`, `etud_image`, `etud_inscription`) VALUES ('$nom','$nom_arab',
+                        `etud_scan_cin`, `etud_scan_permis`, `etud_scan_visite`, `etud_image`, `etud_inscription`) VALUES ('$nom','$nom_arab',
                         '$prenom','$prenom_arab','$email','$telephone','$motdepasse','$cin','$formation','$naissance','$lieu','$adresse',
-                        '$permis','$categorie','$profesionnel','$obtenir','$path$cinlink$scan_cin','$cinlink$scan_cin','$path$permislink$scan_permis',
-                        '$permislink$scan_permis','$path$visitelink$scan_visite','$visitelink$scan_visite','$path$imagelink$image',NOW())");
+                        '$permis','$categorie','$profesionnel','$obtenir','$newcin',
+                        '$newpermis','$newvisit','$image',NOW())");
                         /*$to = $_POST['email'];
                         $subject = "Confirmation d'inscription";
                         $headers = 'Content-type: text/html';
@@ -871,7 +878,6 @@
                 if($promotion == ''){
                     $_SESSION['status_error'] = "Merci de choisir une promotion pour poursuivre";
                 }else{
-                    echo $promotion;
                     $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
                     INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation  INNER JOIN `promos` ON pro_id=etud_promos WHERE etud_promos = '$promotion' ORDER BY pro_groupe");
                     $resultArray = array();
@@ -942,12 +948,12 @@
         }
         public function insertPromotion(){
             $promotion_name =  mysqli_escape_string($this->db->conn, $_POST['promotion_name']);
-            $checkresult = $this->db->conn->query("SELECT `pro_année` FROM `promos` WHERE pro_group='$promotion_name'");
+            $checkresult = $this->db->conn->query("SELECT `pro_groupe` FROM `promos` WHERE pro_groupe='$promotion_name'");
             if($checkresult->num_rows){
                 $_SESSION['status_danger'] = "Nom existe déjà veuillez choisir un autre";
                 echo "<script>window.location.href='ajouter-promotion'</script>";
             }else{
-                $result = $this->db->conn->query("INSERT INTO `promos`(`pro_group`) VALUES ('$promotion_name')");
+                $result = $this->db->conn->query("INSERT INTO `promos`(`pro_groupe`) VALUES ('$promotion_name')");
                 if($result){
                     $_SESSION['status'] = "La promotion a été bien ajoutée";
                     echo "<script>window.location.href='ajouter-promotion'</script>";
@@ -1091,10 +1097,10 @@
         }
         public function updateDiplome(){
             $id = $_POST['dip_etud'];         
-            $image = basename($_FILES['dip_image']['name']);
-            $path = "./demande/diplomes/";
+            $image = $_FILES['dip_image']['name'];
+            $path = "../demandes/";
             if(move_uploaded_file($_FILES['dip_image']['tmp_name'], $path.$image)){
-                $result = $this->db->conn->query("UPDATE `diplome` SET `dip_image`='$path$image' WHERE dip_etudiant=$id");
+                $result = $this->db->conn->query("UPDATE `diplome` SET `dip_image`='$image' WHERE dip_etudiant=$id");
             }
             if($result){
                 $_SESSION['status'] = "Le document a été bien envoyé";
@@ -1107,9 +1113,9 @@
         public function updateAttestation(){
             $id = $_POST['att_etud'];         
             $image = basename($_FILES['att_image']['name']);
-            $path = "./demande/attestation/";
+            $path = "../demandes/";
             if(move_uploaded_file($_FILES['att_image']['tmp_name'], $path.$image)){
-                $result = $this->db->conn->query("UPDATE `attestation` SET `att_image`='$path$image' WHERE att_etudiant=$id");
+                $result = $this->db->conn->query("UPDATE `attestation` SET `att_image`='$image' WHERE att_etudiant=$id");
             }
             if($result){
                 $_SESSION['status'] = "Le document a été bien envoyé";
@@ -1296,7 +1302,16 @@
         }
         public function getArticleTitre(){
             $id = $_GET['id'];
-            $result = $this->db->conn->query("SELECT *, COUNT(com_comentaire) AS 'commentaires' FROM `article` INNER JOIN `commentaire` ON com_article=art_id WHERE art_id=$id");
+            $result = $this->db->conn->query("SELECT *, COUNT(com_comentaire) AS 'commentaires'  FROM `article` INNER JOIN `commentaire` ON com_article=art_id WHERE REPLACE(art_titre, ' ', '_')='$id'");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function getArticleTitreAjax(){
+            $result = $this->db->conn->query("SELECT *, COUNT(com_comentaire) AS 'commentaires' FROM `article` INNER JOIN `commentaire` ON com_article=art_id");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -1306,7 +1321,7 @@
         }
         public function getComments(){
             $id = $_GET['id'];
-            $result = $this->db->conn->query("SELECT * FROM `commentaire` WHERE com_article =$id");
+            $result = $this->db->conn->query("SELECT * FROM `commentaire` INNER JOIN `article` ON com_article=art_id WHERE REPLACE(art_titre, ' ', '_') ='$id'");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -1332,7 +1347,7 @@
             $image = basename($_FILES['salle_image']['name']);
             $allowed = array('jpg', 'png', 'jpeg');
             $ext = pathinfo($image, PATHINFO_EXTENSION);
-            $path = "./images/salles/";
+            $path = "../images/salles/";
             if($nom_salle == ''){
                 echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
                         Veuillez saisir un nom en français pour la salle
@@ -1402,7 +1417,7 @@
                 $result = $this->db->conn->query("INSERT INTO `salle`(`sal_nom`, `sal_nom_arab`, `sal_desc`, `sal_desc_arab`, `sal_prix`, 
                 `sal_personne`, `sal_image`, `sal_service`, `sal_service2`, `sal_service3`, `sal_service4`, `sal_service_arab`, 
                 `sal_service2_arab`, `sal_service3_arab`, `sal_service4_arab`) VALUES ('$nom_salle','$nom_salle_arab','$salle_desc','$salle_desc_arab',
-                '$salle_prix','$salle_personne','$path$image','$salle_service1','$salle_service2','$salle_service3','$salle_service4',
+                '$salle_prix','$salle_personne','$image','$salle_service1','$salle_service2','$salle_service3','$salle_service4',
                 '$salle_service1_arab','$salle_service2_arab','$salle_service3_arab','$salle_service4_arab')");
                 if($result){
                     $_SESSION['status'] = "La Salle a été bien ajoutée";
@@ -1485,7 +1500,7 @@
             $image = basename($_FILES['image']['name']);
             $allowed = array('jpg', 'png', 'jpeg');
             $ext = pathinfo($image, PATHINFO_EXTENSION);
-            $path = "./images/articles/";
+            $path = "../images/articles/";
             if($titre == ''){
                 echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
                     Veuillez saisir le nom de l'article
@@ -1514,7 +1529,7 @@
             }else{
                 if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
                     $result = $this->db->conn->query("INSERT INTO `article`(`art_titre`, `art_titre_arab`, `art_texte`, `art_texte_arab`, 
-                    `art_image`, `art_ajout`) VALUES ('$titre','$titre_arab','$texte','$texte_arab','$path$image',NOW())");
+                    `art_image`, `art_ajout`) VALUES ('$titre','$titre_arab','$texte','$texte_arab','$image',NOW())");
                     if($result){
                         $_SESSION['status'] = "L'article a été bien ajouté";
                         echo "<script>window.location.href='articles'</script>";
@@ -1525,58 +1540,58 @@
                 }
             }
         } 
-        public function insertImages(){
-            $nom_salle = $_POST['salle_id'];
-            $image1 = basename($_FILES['image1']['name']);
-            $image2 = basename($_FILES['image2']['name']);
-            $image3 = basename($_FILES['image3']['name']);         
-            $image4 = basename($_FILES['image4']['name']);
-            $allowed = array('jpg', 'png', 'jpeg');
-            $ext_image1 = pathinfo($image1, PATHINFO_EXTENSION);
-            $ext_image2 = pathinfo($image2, PATHINFO_EXTENSION);
-            $ext_image3 = pathinfo($image3, PATHINFO_EXTENSION);
-            $ext_image4 = pathinfo($image4, PATHINFO_EXTENSION);
-            $path = "./images/salles/";
-            if($image1 == '' && $image2 == '' && $image3 == '' && $image4 == ''){
-                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Veuillez choisir une image
-                        </div>";
-            }else if(!in_array($ext_image1, $allowed)){
-                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Le fichier que vous avez choisit ".$image1." est de type ".$ext_image1.
-                            "<br>Nous supportant juste les images de type 'jpg, png, jpeg'
-                        </div>";
-            }else if(!in_array($ext_image2, $allowed)){
-                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Le fichier que vous avez choisit ".$image2."  est de type ".$ext_image2.
-                            "<br>Nous supportant juste les images de type 'jpg, png, jpeg'
-                        </div>";
-            }else if(!in_array($ext_image3, $allowed)){
-                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Le fichier que vous avez choisit ".$image3."  est de type ".$ext_image3.
-                            "<br>Nous supportant juste les images de 'jpg, png, jpeg'
-                        </div>";
-            }else if(!in_array($ext_image4, $allowed)){
-                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                            Le fichier que vous avez choisit ".$image4."  est de type ".$ext_image4.
-                            "<br>Nous supportant juste les images de type 'jpg, png, jpeg'
-                        </div>";
-            }else{
-                move_uploaded_file($_FILES['image1']['tmp_name'], $path.$image1);
-                move_uploaded_file($_FILES['image2']['tmp_name'], $path.$image2);
-                move_uploaded_file($_FILES['image3']['tmp_name'], $path.$image3);
-                move_uploaded_file($_FILES['image4']['tmp_name'], $path.$image4);
-                    $result = $this->db->conn->query("INSERT INTO `img_salle`(`img_salle`, `img1`, `img2`, `img3`, `img4`) VALUES 
-                        ('$nom_salle','$path$image1','$path$image2','$path$image3','$path$image4')"); 
-                if($result){
-                    $_SESSION['status'] = "L'image a été bien insérée";
-                    echo "<script>window.location.href='salles'</script>";
-                }else{
-                    echo "not". $this->db->conn->error;
-                }
-                return $result;
-            }
-        }
+        // public function insertImages(){
+        //     $nom_salle = $_POST['salle_id'];
+        //     $image1 = basename($_FILES['image1']['name']);
+        //     $image2 = basename($_FILES['image2']['name']);
+        //     $image3 = basename($_FILES['image3']['name']);         
+        //     $image4 = basename($_FILES['image4']['name']);
+        //     $allowed = array('jpg', 'png', 'jpeg');
+        //     $ext_image1 = pathinfo($image1, PATHINFO_EXTENSION);
+        //     $ext_image2 = pathinfo($image2, PATHINFO_EXTENSION);
+        //     $ext_image3 = pathinfo($image3, PATHINFO_EXTENSION);
+        //     $ext_image4 = pathinfo($image4, PATHINFO_EXTENSION);
+        //     $path = "./images/salles/";
+        //     if($image1 == '' && $image2 == '' && $image3 == '' && $image4 == ''){
+        //         echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                     Veuillez choisir une image
+        //                 </div>";
+        //     }else if(!in_array($ext_image1, $allowed)){
+        //         echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                     Le fichier que vous avez choisit ".$image1." est de type ".$ext_image1.
+        //                     "<br>Nous supportant juste les images de type 'jpg, png, jpeg'
+        //                 </div>";
+        //     }else if(!in_array($ext_image2, $allowed)){
+        //         echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                     Le fichier que vous avez choisit ".$image2."  est de type ".$ext_image2.
+        //                     "<br>Nous supportant juste les images de type 'jpg, png, jpeg'
+        //                 </div>";
+        //     }else if(!in_array($ext_image3, $allowed)){
+        //         echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                     Le fichier que vous avez choisit ".$image3."  est de type ".$ext_image3.
+        //                     "<br>Nous supportant juste les images de 'jpg, png, jpeg'
+        //                 </div>";
+        //     }else if(!in_array($ext_image4, $allowed)){
+        //         echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                     Le fichier que vous avez choisit ".$image4."  est de type ".$ext_image4.
+        //                     "<br>Nous supportant juste les images de type 'jpg, png, jpeg'
+        //                 </div>";
+        //     }else{
+        //         move_uploaded_file($_FILES['image1']['tmp_name'], $path.$image1);
+        //         move_uploaded_file($_FILES['image2']['tmp_name'], $path.$image2);
+        //         move_uploaded_file($_FILES['image3']['tmp_name'], $path.$image3);
+        //         move_uploaded_file($_FILES['image4']['tmp_name'], $path.$image4);
+        //             $result = $this->db->conn->query("INSERT INTO `img_salle`(`img_salle`, `img1`, `img2`, `img3`, `img4`) VALUES 
+        //                 ('$nom_salle','$path$image1','$path$image2','$path$image3','$path$image4')"); 
+        //         if($result){
+        //             $_SESSION['status'] = "L'image a été bien insérée";
+        //             echo "<script>window.location.href='salles'</script>";
+        //         }else{
+        //             echo "not". $this->db->conn->error;
+        //         }
+        //         return $result;
+        //     }
+        // }
         public function getiso(){
             $result = $this->db->conn->query("SELECT * FROM `iso`");
             $resultArray = array();
@@ -2044,7 +2059,7 @@
             $email = $_POST['email'];
             $motdepasse = md5($_POST['motdepasse']);
             $image = basename($_FILES['image']['name']);
-            $path = "./images/admin/";
+            $path = "../images/admin/";
             $allowed = array('jpg', 'png', 'jpeg');
             $ext = pathinfo($image, PATHINFO_EXTENSION);
             $result = $this->db->conn->query("SELECT `adm_email` FROM `admin` WHERE adm_email = '$email'");
@@ -2059,7 +2074,7 @@
                 }else{
                     move_uploaded_file($_FILES['image']['tmp_name'], $path.$image);
                     $result = $this->db->conn->query("INSERT INTO `admin`(`adm_prenom`, `adm_nom`, `adm_email`, `adm_password`, `adm_image`, `adm_registre`) 
-                        VALUES ('$prenom','$nom','$email','$motdepasse','$path$image',NOW())");
+                        VALUES ('$prenom','$nom','$email','$motdepasse','$image',NOW())");
                         if($result){
                             $_SESSION['success'] = "Inscription réussite";
                             echo "<script>window.location.href='login-admin'</script>";

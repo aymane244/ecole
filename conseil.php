@@ -7,22 +7,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php
-  include_once "header.php";
-  include_once "style.php";
-  include_once "scripts.php";
+  include_once "includes/header.php";
+  include_once "includes/style.php";
+  include_once "includes/scripts.php";
   ?>
-    <style>
+  <style>
     .card {
-      width: 100% !important;        
+      width: 100% !important;
       font-size: 1rem;
       text-decoration: none;
       overflow: hidden;
       box-shadow: 0 0 3rem -1rem rgba(0, 0, 0, 0.5);
       transition: transform 0.1s ease-in-out, box-shadow 0.1s;
     }
-    .card:hover {
-      transform: translateY(-0.5rem) scale(1.0125);
-      box-shadow: 0 0.5em 3rem -1rem rgba(0, 0, 0, 0.5);
+
+    .card-im {
+      min-height: 20rem !important;
     }
   </style>
   <title><?php echo $title['Accompagnement'] ?></title>
@@ -35,9 +35,9 @@
     <div class="text-white text-center text-big div-header">
       <h1><?php echo $accompagenemt['accompagnement'] ?></h1>
     </div>
-    <div style="height: 100%; position:relative">
+    <div style="position:relative">
       <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-      <img src="images/iso.png" alt="" class="d-block img-fluid" style="width:100%;">
+      <img src="images/view/iso.png" alt="" class="d-block img-fluid" style="width:100%;">
     </div>
     <div class="container mt-5">
       <?php
@@ -48,17 +48,28 @@
         unset($_SESSION['status']);
       }
       ?>
-      <div class="row align-items-center bg-white py-3">
-        <div class="col-md-12">
-          <h2 class="text-center"><?php echo $accompagenemt['pourquoi'] ?> <span class="iso-style"><?php echo $accompagenemt['ISO'] ?></span></h2>
+      <div class="row justify-content-center">
+        <div class="col-md-5 mt-4 bg-white py-3">
+          <h2 class="text-center mb-3"><?php echo $accompagenemt['accompa'] ?> <span class="iso-style">ISO</span></h2>
+          <p class="text-justify">
+            Une certification ISO garantit la conformité d’un processus, un service, une organisation ou un produit.
+            L’ISO 9001 est la certification la plus connue. Une certification ISO est délivrée par l’ISO qui demeure aujourd’hui
+            le plus grand organisme mondial de normalisation, crée en 1947.
+            <br><br>
+            L’obtention de la certification est valable 3 ans. Passé ce délai, à la société doit renouveler son homologation en effectuant 
+            un audit qualité entrepris par un organisme certificateur (ARTL Nord). Il est recommandé que la société certifiée réalise 
+            régulièrement des audits internes afin de s’assurer que le système soit toujours conforme au référentiel de la certification ISO.
+          </p>
         </div>
-        <div class="col-md-12 mt-4 col-lg-6">
-          <img src="images/iso-9001.jpg" class="img-fluid">
-        </div>
-        <div class="col-md-12 mt-4 col-lg-6">
-          <br>
-          <p class="text-justify">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
-            Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
+        <!-- <div class="col-md-12 mt-4 col-lg-6">
+          <img src="images/view/iso-9001.jpg" class="img-fluid">
+        </div> -->
+        <div class="col-md-5 mt-4 bg-white py-3 ml-3">
+          <h2 class="text-center mb-3"><?php echo $accompagenemt['pourquoi'] ?> <span class="iso-style"><?php echo $accompagenemt['ISO'] ?></span></h2>
+          <p class="text-justify">
+            Cela rend les entreprises plus efficaces et leur permet de répondre systématiquement aux risques et opportunités internes et
+            externes. Un dysfonctionnement a été identifié dans le système de management de la qualité et une amélioration continue est
+            requise.
           </p>
         </div>
       </div>
@@ -74,87 +85,121 @@
           <div class="row justify-content-center">
             <div class="col-md-6 mt-4">
               <li class="card pb-5">
-                <a class="card-im" style="background-image: url(images/2323.jpg);position: relative;">
+                <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
                 </a>
-                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important; margin-left: auto; margin-right:auto; width:100%; margin-top:150px;">ISO 9001</h1>
-                <div class="card-description mt-3">
-                  <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page
-                    avant de polices de texte.</p>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important; margin-left: auto; margin-right:auto; width:100%; margin-top:120px;">ISO 9001 (Qualité)</h1>
+                <div class="card-description mt-3 text-justify px-3">
+                  <p>
+                  L’obtention de la certification ISO 9001 garantit l’application des principes de base du management de qualité au sein d’une 
+                  entreprise.
+                  <br>
+                  Leadership, gestion clients, motivation du personnel, gestion des processus, relation fournisseurs, engagement de 
+                  la direction… La certification ISO 9001 met un point d’honneur sur les intérêts de vos clients ainsi que sur votre volonté 
+                  à les accompagner dans cette démarche.
+                  </p>
                 </div>
                 <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
               </li>
             </div>
             <div class="col-md-6 mt-4">
               <li class="card pb-5">
-                <a class="card-im" style="background-image: url(images/2323.jpg);position: relative;">
+                <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
                 </a>
-                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%;  margin-top:150px;">ISO 28000</h1>
-                <a class="card-description mt-3">
-                  <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page
-                    avant de polices de texte</p>
-                </a>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%;  margin-top:70px;">ISO 28000 (Sûreté de la chaîne d'approvisionnement)</h1>
+                <div class="card-description mt-3 text-justify px-3">
+                  <p>
+                    La norme ISO 28000 fournit un cadre de bonnes pratiques pour réduire les risques pour les personnes et les marchandises 
+                    au sein de la chaîne d'approvisionnement. Elle aide à gérer et à atténuer la sûreté potentielle dans le domaine 
+                    de la logistique, en ciblant des menaces telles que le terrorisme, la fraude et le piratage. En augmentant 
+                    la visibilité de la chaîne d'approvisionnement et en réduisant ses perturbations, la norme ISO 28000 peut aider 
+                    toute organisation à atténuer les effets des incidents de sûreté.
+                  </p>
+                </div>
                 <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
               </li>
             </div>
             <div class="col-md-6 mt-4">
               <li class="card pb-5">
-                <a class="card-im" style="background-image: url(images/2323.jpg);position: relative;">
+                <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
                 </a>
-                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%;  margin-top:150px;">ISO 39001</h1>
-                <a class="card-description mt-3">
-                  <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page
-                    avant de polices de texte.</p>
-                </a>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%;  margin-top:100px;">ISO 39001 (Sécurité Routière)</h1>
+                <div class="card-description mt-3 text-justify px-3">
+                  <p>
+                    La norme internationale ISO 39001 encadre un système de management pour la sécurité routière. Face aux chiffres constants 
+                    des blessés et décès liés aux accidents de la route, l’ISO 39001 met en place des exigences afin de permettre à un 
+                    organisme d’assimiler des bonnes pratiques, notamment autour de la vitesse, l’état du véhicule ou encore de la vigilance 
+                    conducteur, et ainsi de limiter les risques.  
+                  </p>
+                </div>
                 <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
               </li>
             </div>
             <div class="col-md-6 mt-4">
               <li class="card pb-5">
-                <a class="card-im" style="background-image: url(images/2323.jpg);position: relative;">
+                <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;">
                   </div>
                 </a>
-                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%; margin-top:150px;">ISO 39001</h1>
-                <a class="card-description mt-3">
-                  <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page
-                    avant de polices de texte</p>
-                </a>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%; margin-top:100px;">ISO 45001 (Santé et la Sécurité au Travail)</h1>
+                <div class="card-description mt-3 text-justify px-3">
+                  <p>
+                    La norme ISO 45001 met l’accent sur le contexte organisationnel. Elle impose à l’organisation de réfléchir aux attentes 
+                    des parties prenantes en termes de management de la santé et de la sécurité au travail.
+                    <br>
+                    Le but de la norme ISO 45001 est de bâtir au sein de l’organisation une compréhension claire des enjeux susceptibles 
+                    d'avoir un impact positif ou négatif sur la société et de mieux comprendre la manière dont l'entreprise gère ses 
+                    responsabilités envers son personnel dans le domaine de la santé et de la sécurité au travail.
+                  </p>
+                </div>
                 <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
               </li>
             </div>
             <div class="col-md-6 my-4">
               <li class="card pb-5">
-                <a class="card-im" style="background-image: url(images/2323.jpg);position: relative;">
+                <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;">
                   </div>
                 </a>
-                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%; margin-top:150px;">ISO 39001</h1>
-                <a class="card-description mt-3">
-                  <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page
-                    avant de polices de texte.</p>
-                </a>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%; margin-top:100px;">ISO 14001 (Environnement)</h1>
+                <div class="card-description mt-3 text-justify px-3">
+                  <p style="line-height: 150% !important;">
+                    La certification ISO 14001 permet à un organisme de démontrer son engagement en matière d’environnement en attestant de sa 
+                    conformité à la norme internationale ISO 14001.
+                    <br>
+                    Cette certification environnementale définit les exigences relatives à l’élaboration, la mise en œuvre, la maintenance 
+                    et l’évaluation d’un système de management environnemental (SME). Cet outil de gestion permet de prendre en compte 
+                    les impacts de vos activités sur l’environnement, de les mesurer et de les réduire (gestion des déchets, pollutions 
+                    de l’air, de l’eau, sonore et visuelles, consommations énergétiques, …).
+                  </p>
+                </div>
                 <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
               </li>
             </div>
           </div>
         </ul>
-        <div class="container mt-3">
+        <!-- <div class="container mt-3">
           <div class="row bg-white py-3 align-items-center">
             <div class="col-md-12">
               <h2 class="text-center mb-3"><?php echo $accompagenemt['accompa'] ?> <span class="iso-style">ISO</span></h2>
             </div>
             <div class="col-md-12 mt-4 col-lg-6">
-              <p class="text-justify">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker..</p>
+              <img src="images/view/iso-9001.jpg" class="img-fluid">
             </div>
             <div class="col-md-12 mt-4 col-lg-6">
-              <img src="images/iso-9001.jpg" class="img-fluid">
-              <br><br>
+              <p class="text-justify">
+                Une certification ISO garantit la conformité d’un processus, un service, une organisation ou un produit.
+                L’ISO 9001 est la certification la plus connue. Une certification ISO est délivrée par l’ISO qui demeure aujourd’hui
+                le plus grand organisme mondial de normalisation, crée en 1947.
+                <br><br>
+                L’International Organization for Standardization définit le terme certification ISO comme étant une procédure permettant à une
+                tierce partie de garantir par écrit qu’un processus, produit ou service répond aux exigences propres à un référentiel.
+              </p>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">
         <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>
@@ -163,73 +208,89 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title text-center" id="exampleModalLabel"><?php echo $accompagenemt['choisir_modal'] ?></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <?php
+              if ($_SESSION['lang'] == "ar") {
+              ?>
+                <div style="float:left;">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo $accompagenemt['choisir_modal'] ?></h5>
+              <?php
+              } else {
+              ?>
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo $accompagenemt['choisir_modal'] ?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              <?php
+              }
+              ?>
             </div>
             <?php
-              if ($_SESSION['lang'] == "ar") {
+            if ($_SESSION['lang'] == "ar") {
             ?>
-            <div id="error_arab" class="mx-5"></div>
+              <div id="error_arab" class="mx-5"></div>
             <?php
-              } else {
+            } else {
             ?>
-            <div id="error" class="w-75" class="mx-5"></div>
+              <div id="error" class="w-75" class="mx-5"></div>
             <?php
-              }
+            }
             ?>
             <form action="" method="POST">
               <div class="row justify-content-center mt-3">
                 <div class="col-md-8">
                   <div class="form-group">
                     <?php
-                      if ($_SESSION['lang'] == "ar") {
+                    if ($_SESSION['lang'] == "ar") {
                     ?>
-                    <div class="d-flex">
-                      <i class="fas fa-user fa-align-right position-awesome_arab_modal"></i>
+                      <div style="float: right;">
+                        <i class="fas fa-user fa-align-right position-awesome-arab"></i>
+                      </div>
                       <input type="text" class="form-control pr-5" name="iso_nom" id="iso_nom" placeholder="الاسم الكامل" style="text-align:right;">
-                    </div>
                     <?php
-                      } else {
+                    } else {
                     ?>
-                    <div class="d-flex">
-                      <i class="fas fa-user position-awesome"></i>
-                      <input type="text" class="form-control pl-5" name="iso_nom" id="iso_nom" placeholder="Nom complet">
-                    </div>
+                      <div class="d-flex">
+                        <i class="fas fa-user position-awesome"></i>
+                        <input type="text" class="form-control pl-5" name="iso_nom" id="iso_nom" placeholder="Nom complet">
+                      </div>
                     <?php
-                      }
+                    }
                     ?>
                   </div>
                 </div>
                 <div class="col-md-8">
                   <div class="form-group">
                     <?php
-                      if ($_SESSION['lang'] == "ar") {
+                    if ($_SESSION['lang'] == "ar") {
                     ?>
-                    <div class="d-flex">
-                      <i class="fas fa-envelope position-awesome_arab_modal"></i>
+                      <div style="float: right;">
+                        <i class="fas fa-envelope position-awesome-arab"></i>
+                      </div>
                       <input type="email" class="form-control pr-5" name="iso_email" id="iso_email" style="text-align:right;" placeholder="البريد الإلكتروني">
-                    </div>
                     <?php
-                      } else {
+                    } else {
                     ?>
-                    <div class="d-flex">
-                      <i class="fas fa-envelope position-awesome-email"></i>
-                      <input type="email" class="form-control pl-5" name="iso_email" id="iso_email" placeholder="Email">
-                    </div>
+                      <div class="d-flex">
+                        <i class="fas fa-envelope position-awesome-email"></i>
+                        <input type="email" class="form-control pl-5" name="iso_email" id="iso_email" placeholder="Email">
+                      </div>
                     <?php
-                      }
+                    }
                     ?>
                   </div>
                 </div>
                 <div class="col-md-8">
                   <div class="form-group">
                     <?php
-                      if ($_SESSION['lang'] == "ar") {
+                    if ($_SESSION['lang'] == "ar") {
                     ?>
-                    <div class="d-flex">
-                      <i class="fas fa-book-open position-awesome_arab_modal"></i>
+                      <div style="float: right;">
+                        <i class="fas fa-book-open position-awesome-arab"></i>
+                      </div>
                       <select class="custom-select pr-5" name="iso_categorie" id="iso_categorie" style="text-align: right;">
                         <option value="">--<?php echo $accompagenemt['choisir_select'] ?>--</option>
                         <option value="ISO 9001">ISO 9001</option>
@@ -238,29 +299,38 @@
                         <option value="ISO 45001">ISO 45001</option>
                         <option value="ISO 14001">ISO 14001</option>
                       </select>
-                    </div>
                     <?php
-                      } else {
+                    } else {
                     ?>
-                    <div class="d-flex">
-                      <i class="fas fa-book-open position-awesome-sujet"></i>
-                      <select class="custom-select pl-5" name="iso_categorie" id="iso_categorie">
-                        <option value="">--<?php echo $accompagenemt['choisir_select'] ?>--</option>
-                        <option value="ISO 9001">ISO 9001</option>
-                        <option value="ISO 28000">ISO 28000</option>
-                        <option value="ISO 39001">ISO 39001</option>
-                        <option value="ISO 45001">ISO 45001</option>
-                        <option value="ISO 14001">ISO 14001</option>
-                      </select>
-                    </div>
+                      <div class="d-flex">
+                        <i class="fas fa-book-open position-awesome-sujet"></i>
+                        <select class="custom-select pl-5" name="iso_categorie" id="iso_categorie">
+                          <option value="">--<?php echo $accompagenemt['choisir_select'] ?>--</option>
+                          <option value="ISO 9001">ISO 9001</option>
+                          <option value="ISO 28000">ISO 28000</option>
+                          <option value="ISO 39001">ISO 39001</option>
+                          <option value="ISO 45001">ISO 45001</option>
+                          <option value="ISO 14001">ISO 14001</option>
+                        </select>
+                      </div>
                     <?php
-                      }
+                    }
                     ?>
                   </div>
                 </div>
                 <div class="col-md-8">
                   <div class="form-group">
-                    <textarea class="form-control" id="iso_message" name="iso_message" rows="6"></textarea>
+                    <?php
+                    if ($_SESSION['lang'] == "ar") {
+                    ?>
+                      <textarea class="form-control text-right" id="iso_message" name="iso_message" rows="6"></textarea>
+                    <?php
+                    } else {
+                    ?>
+                      <textarea class="form-control" id="iso_message" name="iso_message" rows="6"></textarea>
+                    <?php
+                    }
+                    ?>
                   </div>
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary" id="iso_submit" name="iso_submit"><?php echo $accompagenemt['choisir_btn'] ?></button>
@@ -271,14 +341,15 @@
             <div class="modal-body">
               <div id="load_data"></div>
             </div>
-            <div class="modal-footer">
+            <hr class="bg-light">
+            <div class="text-center pb-4">
               <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $accompagenemt['fermer'] ?></button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <?php include_once "footer.php"; ?>
+    <?php include_once "includes/footer.php"; ?>
   </div>
   <script>
     $('#iso_submit').click(function(e) {

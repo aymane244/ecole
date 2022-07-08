@@ -13,9 +13,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php 
-            include_once "header.php";  
-            include_once "style.php";
-            include_once "scripts.php";
+            include_once "includes/header.php";  
+            include_once "includes/style.php";
+            include_once "includes/scripts.php";
         ?>
         <title><?php echo $title['inscription']?></title>
     </head>
@@ -87,28 +87,28 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
+                                            <div class="text-right">
+                                                <label for="nom_arab" class="col-md-12 col-form-label text-md-end">(بالعربية) الاسم العائلي</label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-user position-awesome-arab"></i>
+                                                    </div>
+                                                    <input id="nom_arab" type="text" class="form-control pr-5 text-right" name="nom_arab" autocomplete="nom_arab" placeholder="الاسم العائلي" value="<?php echo isset($_POST['nom_arab']) ? $_POST['nom_arab'] : ''; ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
                                             <div style="text-align: right;">
                                                 <label for="prenom_arab" class="col-md-12 col-form-label text-md-end">(بالعربية) الاسم الشخصي</label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-user position-awesome_arab_modal"></i>
-                                                        <input id="prenom_arab" type="text" class="form-control pr-5" name="prenom_arab" style="text-align: right;" autocomplete="prenom" placeholder="الاسم الشخصي" value="<?php echo isset($_POST['prenom_arab']) ? $_POST['prenom_arab'] : ''; ?>">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-user position-awesome-arab"></i>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="text-right">
-                                                    <label for="nom_arab" class="col-md-12 col-form-label text-md-end">(بالعربية) الاسم العائلي</label>
-                                                </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-user position-awesome_arab_modal"></i>
-                                                        <input id="nom_arab" type="text" class="form-control pr-5 text-right" name="nom_arab" autocomplete="nom_arab" placeholder="الاسم العائلي" value="<?php echo isset($_POST['nom_arab']) ? $_POST['nom_arab'] : ''; ?>">
-                                                    </div>
+                                                    <input id="prenom_arab" type="text" class="form-control pr-5" name="prenom_arab" style="text-align: right;" autocomplete="prenom" placeholder="الاسم الشخصي" value="<?php echo isset($_POST['prenom_arab']) ? $_POST['prenom_arab'] : ''; ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -121,10 +121,10 @@
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-envelope position-awesome_arab_modal"></i>
-                                                        <input id="email" type="email" class="form-control pr-5 text-right" name="email" autocomplete="email" placeholder="بريدك الإلكتروني" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-envelope position-awesome-arab"></i>
                                                     </div>
+                                                    <input id="email" type="email" class="form-control pr-5 text-right" name="email" autocomplete="email" placeholder="بريدك الإلكتروني" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php        
@@ -152,10 +152,10 @@
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-lock position-awesome_arab_modal"></i>
-                                                        <input id="motdepasse" type="password" class="form-control pr-5 text-right" name="motdepasse" placeholder="كلمة السر الخاصة بك" value="<?php echo isset($_POST['motdepasse']) ? $_POST['motdepasse'] : ''; ?>">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-lock position-awesome-arab"></i>
                                                     </div>
+                                                    <input id="motdepasse" type="password" class="form-control pr-5 text-right" name="motdepasse" placeholder="كلمة السر الخاصة بك" value="<?php echo isset($_POST['motdepasse']) ? $_POST['motdepasse'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php        
@@ -185,7 +185,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-calendar position-awesome"></i>
-                                                        <input id="naissance" type="date" class="form-control pl-5" name="naissance" autofocus value="<?php echo isset($_POST['naissance']) ? $_POST['naissance'] : ''; ?>">
+                                                        <input id="naissance" type="date" class="form-control pl-5" name="naissance" value="<?php echo isset($_POST['naissance']) ? $_POST['naissance'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,7 +197,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-calendar position-awesome"></i>
-                                                        <input id="naissance" type="date" class="form-control pl-5" name="naissance" autofocus value="<?php echo isset($_POST['naissance']) ? $_POST['naissance'] : ''; ?>">
+                                                        <input id="naissance" type="date" class="form-control pl-5" name="naissance" value="<?php echo isset($_POST['naissance']) ? $_POST['naissance'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -214,10 +214,10 @@
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-map-marker-alt position-awesome_arab_insc"></i>
-                                                        <input id="lieu" type="text" class="form-control pr-5 text-right" name="lieu" placeholder='مكان الولادة' value="<?php echo isset($_POST['lieu']) ? $_POST['lieu'] : ''; ?>">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-map-marker-alt position-awesome-arab"></i>
                                                     </div>
+                                                    <input id="lieu" type="text" class="form-control pr-5 text-right" name="lieu" placeholder='مكان الولادة' value="<?php echo isset($_POST['lieu']) ? $_POST['lieu'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php        
@@ -245,10 +245,10 @@
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-file-alt position-awesome_arab_insc"></i>
-                                                        <input id="cin" type="text" class="form-control pr-5 text-right" name="cin" autocomplete="cin" placeholder="رقم البطاقة الوطنية" value="<?php echo isset($_POST['cin']) ? $_POST['cin'] : ''; ?>">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-file-alt position-awesome-arab"></i>
                                                     </div>
+                                                    <input id="cin" type="text" class="form-control pr-5 text-right" name="cin" autocomplete="cin" placeholder="رقم البطاقة الوطنية" value="<?php echo isset($_POST['cin']) ? $_POST['cin'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php        
@@ -276,10 +276,10 @@
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-phone position-awesome_arab_modal"></i>
-                                                        <input id="telephone-inscription" type="text" class="form-control pr-5 text-right" name="telephone" autocomplete="telephone" placeholder="رقم الهاتف" autofocus value="<?php echo isset($_POST['telephone']) ? $_POST['telephone'] : ''; ?>">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-phone position-awesome-arab"></i>
                                                     </div>
+                                                    <input id="telephone-inscription" type="text" class="form-control pr-5 text-right" name="telephone" autocomplete="telephone" placeholder="رقم الهاتف" value="<?php echo isset($_POST['telephone']) ? $_POST['telephone'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php        
@@ -290,7 +290,7 @@
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-phone position-awesome"></i>
-                                                        <input id="telephone-inscription" type="text" class="form-control pl-5" name="telephone" autocomplete="telephone" placeholder="Votre numéro de téléphone" autofocus value="<?php echo isset($_POST['telephone']) ? $_POST['telephone'] : ''; ?>">
+                                                        <input id="telephone-inscription" type="text" class="form-control pl-5" name="telephone" autocomplete="telephone" placeholder="Votre numéro de téléphone" value="<?php echo isset($_POST['telephone']) ? $_POST['telephone'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -307,10 +307,10 @@
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-map-marker-alt position-awesome_arab_modal"></i>
-                                                        <input id="adresse" type="text" class="form-control pr-5 text-right" name="adresse" autocomplete="adresse" placeholder="العنوان" value="<?php echo isset($_POST['adresse']) ? $_POST['adresse'] : ''; ?>">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-map-marker-alt position-awesome-arab"></i>
                                                     </div>
+                                                    <input id="adresse" type="text" class="form-control pr-5 text-right" name="adresse" autocomplete="adresse" placeholder="العنوان" value="<?php echo isset($_POST['adresse']) ? $_POST['adresse'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php        
@@ -336,19 +336,19 @@
                                             <div class="text-right">
                                                 <label for="categorie" class="col-md-4 col-form-label text-md-end"><?php echo $inscription['formation']?></label>
                                             </div>
-                                            <div class="d-flex">
-                                                <i class="fas fa-folder-open position-awesome_arab_full_insc"></i>
-                                                <select class="custom-select pr-5 text-right" name="formation" onchange="affichage()" id="formation" style="appearance: none;">
-                                                    <option selected value="">--<?php echo $inscription['choisir']?>--</option>
-                                                    <?php
-                                                        foreach($formations as $formation){
-                                                    ?>
-                                                    <option value="<?php echo $formation['for_id'] ?>"><?php echo $formation['for_nom_arab'] ?></option>
-                                                    <?php      
-                                                        }
-                                                    ?>
-                                                </select>
+                                            <div class="float-right">
+                                                <i class="fas fa-folder-open position-awesome-arab"></i>
                                             </div>
+                                            <select class="custom-select pr-5 text-right" name="formation" onchange="affichage()" id="formation" style="appearance: none;">
+                                                <option selected value="">--<?php echo $inscription['choisir']?>--</option>
+                                                <?php
+                                                    foreach($formations as $formation){
+                                                ?>
+                                                <option value="<?php echo $formation['for_id'] ?>"><?php echo $formation['for_nom_arab'] ?></option>
+                                                <?php      
+                                                    }
+                                                ?>
+                                            </select>                                        
                                         </div>
                                         <?php    
                                             }else{
@@ -362,7 +362,7 @@
                                                     <?php
                                                         foreach($formations as $formation){
                                                     ?>
-                                                    <option value="<?php echo $formation['for_id'] ?>"><?php echo $formation['for_nom_arab'] ?></option>
+                                                    <option value="<?php echo $formation['for_id'] ?>"><?php echo $formation['for_nom'] ?></option>
                                                     <?php      
                                                         }
                                                     ?>
@@ -381,10 +381,10 @@
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-id-badge position-awesome_arab_insc"></i>
-                                                        <input id="permis" type="text" class="form-control pr-5 text-right" name="permis" autocomplete="permis" placeholder="رقم رخصة السياقة" value="<?php echo isset($_POST['permis']) ? $_POST['permis'] : ''; ?>">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-id-badge position-awesome-arab"></i>
                                                     </div>
+                                                    <input id="permis" type="text" class="form-control pr-5 text-right" name="permis" autocomplete="permis" placeholder="رقم رخصة السياقة" value="<?php echo isset($_POST['permis']) ? $_POST['permis'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php    
@@ -412,15 +412,15 @@
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-bus position-awesome_arab_insc"></i>
-                                                        <select class="custom-select pr-5 text-right" name="categorie" id="categorie" style="text-indent: 5px;">
-                                                            <option selected value="">--<?php echo $inscription['categorie_permis']?>--</option>
-                                                            <option value="A">A</option>
-                                                            <option value="B">B</option>
-                                                            <option value="C">C</option>
-                                                        </select>
+                                                    <div class="float-right">
+                                                        <i class="fas fa-bus position-awesome-arab"></i>
                                                     </div>
+                                                    <select class="custom-select pr-5 text-right" name="categorie" id="categorie" style="text-indent: 5px;">
+                                                        <option selected value="">--<?php echo $inscription['categorie_permis']?>--</option>
+                                                        <option value="A">A</option>
+                                                        <option value="B">B</option>
+                                                        <option value="C">C</option>
+                                                    </select>                        
                                                 </div>
                                             </div>
                                             <?php    
@@ -607,10 +607,10 @@
             <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">
                 <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>
             </div>
-            <?php include_once "footer.php";?>
+            <?php include_once "includes/footer.php";?>
         <script>
             function affichage(){
-                if(document.getElementById('formation').value == 2){
+                if(document.getElementById('formation').value == 17){
                     document.getElementById('div-carte').style.display ="block";
                 }else{
                     document.getElementById('div-carte').style.display ="none";

@@ -11,9 +11,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php 
-            include_once "header.php";  
-            include_once "style.php";
-            include_once "scripts.php";
+            include_once "includes/header.php";  
+            include_once "includes/style.php";
+            include_once "includes/scripts.php";
         ?>
         <title><?php echo $title['connexion']?></title>
     </head>
@@ -68,10 +68,10 @@
                                         <div style="text-align: right;">
                                             <label for="cin" class="col-md-4 col-form-label text-md-end"><?php echo $login['CIN']?></label>
                                         </div>
-                                        <div class="d-flex">
-                                            <i class="fas fa-file-alt position-awesome_arab_login"></i>
-                                            <input id="cin" type="text" class="form-control pr-5" name="cin" style="text-align:right;" autocomplete="username" autofocus placeholder="رقم بطاقتكم الوطنية" value="<?php echo isset($_POST['cin']) ? $_POST['cin'] : ''; ?>">
+                                        <div style="float:right">
+                                            <i class="fas fa-file-alt position-awesome-arab"></i>
                                         </div>
+                                        <input id="cin" type="text" class="form-control pr-5" name="cin" style="text-align:right;" autocomplete="username" autofocus placeholder="رقم بطاقتكم الوطنية" value="<?php echo isset($_POST['cin']) ? $_POST['cin'] : ''; ?>">
                                     </div>
                                     <?php
                                         }else{
@@ -95,10 +95,10 @@
                                         <div style="text-align: right;">
                                             <label for="password" class="col-md-4 col-form-label text-md-end"><?php echo $login['passe']?></label>
                                         </div>
-                                        <div class="d-flex">
-                                            <i class="fas fa-key position-awesome_arab_login"></i>
-                                            <input id="password" type="password" class="form-control pr-5" name="password" autocomplete="current-password" placeholder="كلمة السر" style="text-align: right;">
+                                        <div style="float:right">
+                                            <i class="fas fa-key position-awesome-arab"></i>
                                         </div>
+                                        <input id="password" type="password" class="form-control pr-5" name="password" autocomplete="current-password" placeholder="كلمة السر" style="text-align: right;">
                                         <div class="col-md-12 text-right mt-3">
                                             <a href="inscription" class="px-4"><?php echo $login['inscrire']?></a>
                                             <button type="submit" class="btn btn-primary" name="submit" id="submit_login"><?php echo $login['connexion']?></button>
@@ -137,7 +137,7 @@
         <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">
             <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>
         </div>
-        <?php include_once "footer.php";?>
+        <?php include_once "includes/footer.php";?>
         <script>
             $("#submit_login").click(function(e){
                 var cin = $("#cin").val();

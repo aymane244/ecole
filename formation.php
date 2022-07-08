@@ -18,15 +18,15 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php 
-            include_once "header.php";  
-            include_once "style.php";
-            include_once "scripts.php";
+            include_once "includes/header.php";  
+            include_once "includes/style.php";
+            include_once "includes/scripts.php";
         ?>
         <title>
             <?php 
@@ -53,16 +53,16 @@
                     ?>
                 </h1>
             </div>
-            <div style="height: 100%; position:relative">
+            <div style="position:relative">
                 <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-                <img src="images/school.png" alt="" class="d-block img-fluid" style="width:100%;">
+                <img src="images/view/school.png" alt="" class="d-block img-fluid" style="width:100%;">
             </div>
             <div class="container-fluid mt-5">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="py-4 px-3 mt-5 mb-lg-4 border text-justify bg-white">
                             <h4 class="text-color"><u><?php echo $forma['presentation'] ?></u></h4>
-                            <p class="ml-3 mt-3 text-font">
+                            <div class="mx-3 mt-3 text-font ">
                                 <?php 
                                     if($_SESSION['lang'] =="ar"){
                                         echo $for_desc_arab;
@@ -70,17 +70,17 @@
                                         echo $for_desc;
                                     }
                                 ?>
-                            </p>
+                            </div>
                             <h4 class="text-color" style="white-space: pre-line"><u><?php echo $forma['description'] ?></u></h4>
-                            <p class="ml-3 mt-3 text-font">
+                            <div class="ml-3 mt-3 text-font">
                                 <?php
                                     if($_SESSION['lang'] =="ar"){
-                                        echo $for_desc_arab;
+                                        echo $for_pres_arab;
                                     }else{  
                                         echo $for_pres;
                                     }
                                 ?>
-                            </p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -133,7 +133,7 @@
             <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">
                 <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>
             </div>
-            <?php include_once "footer.php";?>
+            <?php include_once "includes/footer.php";?>
         </div>
     </body>
 </html>

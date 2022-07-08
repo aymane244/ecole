@@ -4,13 +4,20 @@ include_once 'etudiant.php';
 include_once 'db.php';
 $db = new DBController();
 $data = new Etudiant($db);
+include_once "../includes/lang.php";
 if(isset($_POST['action'])){
     if ($_POST['action']=='add_comment') {
         $data->insertComment();
+        $id = $_POST['article_id'];
+        foreach($data->getArticleTitreAjax() as $count){
+            if($id = $count['art_id']){
+                echo '<h4>'.$count['commentaires'].' '.$artic['Commentaires'].'</h4>';
+            }
+        }
         foreach ($data->getCommentsAjax() as $comment) {
             echo '<p class="pl-3 mt-3">
             <b>'.$comment['com_prenom'].' '.$comment['com_nom'].' </b> <br>
-            <span style="color:#BBBBBB"> '.date("F j, Y",strtotime($comment['com_time'])).' </span> <br>
+            <span style="color:#BBBBBB"> '.date_in_french($comment['com_time']).' </span> <br>
             <span class="pl-3"> '.$comment['com_comentaire'].'</span> </p>';
         }
     }
@@ -27,35 +34,12 @@ if(isset($_POST['action'])){
                 $age = date_diff(date_create($detail['etud_naissance']), date_create($date));
                 $nom = $detail['etud_nom'];
                 $prenom = $detail['etud_prenom'];
-                $cin = $detail['etud_cin_name'];
-                $permis = $detail['etud_permis_name'];
-                $visite = $detail['etud_visite_name'];
-                //$files = array($cin, $permis, $visite);
-                $file = "readme.txt";
-                $zip = new ZipArchive;
-                $zip_file = "$prenom-$nom.zip";
-                $path = "../dossiers-stagiaires/$prenom-$nom";
-                if($zip->open($zip_file, ZIPARCHIVE::CREATE)==true){
-                    file_put_contents($file, "Vous avez bien téléchargé vos fichiers \n".$cin."\n".$permis."\n".$visite);
-                    $zip->addFile("readme.txt");
-                    $file_path= "$path/$cin";
-                    $name =$cin;
-                    $zip->addFile($file_path, $name);
-                    $file_path= "$path/$permis";
-                    $name =$permis;
-                    $zip->addFile($file_path, $name);
-                    $file_path= "$path/$visite";
-                    $name =$visite;
-                    $zip->addFile($file_path, $name);
-                    $zip->extractTo($file_path, $name);
-                    @$zip->close();
-                }
                 echo '<div class="container-fluid">
                     <div class="text-center">';
-                        if($detail['etud_image'] == "./dossiers-stagiaires/$prenom-$nom/image-"){
-                            echo '<img src="images/etudiants/unknown_person.jpg" class="card-image-2">';
+                        if($detail['etud_image'] == ""){
+                            echo '<img src="../images/etudiants/unknown_person.jpg" class="card-image-2">';
                         }else{
-                            echo '<img src="'.$detail['etud_image'].'" class="card-image-2">';
+                            echo '<img src="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_image'].'" class="card-image-2">';
                         };
                     echo '</div>
                     <div class="text-center mt-5 mb-4 font-style">
@@ -113,28 +97,29 @@ if(isset($_POST['action'])){
                             <h4 class="text-center pb-2">Documents scanés</h4>
                             <div class="d-flex align-items-center justify-content-around">
                                 <p>
-                                    <a download="'.$detail['etud_scan_cin'].'" href="'.$detail['etud_scan_cin'].'">
-                                        CIN <br> <img src="images/PDF_file_icon.svg" style="width:30px" class="img-fluid">
+                                    <a download="'.$detail['etud_scan_cin'].'" href="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_scan_cin'].'">
+                                        CIN <br> <img src="../images/view/PDF_file_icon.svg" style="width:30px" class="img-fluid">
                                     </a>
                                 </p>
                                 <p>
-                                    <a download="'.$detail['etud_scan_permis'].'" href="'.$detail['etud_scan_permis'].'">
-                                        Permis <br> <img src="images/PDF_file_icon.svg" style="width:30px; margin-left:12px" class="img-fluid">
+                                    <a download="'.$detail['etud_scan_permis'].'" href="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_scan_permis'].'">
+                                        Permis <br> <img src="../images/view/PDF_file_icon.svg" style="width:30px; margin-left:12px" class="img-fluid">
                                     </a>
                                 </p>
                                 <p>
-                                    <a download="'.$detail['etud_scan_visite'].'" href="'.$detail['etud_scan_visite'].'">
-                                        Visite médicale <br> <img src="images/PDF_file_icon.svg" style="width:30px; margin-left:45px" class="img-fluid">
+                                    <a download="'.$detail['etud_scan_visite'].'" href="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_scan_visite'].'">
+                                        Visite médicale <br> <img src="../images/view/PDF_file_icon.svg" style="width:30px; margin-left:45px" class="img-fluid">
                                     </a>
                                 </p>
                             </div>
                             <hr class="bg-light">
                             <div class="text-center">
-                                <p>
-                                    <a download="'.$zip_file.'" href="functions/'.$zip_file.'">
-                                        Télécharger tous <br> <img src="images/winrar.png" style="width:40px; " class="img-fluid">
-                                    </a>
-                                </p>
+                                <form action="../functions/download.php" method="POST">
+                                    <input type="hidden" name="id" value="'.$detail['etud_id'].'">
+                                    <button type="submit" name="createpdf" style="background-color:transparent; border:none; color:#0056B3">
+                                        <b>Télécharger tous</b> <br> <img src="../images/view/winrar.png" style="width:40px; " class="img-fluid">
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -151,29 +136,29 @@ if(isset($_POST['action'])){
                 $age = date_diff(date_create($detail['etud_naissance']), date_create($date));
                 $nom = $detail['etud_nom'];
                 $prenom = $detail['etud_prenom'];
-                $cin = $detail['etud_cin_name'];
-                $permis = $detail['etud_permis_name'];
-                $visite = $detail['etud_visite_name'];
-                //$files = array($cin, $permis, $visite);
-                $file = "readme.txt";
-                $zip = new ZipArchive();
-                $zip_file = "$prenom-$nom.zip";
-                $path = "../dossiers-stagiaires/$prenom-$nom";
-                if($zip->open($zip_file, ZIPARCHIVE::CREATE)==true){
-                    file_put_contents($file, "Vous avez bien téléchargé vos fichiers \n".$cin."\n".$permis."\n".$visite);
-                    $zip->addFile("readme.txt");
-                    $file_path= "$path/$cin";
-                    $name =$cin;
-                    $zip->addFile($file_path, $name);
-                    $file_path= "$path/$permis";
-                    $name =$permis;
-                    $zip->addFile($file_path, $name);
-                    $file_path= "$path/$visite";
-                    $name =$visite;
-                    $zip->addFile($file_path, $name);
-                    $zip->extractTo($file_path, $name);
-                    //$zip->close();
-                }
+                // $cin = $detail['etud_cin_name'];
+                // $permis = $detail['etud_permis_name'];
+                // $visite = $detail['etud_visite_name'];
+                // //$files = array($cin, $permis, $visite);
+                // $file = "readme.txt";
+                // $zip = new ZipArchive();
+                // $zip_file = "$prenom-$nom.zip";
+                // $path = "../dossiers-stagiaires/$prenom-$nom";
+                // if($zip->open($zip_file, ZIPARCHIVE::CREATE)==true){
+                //     file_put_contents($file, "Vous avez bien téléchargé vos fichiers \n".$cin."\n".$permis."\n".$visite);
+                //     $zip->addFile("readme.txt");
+                //     $file_path= "$path/$cin";
+                //     $name =$cin;
+                //     $zip->addFile($file_path, $name);
+                //     $file_path= "$path/$permis";
+                //     $name =$permis;
+                //     $zip->addFile($file_path, $name);
+                //     $file_path= "$path/$visite";
+                //     $name =$visite;
+                //     $zip->addFile($file_path, $name);
+                //     $zip->extractTo($file_path, $name);
+                //     //$zip->close();
+                // }
                 echo '<br>';
                 echo '<div class="container-fluid">
                     <hr>
@@ -181,10 +166,10 @@ if(isset($_POST['action'])){
                         <div class="col-md-12 font-style">
                             <h4 class="text-center pb-2">Information personnelle</h4>
                             <div class="d-flex align-items-center justify-content-around">';
-                                if($detail['etud_image'] === "./dossiers-stagiaires/$prenom-$nom/image-"){
-                                    echo '<img src="images/etudiants/unknown_person.jpg"  class="card-image-2">';
+                                if($detail['etud_image'] === ""){
+                                    echo '<img src="../images/etudiants/unknown_person.jpg"  class="card-image-2">';
                                 }else{
-                                    echo '<img src="'.$detail['etud_image'].'" class="card-image-2">';
+                                    echo '<img src="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_image'].'" class="card-image-2">';
                                 };
                                 echo '<p>
                                     Nom complet: '.$detail['etud_prenom'].' '.$detail['etud_nom'].' <br>
@@ -214,35 +199,35 @@ if(isset($_POST['action'])){
                             <h4 class="text-center pb-2">Documents scanés</h4>
                             <div class="d-flex align-items-center justify-content-around">
                                 <p>
-                                    <a download="'.$detail['etud_scan_cin'].'" href="'.$detail['etud_scan_cin'].'">
-                                        CIN <br> <img src="images/PDF_file_icon.svg" style="width:30px" class="img-fluid">
+                                    <a download="'.$detail['etud_scan_cin'].'" href="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_scan_cin'].'">
+                                        CIN <br> <img src="../images/view/PDF_file_icon.svg" style="width:30px" class="img-fluid">
                                     </a>
                                 </p>
                                 <p>
-                                    <a download="'.$detail['etud_scan_permis'].'" href="'.$detail['etud_scan_permis'].'">
-                                        Permis <br> <img src="images/PDF_file_icon.svg" style="width:30px; margin-left:12px" class="img-fluid">
+                                    <a download="'.$detail['etud_scan_permis'].'" href="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_scan_permis'].'">
+                                        Permis <br> <img src="../images/view/PDF_file_icon.svg" style="width:30px; margin-left:12px" class="img-fluid">
                                     </a>
                                 </p>
                                 <p>
-                                    <a download="'.$detail['etud_scan_visite'].'" href="'.$detail['etud_scan_visite'].'">
-                                        Visite médicale <br> <img src="images/PDF_file_icon.svg" style="width:30px; margin-left:45px" class="img-fluid">
+                                    <a download="'.$detail['etud_scan_visite'].'" href="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_scan_visite'].'">
+                                        Visite médicale <br> <img src="../images/view/PDF_file_icon.svg" style="width:30px; margin-left:45px" class="img-fluid">
                                     </a>
                                 </p>
                             </div>
                             <hr>
                             <div class="text-center">
-                                <p>
-                                    <a download="'.$zip_file.'" href="functions/'.$zip_file.'">
-                                        Télécharger tous <br> <img src="images/winrar.png" style="width:40px; " class="img-fluid">
-                                    </a>
-                                </p>
+                                <form action="../functions/download.php" method="POST">
+                                    <input type="hidden" name="id" value="'.$detail['etud_id'].'">
+                                    <button type="submit" name="createpdf" style="background-color:transparent; border:none; color:#0056B3">
+                                        <b>Télécharger tous</b> <br> <img src="../images/view/winrar.png" style="width:40px; " class="img-fluid">
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <hr>
                     <br>
                 </div>';
-                //unlink($zip_file);
             }
         }
     }
@@ -398,6 +383,22 @@ if(isset($_POST['action'])){
 /*if(isset($_GET['action'])){
 
 }*/
+function date_in_french ($date){
+    $month_name=array("","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
+    $split = preg_split('/-/', $date);
+    $year = $split[0];
+    $month = round($split[1]);
+    $day = round($split[2]);
+    return $day .' '. $month_name[$month] .' '. $year;
+}
+function date_in_arabic ($date){
+    $month_name=array("","يناير","فبراير","مارس","أبريل","ماي","يونيو","يوليوز","غشت","شتنبر","أكتوبر","نونبر","دجنبر");
+    $split = preg_split('/-/', $date);
+    $year = $split[0];
+    $month = round($split[1]);
+    $day = round($split[2]);
+    return $year .' '. $month_name[$month] .' '. $day;
+}
 ?>
 <script>
     function supprimer(){
