@@ -38,35 +38,60 @@
       <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
       <img src="images/view/customs.png" alt="" class="d-block img-fluid" style="width:100%;">
     </div>
-    <?php
-    if (isset($_SESSION['status'])) {
-    ?>
-      <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status'] ?></div>
-    <?php
-      unset($_SESSION['status']);
-    }
-    ?>
     <div class="container mt-5">
+      <?php
+        if (isset($_SESSION['status'])) {
+      ?>
+      <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status'] ?></div>
+      <?php
+        unset($_SESSION['status']);
+        }
+      ?>
       <div class="row align-items-center bg-white">
+        
+        <?php
+          if ($_SESSION['lang'] == "ar") {
+        ?>
+        <div class="col-md-12 mt-4 col-lg-6 py-3 ">
+          <h4 class="mb-4 text-center"><?php echo $douane['status'] ?></h4>
+          <p class="text-justify text-right" dir='rtl' lang='ar' >
+            <?php echo $douane['status_text'] ?>
+            <br><br>
+            <strong><?php echo $douane['status_avantage'] ?></strong> 
+            <ul dir='rtl' lang='ar' class="text-right">
+              <li><?php echo $douane['status_li_1'] ?></li>
+              <li><?php echo $douane['status_li_2'] ?></li>
+              <li><?php echo $douane['status_li_3'] ?></li>
+              <li><?php echo $douane['status_li_4'] ?></li>
+            </ul>
+          </p>
+        </div>
+        <div class="col-md-12 mt-4 col-lg-6 py-3">
+          <img src="images/view/630.jpg" class="img-fluid">
+        </div>
+        <?php
+          } else {
+        ?>
         <div class="col-md-12 mt-4 col-lg-6 py-3">
           <img src="images/view/630.jpg" class="img-fluid">
         </div>
         <div class="col-md-12 mt-4 col-lg-6 py-3 ">
           <h4 class="mb-4 text-center"><?php echo $douane['status'] ?></h4>
           <p class="text-justify">
-            La catégorisation consiste à séléctionner les sociétés organisées, gérées d'une manière transparente et en situation régulière avec 
-            la douane, pour leur accorder des facilités douanières leur permettant de réaliser leurs opérations de dédouanement dans de 
-            meilleures conditions de compétitivité et de réactivité frâce à des procédures simplifiées et personnalisées. 
+            <?php echo $douane['status_text'] ?>
             <br><br>
-            <strong>Quels sont les avantages de la catégorisation ?</strong> 
+            <strong><?php echo $douane['status_avantage'] ?></strong> 
             <ul>
-              <li>Un dédouanement rapide d’où des économies en termes de coût et de délais.</li>
-              <li>Des procédures simplifiées et personnalisées améliorant la compétitivité et la réactivité.</li>
-              <li>Une meilleure image de marque sur le marché international.</li>
-              <li>Une première étape vers le statut d’ « opérateur économique agréé » de l’OMD (Organisation Mondiale des Douanes).</li>
+              <li><?php echo $douane['status_li_1'] ?></li>
+              <li><?php echo $douane['status_li_2'] ?></li>
+              <li><?php echo $douane['status_li_3'] ?></li>
+              <li><?php echo $douane['status_li_4'] ?></li>
             </ul>
           </p>
         </div>
+        <?php
+          }
+        ?>
       </div>
     </div>
     <br><br>
@@ -77,44 +102,6 @@
       </div>
       <br>
     </div>
-    <!-- <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <center><img src="images/DOUANE 1.jpg" class="d-block " width="70%" alt="..."></center>
-            <div class="carousel-caption d-none d-md-block">
-              <h1>Class A</h1>
-              <p><?php echo $douane['slide_a'] ?>.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <center><img src="images/class_a.jpg" class="d-block " width="70%" alt="..."></center>
-            <div class="carousel-caption d-none d-md-block">
-              <h1>Class B</h1>
-              <p><?php echo $douane['slide_b'] ?>.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <center><img src="images/630.jpg" class="d-block " width="70%" alt="..."></center>
-            <div class="carousel-caption d-none d-md-block">
-              <h1>Class SS</h1>
-              <p><?php echo $douane['slide_c'] ?>.</p>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-target="#carouselExampleCaptions" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </button>
-      </div> -->
     <div class="container">
       <ul class="card-list">
         <div class="row">
@@ -123,13 +110,23 @@
               <a class=" card-im" style="background-image: url(images/view/OFF.jpg);position: relative;">
                 <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
               </a>
-              <h1 class="text-white text-center" style="position: absolute; z-index:4 ; filter: none !important; margin-left: auto; margin-right:auto; width:100%; margin-top:150px;">Class A</h1>
+              <h1 class="text-white text-center" style="position: absolute; z-index:4 ; filter: none !important; margin-left: auto; margin-right:auto; width:100%; margin-top:110px;">Class A</h1>
               <div class="card-description mt-3 px-3">
-                <p>
-                  Statut d’Opérateur Economique Agréé (OEA) simplifications douanières : accordé pour les sociétés catégorisées classe « A », 
-                  dans un cadre conventionnel, permettant de jouir de la reconnaissance mutuelle par les administrations douanières à l’échelon 
-                  international.
+                <?php
+                  if ($_SESSION['lang'] == "ar") {
+                ?>
+                <p dir='rtl' lang='ar' class="text-right">
+                  <?php echo $douane['class_1'] ?>
                 </p>
+                <?php
+                  } else {
+                ?>
+                <p>
+                  <?php echo $douane['class_1'] ?>
+                </p>
+                <?php
+                  }
+                ?>
               </div>
               <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
             </li>
@@ -139,18 +136,28 @@
               <a class="card-im" style="background-image: url(images/view/OFF.jpg);position: relative;">
                 <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
               </a>
-              <h1 class="text-white text-center" style="position: absolute; z-index:4 ; filter: none !important; margin-left: auto; margin-right:auto; width:100%; margin-top:150px;">Class B</h1>
+              <h1 class="text-white text-center" style="position: absolute; z-index:4 ; filter: none !important; margin-left: auto; margin-right:auto; width:100%; margin-top:110px;">Class B</h1>
               <div class="card-description mt-3 px-3">
-                <p>
-                  Statut d’Opérateur Economique Agréé (OEA) sécurité et sûreté : attribué aux opérateurs qui remplissent les critères 
-                  exigés pour l’octroi du statut OEA simplifications douanières de niveau « A » et qui appliquent les normes appropriées en 
-                  matière de sécurité et de sûreté.  (en cours de mise en place).
+                <?php
+                  if ($_SESSION['lang'] == "ar") {
+                ?>
+                <p dir='rtl' lang='ar' class="text-right">
+                  <?php echo $douane['class_2'] ?>
                 </p>
+                <?php
+                  } else {
+                ?>
+                <p>
+                  <?php echo $douane['class_2'] ?>
+                </p>
+                <?php
+                  }
+                ?>
               </div>
               <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
             </li>
           </div>
-          <div class="col-md-4 mt-4">
+          <!-- <div class="col-md-4 mt-4">
             <li class="card pb-4">
               <a class="card-im" style="background-image: url(images/view/OFF.jpg);position: relative;">
                 <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
@@ -162,7 +169,7 @@
               </div>
               <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
             </li>
-          </div>
+          </div> -->
         </div>
       </ul>
     </div>
@@ -196,11 +203,11 @@
           <?php
           if ($_SESSION['lang'] == "ar") {
           ?>
-            <div id="errors_arab"></div>
+            <div id="errors_arab" class="mx-5"></div>
           <?php
           } else {
           ?>
-            <div id="errors"></div>
+            <div id="errors" class="mx-5"></div>
           <?php
           }
           ?>
@@ -214,7 +221,7 @@
                     <div style="float: right;">
                       <i class="fas fa-user position-awesome-arab"></i>
                     </div>
-                    <input type="text" class="form-control pr-5" name="douane_nom" id="douane_nom" placeholder="الاسم الكامل" style="text-align: right;">
+                    <input type="text" class="form-control pr-5" dir="rtl" lang="ar" name="douane_nom" id="douane_nom" placeholder="الاسم الكامل">
                   <?php
                   } else {
                   ?>
@@ -235,7 +242,7 @@
                     <div style="float: right;">
                       <i class="fas fa-envelope position-awesome-arab"></i>
                     </div>
-                    <input type="email" class="form-control pr-5" name="douane_email" id="douane_email" placeholder="البريد الإلكتروني" style="text-align: right;">
+                    <input type="email" class="form-control pr-5" dir="rtl" lang="ar" name="douane_email" id="douane_email" placeholder="البريد الإلكتروني" style="text-align: right;">
                   <?php
                   } else {
                   ?>
@@ -256,7 +263,7 @@
                     <div style="float: right;">
                       <i class="fas fa-book-open position-awesome-arab"></i>
                     </div>
-                    <select class="custom-select pr-5" name="douane_categorie" id="douane_categorie" style="text-align: right;">
+                    <select class="custom-select pr-5" name="douane_categorie" id="douane_categorie" dir="rtl" lang="ar">
                       <option value="">--<?php echo $douane['choisir_select'] ?>--</option>
                       <option value="Classe A">Classe A</option>
                       <option value="Classe B">Classe B</option>

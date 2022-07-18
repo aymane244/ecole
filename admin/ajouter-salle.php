@@ -53,7 +53,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6" lang="ar">
                                         <div class="row mb-3 text-right">
                                             <label for="titre_arab" class="col-md-12 col-form-label text-md-end">اسم القاعة</label>
                                             <div class="col-md-12">
@@ -74,7 +74,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6" lang="ar">
                                         <div class="row mb-3 text-right">
                                             <label for="desc_arab" class="col-md-12 col-form-label text-md-end">وصف القاعة</label>
                                             <div class="col-md-12">
@@ -147,29 +147,18 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="row mb-3 text-right">
-                                            <label for="salle-service1_arab" class="col-md-12 col-form-label text-md-end">خدمة 1</label>
+                                        <div class="row mb-3 text-right" lang="ar">
+                                            <label for="salle-service4_arab" class="col-md-12 col-form-label text-md-end">خدمة 4</label>
                                             <div class="col-md-12">
                                                 <div class="float-right">
                                                     <i class="fas fa-check position-awesome-arab"></i>
                                                 </div>
-                                                <input id="salle-service1_arab" type="text" class="form-control pr-5 text-right" name="salle_service1_arab" autocomplete="nom" placeholder="خدمة 1" value="<?php echo isset($_POST['salle_service1_arab']) ? $_POST['salle_service1_arab'] : ''; ?>">
+                                                <input id="salle-service4_arab" type="text" class="form-control pr-5 text-right" name="salle_service4_arab" autocomplete="nom" placeholder="خدمة 4" value="<?php echo isset($_POST['salle_service4_arab']) ? $_POST['salle_service4_arab'] : ''; ?>">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="row mb-3 text-right">
-                                            <label for="salle-service2_arab" class="col-md-12 col-form-label text-md-end">خدمة 2</label>
-                                            <div class="col-md-12">
-                                                <div class="float-right">
-                                                    <i class="fas fa-check position-awesome-arab"></i>
-                                                </div>
-                                                <input id="salle-service2_arab" type="text" class="form-control pr-5 text-right" name="salle_service2_arab" autocomplete="nom" placeholder="خدمة 2" value="<?php echo isset($_POST['salle_service2_arab']) ? $_POST['salle_service2_arab'] : ''; ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="row mb-3 text-arab">
+                                        <div class="row mb-3 text-right" lang="ar">
                                             <label for="salle-service3_arab" class="col-md-12 col-form-label text-md-end">خدمة 3</label>
                                             <div class="col-md-12">
                                                 <div class="float-right">
@@ -180,13 +169,24 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="row mb-3 text-right">
-                                            <label for="salle-service4_arab" class="col-md-12 col-form-label text-md-end">خدمة 4</label>
+                                        <div class="row mb-3 text-right" lang="ar">
+                                            <label for="salle-service2_arab" class="col-md-12 col-form-label text-md-end">خدمة 2</label>
                                             <div class="col-md-12">
                                                 <div class="float-right">
                                                     <i class="fas fa-check position-awesome-arab"></i>
                                                 </div>
-                                                <input id="salle-service4_arab" type="text" class="form-control pr-5 text-right" name="salle_service4_arab" autocomplete="nom" placeholder="خدمة 4" value="<?php echo isset($_POST['salle_service4_arab']) ? $_POST['salle_service4_arab'] : ''; ?>">
+                                                <input id="salle-service2_arab" type="text" class="form-control pr-5 text-right" name="salle_service2_arab" autocomplete="nom" placeholder="خدمة 2" value="<?php echo isset($_POST['salle_service2_arab']) ? $_POST['salle_service2_arab'] : ''; ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="row mb-3 text-right" lang="ar">
+                                            <label for="salle-service1_arab" class="col-md-12 col-form-label text-md-end">خدمة 1</label>
+                                            <div class="col-md-12">
+                                                <div class="float-right">
+                                                    <i class="fas fa-check position-awesome-arab"></i>
+                                                </div>
+                                                <input id="salle-service1_arab" type="text" class="form-control pr-5 text-right" name="salle_service1_arab" autocomplete="nom" placeholder="خدمة 1" value="<?php echo isset($_POST['salle_service1_arab']) ? $_POST['salle_service1_arab'] : ''; ?>">
                                             </div>
                                         </div>
                                     </div>

@@ -3,7 +3,7 @@
     if(!isset($_SESSION['etud_cin']) && !isset($_SESSION['etud_motdepasse'])){
         echo "<script>window.location.href='login'</script>";
     }
-    $etudiants = $data->getEtudiantMatiereFormation();
+    $etudiants = $data->getEtudiantNote();
     $matieres = $data->getEtudiantMatiereFormation();
     $notes = $data->noteGenerale();
     $matieresMessage = $data->getForMatEtud();
@@ -12,7 +12,7 @@
     $note1 = array_column($matieresMessage, 'mat_id');
     $note2 = array_column($notesMessage, 'not_matiere');
     foreach($etudiants as $etudiant){
-        if($_SESSION['id'] == $etudiant['etud_id']){
+        
             $etudnom = $etudiant['etud_nom'];
             $etudprenom = $etudiant['etud_prenom'];
             $etudnom_arab = $etudiant['etud_nom_arab'];
@@ -20,7 +20,8 @@
             $fornom = $etudiant['for_nom'];
             $fornom_arab = $etudiant['for_nom_arab'];
             $etud_id = $etudiant['not_etudiant'];
-        }
+            $forid = $etudiant['for_id'];
+        
     }
     // foreach($notes as $note){
     //     if($note['etud_id'] == $_SESSION['id']){
@@ -62,7 +63,7 @@
                     <?php
                         if($_SESSION['lang'] =="ar"){
                     ?>
-                    <thead class="text-center text-white" style="background-color: #11101d;">
+                    <thead class="text-center text-white" style="background-color: #11101d;" lang="ar">
                         <tr>
                             <th scope="col" colspan="9"><?php echo $title['titre']?></th>
                         </tr>
@@ -70,14 +71,14 @@
                             <th scope="col" colspan="9"><?php echo $fornom_arab?></th>
                         </tr>
                         <tr>
-                            <th scope="col" colspan="9"><?php echo @$etudprenom_arab." ".@$etudnom_arab?></th>
+                            <th scope="col" colspan="9"><?php echo $etudprenom_arab." ".$etudnom_arab?></th>
                         </tr>
                         <tr>
                             <th scope="col"><?php echo $espaceetudiant['note']?></th>
                             <th scope="col"><?php echo $forma['matieres']?></th>
                         </tr>
                     </thead>
-                    <tbody class="text-center">
+                    <tbody class="text-center" lang="ar">
                         <?php
                             foreach($matieres as $matiere){
                                 if($_SESSION['id'] == $matiere['etud_id']){
@@ -111,10 +112,10 @@
                             <th scope="col" colspan="9"><?php echo $title['titre']?></th>
                         </tr>
                         <tr>
-                            <th scope="col" colspan="9"><?php echo @$fornom?></th>
+                            <th scope="col" colspan="9"><?php echo $fornom?></th>
                         </tr>
                         <tr>
-                            <th scope="col" colspan="9"><?php echo @$etudprenom." ".@$etudnom?></th>
+                            <th scope="col" colspan="9"><?php echo $etudprenom." ".$etudnom?></th>
                         </tr>
                         <tr>
                             <th scope="col"><?php echo $forma['matieres']?></th>
@@ -241,7 +242,7 @@
                                             <?php
                                                 $formations = $data->getformation();                
                                                 foreach($formations as $formation){
-                                                    if($formation['for_id'] == 17){
+                                                    if($formation['for_id'] == $forid+1){
                                             ?>
                                             <input type="hidden" name="for_id" value="<?php echo $formation['for_id'] ?>">
                                             <?php

@@ -37,12 +37,12 @@
 			<?php
             	if(isset($_SESSION['status_arab'])){
             ?>
-            <div class='alert alert-success text-center' role='alert'><?php echo $_SESSION['status_arab']?></div>
+            <div class='alert alert-success text-center' role='alert' dir="rtl" lang="ar"><?php echo $_SESSION['status_arab']?></div>
             <?php
                     unset($_SESSION['status_arab']);
                 }else if(isset($message_arab)){
 			?>
-			<div class="alert alert-danger text-center" role="alert"><?php echo $message_arab?></div>
+			<div class="alert alert-danger text-center" role="alert" dir="rtl" lang="ar"><?php echo $message_arab?></div>
 			<?php		
 				}else{
 					unset($message_arab);
@@ -74,20 +74,21 @@
 						<div class="col-md-8">
 							<div class="card card-position" style="box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.2);">
 								<div class="card-header text-center link-font">
-									<h3>
-										<?php
-                                        	if($_SESSION['lang'] == 'ar'){
-                                    	?>
-										<?php echo $password['oublie'] ?> <i class="fas fa-lock"></i> 
-										<?php
-                                        	}else{
-                                    	?>
-										<i class="fas fa-lock"></i> <?php echo $password['oublie'] ?>
-										<?php                
-                                        	}
-                                    	?>
-										
+									<?php
+                                    	if($_SESSION['lang'] == 'ar'){
+                                	?>
+									<h3 dir="rtl" lang="ar">
+										<?php echo $password['oublie'] ?> <i class="fas fa-lock"></i>
 									</h3>
+									<?php
+                                    	}else{
+                                	?>
+									<h3>
+										<i class="fas fa-lock"></i> <?php echo $password['oublie'] ?>
+									</h3>
+									<?php                
+                                    	}
+                                	?>
 								</div>
 								<div class="card-body py-5">
 									<div class="row mb-3 justify-content-center">
@@ -95,14 +96,14 @@
                                         	if($_SESSION['lang'] == 'ar'){
                                     	?>
 										<div class="col-md-8">
-											<div class="text-right">
+											<div class="text-right" dir="rtl" lang="ar">
 												<label for="motdepasse" class="col-md-8 col-form-label"><?php echo $password['nouveau'] ?></label>
 											</div>
 											<div style="float:right">
 												<i class="fas fa-key position-awesome-arab"></i>
 											</div>
-											<input type="password" class="form-control pr-5 input-check text-right" id="exampleInputPassword" placeholder="كلمة السر" name="password">
-											<p id="error_ara" style="text-align: right;"></p>
+											<input type="password" class="form-control pr-5 input-check text-right" dir="rtl" lang="ar" id="exampleInputPassword" placeholder="كلمة المرور" name="password">
+											<p id="error_ara" style="text-align: right;" dir="rtl" lang="ar"></p>
 											<div class="form-group form-check px-4 text-right">
 												<label class="form-check-label " for="exampleCheck1"><?php echo $password['afficher'] ?></label>
 												<input type="checkbox" class="form-check-input" id="chekc" style="margin-left:5px">
@@ -170,13 +171,13 @@
                                         	if($_SESSION['lang'] == 'ar'){
                                     	?>
 										<div class="col-md-8">
-											<div class="text-right">
+											<div class="text-right" dir="rtl" lang="ar">
 												<label for="email" class="col-md-8 col-form-label"><?php echo $password['email'] ?></label>
 											</div>
 											<div style="float:right">
 												<i class="fas fa-at position-awesome-arab"></i>
 											</div>
-											<input type="email" class="form-control pr-5 text-right" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكتروني" name="email">
+											<input type="email" class="form-control pr-5 text-right" dir="rtl" lang="ar" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="البريد الإلكتروني" name="email">
 											<br>
 											<div class="pt-2 text-right">
 												<button type="submit" class="btn btn-primary" id="id-submit" name="submit_pwd"> <?php echo $password['envoyer'] ?></button>

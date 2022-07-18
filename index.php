@@ -32,9 +32,9 @@ $formations = $data->getformation();
     <?php include_once "navbar.php"; ?>
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style="position:relative">
         <div class="text-white text-center text-fade text-big div-header">
-            <h1 class="h1-size-big"><?php echo $index['banner_1'] ?> <br> <?php echo $index['banner_2'] ?><br>ARTLN</h1>
-            <h3 class="pt-4 margin-text">
-                Nous sommes spécialisé dans la Formation <br> & le Conseil des entreprises du secteur <br> du Transport et de la Logistique,
+            <h1 class="h1-size"><?php echo $index['banner_1'] ?> <br> <?php echo $index['banner_2'] ?><br>ARTLN</h1>
+            <h3 class="pt-4 margin-text h3-size">
+            <?php echo $index['banner_3'] ?> <br> <?php echo $index['banner_4'] ?> <br> <?php echo $index['banner_5'] ?>
             </h3>
             <section id="section07" class="demo">
                 <a href="#academie"><span></span><span></span><span></span></a>
@@ -43,15 +43,15 @@ $formations = $data->getformation();
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-                <img src="images/view/entropot.png" class="d-block img-fluid" alt="first" style="width:100%; max-height:80vh">
+                <img src="images/view/entropot.png" class="d-block img-fluid" alt="first" style="width:100%; max-height:81vh">
             </div>
             <div class="carousel-item">
                 <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-                <img src="images/view/seb.jpg" class="d-block img-fluid" alt="second" style="width:100%; max-height:80vh">
+                <img src="images/view/seb.jpg" class="d-block img-fluid" alt="second" style="width:100%; max-height:81vh">
             </div>
             <div class="carousel-item">
                 <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-                <img src="images/view/camions_group.png" class="d-block img-fluid" alt="third" style="width:100%; max-height:80vh">
+                <img src="images/view/camions_group.png" class="d-block img-fluid" alt="third" style="width:100%; max-height:81vh">
             </div>
         </div>
     </div>
@@ -65,23 +65,35 @@ $formations = $data->getformation();
             <div class="bg-white pb-4">
                 <div class="container-fluid">
                     <div class="row align-items-center">
+                        <?php
+                            if($_SESSION['lang'] == 'ar'){
+                        ?>
+                        <div class="col-md-12 col-lg-6 mt-4 text-justify d-flex align-items-center">
+                            <p class="text-right" dir="rtl" lang="ar">
+                                <?php echo $index['text_1'] ?>
+                                <br><br>
+                                <?php echo $index['text_2'] ?>
+                            </p>                            
+                        </div>
+                        <div class="col-md-12 mt-4 col-lg-6 text-center">
+                            <img src="images/view/logo.jpeg" alt="" class="img-fluid">
+                        </div>
+                        <?php
+                            }else{
+                        ?>
                         <div class="col-md-12 mt-4 col-lg-6 text-center">
                             <img src="images/view/logo.jpeg" alt="" class="img-fluid">
                         </div>
                         <div class="col-md-12 col-lg-6 mt-4 text-justify d-flex align-items-center">
                             <p>
-                                L'Académie Régionale du Transport et de la Logistique du Nord (ARTL NORD) est un organisme spécialisé dans 
-                                la Formation & le Conseil des entreprises du secteur du Transport et de la Logistique, il soutien votre 
-                                équipe en interne et vous propose des solutions rentables selon les besoins ou affectation d’une équipe 
-                                dédiée à la réalisation d’un projet d’amélioration logistique et de la chaîne d’approvisionnement, 
-                                ainsi il vous accompagne à l’intégration et la mise en place des systèmes de management de la qualité au 
-                                Maroc et à l’international.
+                                <?php echo $index['text_1'] ?>
                                 <br><br>
-                                Nous Intervenons ainsi sur des thématiques majeures, au coeur des préoccupations opérationnelles et 
-                                stratégiques de nos clients : la Supply Chain, le transport, la distribution, l’entreposage, les matières 
-                                dangereuses, les échanges internationaux.
+                                <?php echo $index['text_2'] ?>
                             </p>
                         </div>
+                        <?php       
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -89,47 +101,104 @@ $formations = $data->getformation();
         <div class="container">
             <div class="bg-choisir rounded px-3 mt-4 text-center pt-3">
                 <h2 class="text-white"><?php echo $index['pourquoi'] ?></h2>
-                <p class="text-white">
-                    La formation dans le sectuer du transport et de la logistique est notre spécialité, nous assurons que tous les apprentis 
-                    exerce bien le metier du conducteur routier, avec une pédagogie active. <br> <br>
-                    Ainsi que l'accompagnement des entreprises pour l'obtention de la catégorisation douane et de l'accompagenemnt iso dans 
-                    les meilleurs conditions en suivant une politique de qualité trés rigoureuse.
+                <?php
+                    if($_SESSION['lang'] == 'ar'){
+                ?> 
+                <p class="text-white" lang="ar" dir="rtl">
+                    <?php echo $index['text_pourquoi_1'] ?>
+                    <br> <br>
+                    <?php echo $index['text_pourquoi_2'] ?>
                 </p>
+                <?php
+                    }else{
+                ?>
+                <p class="text-white">
+                    <?php echo $index['text_pourquoi_1'] ?>
+                    <br> <br>
+                    <?php echo $index['text_pourquoi_2'] ?>
+                </p>
+                <?php       
+                    }
+                ?>
                 <div class="row">
                     <div class="col-lg-4 mt-2">
                         <div class="border bg-white py-3">
                             <div class="py-3"><i class="fas fa-award awesome-font pt-2"></i></div>
                             <h2><?php echo $index['qualite'] ?></h2>
-                            <p class="text-justify px-3 padding-text">
-                                Nous suivons une politique de qualité trés rigoureuse pour la certification d'ISO afin d'accompagner les 
-                                entreprises dans les bons conditions
+                            <?php
+                                if($_SESSION['lang'] == 'ar'){
+                            ?>
+                            <p class="text-justify px-3 text-right text-height" lang="ar" dir="rtl">
+                                <?php echo $index['qualite_text'] ?>
                             </p>
+                            <?php
+                                }else{
+                            ?>
+                            <p class="text-justify px-3 padding-text">
+                                <?php echo $index['qualite_text'] ?>
+                            </p>
+                            <?php       
+                                }
+                            ?>
                         </div>
                     </div>
                     <div class="col-lg-4 mt-2">
                         <div class="border bg-white py-3">
                             <div class="py-3"><i class="fas fa-user-tie awesome-font pt-2"></i></div>
+                            
+                            <?php
+                                if($_SESSION['lang'] == 'ar'){
+                            ?>
                             <h2><?php echo $index['profes'] ?></h2>
-                            <p class="text-justify px-3 padding-text">
-                                Pour la satisfaction de votre service nous assurons de recruter une équipe profesionnelle qui est toujours
-                                à jour de tous changement et performante
+                            <p class="text-justify px-3 text-right text-height" lang="ar" dir="rtl">
+                                <?php echo $index['profes_text'] ?>
                             </p>
+                            <?php
+                                }else{
+                            ?>
+                            <h2 class="text-font"><?php echo $index['profes'] ?></h2>
+                            <p class="text-justify px-3 padding-text-2">
+                                <?php echo $index['profes_text'] ?>
+                            </p>
+                            <?php       
+                                }
+                            ?>
                         </div>
                     </div>
                     <div class="col-lg-4 mt-2">
                         <div class="border bg-white py-3">
                             <div class="py-3"><i class="fas fa-address-card awesome-font pt-2"></i></div>
                             <h3><?php echo $index['carte'] ?></h3>
-                            <p class="text-justify px-3">
-                            Nous assurons que nos formations FQIMO et FCO se passent dans les meilleures conditions avec le maximum 
-                            d'apprentissage pour les stagiaires, pour bien exercer le metier du conducteur professionnel 
-                            et l'obtention de la carte professionelle 
+                            <?php
+                                if($_SESSION['lang'] == 'ar'){
+                            ?>
+                            <p class="text-justify px-3 text-right" lang='ar' dir="rtl">
+                                <?php echo $index['carte_text'] ?>
                             </p>
+                            <?php
+                                }else{
+                            ?>
+                            <p class="text-justify px-3">
+                                <?php echo $index['carte_text'] ?>
+                            </p>
+                            <?php       
+                                }
+                            ?>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="text-center my-5">
+                            <?php
+                                if($_SESSION['lang'] == 'ar'){
+                            ?>
+                            <a href="ARTL-Nord" class="btn-formation-arab rounded-pill py-2" lang="ar"><i class="fas fa-chevron-left arrow-font-arab"></i> <?php echo $index['plus'] ?></a>
+                            <?php
+                                }else{
+                            ?>
                             <a href="ARTL-Nord" class="btn-formation rounded-pill py-2"><?php echo $index['plus'] ?> <i class="fas fa-chevron-right arrow-font"></i></a>
+                            <?php       
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -145,39 +214,76 @@ $formations = $data->getformation();
                     <div class="card bg-white rounded" style="box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);">
                         <div class="pb-3 text-center"><i class="fas fa-book awesome-font pt-3" style="color: #4A07D7;"></i></div>
                         <h3 class="text-center" style="color: #4A07D7;"><?php echo $index['formation'] ?></h3>
-                        <p class="text-justify px-3 py-3">
-                            Formation FQIMO pour 10 jours et FCO pour 3 jours, dans des salles bien équipées, des formateurs professionnels 
-                            et Cours théorique et pratique.
+                        <?php
+                            if($_SESSION['lang'] == 'ar'){
+                        ?>
+                        <p class="text-justify px-3 py-3 text-right text-space" lang="ar" dir="rtl">
+                            <?php echo $index['formation_text_1'] ?>
                         </p>
+                        <?php
+                            }else{
+                        ?>
+                        <p class="text-justify px-3 py-3 padding-equal">
+                            <?php echo $index['formation_text'] ?>
+                        </p>
+                        <?php       
+                            }
+                        ?>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card bg-white rounded" style="box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);">
+                        <div class="pb-3 text-center"><i class="fa-solid fa-people-roof awesome-font pt-3" style="color: #4A07D7;"></i></div>
+                        <h3 class="text-center" style="color: #4A07D7;"><?php echo $index['location'] ?></h3>
+                        <?php
+                            if($_SESSION['lang'] == 'ar'){
+                        ?>
+                        <p class="text-justify px-3 py-3 text-right" lang="ar" dir="rtl"><?php echo $index['location_text'] ?></p>
+                        <?php
+                            }else{
+                        ?>
+                        <p class="text-justify px-3 py-3 margin-text"><?php echo $index['location_text'] ?></p>
+                        <?php       
+                            }
+                        ?>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="card bg-white rounded" style="box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);">
                         <div class="pb-3 text-center"><i class="fas fa-file awesome-font pt-3" style="color: #4A07D7;"></i></div>
                         <h3 class="text-center" style="color: #4A07D7;"><?php echo $index['certificat'] ?></h3>
-                        <p class="text-justify px-3 py-3 margin-text">
-                            Vous pouvez prendre un rendez-vous avec notre équipe pour vous accompagner de la certification ISO de vos produits.
+                        <?php
+                            if($_SESSION['lang'] == 'ar'){
+                        ?>
+                        <p class="text-justify px-3 py-3 text-right text-space" lang="ar" dir="rtl">
+                            <?php echo $index['certificat_text'] ?>
                         </p>
+                        <?php
+                            }else{
+                        ?>
+                        <p class="text-justify px-3 py-3 margin-text padding-equal-2">
+                            <?php echo $index['certificat_text'] ?>
+                        </p>
+                        <?php       
+                            }
+                        ?>
                     </div>
                 </div>
                 <div class="col-md-6 margin-service">
                     <div class="card bg-white rounded" style="box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);">
                         <div class="pb-3 text-center"><i class="far fa-file-alt awesome-font pt-3" style="color: #4A07D7;"></i></div>
                         <h3 class="text-center" style="color: #4A07D7;"><?php echo $index['douane'] ?></h3>
-                        <p class="text-justify px-3 py-3">
-                            Vous pouvez prendre un rendez-vous avec notre équipe pour vous prendre le statut d’Opérateur Economique Agréé aux 
-                            intervenants  dans  la  chaine du commerce extérieur.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card bg-white rounded" style="box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);">
-                        <div class="pb-3 text-center"><i class="fa-solid fa-people-roof awesome-font pt-3" style="color: #4A07D7;"></i></div>
-                        <h3 class="text-center" style="color: #4A07D7;"><?php echo $index['location'] ?></h3>
-                        <p class="text-justify px-3 py-3 margin-text">
-                            Vous pouvez prendre un rendez-vous pour consulter la disponibilité des nos salles de formation pour 20 personnes,
-                            qui ont equipé des vidéosprojecteurs, tableaux magnétiques
-                        </p>
+                        <?php
+                            if($_SESSION['lang'] == 'ar'){
+                        ?>
+                        <p class="text-justify px-3 py-3 text-right" lang="ar" dir="rtl"><?php echo $index['douane_text'] ?></p>
+                        <?php
+                            }else{
+                        ?>
+                        <p class="text-justify px-3 py-3"><?php echo $index['douane_text'] ?></p>
+                        <?php       
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

@@ -112,6 +112,7 @@ foreach ($total_etudiants as $total_etudiant) {
                             <input id="absence_date" type="date" class="form-control pl-5" name="absence_date">
                         </div>
                     </div>
+                    <div id="errors"></div>
                     <table class="table table-bordered mt-5 bg-white">
                         <thead class="text-center text-white" style="background-color: #11101d;">
                             <tr>
@@ -176,7 +177,7 @@ foreach ($total_etudiants as $total_etudiant) {
                         </tbody>
                     </table>
                     <div class="text-center py-3">
-                        <button class="btn btn-primary" type="submit" name="absence_submit">Valider</button>
+                        <button class="btn btn-primary" type="submit" name="absence_submit" id="submit">Valider</button>
                     </div>
                 </form>
             <?php
@@ -185,6 +186,27 @@ foreach ($total_etudiants as $total_etudiant) {
             ?>
         </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            $("#submit").click(function(e){
+                var date = $("#absence_date").val();
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+                today = yyyy + '-' + mm + '-' + dd;
+                if(date == ''){
+                    e.preventDefault();
+                    alert(today+' '+ date)
+                    $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir une date</div>');
+                }else if(date > today){
+                    e.preventDefault();
+                    alert(today+' '+ date)
+                    $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">La date saisit ne doit pas être supérieure à la date d\'ajourd\'hui</div>');
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>

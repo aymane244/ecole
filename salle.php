@@ -1,27 +1,25 @@
 <?php include_once "session.php";?>
 <?php
-    if(!isset($_GET['id'])){
+    if(!isset($_GET['nom'])){
         echo "<script>window.location.href='location-salle'</script>";
     }
-    $images = $data->getImage();
-    $id= $_GET['id'];
+    $images = $data->getSalle();
+    $id= $_GET['nom'];
     foreach($images as $image){
-        if($image['sal_id'] == $id){
-            $sal_id =$image['sal_id'];
-            $sal_nom =$image['sal_nom'];
-            $sal_description =$image['sal_desc'];
-            $sal_nom_arab =$image['sal_nom_arab'];
-            $sal_description_arab =$image['sal_desc_arab'];
-            $salle_image = $image['sal_image'];
-            $salle_service1 = $image['sal_service'];
-            $salle_service2 = $image['sal_service2'];
-            $salle_service3 = $image['sal_service3'];
-            $salle_service4 = $image['sal_service4'];
-            $salle_service1_arab = $image['sal_service_arab'];
-            $salle_service2_arab = $image['sal_service2_arab'];
-            $salle_service3_arab = $image['sal_service3_arab'];
-            $salle_service4_arab = $image['sal_service4_arab'];
-        }
+        $sal_id =$image['sal_id'];
+        $sal_nom =$image['sal_nom'];
+        $sal_description =$image['sal_desc'];
+        $sal_nom_arab =$image['sal_nom_arab'];
+        $sal_description_arab =$image['sal_desc_arab'];
+        $salle_image = $image['sal_image'];
+        $salle_service1 = $image['sal_service'];
+        $salle_service2 = $image['sal_service2'];
+        $salle_service3 = $image['sal_service3'];
+        $salle_service4 = $image['sal_service4'];
+        $salle_service1_arab = $image['sal_service_arab'];
+        $salle_service2_arab = $image['sal_service2_arab'];
+        $salle_service3_arab = $image['sal_service3_arab'];
+        $salle_service4_arab = $image['sal_service4_arab'];
     }
 ?>
 <!DOCTYPE html>
@@ -78,18 +76,23 @@
                         </div>
                     </div>
                     <div class="col-md-6 bg-white py-3">
-                        <div class="text-center">
-                            <h4 class="text-color"><u><?php echo $salle['description'] ?></u></h4>
-                            <p class="text-justify mt-3">
-                                <?php 
-                                    if($_SESSION['lang'] =="ar"){
-                                        echo $sal_description_arab;
-                                    }else{
-                                        echo $sal_description;
-                                    }
-                                ?>
-                            </p>
+                        <?php 
+                            if($_SESSION['lang'] =="ar"){
+                        ?>
+                        <div lang="ar" dir="rtl">
+                            <h4 class="text-color text-center"><u><?php echo $salle['description'] ?></u></h4>
+                            <p class="text-justify mt-3 text-right"> <?php echo $sal_description_arab;?></p>
                         </div>
+                        <?php
+                            }else{
+                        ?>
+                        <div>
+                            <h4 class="text-color text-center"><u><?php echo $salle['description'] ?></u></h4>
+                            <p class="text-justify mt-3"> <?php echo $sal_description;?></p>
+                        </div>
+                        <?php 
+                            }
+                        ?>            
                     </div>
                 </div>
                 <div class="text-center pt-3 text-color">
@@ -99,15 +102,13 @@
                 <div class="d-flex justify-content-around bg-white py-3">
                     <div class="font-ckeck-image">
                         <p>
-                            <span class="pl-3">
-                                <?php 
-                                     if($_SESSION['lang'] =="ar"){
-                                        echo $salle_service1_arab.' <i class="fas fa-check"></i>';
-                                    }else{
-                                        echo '<i class="fas fa-check"></i> '.$salle_service1;
-                                    }
-                                ?>
-                            </span> 
+                            <?php 
+                                if($_SESSION['lang'] =="ar"){
+                                    echo $salle_service1_arab.' <i class="fas fa-check"></i>';
+                                }else{
+                                    echo '<i class="fas fa-check"></i> '.$salle_service1;
+                                }
+                            ?>
                         </p>
                         <p>
                             <span class="pl-3">
@@ -217,8 +218,8 @@
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 thumb">
                             <div class="Gallery-box">
                                 <figure>
-                                    <a href="images/salle6_artln.jpg" class="fancybox" rel="ligthbox">
-                                        <img src="images/salle6_artln.jpg" alt="" class="img-fluid img-width">
+                                    <a href="images/view/salle6_artln.jpg" class="fancybox" rel="ligthbox">
+                                        <img src="images/view/salle6_artln.jpg" alt="" class="img-fluid img-width">
                                     </a>
                                     <span class="hoverle">
                                         <a href="images/salle6_artln.jpg" class="fancybox" rel="ligthbox">View</a>
@@ -262,13 +263,13 @@
                                     <?php
                                         if ($_SESSION['lang'] == "ar") {
                                     ?>
-                                    <div style="text-align: right;">
+                                    <div style="text-align: right;" lang="ar" dir="rtl">
                                         <label for="nom"><?php echo $salle['nom'] ?></label>
                                     </div>
                                     <div style="float: right;">
                                         <i class="fas fa-user position-awesome-arab"></i>
                                     </div>
-                                    <input type="text" class="form-control pr-5" name="reservation_nom" style="text-align: right;" id="reservation_nom" placeholder="اسمك" value="<?php echo isset($_POST['reservation_nom']) ? $_POST['reservation_nom'] : '' ?>">
+                                    <input type="text" class="form-control pr-5" lang="ar" dir="rtl" name="reservation_nom" style="text-align: right;" id="reservation_nom" placeholder="اسمك" value="<?php echo isset($_POST['reservation_nom']) ? $_POST['reservation_nom'] : '' ?>">
                                     <?php
                                         }else{
                                     ?>
@@ -287,13 +288,13 @@
                                     <?php
                                         if ($_SESSION['lang'] == "ar") {
                                     ?>
-                                    <div style="text-align: right;">
+                                    <div style="text-align: right;" lang="ar" dir="rtl">
                                         <label for="telephone"><?php echo $salle['num'] ?></label>
                                     </div>
                                     <div style="float: right;">
                                         <i class="fas fa-phone-alt position-awesome-arab"></i>
                                     </div>
-                                    <input type="text" class="form-control pr-5" name="reservation_telephone" style="text-align: right;" id="reservation_telephone" placeholder="رقم هاتفك" value="<?php echo isset($_POST['reservation_telephone']) ? $_POST['reservation_telephone'] : '' ?>">
+                                    <input type="text" class="form-control pr-5" lang="ar" dir="rtl" name="reservation_telephone" style="text-align: right;" id="reservation_telephone" placeholder="رقم هاتفك" value="<?php echo isset($_POST['reservation_telephone']) ? $_POST['reservation_telephone'] : '' ?>">
                                     <?php
                                         }else{
                                     ?>
@@ -312,13 +313,13 @@
                             <?php
                                 if ($_SESSION['lang'] == "ar") {
                            ?>
-                           <div style="text-align: right;">
-                                <label for="exampleInputEmail1" style="margin-left:40rem"><?php echo $salle['email'] ?></label>
+                           <div style="text-align: right;" lang="ar" dir="rtl">
+                                <label for="exampleInputEmail1"><?php echo $salle['email'] ?></label>
                            </div>
                             <div style="float: right;">
                                 <i class="fas fa-envelope position-awesome-arab"></i>
                             </div>
-                            <input type="email" class="form-control pr-5" id="email_reservation" style="text-align: right;" name="email_reservation" aria-describedby="emailHelp" placeholder="بريدك الإلكتروني" value="<?php echo isset($_POST['email_reservation']) ? $_POST['email_reservation'] : '' ?>">
+                            <input type="email" class="form-control pr-5" lang="ar" dir="rtl" id="email_reservation" style="text-align: right;" name="email_reservation" aria-describedby="emailHelp" placeholder="بريدك الإلكتروني" value="<?php echo isset($_POST['email_reservation']) ? $_POST['email_reservation'] : '' ?>">
                             <?php
                                 }else{
                             ?>
@@ -338,7 +339,9 @@
                                     <?php
                                         if ($_SESSION['lang'] == "ar") {
                                     ?>
-                                    <label for="exampleInputEmail1" style="margin-left:11.5rem"><?php echo $salle['date'] ?></label>
+                                    <div lang="ar" dir="rtl" class="text-right">
+                                        <label for="exampleInputEmail1" lang="ar" dir="rtl"><?php echo $salle['date'] ?></label>
+                                    </div>
                                     <?php
                                         }else{
                                     ?>
@@ -356,7 +359,9 @@
                                     <?php
                                         if ($_SESSION['lang'] == "ar") {
                                     ?>
-                                    <label for="heur_debut" style="margin-left:10.2rem"><?php echo $salle['debut'] ?></label>
+                                    <div class="text-right" dir="rtl" lang="ar">
+                                        <label for="heur_debut"><?php echo $salle['debut'] ?></label>
+                                    </div>
                                     <?php
                                         }else{
                                     ?>
@@ -382,7 +387,9 @@
                                     <?php
                                         if ($_SESSION['lang'] == "ar") {
                                     ?>
-                                    <label for="heur_debut" style="margin-left:10.2rem"><?php echo $salle['fin'] ?></label>
+                                    <div class="text-right" dir="rtl" lang="ar">
+                                        <label for="heur_debut"><?php echo $salle['fin'] ?></label>
+                                    </div>
                                     <?php
                                         }else{
                                     ?>
@@ -409,7 +416,7 @@
                             <?php
                                 if ($_SESSION['lang'] == "ar") {
                             ?>
-                            <div id="errors_arab"></div>
+                            <div id="errors_arab" lang="ar" dir="rtl"></div>
                             <?php
                                 } else {
                             ?>
@@ -426,7 +433,9 @@
                             <?php
                                 if ($_SESSION['lang'] == "ar") {
                             ?>
-                            <label for="commentaire_reservation" style="margin-left:41rem"><?php echo $salle['comment'] ?></label>
+                            <div  dir="rtl" lang="ar" class="text-right">
+                                <label for="commentaire_reservation"><?php echo $salle['comment'] ?></label>
+                            </div>
                             <textarea class="form-control text-right" id="commentaire_reservation" name="commentaire_reservation" rows="6"><?php echo isset($_POST['commentaire_reservation']) ? $_POST['commentaire_reservation'] : '' ?></textarea>
                             <?php
                                 }else{
@@ -462,46 +471,54 @@
                     var time_debut = $("#time_debut").val();
                     var time_fin = $("#time_fin").val();
                     if(reservation_nom == '' && email_reservation == '' && reservation_telephone == '' && commentaire_reservation == '' && date_salle == ''){
+                        $("#errors").show();
+                        $("#errors_arab").show();
                         $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez remplir tous les champs</div>');
                         $('#errors_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">رجاءا اكمل جميع الحقول</div>');
-                        $("#show-disponibilite").css("display", "none");
+                        $("#show-disponibilite").hide();
                     }else if(reservation_nom== ''){
+                        $("#errors").show();
+                        $("#errors_arab").show();
                         $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez choir saisir votre nom</div>');
                         $('#errors_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">الرجاء إدخال اسمك</div>');
-                        $("#show-disponibilite").css("display", "none");
+                        $("#show-disponibilite").hide();
                     }else if(reservation_telephone == ''){
+                        $("#errors").show();
+                        $("#errors_arab").show();
                         $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre numéro de téléphone</div>');
                         $('#errors_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">يرجى إدخال رقم الهاتف الخاص بك</div>');
-                        $("#show-disponibilite").css("display", "none");
+                        $("#show-disponibilite").hide();
                     }else if(email_reservation == ''){
+                        $("#errors").show();
+                        $("#errors_arab").show();
                         $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir un email</div>');
                         $('#errors_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">الرجاء إدخال بريد إلكتروني</div>');
-                        $("#show-disponibilite").css("display", "none");
+                        $("#show-disponibilite").hide();
                     }else if(date_salle== ''){
+                        $("#errors").show();
+                        $("#errors_arab").show();
                         $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez choisir une date</div>');
                         $('#errors_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">الرجاء اختيار التاريخ</div>');
-                        $("#show-disponibilite").css("display", "none");
+                        $("#show-disponibilite").hide();
                     }else if(commentaire_reservation == ''){
+                        $("#errors").show();
+                        $("#errors_arab").show();
                         $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre commentaire</div>');
                         $('#errors_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">الرجاء إدخال تعليقك</div>');
-                        $("#show-disponibilite").css("display", "none");
+                        $("#show-disponibilite").hide();
                     }else{
                             $.post( "functions/traitement.php",{reservation_nom: reservation_nom, email_reservation: email_reservation, 
                             commentaire_reservation:commentaire_reservation, reservation_telephone:reservation_telephone, salle_id:salle_id, 
                             date_salle:date_salle, time_debut:time_debut, time_fin:time_fin,action:'add_reservation'}, function( result ) {
-                            $("#show-disponibilite").css("display", "none");
-                            $("#result").css("display", "block");
+                            $("#show-disponibilite").hide();
+                            $("#result").show();
                             $('#result').html(result);
                             $("#reservation_nom").val('');
                             $("#email_reservation").val('');
                             $("#reservation_telephone").val('');
                             $("#commentaire_reservation").val('');
-                            reservation_nom.css("display", "none");
-                            reservation_telephone.css("display", "none");
-                            email_reservation.css("display", "none");
-                            commentaire_reservation.css("display", "none");
-                            date_salle.css("display", "none");
-                            
+                            $("#errors").hide();
+                            $("#errors_arab").hide();
                             setTimeout(cacher, 3000);
                             function cacher(){
                                 $('#result').fadeOut();
@@ -518,11 +535,11 @@
                     var time_debut = $("#time_debut").val();
                     var time_fin = $("#time_fin").val();
                     var reservation_salle = $("#reservation_salle").val();
-                    $("#result").css("display", "none");
                     $.post("functions/traitement.php",{ date_salle:date_salle, time_debut:time_debut, time_fin:time_fin, 
-                        reservation_salle:reservation_salle, action:'verifier_reservation'}, function( result ) {
-                            $("#show-disponibilite").css("display", "block");
-                            
+                    reservation_salle:reservation_salle, action:'verifier_reservation'}, function( result ) {
+                        $("#errors").hide();
+                        $("#errors_arab").hide();
+                        $("#show-disponibilite").show();
                         $('#show-disponibilite').html(result);
                     });
                 });

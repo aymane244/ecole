@@ -44,10 +44,10 @@ $formations = $data->getFormation();
                     <i class="fas fa-plus-square"></i> Ajouter une formation
                 </a>
             </div>
-            <div class="mt-4 align-items-center d-flex justify-content-center">
+            <!-- <div class="mt-4 align-items-center d-flex justify-content-center">
                 <input type="button" value="Français" class="btn btn-primary" onclick="frensh()">
                 <input type="button" value="Arabe" class="btn btn-primary ml-3" onclick="arabe()">
-            </div>
+            </div> -->
             <div id="frensh">
                 <table class="table table-bordered mt-5 bg-white">
                     <thead class="text-center text-white" style="background-color: #11101d;">
@@ -116,7 +116,7 @@ $formations = $data->getFormation();
                 </table>
                 <br>
             </div>
-            <div id="arabe" style="display:none;">
+            <!-- <div id="arabe" style="display:none;">
                 <table class="table table-bordered bg-white mt-5">
                     <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
@@ -124,8 +124,8 @@ $formations = $data->getFormation();
                         </tr>
                         <tr>
                             <th scope="col">إجراءات</th>
-                            <!-- <th scope="col">وصف التكوين</th> -->
-                            <!-- <th scope="col">صورة</th> -->
+                            <th scope="col">وصف التكوين</th>
+                            <th scope="col">صورة</th>
                             <th scope="col">إدارة</th>
                             <th scope="col">عرض التكوين</th>
                             <th scope="col">التكوينات</th>
@@ -169,8 +169,8 @@ $formations = $data->getFormation();
                                             إدارة التدريب
                                         </a>
                                     </td>
-                                    <!-- <td class="row-style"><img src="<?php echo $formation['for_image'] ?>" style='max-width: 5rem'></td> -->
-                                    <!-- <td class="row-style text-length2"><?php echo $formation['for_desc_arab'] ?></td> -->
+                                    <td class="row-style"><img src="<?php echo $formation['for_image'] ?>" style='max-width: 5rem'></td>
+                                    <td class="row-style text-length2"><?php echo $formation['for_desc_arab'] ?></td>
                                     <td class="w-25 row-style"><?php echo $formation['for_pres_arab'] ?></td>
                                     <td class="row-style"><?php echo $formation['for_nom_arab'] ?></td>
                                     <td class="row-style"><?php echo $i++ ?></td>
@@ -181,7 +181,7 @@ $formations = $data->getFormation();
                         ?>
                     </tbody>
                 </table>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>

@@ -161,7 +161,7 @@ foreach ($etudiants as $etudiant) {
                                         <label for="obtenue" class="col-md-12 col-form-label text-md-end">Date d'obtention</label>
                                         <div class="d-flex">
                                             <i class="fas fa-calendar position-awesome"></i>
-                                            <input id="obtenue" type="text" class="form-control pl-5" name="obtenue" autocomplete="obtenue" value="<?php echo $obtenue; ?>" placeholder="Lieu de naissance">
+                                            <input id="obtenue" type="text" class="form-control pl-5" name="obtenue" autocomplete="obtenue" value="<?php echo $obtenue; ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -184,7 +184,7 @@ foreach ($etudiants as $etudiant) {
                                         <label for="pro" class="col-md-12 col-form-label text-md-end">Numéro de la carte professionnelle</label>
                                         <div class="d-flex">
                                             <i class="fas fa-file-alt position-awesome"></i>
-                                            <input id="pro" type="text" class="form-control pl-5" name="pro" autocomplete="pro" value="<?php echo $pro; ?>" placeholder="Lieu de naissance">
+                                            <input id="pro" type="text" class="form-control pl-5" name="pro" autocomplete="pro" value="<?php echo $pro; ?>" placeholder="Numéro de la carte professionnelle">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

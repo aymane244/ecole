@@ -87,7 +87,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
-                                            <div class="text-right">
+                                            <div class="text-right" lang="ar">
                                                 <label for="nom_arab" class="col-md-12 col-form-label text-md-end">(بالعربية) الاسم العائلي</label>
                                             </div>
                                             <div class="row mb-3">
@@ -95,12 +95,12 @@
                                                     <div class="float-right">
                                                         <i class="fas fa-user position-awesome-arab"></i>
                                                     </div>
-                                                    <input id="nom_arab" type="text" class="form-control pr-5 text-right" name="nom_arab" autocomplete="nom_arab" placeholder="الاسم العائلي" value="<?php echo isset($_POST['nom_arab']) ? $_POST['nom_arab'] : ''; ?>">
+                                                    <input id="nom_arab" type="text" dir="rtl" lang="ar" class="form-control pr-5 text-right" name="nom_arab" autocomplete="nom_arab" placeholder="الاسم العائلي" value="<?php echo isset($_POST['nom_arab']) ? $_POST['nom_arab'] : ''; ?>">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
-                                            <div style="text-align: right;">
+                                            <div style="text-align: right;" lang="ar">
                                                 <label for="prenom_arab" class="col-md-12 col-form-label text-md-end">(بالعربية) الاسم الشخصي</label>
                                             </div>
                                             <div class="row mb-3">
@@ -108,7 +108,7 @@
                                                     <div class="float-right">
                                                         <i class="fas fa-user position-awesome-arab"></i>
                                                     </div>
-                                                    <input id="prenom_arab" type="text" class="form-control pr-5" name="prenom_arab" style="text-align: right;" autocomplete="prenom" placeholder="الاسم الشخصي" value="<?php echo isset($_POST['prenom_arab']) ? $_POST['prenom_arab'] : ''; ?>">
+                                                    <input id="prenom_arab" type="text" dir="rtl" lang="ar" class="form-control pr-5" name="prenom_arab" style="text-align: right;" autocomplete="prenom" placeholder="الاسم الشخصي" value="<?php echo isset($_POST['prenom_arab']) ? $_POST['prenom_arab'] : ''; ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -116,7 +116,7 @@
                                             <?php
                                                 if($_SESSION['lang'] == 'ar'){
                                             ?>
-                                            <div class="text-right">
+                                            <div class="text-right" dir="rtl" lang="ar">
                                                 <label for="email" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['email']?></label>
                                             </div>
                                             <div class="row mb-3">
@@ -124,7 +124,7 @@
                                                     <div class="float-right">
                                                         <i class="fas fa-envelope position-awesome-arab"></i>
                                                     </div>
-                                                    <input id="email" type="email" class="form-control pr-5 text-right" name="email" autocomplete="email" placeholder="بريدك الإلكتروني" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
+                                                    <input id="email" type="email" dir="rtl" lang="ar" class="form-control pr-5 text-right" name="email" autocomplete="email" placeholder="بريدك الإلكتروني" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php        
@@ -147,15 +147,15 @@
                                             <?php
                                                 if($_SESSION['lang'] == 'ar'){
                                             ?>
-                                            <div class="text-right">
-                                                <label for="motdepasse" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['passe']?></label>
+                                            <div class="text-right" dir="rtl" lang="ar">
+                                                <label for="motdepasse" class="col-md-12 col-form-label text-md-end" dir="rtl" lang="ar"><?php echo $inscription['passe']?></label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <div class="float-right">
                                                         <i class="fas fa-lock position-awesome-arab"></i>
                                                     </div>
-                                                    <input id="motdepasse" type="password" class="form-control pr-5 text-right" name="motdepasse" placeholder="كلمة السر الخاصة بك" value="<?php echo isset($_POST['motdepasse']) ? $_POST['motdepasse'] : ''; ?>">
+                                                    <input id="motdepasse" type="password" dir="rtl" lang="ar" class="form-control pr-5 text-right" name="motdepasse" placeholder="كلمة السر الخاصة بك" value="<?php echo isset($_POST['motdepasse']) ? $_POST['motdepasse'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php        
@@ -178,14 +178,14 @@
                                             <?php
                                                 if($_SESSION['lang'] == 'ar'){
                                             ?>
-                                            <div class="text-right">
+                                            <div class="text-right" dir="rtl" lang="ar">
                                                 <label for="naissance" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['date']?></label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-calendar position-awesome"></i>
-                                                        <input id="naissance" type="date" class="form-control pl-5" name="naissance" value="<?php echo isset($_POST['naissance']) ? $_POST['naissance'] : ''; ?>">
+                                                        <input id="naissance" type="date" dir="rtl" lang="ar" class="form-control pl-5" name="naissance" value="<?php echo isset($_POST['naissance']) ? $_POST['naissance'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -209,7 +209,7 @@
                                             <?php
                                                 if($_SESSION['lang'] == 'ar'){
                                             ?>
-                                            <div class="text-right">
+                                            <div class="text-right" dir="rtl" lang="ar">
                                                 <label for="lieu" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['lieu']?></label>
                                             </div>
                                             <div class="row mb-3">
@@ -217,7 +217,7 @@
                                                     <div class="float-right">
                                                         <i class="fas fa-map-marker-alt position-awesome-arab"></i>
                                                     </div>
-                                                    <input id="lieu" type="text" class="form-control pr-5 text-right" name="lieu" placeholder='مكان الولادة' value="<?php echo isset($_POST['lieu']) ? $_POST['lieu'] : ''; ?>">
+                                                    <input id="lieu" type="text" class="form-control pr-5 text-right" dir="rtl" lang="ar" name="lieu" placeholder='مكان الولادة' value="<?php echo isset($_POST['lieu']) ? $_POST['lieu'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php        
@@ -240,7 +240,7 @@
                                             <?php
                                                 if($_SESSION['lang'] == 'ar'){
                                             ?>
-                                            <div class="text-right">
+                                            <div class="text-right" dir="rtl" lang="ar">
                                                 <label for="cin" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['cin']?></label>
                                             </div>
                                             <div class="row mb-3">
@@ -248,7 +248,7 @@
                                                     <div class="float-right">
                                                         <i class="fas fa-file-alt position-awesome-arab"></i>
                                                     </div>
-                                                    <input id="cin" type="text" class="form-control pr-5 text-right" name="cin" autocomplete="cin" placeholder="رقم البطاقة الوطنية" value="<?php echo isset($_POST['cin']) ? $_POST['cin'] : ''; ?>">
+                                                    <input id="cin" dir="rtl" lang="ar" type="text" class="form-control pr-5 text-right" name="cin" autocomplete="cin" placeholder="رقم البطاقة الوطنية" value="<?php echo isset($_POST['cin']) ? $_POST['cin'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php        
@@ -271,15 +271,15 @@
                                             <?php
                                                 if($_SESSION['lang'] == 'ar'){
                                             ?>
-                                            <div class="text-right">
+                                            <div class="text-right" dir="rtl" lang="ar">
                                                 <label for="telephone" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['telephone']?></label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <div class="float-right">
-                                                        <i class="fas fa-phone position-awesome-arab"></i>
+                                                        <i class="fas fa-phone-alt position-awesome-arab"></i>
                                                     </div>
-                                                    <input id="telephone-inscription" type="text" class="form-control pr-5 text-right" name="telephone" autocomplete="telephone" placeholder="رقم الهاتف" value="<?php echo isset($_POST['telephone']) ? $_POST['telephone'] : ''; ?>">
+                                                    <input id="telephone-inscription" dir="rtl" lang="ar" type="text" class="form-control pr-5 text-right" name="telephone" autocomplete="telephone" placeholder="رقم الهاتف" value="<?php echo isset($_POST['telephone']) ? $_POST['telephone'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php        
@@ -302,7 +302,7 @@
                                             <?php
                                                 if($_SESSION['lang'] == 'ar'){
                                             ?>
-                                            <div class="text-right">
+                                            <div class="text-right" dir="rtl" lang="ar">
                                                 <label for="adresse" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['adresse']?></label>
                                             </div>
                                             <div class="row mb-3">
@@ -310,7 +310,7 @@
                                                     <div class="float-right">
                                                         <i class="fas fa-map-marker-alt position-awesome-arab"></i>
                                                     </div>
-                                                    <input id="adresse" type="text" class="form-control pr-5 text-right" name="adresse" autocomplete="adresse" placeholder="العنوان" value="<?php echo isset($_POST['adresse']) ? $_POST['adresse'] : ''; ?>">
+                                                    <input id="adresse" dir="rtl" lang="ar" type="text" class="form-control pr-5 text-right" name="adresse" autocomplete="adresse" placeholder="العنوان" value="<?php echo isset($_POST['adresse']) ? $_POST['adresse'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php        
@@ -333,13 +333,13 @@
                                             if($_SESSION['lang'] =="ar"){
                                         ?>
                                         <div class="col-md-12 mb-3">
-                                            <div class="text-right">
+                                            <div class="text-right" dir="rtl" lang="ar">
                                                 <label for="categorie" class="col-md-4 col-form-label text-md-end"><?php echo $inscription['formation']?></label>
                                             </div>
                                             <div class="float-right">
                                                 <i class="fas fa-folder-open position-awesome-arab"></i>
                                             </div>
-                                            <select class="custom-select pr-5 text-right" name="formation" onchange="affichage()" id="formation" style="appearance: none;">
+                                            <select class="custom-select pr-5 text-right" name="formation" onchange="affichage()" id="formation" style="appearance: none;" dir="rtl" lang="ar">
                                                 <option selected value="">--<?php echo $inscription['choisir']?>--</option>
                                                 <?php
                                                     foreach($formations as $formation){
@@ -376,7 +376,7 @@
                                             <?php
                                                 if($_SESSION['lang'] =="ar"){
                                             ?>
-                                            <div class="text-right">
+                                            <div class="text-right" dir="rtl" lang="ar">
                                                 <label for="permis" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['permis']?></label>
                                             </div>
                                             <div class="row mb-3">
@@ -384,7 +384,7 @@
                                                     <div class="float-right">
                                                         <i class="fas fa-id-badge position-awesome-arab"></i>
                                                     </div>
-                                                    <input id="permis" type="text" class="form-control pr-5 text-right" name="permis" autocomplete="permis" placeholder="رقم رخصة السياقة" value="<?php echo isset($_POST['permis']) ? $_POST['permis'] : ''; ?>">
+                                                    <input id="permis" type="text" class="form-control pr-5 text-right" dir="rtl" lang="ar" name="permis" autocomplete="permis" placeholder="رقم رخصة السياقة" value="<?php echo isset($_POST['permis']) ? $_POST['permis'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php    
@@ -407,7 +407,7 @@
                                             <?php
                                                 if($_SESSION['lang'] =="ar"){
                                             ?>
-                                            <div class="text-right">
+                                            <div class="text-right" dir="rtl" lang="ar">
                                                 <label for="adresse" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['categorie']?></label>
                                             </div>
                                             <div class="row mb-3">
@@ -415,7 +415,7 @@
                                                     <div class="float-right">
                                                         <i class="fas fa-bus position-awesome-arab"></i>
                                                     </div>
-                                                    <select class="custom-select pr-5 text-right" name="categorie" id="categorie" style="text-indent: 5px;">
+                                                    <select class="custom-select pr-5 text-right" dir="rtl" lang="ar" name="categorie" id="categorie" style="text-indent: 5px;">
                                                         <option selected value="">--<?php echo $inscription['categorie_permis']?>--</option>
                                                         <option value="A">A</option>
                                                         <option value="B">B</option>
@@ -448,14 +448,14 @@
                                             <?php
                                                 if($_SESSION['lang'] =="ar"){
                                             ?>
-                                            <div class="text-right">
+                                            <div class="text-right" dir="rtl" lang="ar">
                                                 <label for="obtenir" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['obtention']?></label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <div class="d-flex">
                                                         <i class="fas fa-calendar position-awesome"></i>
-                                                        <input id="obtenir" type="date" class="form-control pl-5" name="obtenir" autocomplete="obtenir" value="<?php echo isset($_POST['obtenir']) ? $_POST['obtenir'] : ''; ?>">
+                                                        <input id="obtenir" dir="rtl" lang="ar" type="date" class="form-control pl-5" name="obtenir" autocomplete="obtenir" value="<?php echo isset($_POST['obtenir']) ? $_POST['obtenir'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -477,19 +477,19 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6" id="div-carte" style="display:none;">
+                                        <div class="col-md-12" id="div-carte" style="display:none;">
                                             <?php
                                                 if($_SESSION['lang'] =="ar"){
                                             ?>
-                                            <div class="text-right">
+                                            <div class="text-right" dir="rtl" lang="ar">
                                                 <label for="profesionnel" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['profesionnel']?></label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-address-card position-awesome_arab_modal"></i>
-                                                        <input id="profesionnel" type="text" class="form-control pr-5 text-right" name="profesionnel" autocomplete="profesionnel" placeholder="رقم البطاقة المهنية" value="<?php echo isset($_POST['profesionnel']) ? $_POST['profesionnel'] : ''; ?>">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-address-card position-awesome-arab"></i>
                                                     </div>
+                                                    <input id="profesionnel" dir="rtl" lang="ar" type="text" class="form-control pr-5 text-right" name="profesionnel" autocomplete="profesionnel" placeholder="رقم البطاقة المهنية" value="<?php echo isset($_POST['profesionnel']) ? $_POST['profesionnel'] : ''; ?>">
                                                 </div>
                                             </div>
                                             <?php    

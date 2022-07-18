@@ -65,13 +65,13 @@
                                         if($_SESSION['lang'] == 'ar'){
                                     ?>
                                     <div class="col-md-8">
-                                        <div style="text-align: right;">
+                                        <div style="text-align: right;" dir="rtl" lang="ar">
                                             <label for="cin" class="col-md-4 col-form-label text-md-end"><?php echo $login['CIN']?></label>
                                         </div>
                                         <div style="float:right">
                                             <i class="fas fa-file-alt position-awesome-arab"></i>
                                         </div>
-                                        <input id="cin" type="text" class="form-control pr-5" name="cin" style="text-align:right;" autocomplete="username" autofocus placeholder="رقم بطاقتكم الوطنية" value="<?php echo isset($_POST['cin']) ? $_POST['cin'] : ''; ?>">
+                                        <input id="cin" type="text" class="form-control pr-5" name="cin" dir="rtl" lang="ar" style="text-align:right;" autocomplete="username" autofocus placeholder="رقم بطاقتكم الوطنية" value="<?php echo isset($_POST['cin']) ? $_POST['cin'] : ''; ?>">
                                     </div>
                                     <?php
                                         }else{
@@ -92,13 +92,13 @@
                                         if($_SESSION['lang'] == 'ar'){
                                     ?>
                                     <div class="col-md-8">
-                                        <div style="text-align: right;">
+                                        <div style="text-align: right;" dir="rtl" lang="ar">
                                             <label for="password" class="col-md-4 col-form-label text-md-end"><?php echo $login['passe']?></label>
                                         </div>
                                         <div style="float:right">
                                             <i class="fas fa-key position-awesome-arab"></i>
                                         </div>
-                                        <input id="password" type="password" class="form-control pr-5" name="password" autocomplete="current-password" placeholder="كلمة السر" style="text-align: right;">
+                                        <input id="password" type="password" class="form-control pr-5" dir="rtl" lang="ar" name="password" autocomplete="current-password" placeholder="كلمة المرور" style="text-align: right;">
                                         <div class="col-md-12 text-right mt-3">
                                             <a href="inscription" class="px-4"><?php echo $login['inscrire']?></a>
                                             <button type="submit" class="btn btn-primary" name="submit" id="submit_login"><?php echo $login['connexion']?></button>

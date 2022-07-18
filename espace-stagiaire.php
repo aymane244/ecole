@@ -84,7 +84,7 @@
                         <?php
                             if($_SESSION['lang'] == 'ar'){
                         ?>
-                        <h5 class="text-center pb-3"> التكوين: <?php echo $etud_formation_arab ?></h5>
+                        <h5 class="text-center pb-3" dir="rtl" lang="ar"> التكوين: <?php echo $etud_formation_arab ?></h5>
                         <?php
                             }else{
                         ?>
@@ -98,17 +98,17 @@
                                 <h5 class="pl-4">Prénom: <?php echo $etud_prenom ?></h5>
                             </div>
                             <div>
-                                <h5 class="pr-4 text-right">الاسم العائلي:  <?php echo $etud_nom_arab ?></h5>
-                                <h5 class="pr-4 text-right">الاسم الشخصي: <?php echo $etud_prenom_arab ?></h5>
+                                <h5 class="pr-4 text-right" dir="rtl" lang="ar">الاسم العائلي:  <?php echo $etud_nom_arab ?></h5>
+                                <h5 class="pr-4 text-right" dir="rtl" lang="ar">الاسم الشخصي: <?php echo $etud_prenom_arab ?></h5>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h5 class="pl-4">Age: <?php echo $age->format('%y');?> ans</h5>
-                            <h5 class="pr-4 text-right">السن: <?php echo $age->format('%y');?> سنة</h5>
+                            <h5 class="pr-4 text-right" dir="rtl" lang="ar">السن: <?php echo $age->format('%y');?> سنة</h5>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h5 class="pl-4">CIN: <?php echo $etud_cin ?></h5>
-                            <h5 class="pr-4 text-right"><?php echo $etud_cin ?> :ر.ب.و</h5>
+                            <h5 class="pr-4 text-right" dir="rtl" lang="ar">ر.ب.و: <?php echo $etud_cin ?></h5>
                         </div>
 
                         <hr class="bg-light">

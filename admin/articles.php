@@ -42,10 +42,10 @@ $articles = $data->getArticle();
             <div class="mt-4 text-center">
                 <a href="ajouter-article" target="_blank" class="btn btn-primary"><i class="fas fa-plus-square"></i> Ajouter un article</a>
             </div>
-            <div class="mt-4 align-items-center d-flex justify-content-center">
+            <!-- <div class="mt-4 align-items-center d-flex justify-content-center">
                 <input type="button" value="Français" class="btn btn-primary" onclick="frensh()">
                 <input type="button" value="Arabe" class="btn btn-primary ml-3" onclick="arabe()">
-            </div>
+            </div> -->
             <div id="frensh">
                 <table class="table bg-white mt-5 table-bordered">
                     <thead class="text-center text-white" style="background-color: #11101d;">
@@ -104,7 +104,7 @@ $articles = $data->getArticle();
                     </tbody>
                 </table>
             </div>
-            <div id="arabe" style="display:none;">
+            <!-- <div id="arabe" style="display:none;">
                 <table class="table bg-white mt-5 table-bordered">
                     <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
@@ -112,8 +112,8 @@ $articles = $data->getArticle();
                         </tr>
                         <tr>
                             <th scope="col">إجراءات</th>
-                            <!-- <th scope="col">الصورة</th> -->
-                            <!-- <th scope="col">النص</th> -->
+                            <th scope="col">الصورة</th>
+                            <th scope="col">النص</th>
                             <th scope="col">العنوان</th>
                             <th scope="col">#</th>
                         </tr>
@@ -150,8 +150,8 @@ $articles = $data->getArticle();
                                             </div>
                                         </div>
                                     </td>
-                                    <!-- <td class="row-style"> <img src="<?php echo $article['art_image'] ?>" alt="" class="img-fluid" style="max-width:200px"> </td> -->
-                                    <!-- <td class="text-length2"><?php echo $article['art_texte_arab']; ?></td> -->
+                                    <td class="row-style"> <img src="<?php echo $article['art_image'] ?>" alt="" class="img-fluid" style="max-width:200px"> </td>
+                                    <td class="text-length2"><?php echo $article['art_texte_arab']; ?></td>
                                     <td><?php echo $article['art_titre_arab']; ?></td>
                                     <th scope="row"><?php echo $i++ ?></th>
                                 </tr>
@@ -161,7 +161,7 @@ $articles = $data->getArticle();
                         ?>
                     </tbody>
                 </table>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>

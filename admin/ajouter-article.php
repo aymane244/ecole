@@ -63,7 +63,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
                 </div>
                 <div class="col-md-12 my-5">
                     <h3 class="text-center mb-3">Ajout en Arabe</h3>
-                    <div class="card card-position">
+                    <div class="card card-position" lang="ar">
                         <div class="card-header text-center link-font align-items-center"> أضف مقال <i class="fas fa-plus-square"></i></div>
                         <div class="card-body py-5 w-100">
                             <div class="row mb-3 text-right">

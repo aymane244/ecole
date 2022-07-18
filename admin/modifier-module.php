@@ -83,12 +83,14 @@ foreach ($matieres as $matiere) {
                                             <input id="matiere" type="text" class="form-control pl-5" name="matiere_nom" value="<?php echo $mat ?>" autocomplete="matiere" autofocus required>
                                         </div>
                                     </div>
-                                    <div class="col-md-5 text-right">
-                                        <label for="matiere_arab" class="col-md-12 col-form-label text-md-end">الوحدة</label>
-                                        <div class="d-flex">
-                                            <i class="fas fa-tag position-awesome_arab_full_module"></i>
-                                            <input id="matiere_arab" type="text" class="form-control pr-5 text-right" name="matiere_nom_arab" value="<?php echo $mat_arab ?>" autocomplete="matiere" autofocus required>
+                                    <div class="col-md-5 text-right" lang="ar">
+                                        <div class="text-right">
+                                            <label for="matiere_arab" class="col-md-12 col-form-label text-md-end">الوحدة</label>
                                         </div>
+                                        <div class="float-right">
+                                            <i class="fas fa-tag position-awesome-arab"></i>
+                                        </div>
+                                        <input id="matiere_arab" type="text" class="form-control pr-5 text-right" name="matiere_nom_arab" value="<?php echo $mat_arab ?>" autocomplete="matiere" autofocus required>
                                     </div>
                                 </div>
                                 <div class="row mb-3 justify-content-center">
@@ -99,12 +101,14 @@ foreach ($matieres as $matiere) {
                                             <input id="prof" type="text" class="form-control pl-5" name="prof_nom" value="<?php echo $prof ?>" autocomplete="profnom" autofocus required>
                                         </div>
                                     </div>
-                                    <div class="col-md-5 text-right">
-                                        <label for="prof_arab" class="col-md-12 col-form-label text-md-end">المؤطر</label>
-                                        <div class="d-flex">
-                                            <i class="fas fa-user-tie position-awesome_arab_full_module"></i>
-                                            <input id="prof_arab" type="text" class="form-control pr-5 text-right" name="prof_nom_arab" value="<?php echo $prof_arab ?>" autocomplete="profnom" autofocus required>
+                                    <div class="col-md-5 text-right" lang="ar">
+                                        <div class="text-right">
+                                            <label for="prof_arab" class="col-md-12 col-form-label text-md-end">المؤطر</label>
                                         </div>
+                                        <div class="float-right">
+                                            <i class="fas fa-user-tie position-awesome-arab"></i>
+                                        </div>
+                                        <input id="prof_arab" type="text" class="form-control pr-5 text-right" name="prof_nom_arab" value="<?php echo $prof_arab ?>" autocomplete="profnom" autofocus required>
                                     </div>
                                 </div>
                                 <div class="row mb-3 justify-content-center">

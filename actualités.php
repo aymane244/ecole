@@ -67,11 +67,25 @@ function date_in_arabic ($date){
         </div>
         <div class="container mt-5">
             <div class="d-flex justify-content-between align-items-center">
+                <?php
+                    if ($_SESSION['lang'] == "ar") {
+                ?>
+                <h6 dir="rtl" lang="ar">
+                    <a href="index" class="blog-link"><?php echo $artic['accueil'] ?> </a>/
+                    <a href="#" class="home-link"><?php echo $artic['actualites'] ?></a>
+                </h6>
+                <h5><?php echo $artic['actualites'] ?></h5>
+                <?php
+                    }else{
+                ?>
                 <h5><?php echo $artic['actualites'] ?></h5>
                 <h6>
                     <a href="index" class="blog-link"><?php echo $artic['accueil'] ?> </a>/
                     <a href="#" class="home-link"><?php echo $artic['actualites'] ?></a>
                 </h6>
+                <?php 
+                    }
+                ?>
             </div>
         </div>
         <div class="container py-3 mt-3">
@@ -84,10 +98,10 @@ function date_in_arabic ($date){
                             ?>
                             <div class="col-md-6">
                                 <li class="card pb-4">
-                                    <a class="card-im" href="article?id=<?php echo str_replace(" ", "_", $article['art_titre']) ?>" style="background-image: url(images/articles/<?php echo $article['art_image'] ?>);position: relative;">
+                                    <a class="card-im" href="article?titre=<?php echo str_replace(" ", "_", $article['art_titre']) ?>" style="background-image: url(images/articles/<?php echo $article['art_image'] ?>);position: relative;">
                                         <!-- <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div> -->
                                     </a>
-                                    <a href="article?id=<?php echo str_replace(" ", "_", $article['art_titre']) ?>" class="text-white">
+                                    <a href="article?titre=<?php echo str_replace(" ", "_", $article['art_titre']) ?>" class="text-white">
                                     <p class="text-white py-3 w-100 text-truncate px-2" style="position: absolute; z-index:4 ; margin-top:-17%; background-color:rgba(000,000,000,0.5);">
                                         <strong>
                                         <?php
@@ -98,7 +112,6 @@ function date_in_arabic ($date){
                                             }
                                         ?>
                                         </strong>
-                                        
                                     </p>
                                     </a>
                                     <div class="card-description px-3 wrapp">
@@ -106,7 +119,7 @@ function date_in_arabic ($date){
                                             if ($_SESSION['lang'] == "ar") {
                                         ?>
                                         <p class="">
-                                            <a href="article?id=<?php echo str_replace(" ", "_", $article['art_titre']) ?>" style="color: black;">
+                                            <a href="article?titre=<?php echo str_replace(" ", "_", $article['art_titre']) ?>" style="color: black;">
                                                 <?php echo $article['art_texte_arab']; ?>
                                             </a>
                                         </p>
@@ -114,7 +127,7 @@ function date_in_arabic ($date){
                                             } else {
                                         ?>
                                         <p>
-                                            <a href="article?id=<?php echo str_replace(" ", "_", $article['art_titre']) ?>" style="color: black;">
+                                            <a href="article?titre=<?php echo str_replace(" ", "_", $article['art_titre']) ?>" style="color: black;">
                                                 <?php echo $article['art_texte']; ?>
                                             </a>
                                         </p>
@@ -156,24 +169,30 @@ function date_in_arabic ($date){
                         <div class="row">
                             <div class="col-md-12">
                                 <?php
-                                foreach ($lectures as $lecture) {
+                                    foreach ($lectures as $lecture) {
                                 ?>
-                                    <div class="pb-2">
-                                        <a href="article?id=<?php echo $lecture['art_id'] ?>">
-                                            <h6 class="pt-3 pl-2">
-                                                <?php
-                                                if ($_SESSION['lang'] == "ar") {
-                                                    echo $lecture['art_titre_arab'];
-                                                } else {
-                                                    echo $lecture['art_titre'];
-                                                }
-                                                ?>
-                                            </h6>
-                                        </a>
-                                    </div>
-                                    <hr class="w-75">
+                                <div class="pb-2">
+                                    <a href="article?titre=<?php echo str_replace(" ", "_", $article['art_titre']) ?>">
+                                        <?php
+                                            if ($_SESSION['lang'] == "ar") {
+                                        ?>
+                                        <h6 class="pt-3 px-2 text-right" dir="rtl" lang="ar">
+                                            <?php echo $lecture['art_titre_arab']; ?>
+                                        </h6>
+                                        <?php
+                                            } else {
+                                        ?>
+                                        <h6 class="pt-3 px-2">
+                                            <?php echo $lecture['art_titre']; ?>
+                                        </h6>
+                                        <?php
+                                            }
+                                        ?>
+                                    </a>
+                                </div>
+                                <hr class="w-75">
                                 <?php
-                                }
+                                    }
                                 ?>
                             </div>
                         </div>

@@ -29,13 +29,13 @@
                             <?php
                                 if ($_SESSION['lang'] == "ar") {
                             ?>
-                            <div style="text-align: right;">
+                            <div style="text-align: right;" lang="ar">
                                 <label for="nom" class="text-white"><?php echo $footer['nom'] ?></label>
                             </div>
                             <div style="float: right;">
                                 <i class="fas fa-user position-awesome-arab" style="text-align: right;"></i>
                             </div>
-                            <input type="text" class="form-control pr-5" name="nom" id="contact_nom" placeholder="الاسم الكامل" style="text-align: right;" required>
+                            <input type="text" class="form-control pr-5" name="nom" lang="ar" id="contact_nom" placeholder="الاسم الكامل" style="text-align: right;" required>
                             <?php
                                 } else {
                             ?>
@@ -54,7 +54,7 @@
                             <?php
                                 if ($_SESSION['lang'] == "ar") {
                             ?>
-                            <div style="text-align: right;">
+                            <div style="text-align: right;" lang="ar">
                                 <label for="email" class="text-white"><?php echo $footer['email'] ?></label>
                             </div>
                             <div style="float: right;">
@@ -67,7 +67,7 @@
                             <label for="email" class="text-white"><?php echo $footer['email'] ?></label>
                             <div class="d-flex">
                                 <i class="fas fa-envelope position-awesome-email"></i>
-                                <input type="email" class="form-control pl-5" name="email" id="contact_email" placeholder="email" required>
+                                <input type="email" class="form-control pl-5" name="email" id="contact_email" placeholder="Email" required>
                             </div>
                             <?php
                                 }
@@ -79,41 +79,41 @@
                     <?php
                         if ($_SESSION['lang'] == "ar") {
                     ?>
-                    <div style="text-align: right;">
+                    <div style="text-align: right;" lang="ar">
                         <label for="exampleInputSuje1" class="text-white"><?php echo $footer['sujet'] ?></label>                         
                     </div>
                     <div style="float: right;">
                         <i class="fas fa-book-open position-awesome-arab"></i>
                     </div>
-                    <input type="text" class="form-control pr-5" id="exampleInputSuje1" name ="sujet" aria-describedby="emailSujet" style="text-align: right;" placeholder="الموضوع" required>
+                    <input type="text" class="form-control pr-5" lang="ar" id="exampleInputSuje1" name ="sujet" aria-describedby="emailSujet" style="text-align: right;" placeholder="الموضوع" required>
                     <?php
                         } else {
                     ?>
-                    <label for="exampleInputSuje1" class="text-white"><?php echo $footer['sujet'] ?></label>
+                    <label for="exampleInputSuje1" class="text-white" lang="ar"><?php echo $footer['sujet'] ?></label>
                     <div class="d-flex">
                         <i class="fas fa-book-open position-awesome-sujet"></i>
-                        <input type="text" class="form-control pl-5" id="exampleInputSuje1" name ="sujet" aria-describedby="emailSujet" placeholder="Sujet" required>
+                        <input type="text" class="form-control pl-5" id="exampleInputSuje1" lang="ar" name ="sujet" aria-describedby="emailSujet" placeholder="Sujet" required>
                     </div>
                     <?php
                         }
                     ?>
-
                 </div>
                 <div class="form-group">
                     <?php
                         if ($_SESSION['lang'] == "ar") {
                     ?>
-                    <div style="text-align:right">
-                        <label for="exampleFormControlTextarea1" class="text-white"><?php echo $footer['message'] ?></label>
+                    <div style="text-align:right" lang="ar">
+                        <label for="exampleFormControlTextarea1" lang="ar" class="text-white"><?php echo $footer['message'] ?></label>
+                        <textarea class="form-control text-right" lang="ar" id="exampleFormControlTextarea1" name="message" rows="6" required></textarea>
                     </div>
                     <?php
                         } else {
                     ?>
                     <label for="exampleFormControlTextarea1" class="text-white"><?php echo $footer['message'] ?></label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="6" required></textarea>
                     <?php
                         }
                     ?>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="6" required></textarea>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary" id="submit" name="submit"><?php echo $footer['btn_message'] ?></button>
@@ -121,7 +121,7 @@
                     <?php
                         if ($_SESSION['lang'] == "ar") {
                     ?>
-                    <div id="errorr_arab"></div>
+                    <div id="errorr_arab" lang="ar"></div>
                     <?php
                         } else {
                     ?>
@@ -139,10 +139,10 @@
             <?php
                 if ($_SESSION['lang'] == "ar") {
             ?>
-            <div class="col-lg-3 text-right">
+            <div class="col-lg-3 text-right" lang="ar">
                 <h4 class="text-color-footer"><?php echo $footer['propos'] ?></h4>
                 <div class="text-white mr-3">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis reprehenderit doloribus odit praesentium.</p>
+                    <p>.<?php echo $footer['artln'] ?></p>
                     <!-- <div class="d-flex pb-3 justify-content-center">
                         <div class="social-media social-div"><a href="#" class="text-white"><i class="fab fa-facebook-f facebook-position"></i></a></div>
                         <div class="social-media"><a href="#" class="text-white"><i class="fab fa-instagram instagram-position"></i></a></div>
@@ -151,7 +151,7 @@
                     </div> -->
                 </div>
             </div>
-            <div class="col-lg-3 text-right">
+            <div class="col-lg-3 text-right" lang="ar">
                 <h4 class="text-color-footer"><?php echo $footer['adresse_footer'] ?></h4>
                 <div class="text-white mr-3">
                     <p><?php echo $footer['adresse'] ?> <?php echo $footer['ville'] ?></p>
@@ -163,33 +163,30 @@
                     </p>
                 </div>
             </div>
-            <div class="col-lg-3 text-right">
+            <div class="col-lg-3 text-right" lang="ar">
                 <h4 class="text-color-footer"><?php echo $navbar['Formations'] ?></h4>
                 <div class="text-white">
                     <?php
                         foreach($formations as $formation){
                     ?>
                     <div class="mt-3 mr-3">
-                        <a href="formation?id=<?php echo $formation['for_id']; ?>" class="text-white"><?php echo $formation['for_nom_arab'];?></a> <i class="fas fa-caret-left"></i>
+                        <a href="formation?titre=<?php echo str_replace(' ', '_',$formation['for_nom']); ?>" class="text-white"><?php echo $formation['for_nom_arab'];?></a> <i class="fas fa-caret-left"></i>
                     </div>
                     <?php
                         }
                     ?>
                 </div>
             </div>
-            <div class="col-lg-3 text-right">
+            <div class="col-lg-3 text-right" lang="ar">
                 <h4 class="text-color-footer"><?php echo $footer['liens'] ?></h4>
                 <div class="text-white">
-                    <div class="mt-3 mr-3"> <?php echo $navbar['Accueil'] ?></a> <i class="fas fa-caret-left"></i> </div>
+                    <div class="mt-3 mr-3"> <a href="index" class="text-white"><?php echo $navbar['Accueil'] ?></a> <i class="fas fa-caret-left"></i> </div>
                     <div class="mt-3 mr-3"> <a href="ARTL-Nord" class="text-white"> ARTLN</a> <i class="fas fa-caret-left"></i> </div>
                     <div class="mt-3 mr-3"> <a href="conseil" class="text-white"> <?php echo $navbar['Conseil'] ?></a> <i class="fas fa-caret-left"></i> </div>
-                    <div class="mt-3 mr-3"> <a href="salle-reservation" class="text-white"> <?php echo $navbar['salles'] ?></a> <i class="fas fa-caret-left"></i> </div>
-                    <div class="mt-3 mr-3"> <a href="article" class="text-white"> <?php echo $navbar['Actualites'] ?></a> <i class="fas fa-caret-left"></i> </div>
+                    <div class="mt-3 mr-3"> <a href="location-salle" class="text-white"> <?php echo $navbar['salles'] ?></a> <i class="fas fa-caret-left"></i> </div>
+                    <div class="mt-3 mr-3"> <a href="actualités" class="text-white"> <?php echo $navbar['Actualites'] ?></a> <i class="fas fa-caret-left"></i> </div>
                 </div>
             </div>
-
-
-
             <?php
                 } else {
             ?>
@@ -199,8 +196,8 @@
                     <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="index" class="text-white"> <?php echo $navbar['Accueil'] ?></a></div>
                     <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="ARTL-Nord" class="text-white"> ARTLN</a></div>
                     <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="conseil" class="text-white"> <?php echo $navbar['Conseil'] ?></a></div>
-                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="salle-reservation" class="text-white"> <?php echo $navbar['salles'] ?></a></div>
-                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="article" class="text-white"> <?php echo $navbar['Actualites'] ?></a></div>
+                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="location-salle" class="text-white"> <?php echo $navbar['salles'] ?></a></div>
+                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="actualités" class="text-white"> <?php echo $navbar['Actualites'] ?></a></div>
                 </div>
             </div>
             <div class="col-lg-3">
@@ -210,14 +207,7 @@
                         foreach($formations as $formation){
                     ?>
                     <div class="mt-3 ml-3">
-                        <i class="fas fa-caret-right"></i> 
-                        <?php 
-                            if($_SESSION['lang'] =="ar"){
-                                echo $formation['for_nom_arab'];
-                            }else{
-                                echo $formation['for_nom'];
-                            }
-                        ?>
+                        <i class="fas fa-caret-right"></i> <a href="formation?titre=<?php echo str_replace(' ', '_',$formation['for_nom']); ?>" class="text-white"><?php echo $formation['for_nom'];?></a>
                     </div>
                     <?php
                         }
@@ -239,7 +229,7 @@
             <div class="col-lg-3">
                 <h4 class="text-color-footer"><?php echo $footer['propos'] ?></h4>
                 <div class="text-white">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis reprehenderit doloribus odit praesentium.</p>
+                    <p><?php echo $footer['artln'] ?></p>
                     <!-- <div class="d-flex pb-3 justify-content-center">
                         <div class="social-media social-div"><a href="#" class="text-white"><i class="fab fa-facebook-f facebook-position"></i></a></div>
                         <div class="social-media"><a href="#" class="text-white"><i class="fab fa-instagram instagram-position"></i></a></div>
@@ -291,6 +281,10 @@
                 $("#contact_email").val('');
                 $("#exampleInputSuje1").val('');
                 $("#exampleFormControlTextarea1").val('');
+                setTimeout(cacherFooterr, 3000);
+                    function cacherFooterr(){
+                    $('#res').fadeOut()
+                }
             } 
         });
     })

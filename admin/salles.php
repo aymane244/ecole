@@ -3,7 +3,7 @@
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
     echo "<script>window.location.href='login-admin'</script>";
 }
-$salles = $data->getSalle();
+$salles = $data->getImage();
 $images = $data->getImage();
 $reservations = $data->getReservations();
 ?>
@@ -53,10 +53,10 @@ $reservations = $data->getReservations();
                 <a href="ajouter-salle" target="_blank" class="btn btn-primary"><i class="fas fa-plus-square"></i> Ajouter une salle</a>
                 <!-- <input type="button" value="Réseravtions" class="btn btn-primary ml-3" onclick="reservation()"> -->
             </div>
-            <div class="mt-4 align-items-center d-flex justify-content-center">
+            <!-- <div class="mt-4 align-items-center d-flex justify-content-center">
                 <input type="button" value="Français" class="btn btn-primary" onclick="frensh()">
                 <input type="button" value="Arabe" class="btn btn-primary ml-3" onclick="arabe()">
-            </div>
+            </div> -->
             <div id="frensh">
                 <h2 class="text-center mt-5">Les salles</h2>
                 <table class="table bg-white table-bordered">
@@ -96,7 +96,7 @@ $reservations = $data->getReservations();
                                     <td class="row-style"><?php echo $image['sal_personne']; ?> Personnes</td>
                                     <!-- <td> <img src="<?php echo $image['sal_image'] ?>" alt="" class="img-fluid" class="img-fluid" style="width:12rem; height:180px"> </td> -->
                                     <td class="row-style">
-                                        <div class="row">
+                                        <div class="row justify-content-center">
                                             <div class="col-md-5">
                                                 <a href="modifier-salle?id=<?php echo $image['sal_id'] ?>" target="_blank">
                                                     <i class="fas fa-edit text-success awesome-size"></i>
@@ -133,7 +133,7 @@ $reservations = $data->getReservations();
                     </tbody>
                 </table>
             </div>
-            <div id="arabe" style="display:none">
+            <!-- <div id="arabe" style="display:none">
                 <h2 class="text-center mt-5">Les salles</h2>
                 <table class="table bg-white table-bordered">
                     <thead class="text-center text-white" style="background-color: #11101d;">
@@ -142,10 +142,10 @@ $reservations = $data->getReservations();
                         </tr>
                         <tr>
                             <th scope="col">إجراءات</th>
-                            <!-- <th scope="col">صور</th> -->
+                            <th scope="col">صور</th>
                             <th scope="col"> الأشخاص</th>
                             <th scope="col"> الثمن</th>
-                            <!-- <th scope="col">وصف القاعة</th> -->
+                            <th scope="col">وصف القاعة</th>
                             <th scope="col">قاعة</th>
                             <th scope="col">#</th>
                         </tr>
@@ -192,13 +192,13 @@ $reservations = $data->getReservations();
                                                 <?php
                                                 }
                                                 ?>
-                                            </div> -->
+                                            </div> 
                                         </div>
                                     </td>
-                                    <!-- <td> <img src="<?php echo $image['sal_image'] ?>" alt="" class="img-fluid" class="img-fluid" style="width:12rem; height:180px"> </td> -->
+                                    <<td> <img src="<?php echo $image['sal_image'] ?>" alt="" class="img-fluid" class="img-fluid" style="width:12rem; height:180px"> </td>
                                     <td class="row-style"><?php echo $image['sal_personne']; ?> شخص</td>
                                     <td class="row-style"><?php echo $image['sal_prix']; ?> درهم</td>
-                                    <!-- <td class="text-length2"><?php echo $image['sal_desc_arab']; ?></td> -->
+                                    <td class="text-length2"><?php echo $image['sal_desc_arab']; ?></td>
                                     <td class="row-style"><?php echo $image['sal_nom_arab']; ?></td>
                                     <th scope="row"><?php echo $i++ ?></th>
                                 </tr>
@@ -208,7 +208,7 @@ $reservations = $data->getReservations();
                         ?>
                     </tbody>
                 </table>
-            </div>
+            </div> -->
             <div id="reservation">
                 <h2 class="text-center mt-5">Les réservations</h2>
                 <table class="table bg-white">

@@ -84,11 +84,13 @@ $formations = $data->getformation();
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 text-right">
+                                                    <div class="text-right">
                                                     <label for="matiere_arab" class="col-md-12 col-form-label text-md-end">اسم الوحدة</label>
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-tag position-awesome_arab_module"></i>
-                                                        <input id="matiere_arab" type="text" class="form-control pr-5 text-right" name="matiere_arab[]" placeholder="اسم الوحدة" autocomplete="matiere" value="<?php echo isset($_POST['matiere_arab']) ? $_POST['matiere_arab'] : ''; ?>" required>
                                                     </div>
+                                                    <div class="float-right">
+                                                        <i class="fas fa-tag position-awesome-arab"></i>
+                                                    </div>
+                                                    <input id="matiere_arab" type="text" class="form-control pr-5 text-right" name="matiere_arab[]" placeholder="اسم الوحدة" autocomplete="matiere" value="<?php echo isset($_POST['matiere_arab']) ? $_POST['matiere_arab'] : ''; ?>" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="prof" class="col-md-12 col-form-label text-md-end">Nom du formateur</label>
@@ -98,11 +100,13 @@ $formations = $data->getformation();
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 text-right">
-                                                    <label for="prof_arab" class="col-md-12 col-form-label text-md-end">اسم المؤطر</label>
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-user-tie position-awesome_arab_module"></i>
-                                                        <input id="prof_arab" type="text" class="form-control pr-5 text-right" name="prof_arab[]" placeholder="اسم المؤطر" autocomplete="matiere" value="<?php echo isset($_POST['matiere_arab']) ? $_POST['matiere_arab'] : ''; ?>" required>
+                                                    <div class="text-right">
+                                                        <label for="prof_arab" class="col-md-12 col-form-label text-md-end">اسم المؤطر</label>
                                                     </div>
+                                                    <div class="float-right">
+                                                        <i class="fas fa-user-tie position-awesome-arab"></i>
+                                                    </div>
+                                                    <input id="prof_arab" type="text" class="form-control pr-5 text-right" name="prof_arab[]" placeholder="اسم المؤطر" autocomplete="matiere" value="<?php echo isset($_POST['matiere_arab']) ? $_POST['matiere_arab'] : ''; ?>" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="duree" class="col-md-12 col-form-label text-md-end">Durée total du cours</label>

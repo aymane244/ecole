@@ -7,9 +7,8 @@ if (!isset($_GET['id'])) {
     echo "<script>window.location.href='salles'</script>";
 }
 $id = $_GET['id'];
-$salles = $data->getSalle();
+$salles = $data->getSalleModify();
 foreach ($salles as $salle) {
-    if ($salle['sal_id'] == $id) {
         $salle_nom = $salle['sal_nom'];
         $salle_nom_arab = $salle['sal_nom_arab'];
         $salle_descr = $salle['sal_desc'];
@@ -25,7 +24,6 @@ foreach ($salles as $salle) {
         $salle_service2_arab = $salle['sal_service2_arab'];
         $salle_service3_arab = $salle['sal_service3_arab'];
         $salle_service4_arab = $salle['sal_service4_arab'];
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -48,7 +46,7 @@ foreach ($salles as $salle) {
     <?php include_once "navbar-admin.php"; ?>
     <div class="main-content">
         <header>
-            <?php include 'admin.php' ?>
+            <?php include 'admin.php' ;?>
         </header>
         <div class="container mt-5 pt-5">
             <div class="text-center py-3">
@@ -78,7 +76,7 @@ foreach ($salles as $salle) {
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <div class="row mb-3 text-right">
+                                        <div class="row mb-3 text-right" lang="ar">
                                             <label for="nom_salle_arab" class="col-md-12 col-form-label text-md-end">اسم القاعة</label>
                                             <div class="col-md-12">
                                                 <div class="float-right">
@@ -97,7 +95,7 @@ foreach ($salles as $salle) {
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <div class="row mb-3 text-right">
+                                        <div class="row mb-3 text-right" lang="ar">
                                             <label for="desc_arab" class="col-md-12 col-form-label text-md-end">وصف القاعة</label>
                                             <div class="col-md-12">
                                                 <textarea rows="10" class="form-control text-right" id="editor2" name="salle_descr_arab" value="" autocomplete="texte" required><?php echo $salle_descr_arab ?></textarea>
@@ -167,29 +165,18 @@ foreach ($salles as $salle) {
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="row mb-3 text-right">
-                                            <label for="salle-service1_arab" class="col-md-12 col-form-label text-md-end">خدمة 1</label>
+                                        <div class="row mb-3 text-right" lang="ar">
+                                            <label for="salle-service4_arab" class="col-md-12 col-form-label text-md-end">خدمة 4</label>
                                             <div class="col-md-12">
                                                 <div class="float-right">
                                                     <i class="fas fa-check position-awesome-arab"></i>
-                                                    <input id="salle-service1_arab" type="text" class="form-control pr-5 text-right" value="<?php echo $salle_service1_arab ?>" name="salle_service1_arab" autocomplete="prenom" placeholder="Service 5">
                                                 </div>
+                                                <input id="salle-service4_arab" type="text" class="form-control pr-5 text-right" value="<?php echo $salle_service4_arab ?>" name="salle_service4_arab" autocomplete="nom" placeholder="Service 8">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="row mb-3 text-right">
-                                            <label for="salle-service2_arab" class="col-md-12 col-form-label text-md-end">خدمة 2</label>
-                                            <div class="col-md-12">
-                                                <div class="float-right">
-                                                    <i class="fas fa-check position-awesome-arab"></i>
-                                                    <input id="salle-service2_arab" type="text" class="form-control pr-5 text-right" value="<?php echo $salle_service2_arab ?>" name="salle_service2_arab" autocomplete="nom" placeholder="Service 6">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="row mb-3 text-right">
+                                        <div class="row mb-3 text-right" lang="ar">
                                             <label for="salle-service3_arab" class="col-md-12 col-form-label text-md-end">خدمة 3</label>
                                             <div class="col-md-12">
                                                 <div class="float-right">
@@ -200,13 +187,24 @@ foreach ($salles as $salle) {
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="row mb-3 text-right">
-                                            <label for="salle-service4_arab" class="col-md-12 col-form-label text-md-end">خدمة 4</label>
+                                        <div class="row mb-3 text-right" lang="ar">
+                                            <label for="salle-service2_arab" class="col-md-12 col-form-label text-md-end">خدمة 2</label>
                                             <div class="col-md-12">
                                                 <div class="float-right">
                                                     <i class="fas fa-check position-awesome-arab"></i>
+                                                    <input id="salle-service2_arab" type="text" class="form-control pr-5 text-right" value="<?php echo $salle_service2_arab ?>" name="salle_service2_arab" autocomplete="nom" placeholder="Service 6">
                                                 </div>
-                                                <input id="salle-service4_arab" type="text" class="form-control pr-5 text-right" value="<?php echo $salle_service4_arab ?>" name="salle_service4_arab" autocomplete="nom" placeholder="Service 8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="row mb-3 text-right" lang="ar">
+                                            <label for="salle-service1_arab" class="col-md-12 col-form-label text-md-end">خدمة 1</label>
+                                            <div class="col-md-12">
+                                                <div class="float-right">
+                                                    <i class="fas fa-check position-awesome-arab"></i>
+                                                    <input id="salle-service1_arab" type="text" class="form-control pr-5 text-right" value="<?php echo $salle_service1_arab ?>" name="salle_service1_arab" autocomplete="prenom" placeholder="Service 5">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -219,7 +217,7 @@ foreach ($salles as $salle) {
                                     <div class="col-md-6">
                                         <div class="d-flex">
                                             <i class="fas fa-camera position-awesome-image"></i>
-                                            <input id="image" type="file" class="form-control-file pl-5" name="salle_image" required>
+                                            <input id="image" type="file" class="form-control-file pl-5" name="salle_image">
                                         </div>
                                     </div>
                                     <div class="col-md-6">

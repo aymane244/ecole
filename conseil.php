@@ -50,27 +50,54 @@
       ?>
       <div class="row justify-content-center">
         <div class="col-md-5 mt-4 bg-white py-3">
+          <?php
+            if($_SESSION['lang'] == 'ar'){
+          ?>
+          <h2 class="text-center mb-3" lang='ar'><span class="iso-style">ISO</span> <?php echo $accompagenemt['accompa'] ?> </h2>
+          <?php
+            }else{
+          ?>
           <h2 class="text-center mb-3"><?php echo $accompagenemt['accompa'] ?> <span class="iso-style">ISO</span></h2>
-          <p class="text-justify">
-            Une certification ISO garantit la conformité d’un processus, un service, une organisation ou un produit.
-            L’ISO 9001 est la certification la plus connue. Une certification ISO est délivrée par l’ISO qui demeure aujourd’hui
-            le plus grand organisme mondial de normalisation, crée en 1947.
+          <?php       
+            }
+          ?>
+          <?php
+            if($_SESSION['lang'] == 'ar'){
+          ?>          
+          <p class="text-justify text-right" dir='rtl' lang='ar'>
+            <?php echo $accompagenemt['accompa_text'] ?>
             <br><br>
-            L’obtention de la certification est valable 3 ans. Passé ce délai, à la société doit renouveler son homologation en effectuant 
-            un audit qualité entrepris par un organisme certificateur (ARTL Nord). Il est recommandé que la société certifiée réalise 
-            régulièrement des audits internes afin de s’assurer que le système soit toujours conforme au référentiel de la certification ISO.
+            <?php echo $accompagenemt['accompa_text_2'] ?>
           </p>
+          <?php
+            }else{
+          ?>
+          <p class="text-justify">
+            <?php echo $accompagenemt['accompa_text'] ?>
+            <br><br>
+            <?php echo $accompagenemt['accompa_text_2'] ?>
+          </p>
+          <?php       
+            }
+          ?>
         </div>
         <!-- <div class="col-md-12 mt-4 col-lg-6">
           <img src="images/view/iso-9001.jpg" class="img-fluid">
         </div> -->
         <div class="col-md-5 mt-4 bg-white py-3 ml-3">
+          <?php
+            if($_SESSION['lang'] == 'ar'){
+          ?>
+          <h2 class="text-center mb-3" lang='ar'><span class="iso-style"><?php echo $accompagenemt['ISO'] ?></span> <?php echo $accompagenemt['pourquoi'] ?> </h2>
+          <p class="text-justify text-right" dir='rtl' lang='ar'><?php echo $accompagenemt['pourquoi_text'] ?></p>
+          <?php
+            }else{
+          ?>
           <h2 class="text-center mb-3"><?php echo $accompagenemt['pourquoi'] ?> <span class="iso-style"><?php echo $accompagenemt['ISO'] ?></span></h2>
-          <p class="text-justify">
-            Cela rend les entreprises plus efficaces et leur permet de répondre systématiquement aux risques et opportunités internes et
-            externes. Un dysfonctionnement a été identifié dans le système de management de la qualité et une amélioration continue est
-            requise.
-          </p>
+          <p class="text-justify"><?php echo $accompagenemt['pourquoi_text'] ?></p>
+          <?php       
+            }
+          ?>
         </div>
       </div>
     </div>
@@ -88,16 +115,27 @@
                 <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
                 </a>
-                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important; margin-left: auto; margin-right:auto; width:100%; margin-top:120px;">ISO 9001 (Qualité)</h1>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important; margin-left: auto; margin-right:auto; width:100%; margin-top:120px;">ISO 9001 (<?php echo $accompagenemt['card_1'] ?>)</h1>
                 <div class="card-description mt-3 text-justify px-3">
-                  <p>
-                  L’obtention de la certification ISO 9001 garantit l’application des principes de base du management de qualité au sein d’une 
-                  entreprise.
-                  <br>
-                  Leadership, gestion clients, motivation du personnel, gestion des processus, relation fournisseurs, engagement de 
-                  la direction… La certification ISO 9001 met un point d’honneur sur les intérêts de vos clients ainsi que sur votre volonté 
-                  à les accompagner dans cette démarche.
+                  <?php
+                    if($_SESSION['lang'] == 'ar'){
+                  ?>
+                  <p class="text-right" lang="ar" dir="rtl">
+                    <?php echo $accompagenemt['card_1_text'] ?>
+                    <br><br>
+                    <?php echo $accompagenemt['card_1_text_2'] ?>
                   </p>
+                  <?php
+                    }else{
+                  ?>
+                  <p>
+                    <?php echo $accompagenemt['card_1_text'] ?>
+                    <br><br>
+                    <?php echo $accompagenemt['card_1_text_2'] ?>
+                  </p>
+                  <?php       
+                    }
+                  ?>
                 </div>
                 <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
               </li>
@@ -107,16 +145,27 @@
                 <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
                 </a>
-                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%;  margin-top:70px;">ISO 28000 (Sûreté de la chaîne d'approvisionnement)</h1>
+                <?php
+                  if($_SESSION['lang'] == 'ar'){
+                ?>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%;  margin-top:120px;">ISO 28000 (<?php echo $accompagenemt['card_2'] ?>)</h1>
                 <div class="card-description mt-3 text-justify px-3">
-                  <p>
-                    La norme ISO 28000 fournit un cadre de bonnes pratiques pour réduire les risques pour les personnes et les marchandises 
-                    au sein de la chaîne d'approvisionnement. Elle aide à gérer et à atténuer la sûreté potentielle dans le domaine 
-                    de la logistique, en ciblant des menaces telles que le terrorisme, la fraude et le piratage. En augmentant 
-                    la visibilité de la chaîne d'approvisionnement et en réduisant ses perturbations, la norme ISO 28000 peut aider 
-                    toute organisation à atténuer les effets des incidents de sûreté.
+                  <p class="text-right" lang="ar" dir="rtl">
+                    <?php echo $accompagenemt['card_2_text'] ?>
                   </p>
                 </div>
+                <?php
+                  }else{
+                ?>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%;  margin-top:70px;">ISO 28000 (<?php echo $accompagenemt['card_2'] ?>)</h1>
+                <div class="card-description mt-3 text-justify px-3">
+                  <p>
+                    <?php echo $accompagenemt['card_2_text'] ?>
+                  </p>
+                </div>
+                <?php       
+                  }
+                ?>
                 <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
               </li>
             </div>
@@ -125,15 +174,27 @@
                 <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
                 </a>
-                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%;  margin-top:100px;">ISO 39001 (Sécurité Routière)</h1>
+                <?php
+                  if($_SESSION['lang'] == 'ar'){
+                ?>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%;  margin-top:120px;">ISO 39001 (<?php echo $accompagenemt['card_3'] ?>)</h1>
                 <div class="card-description mt-3 text-justify px-3">
-                  <p>
-                    La norme internationale ISO 39001 encadre un système de management pour la sécurité routière. Face aux chiffres constants 
-                    des blessés et décès liés aux accidents de la route, l’ISO 39001 met en place des exigences afin de permettre à un 
-                    organisme d’assimiler des bonnes pratiques, notamment autour de la vitesse, l’état du véhicule ou encore de la vigilance 
-                    conducteur, et ainsi de limiter les risques.  
+                  <p class="text-right spacing" lang="ar" dir="rtl">
+                    <?php echo $accompagenemt['card_3_text'] ?>
                   </p>
                 </div>
+                <?php
+                  }else{
+                ?>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%;  margin-top:100px;">ISO 39001 (<?php echo $accompagenemt['card_3'] ?>)</h1>
+                <div class="card-description mt-3 text-justify px-3">
+                  <p class="equal-space">
+                    <?php echo $accompagenemt['card_3_text'] ?>
+                  </p>
+                </div>
+                <?php       
+                  }
+                ?>
                 <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
               </li>
             </div>
@@ -143,16 +204,27 @@
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;">
                   </div>
                 </a>
-                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%; margin-top:100px;">ISO 45001 (Santé et la Sécurité au Travail)</h1>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%; margin-top:100px;">ISO 45001 <br> (<?php echo $accompagenemt['card_4'] ?>)</h1>
                 <div class="card-description mt-3 text-justify px-3">
-                  <p>
-                    La norme ISO 45001 met l’accent sur le contexte organisationnel. Elle impose à l’organisation de réfléchir aux attentes 
-                    des parties prenantes en termes de management de la santé et de la sécurité au travail.
-                    <br>
-                    Le but de la norme ISO 45001 est de bâtir au sein de l’organisation une compréhension claire des enjeux susceptibles 
-                    d'avoir un impact positif ou négatif sur la société et de mieux comprendre la manière dont l'entreprise gère ses 
-                    responsabilités envers son personnel dans le domaine de la santé et de la sécurité au travail.
+                  <?php
+                    if($_SESSION['lang'] == 'ar'){
+                  ?>
+                  <p class="text-right" lang="ar" dir="rtl">
+                    <?php echo $accompagenemt['card_4_text'] ?>
+                    <br><br>
+                    <?php echo $accompagenemt['card_4_text_2'] ?>
                   </p>
+                  <?php
+                    }else{
+                  ?>
+                  <p>
+                    <?php echo $accompagenemt['card_4_text'] ?>
+                    <br><br>
+                    <?php echo $accompagenemt['card_4_text_2'] ?>
+                  </p>
+                  <?php       
+                    }
+                  ?>
                 </div>
                 <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
               </li>
@@ -163,18 +235,31 @@
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;">
                   </div>
                 </a>
-                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%; margin-top:100px;">ISO 14001 (Environnement)</h1>
+                <?php
+                  if($_SESSION['lang'] == 'ar'){
+                ?>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%; margin-top:120px;">ISO 14001 (<?php echo $accompagenemt['card_5'] ?>)</h1>
                 <div class="card-description mt-3 text-justify px-3">
-                  <p style="line-height: 150% !important;">
-                    La certification ISO 14001 permet à un organisme de démontrer son engagement en matière d’environnement en attestant de sa 
-                    conformité à la norme internationale ISO 14001.
-                    <br>
-                    Cette certification environnementale définit les exigences relatives à l’élaboration, la mise en œuvre, la maintenance 
-                    et l’évaluation d’un système de management environnemental (SME). Cet outil de gestion permet de prendre en compte 
-                    les impacts de vos activités sur l’environnement, de les mesurer et de les réduire (gestion des déchets, pollutions 
-                    de l’air, de l’eau, sonore et visuelles, consommations énergétiques, …).
+                  <p class="text-right" lang="ar" dir="rtl">
+                    <?php echo $accompagenemt['card_5_text'] ?>
+                    <br><br>
+                    <?php echo $accompagenemt['card_5_text_2'] ?>
                   </p>
                 </div>
+                <?php
+                  }else{
+                ?>
+                <h1 class="text-white" style="position: absolute; z-index:4 ; filter: none !important;margin-left: auto; margin-right:auto; width:100%; margin-top:100px;">ISO 14001 (<?php echo $accompagenemt['card_5'] ?>)</h1>
+                <div class="card-description mt-3 text-justify px-3">
+                  <p>
+                    <?php echo $accompagenemt['card_5_text'] ?>
+                    <br><br>
+                    <?php echo $accompagenemt['card_5_text_2'] ?>
+                  </p>
+                </div>
+                <?php       
+                  }
+                ?>
                 <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
               </li>
             </div>
@@ -216,7 +301,7 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <h5 class="modal-title" id="exampleModalLabel"><?php echo $accompagenemt['choisir_modal'] ?></h5>
+                <h5 class="modal-title" id="exampleModalLabel" lang="ar"><?php echo $accompagenemt['choisir_modal'] ?></h5>
               <?php
               } else {
               ?>
@@ -229,15 +314,15 @@
               ?>
             </div>
             <?php
-            if ($_SESSION['lang'] == "ar") {
+              if ($_SESSION['lang'] == "ar") {
             ?>
-              <div id="error_arab" class="mx-5"></div>
+            <div id="error_arab" class="mx-5"></div>
             <?php
             } else {
             ?>
-              <div id="error" class="w-75" class="mx-5"></div>
+            <div id="error" class="mx-5"></div>
             <?php
-            }
+              }
             ?>
             <form action="" method="POST">
               <div class="row justify-content-center mt-3">
@@ -249,7 +334,7 @@
                       <div style="float: right;">
                         <i class="fas fa-user fa-align-right position-awesome-arab"></i>
                       </div>
-                      <input type="text" class="form-control pr-5" name="iso_nom" id="iso_nom" placeholder="الاسم الكامل" style="text-align:right;">
+                      <input type="text" class="form-control pr-5" lang="ar" name="iso_nom" id="iso_nom" placeholder="الاسم الكامل" style="text-align:right;">
                     <?php
                     } else {
                     ?>
@@ -267,10 +352,10 @@
                     <?php
                     if ($_SESSION['lang'] == "ar") {
                     ?>
-                      <div style="float: right;">
+                      <div style="float: right;" lang="ar">
                         <i class="fas fa-envelope position-awesome-arab"></i>
                       </div>
-                      <input type="email" class="form-control pr-5" name="iso_email" id="iso_email" style="text-align:right;" placeholder="البريد الإلكتروني">
+                      <input type="email" class="form-control pr-5" lang="ar" name="iso_email" id="iso_email" style="text-align:right;" placeholder="البريد الإلكتروني">
                     <?php
                     } else {
                     ?>
@@ -291,7 +376,7 @@
                       <div style="float: right;">
                         <i class="fas fa-book-open position-awesome-arab"></i>
                       </div>
-                      <select class="custom-select pr-5" name="iso_categorie" id="iso_categorie" style="text-align: right;">
+                      <select class="custom-select pr-5" name="iso_categorie" id="iso_categorie" dir="rtl" lang="ar">
                         <option value="">--<?php echo $accompagenemt['choisir_select'] ?>--</option>
                         <option value="ISO 9001">ISO 9001</option>
                         <option value="ISO 28000">ISO 28000</option>

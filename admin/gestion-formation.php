@@ -131,7 +131,7 @@ $promos = $data->getPromotion();
                                             if($etudiant['etud_promos'] == 0 ){
                                         ?>
                                         <b>Veuillez saisir la promotion</b>
-                                        <button type="button" class="btn btn-primary btn-id" id="btn-id" data-toggle="modal" data-target="#modal" data-id="<?php echo $etudiant['etud_id'] ?>">Saisir</button>  
+                                        <button type="button" class="btn btn-primary btn-id-promotion" id="btn-id" data-toggle="modal" data-target="#modal" data-id="<?php echo $etudiant['etud_id'] ?>">Saisir</button>  
                                         <?php     
                                             }else{
                                         ?>
@@ -141,7 +141,7 @@ $promos = $data->getPromotion();
                                         ?>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-id" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $etudiant['etud_id'] ?>">Détails</button>
+                                        <button type="button" class="btn btn-primary btn-id" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $etudiant['etud_id'] ?>">Détails</button>
                                         <a href="saisir-notes?id=<?php echo $etudiant['etud_id'] ?>" target="_blank" class="btn btn-primary">Saisir les notes</a>
                                     </td>
                                 </tr>
@@ -181,34 +181,7 @@ $promos = $data->getPromotion();
                             </button>
                         </div>
                         <div class="modal-body">
-                            <?php 
-                                $promos = $data->getEtudiantPromotion();
-                            ?>
-                            <h6 class="my-3">Veuillez choisir la promotion de l'étudiant <?php echo $etud_prenom." ".$etud_nom?></h6>
-                            <form action="" method="post">
-                                <div class="d-flex">
-                                    <i class="fas fa-folder-open position-awesome"></i>
-                                    <select class="custom-select pl-5" name="promotion">
-                                        <option selected value="">--Choisir promotion--</option>
-                                        <?php
-                                            foreach($promos as $promo){
-                                        ?>
-                                        <option value="<?php echo $promo['pro_id'] ?>">Promotion <?php echo $promo['pro_groupe'] ?></option>
-                                        <?php
-                                            }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="row justify-content-center my-3">
-                                    <div class="col-md-12 text-center">
-                                        <input type="hidden" name="etudiant" id="" value="<?php echo $etud_id?>">
-                                        <button type="submit" class="btn btn-primary" name="submit_promos">Saisir</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            </div>
+                            <div id="load_students"></div>
                         </div>
                     </div>
                 </div>
@@ -223,6 +196,15 @@ $promos = $data->getPromotion();
                         action: "student_id"
                     }, function(data) {
                         $('#load_data').html(data);
+                    })
+                });
+                $(".btn-id-promotion").click(function() {
+                    var ids = $(this).data('id');
+                    $.post("../functions/traitement.php", {
+                        id: ids,
+                        action: "student_promotion"
+                    }, function(data) {
+                        $('#load_students').html(data);
                     })
                 });
             })

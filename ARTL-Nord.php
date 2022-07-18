@@ -26,7 +26,7 @@
             </div>
             <div class="container mt-5">
                 <div class="text-center pt-3 text-color">
-                    <h2 class="pt-4"><?php echo $ARTLN['presentation'] ?></h2>
+                    <h2 class="pt-4"><?php echo $ARTLN['historique'] ?></h2>
                     <hr class="hr-width">
                 </div>
                 <div class="bg-white pb-4">
@@ -49,29 +49,36 @@
                                 </p>
                             </div>
                         </div> -->
-                        <div class="row">
-                            <div class="col-lg-12 mt-3">
-                                <h1 class="text-center"><?php echo $ARTLN['historique'] ?></h1>
-                            </div>
-                        </div>
                         <div class="row align-items-center">
+                            <?php
+                                if($_SESSION['lang'] == 'ar'){
+                            ?>
+                            <div class="col-md-12 col-lg-6 mt-4 text-justify">
+                                <p class="text-right" dir='rtl' lang='ar'>
+                                    <?php echo $ARTLN['historique_text_1'] ?>
+                                    <br><br>
+                                    <?php echo $ARTLN['historique_text_2'] ?>
+                                </p>
+                            </div>
                             <div class="col-md-12 mt-4 col-lg-6">
                                 <img src="images/view/logo.jpeg" alt="" class="img-fluid">
                             </div>
-                            <div class="col-md-12 col-lg-6 mt-4 text-justify">
+                            <?php
+                                }else{
+                            ?>
+                            <div class="col-md-12 mt-4 col-lg-6">
+                                <img src="images/view/logo.jpeg" alt="" class="img-fluid">
+                            </div>
+                            <div class="col-md-12 col-lg-6 mt-4 text-justify">                             
                                 <p>
-                                    L'Académie Régionale du Transport et de la Logistique du Nord (ARTL NORD), a été cérée le 21/12/2017 nous
-                                    sommes spécialisé dans la Formation & le Conseil des entreprises du secteur du Transport et de la 
-                                    Logistique, il soutien votre équipe en interne et vous propose des solutions rentables selon les besoins 
-                                    ou affectation d’une équipe dédiée à la réalisation d’un projet d’amélioration logistique et de la chaîne 
-                                    d’approvisionnement, ainsi il vous accompagne à l’intégration et la mise en place des systèmes de management
-                                    de la qualité au Maroc et à l’international.
+                                    <?php echo $ARTLN['historique_text_1'] ?>
                                     <br><br>
-                                    Nous Intervenons ainsi sur des thématiques majeures, au coeur des préoccupations opérationnelles et 
-                                    stratégiques de nos clients : la Supply Chain, le transport, la distribution, l’entreposage, les matières 
-                                    dangereuses, les échanges internationaux.
+                                    <?php echo $ARTLN['historique_text_2'] ?>
                                 </p>
                             </div>
+                            <?php       
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -92,14 +99,25 @@
                                         <img src="images/view/missions.jpg" alt="" class="img-fluid" style="height:400px">
                                     </div>
                                     <div class="col-md-6 mt-4 text-justify d-flex col-lg-12 col-sm-12">
-                                        <p>
-                                            ARTL Nord est dans le coeur du développement de la région du nord surtout dans le secteur du 
-                                            transport et la logistque, où nous misons sur un potentiel humain et matériel énorme pour 
-                                            atteindre nos objectifs.
+                                        <?php
+                                            if($_SESSION['lang'] == 'ar'){
+                                        ?>
+                                        <p class="text-right" dir='rtl' lang='ar'>
+                                            <?php echo $ARTLN['missions_text_1'] ?>
                                             <br><br>
-                                            Nous prenons la cause enviromentale au sérieux où on essayons de mettre en place un programme 
-                                            pédagogique adéquat avec le e-conduite
+                                            <?php echo $ARTLN['missions_text_2'] ?>
                                         </p>
+                                        <?php
+                                            }else{
+                                        ?>
+                                        <p>
+                                            <?php echo $ARTLN['missions_text_1'] ?>
+                                            <br><br>
+                                            <?php echo $ARTLN['missions_text_2'] ?>
+                                        </p>
+                                        <?php       
+                                            }
+                                        ?>
                                     </div>  
                                 </div>
                             </div>
@@ -113,13 +131,21 @@
                                         <img src="images/view/objectifs.jpg" alt="" class="img-fluid" style="height:400px">
                                     </div>
                                     <div class="col-md-6 mt-4 text-justify d-flex col-lg-12 col-sm-12">
-                                        <p>
-                                            Notre objectif est de rationalisé la conduite dans la région vue l'énorme utilisation des véhicules 
-                                            dans la région et plus précisement les conducteurs professionnels, et de former des stagiaires 
-                                            <br><br>
-                                            qui sont capable d'exercer le metier en respectant les normes
-                                            de conduite et d'environnement avec l'ensemble de notre équipe et les parties prenantes
+                                        <?php
+                                            if($_SESSION['lang'] == 'ar'){
+                                        ?>
+                                        <p class="text-right" dir='rtl' lang='ar' style="line-height: 1.7em">
+                                            <?php echo $ARTLN['objectifs_text_1'] ?>
                                         </p>
+                                        <?php
+                                            }else{
+                                        ?>
+                                        <p style="line-height: 1.7em">
+                                            <?php echo $ARTLN['objectifs_text_1'] ?>
+                                        </p>
+                                        <?php       
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -133,21 +159,25 @@
                                         <img src="images/view/valeurs.jpg" alt="" class="img-fluid" style="height:400px">
                                     </div>
                                     <div class="col-md-6 mt-4 text-justify d-flex col-lg-12 col-sm-12">
-                                        <ul>
-                                            <li>Responsabilité: Avoir des conducteurs responsables qui pratiques les normes de conduite, 
-                                                ce que nous pousse aussi d'être plus responsable envers les stagiaires.
-                                            </li>
-                                            <li>
-                                                Poursuivre notre mission :nous sommes tous motivés par la poursuite d’un objectif commun, 
-                                                une mission qui fait partie intégrante de nos valeurs. 
-                                            </li>
-                                            <li>
-                                                Pratiquer la pleine conscience:nous nous concentrons sur le présent et prenons le 
-                                                temps nécessaire à la réflexion et à l’intégration des nouveaux savoirs. 
-                                                Ces pratiques permettent un apprentissage collectif partagé. Ainsi, nous nous améliorons 
-                                                ensemble et faisons évoluer continuellement notre culture.
-                                            </li>
+                                        <?php
+                                            if($_SESSION['lang'] == 'ar'){
+                                        ?>
+                                        <ul dir='rtl' lang='ar'>
+                                            <li><?php echo $ARTLN['valeurs_text_1'] ?></li>
+                                            <li><?php echo $ARTLN['valeurs_text_2'] ?></li>
+                                            <li><?php echo $ARTLN['valeurs_text_3'] ?></li>
                                         </ul>
+                                        <?php
+                                            }else{
+                                        ?>
+                                        <ul>
+                                            <li><?php echo $ARTLN['valeurs_text_1'] ?></li>
+                                            <li><?php echo $ARTLN['valeurs_text_2'] ?></li>
+                                            <li><?php echo $ARTLN['valeurs_text_3'] ?></li>
+                                        </ul>
+                                        <?php       
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -161,23 +191,30 @@
                                         <img src="images/view/visiion.jpg" alt="" class="img-fluid" style="height:400px">
                                     </div>
                                     <div class="col-md-6 mt-4 text-justify d-flex col-lg-12 col-sm-12">
-                                        <p>
-                                            La vision de l'Académie est de mettre la région du nord comme étant un exemple de la bonne conduite 
-                                            dans tous le Maroc en collaboration avec tous les parties prenantes,
-                                            <br><br>
-                                            et de mettre en place un livret pour avoir le bon comportement de la conduite auprès du 
-                                            conducteurs profesionnels, afin de minimiser les accidents et le respect de l'environement
+                                        <?php
+                                            if($_SESSION['lang'] == 'ar'){
+                                        ?>
+                                        <p class="text-right" dir='rtl' lang='ar'style="line-height:1.7em ">
+                                            <?php echo $ARTLN['vision_text_1'] ?>
                                         </p>
+                                        <?php
+                                            }else{
+                                        ?>
+                                        <p>
+                                            <?php echo $ARTLN['vision_text_1'] ?>
+                                        </p>
+                                        <?php       
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12 mt-3">
-                        <h1 class="text-center">La Politique qualité</h1>
-                    </div>
+                <div class="text-center pt-3 text-color">
+                    <h2 class="pt-4"><?php echo $ARTLN['qualite'] ?></h2>
+                    <hr class="hr-width">
                 </div>
                 <div class="bg-white pb-4">
                     <div class="container-fluid">
@@ -186,13 +223,25 @@
                                 <img src="images/view/iso-certification.png" alt="" class="img-fluid">
                             </div>
                             <div class="col-md-12 col-lg-6 mt-4 text-justify">
-                                <p>
-                                    La Politique Qualité est un document synthétique (une page suffit) qui définit de quelle manière votre 
-                                    démarche qualité s’inscrit dans votre stratégie globale d’entreprise.
+                                <?php
+                                    if($_SESSION['lang'] == 'ar'){
+                                ?>
+                                <p class="text-right" dir='rtl' lang='ar'>
+                                    <?php echo $ARTLN['qualite_text_1'] ?>
                                     <br><br>
-                                    Elle est destinée à être communiquée en interne, mais peut l’être aussi en externe, auprès de vos prospects, 
-                                    clients et autres partenaires. Certaines entreprises la publient sur leur site internet.
+                                    <?php echo $ARTLN['qualite_text_2'] ?>
                                 </p>
+                                <?php
+                                    }else{
+                                ?>
+                                <p>
+                                    <?php echo $ARTLN['qualite_text_1'] ?>
+                                    <br><br>
+                                    <?php echo $ARTLN['qualite_text_2'] ?>
+                                </p>
+                                <?php       
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -202,7 +251,17 @@
                     <hr class="hr-width">
                 </div>
                 <div class="bg-white pb-4 pt-2 text-center">
+                    <?php
+                        if($_SESSION['lang'] == 'ar'){
+                    ?>
+                    <img src="images/view/translation.png" alt="" class="img-fluid">
+                    <?php
+                        }else{
+                    ?>
                     <img src="images/view/organigramme.png" alt="" class="img-fluid">
+                    <?php       
+                        }
+                    ?>
                 </div>
             </div>
             <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">

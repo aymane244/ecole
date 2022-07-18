@@ -15,7 +15,18 @@
             return $resultArray;
         }
         public function getSalle(){
-            $result = $this->db->conn->query("SELECT * FROM `salle`");
+            $id = $_GET['nom'];
+            $result = $this->db->conn->query("SELECT * FROM `salle` WHERE REPLACE(sal_nom, ' ', '_')='$id'");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+        public function getSalleModify(){
+            $id = $_GET['id'];
+            $result = $this->db->conn->query("SELECT * FROM `salle` WHERE sal_id='$id'");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -49,10 +60,10 @@
             $result = $this->db->conn->query("INSERT INTO `etudiant`(`etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, 
                 `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, `etud_lieu_naissance`, 
                 `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, `etud_scan_cin`, `etud_scan_permis`,
-                `etud_scan_visite`, `etud_promos`, `etud_image`, `etud_inscription`) SELECT `etud_nom`, `etud_nom_arab`, `etud_prenom`, 
+                `etud_scan_visite`,  `etud_image`, `etud_inscription`) SELECT `etud_nom`, `etud_nom_arab`, `etud_prenom`, 
                 `etud_prenom_arabe`, `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, '$for_id', `etud_naissance`, 
                 `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, '$profesionnel', `etud_permis_obt`, 
-                `etud_scan_cin`, `etud_scan_permis`,`etud_scan_visite`, '', `etud_image`, NOW() FROM `etudiant` 
+                `etud_scan_cin`, `etud_scan_permis`,`etud_scan_visite`, `etud_image`, NOW() FROM `etudiant` 
                 WHERE etud_id=$id");
             if($result){
                 $_SESSION['status'] = "Inscription bien effectuée";
@@ -125,6 +136,17 @@
             }
             return $resultArray;
         }
+        public function getEtudiantNote(){
+            $id = $_SESSION['id'];
+            $result = $this->db->conn->query("SELECT * FROM `note` INNER JOIN `matiere` ON not_matiere=mat_id
+                INNER JOIN `etudiant` ON not_etudiant=etud_id INNER JOIN `formation` ON not_formation=for_id WHERE etud_id=$id");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
         public function noteGenerale(){
             $result = $this->db->conn->query("SELECT *, AVG(not_note) AS 'notegenerale' FROM `note` INNER JOIN `etudiant` 
                 ON not_etudiant=etud_id GROUP BY not_etudiant");
@@ -172,8 +194,8 @@
             return $resultArray;
         }
         public function getformationUser(){
-            $id = $_GET['id'];
-            $result = $this->db->conn->query("SELECT * FROM `formation` WHERE for_id=$id");
+            $id = $_GET['titre'];
+            $result = $this->db->conn->query("SELECT * FROM `formation` WHERE REPLACE(for_nom, ' ', '_')='$id'");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -499,6 +521,16 @@
             }
             return $resultArray;
         }
+        public function getDiplomeStudent(){
+            $id = $_SESSION['id'];
+            $result = $this->db->conn->query("SELECT * FROM `diplome` INNER JOIN `etudiant` ON etud_id=dip_etudiant WHERE etud_id=$id");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
         public function getAttestation(){
             $result = $this->db->conn->query("SELECT * FROM `attestation` INNER JOIN `etudiant` ON etud_id=att_etudiant");
             $resultArray = array();
@@ -566,11 +598,15 @@
             }
         }
         public function deleteCommentaires($comment_id = null){
-            $id = $_GET['id'];
+            $id = $_GET['titre'];
             $result= $this->db->conn->query("DELETE FROM `commentaire` WHERE com_id=$comment_id");
             if($result){
-                $_SESSION['status'] = "Le Commentaire a été bien supprimé";
-                echo "<script>window.location.href='article?id=$id'</script>";
+                if($_SESSION['lang'] == "ar"){
+                    $_SESSION['status'] = "لقد تم إزالة التعليق بنجاح";
+                }else{
+                    $_SESSION['status'] = "Le Commentaire a été bien supprimé";
+                }
+                echo "<script>window.location.href='article?titre=$id'</script>";
             }else{
                 echo $this->db->conn->error;
             }
@@ -912,39 +948,23 @@
         }
         public function insertAbsence(){
             $id = $_GET['id'];
-            $date = date("Y-m-d");
             $absence_formation = $_POST['absence_formation'];
             $absence_matiere = $_POST['absence_matiere'];
             $absence_date = $_POST['absence_date'];
             $absence_etudiant = $_POST['absence_etudiant'];
             $absence = $_POST['absence'];
             $number_etudiant = $_POST['number_etudiant'];
-            $checkdate = $this->db->conn->query("SELECT `abs_date`, `abs_formation` FROM `absence` WHERE abs_date='$absence_date' AND 
-                        abs_formation='$absence_formation'");
-            if($absence_date == ''){
-                $_SESSION['status_error'] = 'Veuillez choisir une date';
-                echo "<script>window.location.href='marquer-absence?id=$id'</script>";
-            }else if($absence_date > $date){
-                $_SESSION['status_error'] = "La date saisit ne doit pas être supérieure à la date d'ajourd'hui";
-                echo "<script>window.location.href='marquer-absence?id=$id'</script>";
-            }else if($checkdate->num_rows){
-                $_SESSION['status_error'] = "Date déjà saisit veuillez choisir une autre";
-                echo "<script>window.location.href='marquer-absence?id=$id'</script>";
-            }else{
-                for($i=0;$i<$number_etudiant; $i++){
-                    $result = $this->db->conn->query("INSERT INTO `absence`(`abs_etudiant`, `abs_date`, `abs_formation`, `abs_matiere`, `abs_absence`) 
-                    VALUES ('$absence_etudiant[$i]','$absence_date','$absence_formation','$absence_matiere','$absence[$i]')");
-                    if($result){
-                        $_SESSION['status'] = "Les données sont bien enregistrées";
-                        echo "<script>window.location.href='marquer-absence?id=$id'</script>";
-                    }else{
-                        echo $this->db->conn->error;
-                    }
-                    return $result;
+            for($i=0;$i<$number_etudiant; $i++){
+                $result = $this->db->conn->query("INSERT INTO `absence`(`abs_etudiant`, `abs_date`, `abs_formation`, `abs_matiere`, `abs_absence`) 
+                VALUES ('$absence_etudiant[$i]','$absence_date','$absence_formation','$absence_matiere','$absence[$i]')");
+                if($result){
+                    $_SESSION['status'] = "Les données sont bien enregistrées";
+                    echo "<script>window.location.href='marquer-absence?id=$id'</script>";
+                }else{
+                    echo $this->db->conn->error;
                 }
-
+                return $result;
             }
-
         }
         public function insertPromotion(){
             $promotion_name =  mysqli_escape_string($this->db->conn, $_POST['promotion_name']);
@@ -1029,7 +1049,11 @@
                 );
                 $result = $this->insertIntoDiplome($params);
                 if ($result){
-                    $_SESSION['status'] = "Votre demande de document 1 a été bien envoyée";
+                    if($_SESSION['lang'] == 'fr'){
+                        $_SESSION['status'] = "Votre demande a été bien envoyée";
+                    }else{
+                        $_SESSION['status'] = "لقد تم إرسال طلبك بنجاح";
+                    }
                     echo "<script>window.location.href='espace-stagiaire'</script>";
                 }else{
                     echo $this->db->conn->error;
@@ -1057,7 +1081,11 @@
                 );
                 $result = $this->insertIntoAttestation($params);
                 if ($result){
-                    $_SESSION['status'] = "Votre demande de document 2 a été bien envoyée";
+                    if($_SESSION['lang'] == 'fr'){
+                        $_SESSION['status'] = "Votre demande a été bien envoyée";
+                    }else{
+                        $_SESSION['status'] = "لقد تم إرسال طلبك بنجاح";
+                    }
                     echo "<script>window.location.href='espace-stagiaire'</script>";
                 }else{
                     echo $this->db->conn->error;
@@ -1292,7 +1320,7 @@
             return $resultArray;
         }
         public function getArticleLimit(){
-            $result = $this->db->conn->query("SELECT * FROM `article` LIMIT 10");
+            $result = $this->db->conn->query("SELECT * FROM `article`");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -1301,8 +1329,8 @@
             return $resultArray;
         }
         public function getArticleTitre(){
-            $id = $_GET['id'];
-            $result = $this->db->conn->query("SELECT *, COUNT(com_comentaire) AS 'commentaires'  FROM `article` INNER JOIN `commentaire` ON com_article=art_id WHERE REPLACE(art_titre, ' ', '_')='$id'");
+            $id = $_GET['titre'];
+            $result = $this->db->conn->query("SELECT *, COUNT(com_comentaire) AS 'commentaires'  FROM `article` LEFT JOIN `commentaire` ON com_article=art_id WHERE REPLACE(art_titre, ' ', '_')='$id'");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -1320,7 +1348,7 @@
             return $resultArray;
         }
         public function getComments(){
-            $id = $_GET['id'];
+            $id = $_GET['titre'];
             $result = $this->db->conn->query("SELECT * FROM `commentaire` INNER JOIN `article` ON com_article=art_id WHERE REPLACE(art_titre, ' ', '_') ='$id'");
             $resultArray = array();
             // fetch product data one by one
@@ -1761,9 +1789,9 @@
             $result = $this->db->conn->query("INSERT INTO `contact`(`con_nom`, `con_email`, `con_sujet`, `con_message`, `con_envoie`)
                 VALUES ('$nom','$email','$sujet','$message',NOW())");
             if($_SESSION['lang'] =="ar"){
-                echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">تم ارسال رسالتك بنجاح <i class="fas fa-times font-close" onclick="fermer()"></i></div>'; 
+                echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">تم ارسال رسالتك بنجاح</div>'; 
             }else{
-                echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre message a été envoyé avec succes <i class="fas fa-times font-close" onclick="fermer()"></i></div>'; 
+                echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre message a été envoyé avec succes</div>'; 
             }
             return $result;
         }
@@ -1814,7 +1842,11 @@
                 `res_commentaire`, `res_date`, `time_debut`, `time_fin`) 
                 VALUES ('$reservation_nom','$reservation_telephone','$email_reservation','$salle_id','$commentaire_reservation'
                 ,'$date_salle','$time_debut','$time_fin')");
-                echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre réservation a été effectuée avec succès <i class="fas fa-times font-close2" onclick="fermer()"></i></div>';   
+                if($_SESSION['lang'] == 'ar'){
+                    echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">لقد تم الحجز بنجاح </div>';   
+                }else{
+                    echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre réservation a été effectuée avec succès </div>';   
+                }
                 return $result3;
             }
         }

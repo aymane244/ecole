@@ -28,11 +28,11 @@
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 3;
             /* number of lines to show */
-            line-clamp: 4;
+            line-clamp: 3;
             -webkit-box-orient: vertical;
-            height: 110px;
+            height: 70px;
         }
     </style>
     <title><?php echo $title['salle'] ?></title>
@@ -57,11 +57,11 @@
                         <div class="col-lg-4 col-md-12">
                             <div class="text-center pt-3">
                                 <li class="card">
-                                    <a class="card-im" href="salle?id=<?php echo $image['sal_id'] ?>" style="background-image: url(images/salles/<?php echo $image['sal_image'] ?>);position: relative;">
+                                    <a class="card-im" href="salle?nom=<?php echo str_replace(" ", "_", $image['sal_nom'] )?>" style="background-image: url(images/salles/<?php echo $image['sal_image'] ?>);position: relative;">
                                         <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
                                     </a>
-                                    <h1 class="text-white text-center px-3" style="position: absolute; z-index:4 ; filter: none !important;  margin-top: 80px; margin-left:auto; margin-right:auto; width:100% ">
-                                        <a href="salle?id=<?php echo $image['sal_id'] ?>" class="text-white">
+                                    <h1 class="text-white text-center px-3" style="position: absolute; z-index:4 ; filter: none !important;  margin-top: 100px; margin-left:auto; margin-right:auto; width:100% ">
+                                        <a href="salle?nom=<?php echo str_replace(" ", "_", $image['sal_nom']) ?>" class="text-white">
                                             <?php
                                             if ($_SESSION['lang'] == "ar") {
                                                 echo $image['sal_nom_arab'];
@@ -71,22 +71,40 @@
                                             ?>
                                         </a>
                                     </h1>
-                                    <div class="d-flex justify-content-around mt-4 card-description">
-                                        <div class="wrapp">
-                                            <?php
+                                    <div class="mt-4 card-description">
+                                        <?php
                                             if ($_SESSION['lang'] == "ar") {
-                                                echo $image['sal_desc_arab'];
+                                        ?>
+                                        <div class="row">
+                                            <div dir="rtl" lang="ar" class="col-md-4">
+                                                <strong>
+                                                    <?php echo $image['sal_prix'] ?> <?php echo $salle['dirhams'] ?> <br>
+                                                    <?php echo $image['sal_personne'] ?> <?php echo $salle['personne'] ?>
+                                                </strong>
+                                            </div>
+                                            <div class="wrapp col-md-8" dir="rtl" lang="ar">
+                                                <?php echo $image['sal_desc_arab'];?>
+                                            </div>              
+                                        </div>                     
+                                        <?php
                                             } else {
-                                                echo $image['sal_desc'];
+                                        ?>
+                                        <div class="row justify-content-around">
+                                            <div class="wrapp col-md-8">
+                                                <?php echo $image['sal_desc'];?>
+                                            </div>        
+                                            <div class="col-md-4">
+                                                <strong>
+                                                    <?php echo $image['sal_prix'] ?> <?php echo $salle['dirhams'] ?> <br>
+                                                    <?php echo $image['sal_personne'] ?> <?php echo $salle['personne'] ?>
+                                                </strong>
+                                            </div>
+                                        </div>
+                                        <?php
                                             }
-                                            ?>
-                                        </div>
-                                        <div>
-                                            <?php echo $image['sal_prix'] ?> <?php echo $salle['dirhams'] ?> <br>
-                                            <?php echo $image['sal_personne'] ?> <?php echo $salle['personne'] ?>
-                                        </div>
+                                        ?>
                                     </div>
-                                    <a href="salle?id=<?php echo $image['sal_id'] ?>" class="btn btn-dark mx-5 mb-5 "><?php echo $salle['reservez'] ?> </a>
+                                    <a href="salle?nom=<?php echo str_replace(" ", "_", $image['sal_nom']) ?>" class="btn btn-dark mx-5 mb-5 "><?php echo $salle['reservez'] ?> </a>
                                 </li>
                             </div>
                         </div>

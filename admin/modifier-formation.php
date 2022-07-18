@@ -84,7 +84,7 @@ foreach ($formations as $formation) {
                     </div>
                     <div class="col-md-12 mt-5">
                         <h3 class="text-center mb-3">Modification en Arabe</h3>
-                        <div class="card card-position">
+                        <div class="card card-position" lang="ar">
                             <div class="card-header text-center link-font">تعديل التكوين <i class="fas fa-edit"></i></div>
                             <div class="card-body py-5">
                                 <div class="row mb-3 text-right">

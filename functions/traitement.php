@@ -9,16 +9,19 @@ if(isset($_POST['action'])){
     if ($_POST['action']=='add_comment') {
         $data->insertComment();
         $id = $_POST['article_id'];
-        foreach($data->getArticleTitreAjax() as $count){
-            if($id = $count['art_id']){
-                echo '<h4>'.$count['commentaires'].' '.$artic['Commentaires'].'</h4>';
-            }
-        }
         foreach ($data->getCommentsAjax() as $comment) {
-            echo '<p class="pl-3 mt-3">
-            <b>'.$comment['com_prenom'].' '.$comment['com_nom'].' </b> <br>
-            <span style="color:#BBBBBB"> '.date_in_french($comment['com_time']).' </span> <br>
-            <span class="pl-3"> '.$comment['com_comentaire'].'</span> </p>';
+            if ($_SESSION['lang'] == "ar") {
+                echo '<div class="pr-3 mt-3 text-right" dir="rtl" lang="ar" class="">
+                    <b><span style="font-size: 17px;" dir="rtl" lang="ar">'.$comment['com_nom'].' '.$comment['com_prenom'].' </span></b> <br>
+                    <span class="pr-3"> '.$comment['com_comentaire'].'</span> <br>
+                    <span style="color:#BBBBBB; font-size: 14px;" class="pr-3"> '.date_in_arabic($comment['com_time']).' </span>
+                </div>';
+            }else{
+                echo '<p class="pl-3 mt-3">
+                <b>'.$comment['com_prenom'].' '.$comment['com_nom'].' </b> <br>
+                <span style="color:#BBBBBB"> '.date_in_french($comment['com_time']).' </span> <br>
+                <span class="pl-3"> '.$comment['com_comentaire'].'</span> </p>';
+            }
         }
     }
     if ($_POST['action']=='student_id') {
@@ -89,7 +92,7 @@ if(isset($_POST['action'])){
                                 </tr>
                             </table>
                             <div class="text-center font-style mt-4">
-                                <a href="saisir_notes?id='.$detail['etud_id'].'" target="_blank" class="btn btn-primary">Saisir les notes</a>
+                                <a href="saisir-notes?id='.$detail['etud_id'].'" target="_blank" class="btn btn-primary">Saisir les notes</a>
                             </div>
                             <br>
                         </div>
@@ -126,6 +129,42 @@ if(isset($_POST['action'])){
                 </div>';
             }
         }
+    }
+    if($_POST['action'] == 'student_promotion'){
+        $etudiants = $data->getEtudiantNotes();
+        $id = $_POST['id'];
+        $promos = $data->getEtudiantPromotion();
+        foreach ($etudiants as $etudiant) {
+            if ($etudiant['etud_id'] == $id) {
+                $fornom = $etudiant['for_nom'];
+                $for_id = $etudiant['for_id'];
+                $etud_nom = $etudiant['etud_nom'];
+                $etud_prenom = $etudiant['etud_prenom'];
+                $etud_id = $etudiant['etud_id'];
+                
+                echo '<h6 class="my-3">Veuillez choisir la promotion de l\'étudiant '.$etud_prenom." ".$etud_nom.'</h6>';
+            }
+        }
+        echo'<form action="" method="post">
+            <div class="d-flex">
+                <i class="fas fa-folder-open position-awesome"></i>
+                <select class="custom-select pl-5" name="promotion">
+                    <option selected value="">--Choisir promotion--</option>';
+                    foreach($promos as $promo){
+                        echo '<option value="'.$promo['pro_id'].'">Promotion '.$promo['pro_groupe'].'</option>';
+                    }
+        echo '</select>
+            </div>
+            <div class="row justify-content-center my-3">
+                <div class="col-md-12 text-center">
+                    <input type="hidden" name="etudiant" id="" value="'.$etud_id.'">
+                    <button type="submit" class="btn btn-primary" name="submit_promos">Saisir</button>
+                </div>
+            </div>
+        </form>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>';
     }
     if ($_POST['action']=='student_detail') {
         $id = $_POST['id'];
@@ -397,7 +436,7 @@ function date_in_arabic ($date){
     $year = $split[0];
     $month = round($split[1]);
     $day = round($split[2]);
-    return $year .' '. $month_name[$month] .' '. $day;
+    return $day .' '. $month_name[$month] .' '. $year;
 }
 ?>
 <script>

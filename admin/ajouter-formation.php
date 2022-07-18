@@ -70,10 +70,10 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
                     </div>
                     <div class="col-md-12 my-5">
                         <h3 class="text-center mb-3">Ajout en Arabe</h3>
-                        <div class="card card-position">
+                        <div class="card card-position" lang="ar">
                             <div class="card-header text-center link-font align-items-center"> أضف تكوين <i class="fas fa-plus-square"></i></div>
                             <div class="card-body py-5">
-                                <div class="row mb-3 text-right">
+                                <div class="row mb-3 text-right" lang="ar">
                                     <label for="titre" class="col-md-12 col-form-label text-md-end">اسم التكوين</label>
                                     <div class="col-md-12">
                                         <div style="float: right;">
@@ -82,13 +82,13 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
                                         <input id="titre" type="text" class="form-control pr-5 text-right" placeholder="اسم التكوين" name="titre_arabe" value="<?php echo isset($_POST['titre_arabe']) ? $_POST['titre_arabe'] : ''; ?>" autocomplete="titre">
                                     </div>
                                 </div>
-                                <div class="row mb-3 text-right">
+                                <div class="row mb-3 text-right" lang="ar">
                                     <label for="presentation" class="col-md-12 col-form-label text-md-end">مقدمة عن التكوين</label>
                                     <div class="col-md-12">
                                         <textarea id="editor3" rows="10" class="form-control text-right" name="presentation_arabe" value="<?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?>" autocomplete="presentation"><?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?></textarea>
                                     </div>
                                 </div>
-                                <div class="row mb-3 text-right">
+                                <div class="row mb-3 text-right" lang="ar">
                                     <label for="prof" class="col-md-12 col-form-label text-md-end">وصف التكوين</label>
                                     <div class="col-md-12">
                                         <textarea rows="10" class="form-control text-right" id="editor4" name="description_arabe" value="<?php echo isset($_POST['presentation_arabe']) ? $_POST['presentation_arabe'] : ''; ?>" autocomplete="description"><?php echo isset($_POST['description_arabe']) ? $_POST['description_arabe'] : ''; ?></textarea>

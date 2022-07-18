@@ -128,11 +128,12 @@ foreach ($formations as $formations) {
                     if (isset($_POST['absence_submit'])) {
                         if (is_array($states) || is_object($states)) {
                             foreach ($states as $state) {
+                                $date = strtotime($state['abs_date']);
                     ?>
                                 <tr>
                                     <td><?php echo $state['etud_nom'] . " " . $state['etud_prenom'] ?> </td>
                                     <td><?php echo $state['abs_absence'] ?></td>
-                                    <td><?php echo $state['abs_date'] ?></td>
+                                    <td><?php echo date('d/m/Y',$date) ?></td>
                                 </tr>
                         <?php
                             }

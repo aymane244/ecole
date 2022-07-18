@@ -222,7 +222,7 @@ foreach ($douanetotal as $count) {
                                     ?>
                                             <tr>
                                                 <td><?= $diplome['etud_prenom'] . " " . $diplome['etud_nom'] ?></td>
-                                                <td>Diplôme</td>
+                                                <td>Document 1</td>
                                             </tr>
                                         <?php
                                         }
@@ -232,7 +232,7 @@ foreach ($douanetotal as $count) {
                                         ?>
                                             <tr>
                                                 <td><?= $attestation['etud_prenom'] . " " . $attestation['etud_nom'] ?></td>
-                                                <td>Attestation</td>
+                                                <td>Document 2</td>
                                             </tr>
                                 <?php
                                         }

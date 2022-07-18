@@ -60,10 +60,10 @@ foreach ($formations as $row) {
             <div class="mt-4 text-center">
                 <a href="ajouter-module" target="_blank" class="btn btn-primary"><i class="fas fa-plus-square"></i> Ajouter un module</a>
             </div>
-            <div class="mt-4 align-items-center d-flex justify-content-center">
+            <!-- <div class="mt-4 align-items-center d-flex justify-content-center">
                 <input type="button" value="Français" class="btn btn-primary" onclick="frensh()">
                 <input type="button" value="Arabe" class="btn btn-primary ml-3" onclick="arabe()">
-            </div>
+            </div> -->
             <div id="frensh">
                 <table class="table table-bordered mt-5 bg-white">
                     <thead class="text-center text-white" style="background-color: #11101d;">
@@ -131,22 +131,22 @@ foreach ($formations as $row) {
                 <br>
             </div>
             <?php
-            $arr_arab = array();
-            $matieres_arab = array();
-            $formationame_arab = array();
-            $prof_arab = array();
-            foreach ($formations as $row) {
-                array_push($formationame_arab, $row['for_nom_arab']);
-                array_push($matieres_arab, $row['mat_nom_arab']);
-                array_push($prof_arab, $row['mat_prof_arab']);
-                if (!isset($arr_arab[$row['for_nom_arab']])) {
-                    $arr_arab[$row['for_nom_arab']]['rowspan'] = 0;
-                }
-                $arr_arab[$row['for_nom_arab']]['printed'] = 'no';
-                $arr_arab[$row['for_nom_arab']]['rowspan'] += 1;
-            }
+            // $arr_arab = array();
+            // $matieres_arab = array();
+            // $formationame_arab = array();
+            // $prof_arab = array();
+            // foreach ($formations as $row) {
+            //     array_push($formationame_arab, $row['for_nom_arab']);
+            //     array_push($matieres_arab, $row['mat_nom_arab']);
+            //     array_push($prof_arab, $row['mat_prof_arab']);
+            //     if (!isset($arr_arab[$row['for_nom_arab']])) {
+            //         $arr_arab[$row['for_nom_arab']]['rowspan'] = 0;
+            //     }
+            //     $arr_arab[$row['for_nom_arab']]['printed'] = 'no';
+            //     $arr_arab[$row['for_nom_arab']]['rowspan'] += 1;
+            // }
             ?>
-            <div id="arabe" style="display:none">
+            <!-- <div id="arabe" style="display:none">
                 <table class="table table-bordered bg-white mt-5">
                     <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
@@ -210,7 +210,7 @@ foreach ($formations as $row) {
                         ?>
                     </tbody>
                 </table>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>
