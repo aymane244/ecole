@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 08 juil. 2022 à 18:29
+-- Généré le : lun. 18 juil. 2022 à 15:36
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -35,6 +35,15 @@ CREATE TABLE `absence` (
   `abs_matiere` int(11) NOT NULL,
   `abs_absence` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `absence`
+--
+
+INSERT INTO `absence` (`abs_id`, `abs_etudiant`, `abs_date`, `abs_formation`, `abs_matiere`, `abs_absence`) VALUES
+(37, 138, '2022-07-11', 16, 82, 'Présent'),
+(41, 138, '2022-07-13', 16, 82, 'Présent'),
+(42, 138, '2022-07-12', 16, 82, 'Absent');
 
 -- --------------------------------------------------------
 
@@ -82,7 +91,7 @@ CREATE TABLE `article` (
 
 INSERT INTO `article` (`art_id`, `art_titre`, `art_titre_arab`, `art_texte`, `art_texte_arab`, `art_image`, `art_ajout`) VALUES
 (11, 'Carte de conducteur professionnel : le délai d’inscription prolongé à fin décembre 2022', 'بطاقة سائق محترف: تم تمديد الموعد النهائي للتسجيل حتى نهاية ديسمبر 2022', '<p>Dans le cadre de la mise en &oelig;uvre des engagements pris par le minist&egrave;re du Transport et de la Logistique, concernant la gratuit&eacute; des formations obligatoires pour l&rsquo;obtention de la carte de conducteur professionnel, et &eacute;tant donn&eacute; que l&rsquo;op&eacute;ration d&rsquo;inscription se poursuit encore, et pour r&eacute;pondre aux dol&eacute;ances des professionnels, le minist&egrave;re porte &agrave; la connaissance de l&rsquo;ensemble des conducteurs professionnels exer&ccedil;ant la conduite professionnelle et souhaitant l&rsquo;obtention de ladite carte, que le d&eacute;lai d&rsquo;inscription &agrave; cette op&eacute;ration a &eacute;t&eacute; prorog&eacute; jusqu&rsquo;au 31 d&eacute;cembre 2022, indique le minist&egrave;re dans un communiqu&eacute;.<br><br>Cette op&eacute;ration s&rsquo;exerce selon les m&ecirc;mes conditions fix&eacute;es auparavant dans les communiqu&eacute;s publi&eacute;s par le minist&egrave;re &agrave; cet &eacute;gard, souligne la m&ecirc;me source.<br><br>Par cons&eacute;quent, il a &eacute;t&eacute; d&eacute;cid&eacute; de reporter le contr&ocirc;le relatif &agrave; la possession de la carte de conducteur professionnel au 1er janvier 2023, rel&egrave;ve le communiqu&eacute;, notant que ce contr&ocirc;le sera effectu&eacute; sur la base d&rsquo;une carte de conducteur professionnel en cours de validit&eacute;, ou d&rsquo;un r&eacute;c&eacute;piss&eacute; de d&eacute;p&ocirc;t attestant l\'inscription &agrave; une formation pour l&rsquo;obtention de ladite carte avant le 1er janvier 2023.</p>', '<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">في إطار تنفيذ الالتزامات التي تعهدت بها وزارة النقل واللوجستيات بشأن التدريب الإجباري المجاني للحصول على بطاقة السائق المحترف ، ونظراً لاستمرار عملية التسجيل مرة أخرى ، وللرد على شكاوى المهنيين ، تبلغ الوزارة وقالت الوزارة في بيان إن جميع السائقين المحترفين الذين يمارسون القيادة الاحترافية ويرغبون في الحصول على البطاقة المذكورة ، تم تمديد الموعد النهائي للتسجيل لهذه العملية حتى 31 ديسمبر 2022.</p>\r\n<p dir=\"rtl\" data-placeholder=\"Traduction\">وأوضح المصدر ذاته أن هذه العملية تتم وفق نفس الشروط التي سبق بيانها في البيانات الصحفية التي نشرتها الوزارة بهذا الشأن.</p>\r\n<p dir=\"rtl\" data-placeholder=\"Traduction\">وبناءً على ذلك ، تقرر تأجيل المراقبة المتعلقة بحيازة بطاقة السائق المحترف إلى 1 يناير 2023 ، كما يشير البيان الصحفي ، مشيرًا إلى أن هذا التحكم سيتم على أساس بطاقة سائق محترف سارية المفعول.</p>\r\n<p dir=\"rtl\" data-placeholder=\"Traduction\">إيصال إيداع يشهد على التسجيل للتدريب للحصول على البطاقة المذكورة قبل 1 يناير 2023.</p>', 'OFF.jpg', '2022-07-05'),
-(12, 'Couverture sociale/conducteurs professionnels', 'التغطية الاجتماعية / السائقين المحترفين', '<p><em>Le Conseil de gouvernement, r&eacute;uni jeudi sous la pr&eacute;sidence du Chef de gouvernement, Aziz Akhannouch, a approuv&eacute; le projet de d&eacute;cret n&deg;2.22.190, portant application de la loi n&deg; 98.15 relative au r&eacute;gime de l\'assurance maladie obligatoire (AMO) de base et de la loi n&deg; 99.15 instituant un r&eacute;gime de pensions pour les cat&eacute;gories des professionnels, des travailleurs ind&eacute;pendants et des personnes non salari&eacute;es exer&ccedil;ant une activit&eacute; lib&eacute;rale, en ce qui concerne les conducteurs ayant une carte de conducteur professionnel.</em></p>\r\n<p>Ce texte, qui s\'inscrit dans la continuit&eacute; de l\'action gouvernementale pour la mise en &oelig;uvre du chantier strat&eacute;gique de la g&eacute;n&eacute;ralisation de la couverture sociale, vise &agrave; d&eacute;terminer les modalit&eacute;s d&rsquo;application des r&eacute;gimes d&rsquo;AMO et de pensions pour les conducteurs titulaires d&rsquo;une carte de conducteur professionnel, &agrave; l&rsquo;exception des chauffeurs de taxi et ce, suite aux r&eacute;unions consultatives tenues par le minist&egrave;re du Transport et de la Logistique avec les repr&eacute;sentations professionnelles de cette cat&eacute;gories, a indiqu&eacute; le ministre d&eacute;l&eacute;gu&eacute; charg&eacute; des Relations avec le parlement, porte-parole du gouvernement, Mustapha Baitas, lors d\'un point de presse &agrave; l\'issue du Conseil.&nbsp;</p>\r\n<p>En vertu de ce projet de d&eacute;cret, le revenu forfaitaire pour un conducteur qui n&rsquo;est pas propri&eacute;taire d&rsquo;un v&eacute;hicule autoris&eacute; &agrave; &ecirc;tre utilis&eacute; dans le transport routier est fix&eacute; &agrave; 1x le salaire minimum interprofessionnel garanti (SMIG) dans les secteurs non agricoles, d&eacute;termin&eacute; en application des dispositions de l\'article 356, de la loi n&deg; 65.99 relative au code de travail, multipli&eacute; par la dur&eacute;e normale annuelle de travail dans les activit&eacute;s non agricoles fix&eacute;e par l&rsquo;article n.184 de ladite Loi, a pr&eacute;cis&eacute; M. Baitas.</p>\r\n<p>Pour les conducteurs qui poss&egrave;dent un v&eacute;hicule autoris&eacute; &agrave; &ecirc;tre utilis&eacute; dans le transport routier, le texte fixe le revenu forfaitaire &agrave; 1.3x la valeur mentionn&eacute;e, a ajout&eacute; le ministre.</p>\r\n<p>Et de noter que les dispositions de ce projet de d&eacute;cret consid&egrave;rent le minist&egrave;re du Transport et de la Logistique- D&eacute;partement du Transport- l&rsquo;organe de liaison avec la Caisse nationale de s&eacute;curit&eacute; sociale (CNSS) pour lui fournir les informations n&eacute;cessaires &agrave; l&rsquo;inscription des conducteurs concern&eacute;s, la d&eacute;termination de versement des cotisations &agrave; pr&eacute;lever chaque mois, les modalit&eacute;s d\'inscription, ainsi que de la date &agrave; partir de laquelle l\'inscription prend effet au 1er mai 2022, avec possibilit&eacute; d\'inscription avant cette date.</p>', '<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\"><em>وافق مجلس الحكومة ، المنعقد يوم الخميس برئاسة رئيس الحكومة ، عزيز أخنوش ، على مشروع مرسوم رقم 2.22.190 بتنفيذ القانون رقم 98.15 المتعلق بنظام التأمين الصحي الإجباري (AMO) والقانون رقم 99.15. إنشاء نظام معاشات لفئات المهنيين والعاملين لحسابهم الخاص والأشخاص العاملين لحسابهم الخاص الذين يمارسون نشاطاً ليبرالياً ، فيما يتعلق بالسائقين الحاملين لبطاقة سائق محترف.</em></p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">يهدف هذا النص ، الذي يعد جزءًا من استمرار العمل الحكومي لتنفيذ المشروع الاستراتيجي لتعميم التغطية الاجتماعية ، إلى تحديد شروط تطبيق نظام AMO وأنظمة التقاعد للسائقين حاملي بطاقة السائق المحترف ، مع باستثناء سائقي سيارات الأجرة وذلك عقب الاجتماعات التشاورية التي عقدتها وزارة النقل واللوجستيات مع الممثلين المهنيين من هذه الفئة ، أوضح الوزير المفوض المكلف بالعلاقات مع البرلمان المتحدث الرسمي باسم الحكومة مصطفى بيتاس خلال إيجاز صحفي بعد المجلس.</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">بموجب مشروع المرسوم هذا ، يتم تحديد الدخل الثابت للسائق الذي ليس مالكًا لسيارة مصرح باستخدامها في النقل البري بمقدار 1x الحد الأدنى للأجور المهنية المضمونة (SMIG) في القطاعات غير الزراعية ، والتي يتم تحديدها وفقًا لـ أحكام المادة 356 من القانون رقم 65.99 المتعلق بقانون العمل ، مضروبة في وقت العمل السنوي العادي في الأنشطة غير الزراعية المنصوص عليها في المادة رقم 184 من القانون المذكور ، حدد السيد بيتاس.</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">وأضاف الوزير أنه بالنسبة للسائقين الذين يمتلكون سيارة مصرح لها باستخدامها في النقل البري ، فإن النص يحدد الدخل الثابت عند 1.3 ضعف القيمة المذكورة.</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">والإشارة إلى أن أحكام مشروع المرسوم هذا تعتبر وزارة النقل والإمداد - دائرة النقل - جهة الاتصال مع الصندوق الوطني للضمان الاجتماعي (CNSS) لتزويدها بالمعلومات اللازمة لتسجيل السائقين المعنيين ، تحديد دفع الاشتراكات التي سيتم خصمها كل شهر ، وإجراءات التسجيل ، وكذلك تاريخ بدء سريان التسجيل في 1 مايو 2022 ، مع إمكانية التسجيل قبل هذا التاريخ.</p>', 'CNSS.jpg', '2022-07-06');
+(12, 'Couverture sociale des conducteurs professionnels', 'التغطية الاجتماعية / السائقين المحترفين', '<p><em>Le Conseil de gouvernement, r&eacute;uni jeudi sous la pr&eacute;sidence du Chef de gouvernement, Aziz Akhannouch, a approuv&eacute; le projet de d&eacute;cret n&deg;2.22.190, portant application de la loi n&deg; 98.15 relative au r&eacute;gime de l\'assurance maladie obligatoire (AMO) de base et de la loi n&deg; 99.15 instituant un r&eacute;gime de pensions pour les cat&eacute;gories des professionnels, des travailleurs ind&eacute;pendants et des personnes non salari&eacute;es exer&ccedil;ant une activit&eacute; lib&eacute;rale, en ce qui concerne les conducteurs ayant une carte de conducteur professionnel.</em></p>\r\n<p>Ce texte, qui s\'inscrit dans la continuit&eacute; de l\'action gouvernementale pour la mise en &oelig;uvre du chantier strat&eacute;gique de la g&eacute;n&eacute;ralisation de la couverture sociale, vise &agrave; d&eacute;terminer les modalit&eacute;s d&rsquo;application des r&eacute;gimes d&rsquo;AMO et de pensions pour les conducteurs titulaires d&rsquo;une carte de conducteur professionnel, &agrave; l&rsquo;exception des chauffeurs de taxi et ce, suite aux r&eacute;unions consultatives tenues par le minist&egrave;re du Transport et de la Logistique avec les repr&eacute;sentations professionnelles de cette cat&eacute;gories, a indiqu&eacute; le ministre d&eacute;l&eacute;gu&eacute; charg&eacute; des Relations avec le parlement, porte-parole du gouvernement, Mustapha Baitas, lors d\'un point de presse &agrave; l\'issue du Conseil.&nbsp;</p>\r\n<p>En vertu de ce projet de d&eacute;cret, le revenu forfaitaire pour un conducteur qui n&rsquo;est pas propri&eacute;taire d&rsquo;un v&eacute;hicule autoris&eacute; &agrave; &ecirc;tre utilis&eacute; dans le transport routier est fix&eacute; &agrave; 1x le salaire minimum interprofessionnel garanti (SMIG) dans les secteurs non agricoles, d&eacute;termin&eacute; en application des dispositions de l\'article 356, de la loi n&deg; 65.99 relative au code de travail, multipli&eacute; par la dur&eacute;e normale annuelle de travail dans les activit&eacute;s non agricoles fix&eacute;e par l&rsquo;article n.184 de ladite Loi, a pr&eacute;cis&eacute; M. Baitas.</p>\r\n<p>Pour les conducteurs qui poss&egrave;dent un v&eacute;hicule autoris&eacute; &agrave; &ecirc;tre utilis&eacute; dans le transport routier, le texte fixe le revenu forfaitaire &agrave; 1.3x la valeur mentionn&eacute;e, a ajout&eacute; le ministre.</p>\r\n<p>Et de noter que les dispositions de ce projet de d&eacute;cret consid&egrave;rent le minist&egrave;re du Transport et de la Logistique- D&eacute;partement du Transport- l&rsquo;organe de liaison avec la Caisse nationale de s&eacute;curit&eacute; sociale (CNSS) pour lui fournir les informations n&eacute;cessaires &agrave; l&rsquo;inscription des conducteurs concern&eacute;s, la d&eacute;termination de versement des cotisations &agrave; pr&eacute;lever chaque mois, les modalit&eacute;s d\'inscription, ainsi que de la date &agrave; partir de laquelle l\'inscription prend effet au 1er mai 2022, avec possibilit&eacute; d\'inscription avant cette date.</p>', '<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\"><em>وافق مجلس الحكومة ، المنعقد يوم الخميس برئاسة رئيس الحكومة ، عزيز أخنوش ، على مشروع مرسوم رقم 2.22.190 بتنفيذ القانون رقم 98.15 المتعلق بنظام التأمين الصحي الإجباري (AMO) والقانون رقم 99.15. إنشاء نظام معاشات لفئات المهنيين والعاملين لحسابهم الخاص والأشخاص العاملين لحسابهم الخاص الذين يمارسون نشاطاً ليبرالياً ، فيما يتعلق بالسائقين الحاملين لبطاقة سائق محترف.</em></p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">يهدف هذا النص ، الذي يعد جزءًا من استمرار العمل الحكومي لتنفيذ المشروع الاستراتيجي لتعميم التغطية الاجتماعية ، إلى تحديد شروط تطبيق نظام AMO وأنظمة التقاعد للسائقين حاملي بطاقة السائق المحترف ، مع باستثناء سائقي سيارات الأجرة وذلك عقب الاجتماعات التشاورية التي عقدتها وزارة النقل واللوجستيات مع الممثلين المهنيين من هذه الفئة ، أوضح الوزير المفوض المكلف بالعلاقات مع البرلمان المتحدث الرسمي باسم الحكومة مصطفى بيتاس خلال إيجاز صحفي بعد المجلس.</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">بموجب مشروع المرسوم هذا ، يتم تحديد الدخل الثابت للسائق الذي ليس مالكًا لسيارة مصرح باستخدامها في النقل البري بمقدار 1x الحد الأدنى للأجور المهنية المضمونة (SMIG) في القطاعات غير الزراعية ، والتي يتم تحديدها وفقًا لـ أحكام المادة 356 من القانون رقم 65.99 المتعلق بقانون العمل ، مضروبة في وقت العمل السنوي العادي في الأنشطة غير الزراعية المنصوص عليها في المادة رقم 184 من القانون المذكور ، حدد السيد بيتاس.</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">وأضاف الوزير أنه بالنسبة للسائقين الذين يمتلكون سيارة مصرح لها باستخدامها في النقل البري ، فإن النص يحدد الدخل الثابت عند 1.3 ضعف القيمة المذكورة.</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">والإشارة إلى أن أحكام مشروع المرسوم هذا تعتبر وزارة النقل والإمداد - دائرة النقل - جهة الاتصال مع الصندوق الوطني للضمان الاجتماعي (CNSS) لتزويدها بالمعلومات اللازمة لتسجيل السائقين المعنيين ، تحديد دفع الاشتراكات التي سيتم خصمها كل شهر ، وإجراءات التسجيل ، وكذلك تاريخ بدء سريان التسجيل في 1 مايو 2022 ، مع إمكانية التسجيل قبل هذا التاريخ.</p>', 'CNSS.jpg', '2022-07-06');
 
 -- --------------------------------------------------------
 
@@ -126,7 +135,20 @@ INSERT INTO `commentaire` (`com_id`, `com_nom`, `com_prenom`, `com_comentaire`, 
 (47, 'sd', 'wxc', 'xcwxc', 11, '2022-07-07'),
 (48, 'wxc', 'cwxc', 'sdqsd', 11, '2022-07-07'),
 (49, 'wxcw', 'wc', 'wxcwc', 11, '2022-07-07'),
-(50, 'Chnaif', 'Aymane', 'hhh', 11, '2022-07-07');
+(50, 'Chnaif', 'Aymane', 'hhh', 11, '2022-07-07'),
+(51, 'Chnaif', 'Aimane', 'hhh', 12, '2022-07-08'),
+(52, 'Chnaif', 'Aimane', 'azert', 12, '2022-07-09'),
+(53, 'Chnaif', 'Aimane', 'شسيشسي', 12, '2022-07-13'),
+(54, 'أيمن', 'اشنايف', 'شسيشسي', 12, '2022-07-13'),
+(55, 'Chnaif', 'Aymane', 'qsdqsd', 12, '2022-07-13'),
+(56, 'Chnaif', 'Aymane', 'qsdqsd', 12, '2022-07-13'),
+(57, 'qsdqsd', 'qsdqsd', 'qsd', 12, '2022-07-13'),
+(58, 'Chnaifqsdqsd', 'Aimane', 'qsdqsdqsd', 12, '2022-07-13'),
+(59, 'wxc', 'Aimane', 'wxcwxcwxcwxc', 12, '2022-07-13'),
+(60, 'Chnaif', 'Aimane', 'wxcwxc', 12, '2022-07-13'),
+(61, 'n,b,nb', 'n,b,nb', 'jhgjgh\'rr', 12, '2022-07-13'),
+(62, 'Chnaif', 'Aimane', 'qsdqsdqsd', 12, '2022-07-13'),
+(63, 'qsdqsd', 'qsdqsd', 'qsdqsd', 12, '2022-07-13');
 
 -- --------------------------------------------------------
 
@@ -143,6 +165,18 @@ CREATE TABLE `contact` (
   `con_envoie` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `contact`
+--
+
+INSERT INTO `contact` (`con_id`, `con_nom`, `con_email`, `con_sujet`, `con_message`, `con_envoie`) VALUES
+(52, 'Chnaif', 'a.chnaif2010@gmail.com', 'jj', 'azer', '2022-07-09'),
+(53, 'Chnaif', 'a.chnaif2010@gmail.com', 'bb', 'nnnn', '2022-07-09'),
+(54, 'Chnaif', 'a.chnaif2010@gmail.com', 'hjkhkj', 'nbnv', '2022-07-09'),
+(55, 'Chnaif', 'a.chnaif2010@gmail.com', 'hgjhg', 'jhg', '2022-07-09'),
+(56, 'Chnaif', 'a.chnaif2010@gmail.com', 'Reclamation', 'test', '2022-07-15'),
+(57, 'Aymane', 'a.chnaif2010@gmail.com', 'Message test', 'test', '2022-07-15');
+
 -- --------------------------------------------------------
 
 --
@@ -154,6 +188,13 @@ CREATE TABLE `diplome` (
   `dip_etudiant` int(11) NOT NULL,
   `dip_image` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `diplome`
+--
+
+INSERT INTO `diplome` (`dip_id`, `dip_etudiant`, `dip_image`) VALUES
+(19, 138, 'CV Aimane chnaif (5).pdf');
 
 -- --------------------------------------------------------
 
@@ -169,6 +210,14 @@ CREATE TABLE `douane` (
   `dou_res_message` text NOT NULL,
   `dou_res_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `douane`
+--
+
+INSERT INTO `douane` (`dou_id`, `dou_nom`, `dou_res_nom`, `dou_res_email`, `dou_res_message`, `dou_res_date`) VALUES
+(17, 'Classe B', 'Aimane Chnaif', 'a.chnaif2010@gmail.com', '', '2022-07-15'),
+(18, 'Classe A', 'Aimane Chnaif', 'a.chnaif2010@gmail.com', '', '2022-07-15');
 
 -- --------------------------------------------------------
 
@@ -207,8 +256,9 @@ CREATE TABLE `etudiant` (
 --
 
 INSERT INTO `etudiant` (`etud_id`, `etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, `etud_scan_cin`, `etud_scan_permis`, `etud_scan_visite`, `etud_promos`, `etud_image`, `etud_inscription`) VALUES
-(138, 'Chnaif', 'أشنايف', 'Aimane', 'أيمن', 'aimane@gmail.com', '0644776612', 'ab4f63f9ac65152575886860dde480a1', 'G621092', 16, '1991-11-26', 'Kénitra', 'Riad Ahlan II', '76/9800', 'B', '', '2015-07-01', 'CV Aimane chnaif.pdf', 'CV Aimane chnaif.pdf', 'CV Aimane chnaif.pdf', NULL, '1569162702507.jpg', '2022-07-05'),
-(139, 'Bou', 'هشام', 'Hicham', 'بو', 'hicham@gmail.com', '0709845687', 'ab4f63f9ac65152575886860dde480a1', 'L76542', 16, '2000-12-11', 'Tanger', 'Hay Zouhour', '78/90943', 'B', '', '2019-01-14', 'CIN.pdf', 'Permis.pdf', 'Visite.pdf', NULL, '', '2022-07-05');
+(138, 'Chnaif', 'أشنايف', 'Aimane', 'أيمن', 'aimane@gmail.com', '0644776612', 'ab4f63f9ac65152575886860dde480a1', 'G621092', 16, '1991-11-26', 'Kénitra', 'Riad Ahlan II', '76/9800', 'B', '', '2015-07-01', 'CV Aimane chnaif.pdf', 'CV Aimane chnaif.pdf', 'CV Aimane chnaif.pdf', 7, '1569162702507.jpg', '2022-07-05'),
+(139, 'Bou', 'هشام', 'Hicham', 'بو', 'hicham@gmail.com', '0709845687', 'ab4f63f9ac65152575886860dde480a1', 'L76542', 16, '2000-12-11', 'Tanger', 'Hay Zouhour', '78/90943', 'B', '', '2019-01-14', 'CIN.pdf', 'Permis.pdf', 'Visite.pdf', NULL, 'IMG_20191229_020502_262.jpg', '2022-07-05'),
+(141, 'Chnaif', 'أشنايف', 'Aimane', 'أيمن', 'aimane@gmail.com', '0644776612', 'ab4f63f9ac65152575886860dde480a1', 'G621092', 17, '1991-11-26', 'Kénitra', 'Riad Ahlan II', '76/9800', 'B', '123456', '2015-07-01', 'CV Aimane chnaif.pdf', 'CV Aimane chnaif.pdf', 'CV Aimane chnaif.pdf', NULL, '1569162702507.jpg', '2022-07-15');
 
 -- --------------------------------------------------------
 
@@ -231,8 +281,8 @@ CREATE TABLE `formation` (
 --
 
 INSERT INTO `formation` (`for_id`, `for_nom`, `for_nom_arab`, `for_pres`, `for_pres_arab`, `for_descr`, `for_desc_arab`) VALUES
-(16, 'Formation de qualification initiale minimale Obligatoire (FQIMO)', '(FQIMO) الحد الأدنى الإلزامي من تدريب التأهيل الأولي', '<p>Aucune formation ou dipl&ocirc;me n&rsquo;est requis pour&nbsp;<strong>devenir</strong>&nbsp;chauffeur de ma&icirc;tre. Il suffit de poss&eacute;der le permis de conduire depuis plus de deux ans. La Formation Initiale Minimum Obligatoire (FIMO) n&rsquo;est attendue que pour le transport de marchandises ou pour les transports en commun.</p>', '<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">لا يتطلب الأمر تدريبًا أو دبلومًا لتصبح <strong>سائقًا رئيسيًا</strong>. يكفي أن يكون لديك رخصة قيادة لأكثر من عامين. الحد الأدنى الإلزامي من التدريب الأولي (FQIMO) متوقع فقط لنقل البضائع أو النقل العام.</p>\r\n<p><span style=\"font-size: 12pt;\"><br><br></span></p>', '<p>OJECTIFS DE LA FORMATION</p>\n<p>&Ecirc;tre capable d&rsquo;exercer le m&eacute;tier de conducteur routier marchandises dans le respect de la s&eacute;curit&eacute; et de la r&eacute;glementation professionnelle en assurant un service de qualit&eacute;.</p>\n<ul>\n<li>&Ecirc;tre capable de conduire un v&eacute;hicule de transport de marchandises selon des principes professionnels.</li>\n<li>Avoir des notions sur la conduite rationnelle.</li>\n<li>Savoir utiliser l&rsquo;ensemble des documents n&eacute;cessaires &agrave; la r&eacute;alisation des transports.</li>\n<li>Assurer les bases professionnelles n&eacute;cessaires pour exercer l&rsquo;emploi de conducteur routier de marchandises eu &eacute;gard aux conditions g&eacute;n&eacute;rales de la pratique du m&eacute;tier et des conditions particuli&egrave;res de s&eacute;curit&eacute;.</li>\n<li>Connaitre les applications r&egrave;glementaires r&eacute;gissant la profession.</li>\n<li>Avoir connaissance des r&egrave;gles et principes relatifs &agrave; la sant&eacute;, la s&eacute;curit&eacute; routi&egrave;re et la s&eacute;curit&eacute; environnementale.</li>\n<li>&Ecirc;tre conscient de l&rsquo;importance du monde du transport et des attitudes positives &agrave; d&eacute;velopper &agrave; son &eacute;gard.</li>\n</ul>\n<p>ENCADREMENT</p>\n<p>Enseignants r&eacute;f&eacute;renc&eacute;s par d&eacute;cision administrative dans le cadre de l&rsquo;agr&eacute;ment de l&rsquo;organisme de formation</p>\n<p>METHODE ET MOYENS PEDAGOGIQUE</p>\n<ul>\n<li>M&eacute;thodes actives adapt&eacute;es &agrave; la formation des adultes.</li>\n<li>Alternance de th&eacute;orie et de pratique</li>\n</ul>\n<p>MOYENS TECHNIQUES</p>\n<ul>\n<li>Salles de cours &eacute;quip&eacute;es de moyens multim&eacute;dia.</li>\n<li>Aires d&rsquo;&eacute;volution sp&eacute;cialement am&eacute;nag&eacute;es.</li>\n<li>V&eacute;hicules porteurs adapt&eacute;s &agrave; l&rsquo;enseignement.</li>\n<li>Fiche de suivi et livret d&rsquo;apprentissage.</li>\n<li>Fourniture de supports p&eacute;dagogiques sp&eacute;cifiques</li>\n</ul>\n<p>EVALUATION ET CONDITION DE REUISSITE</p>\n<ul>\n<li>Feuilles de pr&eacute;sence &eacute;marg&eacute;es par les stagiaires</li>\n<li>Un questionnaire est utilis&eacute; pour mesurer la satisfaction globale des stagiaires sur l&rsquo;organisation, les qualit&eacute;s p&eacute;dagogiques du formateur, les m&eacute;thodes et supports utilis&eacute;s &hellip;</li>\n<li>Conditions de r&eacute;ussite : Attestation de Formation Initiale de&nbsp; Qualification Minimale Obligatoire (FIQMO) marchandises si succ&egrave;s &agrave; l&rsquo;&eacute;valuation finale</li>\n</ul>\n<p>RESULTAT ATTENDU</p>\n<p>D&eacute;livrance de la carte de qualification de conducteur</p>', '<p id=\"tw-target-text\" dir=\"rtl\" style=\"text-align: right;\" data-placeholder=\"Traduction\">أن تكون قادرًا على قيادة مركبة نقل البضائع وفقًا للمبادئ المهنية.</p>\r\n<ul>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">أن يكون لديك أفكار عن القيادة العقلانية.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">أن تكون قادرا على ماذا</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">تعرف على كيفية استخدام جميع المستندات اللازمة لإجراء النقل.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">ضمان الأسس المهنية اللازمة لأداء عمل سائق الشحن البري مع مراعاة الشروط العامة لممارسة المهنة وشروط السلامة المحددة.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">معرفة التطبيقات الرقابية المنظمة للمهنة.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">معرفة القواعد والمبادئ المتعلقة بالصحة وسلامة الطرق وسلامة البيئة.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">أن يكون على دراية بأهمية عالم النقل والمواقف الإيجابية التي يجب تطويرها تجاهه.</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">تأطير</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">يشار إلى المعلمين بقرار إداري في إطار موافقة الهيئة التدريبية.</p>\r\n<p dir=\"rtl\" data-placeholder=\"Traduction\">&nbsp;</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">الطريقة البيداغوجية والوسائل</p>\r\n<ul>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">الأساليب النشطة التي تتكيف مع تدريب الكبار.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">التناوب بين النظرية والتطبيق.</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">الوسائل التقنية</p>\r\n<ul>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">الفصول الدراسية مجهزة بمصادر الوسائط المتعددة.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">مناطق هبوط مجهزة بشكل خاص.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">مركبات النقل مناسبة للتدريس.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">ورقة متابعة وكتيب تعليمي.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">توفير وسائل تعليمية محددة.</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">التقييم وشروط النجاح</p>\r\n<ul>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">كشوف حضور موقعة من المتدربين.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">يتم استخدام استبيان لقياس الرضا العام للمتدربين عن المنظمة والصفات التربوية للمدرب والطرق والمواد المستخدمة ...</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">شروط النجاح: شهادة التدريب الأولي لسلع الحد الأدنى من المؤهلات الإجبارية (FIQMO) إذا نجحت في التقييم النهائي.</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">نتيجة منتظرة</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">اصدار بطاقة تأهيل السائق</p>\r\n<p>\" required&gt;</p>\r\n<p>أن يكون قادراً على ممارسة مهنة سائق الشحن البري بما يتوافق مع أنظمة السلامة والمهنية من خلال تقديم خدمة عالية الجودة.</p>\r\n<p>&nbsp;</p>\r\n<ul>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" style=\"text-align: right;\" data-placeholder=\"Traduction\">أن تكون قادرًا على قيادة مركبة نقل البضائع وفقًا للمبادئ المهنية.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">أن يكون لديك أفكار عن القيادة العقلانية.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">تعرف على كيفية استخدام جميع المستندات اللازمة لإجراء النقل.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">ضمان الأسس المهنية اللازمة لأداء عمل سائق الشحن البري مع مراعاة الشروط العامة لممارسة المهنة وشروط السلامة المحددة.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">معرفة التطبيقات الرقابية المنظمة للمهنة.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">معرفة القواعد والمبادئ المتعلقة بالصحة وسلامة الطرق وسلامة البيئة.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">أن يكون على دراية بأهمية عالم النقل والمواقف الإيجابية التي يجب تطويرها تجاهه.</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">تأطير</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">يشار إلى المعلمين بقرار إداري في إطار موافقة الهيئة التدريبية.</p>\r\n<p dir=\"rtl\" data-placeholder=\"Traduction\">&nbsp;</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">الطريقة البيداغوجية والوسائل</p>\r\n<ul>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">الأساليب النشطة التي تتكيف مع تدريب الكبار.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">التناوب بين النظرية والتطبيق.</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">الوسائل التقنية</p>\r\n<ul>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">الفصول الدراسية مجهزة بمصادر الوسائط المتعددة.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">مناطق هبوط مجهزة بشكل خاص.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">مركبات النقل مناسبة للتدريس.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">ورقة متابعة وكتيب تعليمي.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">توفير وسائل تعليمية محددة.</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">التقييم وشروط النجاح</p>\r\n<ul>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">كشوف حضور موقعة من المتدربين.</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">يتم استخدام استبيان لقياس الرضا العام للمتدربين عن المنظمة والصفات التربوية للمدرب والطرق والمواد المستخدمة ...</p>\r\n</li>\r\n<li dir=\"rtl\" data-placeholder=\"Traduction\">\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">شروط النجاح: شهادة التدريب الأولي لسلع الحد الأدنى من المؤهلات الإجبارية (FIQMO) إذا نجحت في التقييم النهائي.</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">نتيجة منتظرة</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">اصدار بطاقة تأهيل السائق</p>'),
-(17, 'Formation Continuer Obligatoire (FCO)', '(FCO) التعليم المستمر الإجباري', '<p>La&nbsp;<strong>FCO</strong>&nbsp;est destin&eacute;e aux&nbsp;<strong>personnes &acirc;g&eacute;es au minimum de 21 ans</strong>&nbsp;et poss&eacute;dant un<strong>&nbsp;permis C/EC&nbsp;ou&nbsp;permis</strong>&nbsp;en cours de validit&eacute; (pour la FCO Marchandises) ou un&nbsp;<strong>permis D&nbsp;ou permis ED</strong>&nbsp;(pour la FCO voyageurs).</p>', '<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">التعليم المستمر الإجباري ، ومدته 35 ساعة قابلة للتجديد كل 5 سنوات. يسمح للسائق بتحديث معرفته وتحسين ممارسته من حيث السلامة واللوائح المهنية. إنها إعادة تدوير FQIMO.</p>', '<p>La FCO est la Formation Continue Obligatoire, d&rsquo;une dur&eacute;e de 35 heures, renouvelable tous les 5 ans. Elle permet au conducteur d&rsquo;actualiser ses connaissances et parfaire sa pratique en mati&egrave;re de s&eacute;curit&eacute; et de r&eacute;glementation professionnelle. Elle est le recyclage de la FQIMO.</p>\r\n<p>&nbsp;</p>\r\n<p>OBJECTIFS DE LA FORMATION FCO MARCHANDISES :</p>\r\n<p>Acqu&eacute;rir ou compl&eacute;ter les connaissances et les comp&eacute;tences n&eacute;cessaires &agrave; l&rsquo;acc&egrave;s au secteur du transport de marchandises, par le perfectionnement &agrave; une conduite rationnelle ax&eacute; sur les r&egrave;gles de s&eacute;curit&eacute;, la connaissance, l&rsquo;application et le respect des r&eacute;glementations du transport et des r&egrave;gles relatives &agrave; la sant&eacute;, la s&eacute;curit&eacute; routi&egrave;re, l&rsquo;environnement &eacute;conomique et l&rsquo;organisation du march&eacute; du secteur du transport.</p>\r\n<p>A compter de la mise en place du contrat de progr&egrave;s dans le transport, tout conducteur(trice) de v&eacute;hicules de transport de marchandises, doit tous les 5 ans, suivre une FCO (Formation Continue Obligatoire) lui permettant de proc&eacute;der &agrave; une mise &agrave; jour de ses connaissances dans le domaine th&eacute;orique et pratique.</p>\r\n<p>&nbsp;</p>\r\n<p>METHODES PEDAGOGIQUES</p>\r\n<p>Cours th&eacute;oriques et pratiques. En cours collectifs.<br>Sur la route, sur v&eacute;hicule et/ou sur simulateur pour la conduite.</p>', '<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">أهداف التدريب التعليم المستمر الإلزامي للسلع:</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">اكتساب أو إكمال المعرفة والمهارات اللازمة للوصول إلى قطاع نقل البضائع ، من خلال تطوير القيادة العقلانية القائمة على قواعد السلامة والمعرفة والتطبيق والامتثال لأنظمة وقواعد النقل.المتعلقة بالصحة وسلامة الطرق والبيئة الاقتصادية والمنظمة من سوق قطاع النقل.</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">من تنفيذ عقد التقدم في النقل ، يجب على أي سائق لمركبات نقل البضائع ، كل 5 سنوات ، اتباع FCO (التعليم المستمر الإلزامي) مما يسمح له بإجراء تحديث لمعرفته في المجال النظري والعملي.</p>\r\n<p dir=\"rtl\" data-placeholder=\"Traduction\">&nbsp;</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">طرق التدريس:</p>\r\n<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">دروس نظرية وعملية. في دروس جماعية. على الطريق ، على السيارة و / أو على جهاز محاكاة القيادة.</p>');
+(16, 'Formation de qualification initiale minimale Obligatoire (FQIMO)', '(FQIMO) الحد الأدنى الإلزامي من تدريب التأهيل الأولي', '<p>Aucune formation ou dipl&ocirc;me n&rsquo;est requis pour&nbsp;<strong>devenir</strong> chauffeur professionnel. Il suffit de poss&eacute;der le permis de conduire depuis plus de deux ans. La Formation Initiale Minimum Obligatoire (FQIMO) n&rsquo;est attendue que pour le transport de marchandises ou pour les transports en commun.</p>', '<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">لا يتطلب الأمر تكوينا أو دبلومًا مسبقا لتصبح <strong>سائقًا مهني</strong>. يكفي أن يكون لديك رخصة قيادة لأكثر من عامين. الحد الأدنى الإلزامي من التدريب الأولي (FQIMO) هي فقط لنقل البضائع أو النقل العام.</p>\r\n<p><span style=\"font-size: 12pt;\"><br><br></span></p>', '<p>OJECTIFS DE LA FORMATION</p>\r\n<p>&Ecirc;tre capable d&rsquo;exercer le m&eacute;tier de conducteur routier marchandises dans le respect de la s&eacute;curit&eacute; et de la r&eacute;glementation professionnelle en assurant un service de qualit&eacute;.</p>\r\n<ul>\r\n<li>&Ecirc;tre capable de conduire un v&eacute;hicule de transport de marchandises selon des principes professionnels.</li>\r\n<li>Avoir des notions sur la conduite rationnelle.</li>\r\n<li>Savoir utiliser l&rsquo;ensemble des documents n&eacute;cessaires &agrave; la r&eacute;alisation des transports.</li>\r\n<li>Assurer les bases professionnelles n&eacute;cessaires pour exercer l&rsquo;emploi de conducteur routier de marchandises eu &eacute;gard aux conditions g&eacute;n&eacute;rales de la pratique du m&eacute;tier et des conditions particuli&egrave;res de s&eacute;curit&eacute;.</li>\r\n<li>Connaitre les applications r&egrave;glementaires r&eacute;gissant la profession.</li>\r\n<li>Avoir connaissance des r&egrave;gles et principes relatifs &agrave; la sant&eacute;, la s&eacute;curit&eacute; routi&egrave;re et la s&eacute;curit&eacute; environnementale.</li>\r\n<li>&Ecirc;tre conscient de l&rsquo;importance du monde du transport et des attitudes positives &agrave; d&eacute;velopper &agrave; son &eacute;gard.</li>\r\n</ul>\r\n<p>ENCADREMENT</p>\r\n<p>Enseignants r&eacute;f&eacute;renc&eacute;s par d&eacute;cision administrative dans le cadre de l&rsquo;agr&eacute;ment de l&rsquo;organisme de formation et de l\'Acad&eacute;mie.</p>\r\n<p>METHODE ET MOYENS PEDAGOGIQUE</p>\r\n<ul>\r\n<li>M&eacute;thodes actives adapt&eacute;es &agrave; la formation des adultes.</li>\r\n<li>Formation th&eacute;orique et pratique.</li>\r\n</ul>\r\n<p>MOYENS TECHNIQUES</p>\r\n<ul>\r\n<li>Salles de cours &eacute;quip&eacute;es de moyens multim&eacute;dia.</li>\r\n<li>Aires d&rsquo;&eacute;volution sp&eacute;cialement am&eacute;nag&eacute;es.</li>\r\n<li>V&eacute;hicules porteurs adapt&eacute;s &agrave; l&rsquo;enseignement.</li>\r\n<li>Fiche de suivi et livret d&rsquo;apprentissage.</li>\r\n<li>Fourniture de supports p&eacute;dagogiques sp&eacute;cifiques.</li>\r\n</ul>\r\n<p>EVALUATION ET CONDITION DE REUISSITE</p>\r\n<ul>\r\n<li>Feuilles de pr&eacute;sence &eacute;marg&eacute;es par les stagiaires.</li>\r\n<li>Un questionnaire est utilis&eacute; pour mesurer la satisfaction globale des stagiaires sur l&rsquo;organisation, les qualit&eacute;s p&eacute;dagogiques du formateur, les m&eacute;thodes et supports utilis&eacute;s &hellip;</li>\r\n</ul>\r\n<p>RESULTAT ATTENDU</p>\r\n<p>D&eacute;livrance de la carte de qualification de conducteur</p>', '<p>الأهداف من التكوين</p>\r\n<p>أن يكون قادراً على ممارسة مهنة سائق الشحن البري بما يتوافق مع أنظمة السلامة والمهنية من خلال تقديم خدمة عالية الجودة.</p>\r\n<ul>\r\n<li>أن تكون قادرًا على قيادة مركبة نقل البضائع وفقًا للمبادئ المهنية.</li>\r\n<li>أن يكون لديك أفكار عن القيادة العقلانية.</li>\r\n<li>معرفة كيفية استخدام جميع المستندات اللازمة لإجراء النقل.</li>\r\n<li>ضمان الأسس المهنية اللازمة لأداء عمل سائق الشحن البري مع مراعاة الشروط العامة لممارسة المهنة وشروط السلامة المحددة.</li>\r\n<li>معرفة التطبيقات الرقابية المنظمة للمهنة.</li>\r\n<li>معرفة القواعد والمبادئ المتعلقة بالصحة والسلامة الطرقية وسلامة البيئة.</li>\r\n<li>أن تكون على دراية بأهمية عالم النقل والمواقف الإيجابية التي يجب تطويرها تجاهه.</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>تأطير</p>\r\n<p>تعيين مكونين مهنيين في إطار موافقة الهيئة البيداغوجية الخاصة بالأكاديمية والهيئة التكوينية</p>\r\n<p>&nbsp;</p>\r\n<p>طريق ووسائل التدريس</p>\r\n<ul>\r\n<li>الأساليب النشطة التي تتكيف مع تكوين الأشخص البالغين.</li>\r\n<li>تكوين نظري وتطبيقي.</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>الوسائل التقنية</p>\r\n<ul>\r\n<li>الفصول الدراسية مجهزة بمصادر الوسائط المتعددة.</li>\r\n<li>مناطق تمارين مجهزة بشكل خاص.</li>\r\n<li>مركبات مناسبة للتدريس.</li>\r\n<li>ورقة متابعة وكتيب تعليمي.</li>\r\n<li>توفير وسائل تعليمية محددة.</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>التقييم وشروط النجاح</p>\r\n<ul>\r\n<li>كشوف حضور موقعة من المتدربين.</li>\r\n<li>يتم استخدام استبيان لقياس الرضا العام للمتدربين عن الأكايديمية والمهارات التربوية للمدرب والطرق والمواد المستخدمة ...</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p>النتائج المنتظرة</p>\r\n<p>اصدار بطاقة تأهيل السائق</p>\r\n<p>&nbsp;</p>'),
+(17, 'Formation Continue Obligatoire (FCO)', '(FCO) التعليم المستمر الإجباري', '<p>La&nbsp;<strong>FCO</strong>&nbsp;est destin&eacute;e aux&nbsp;<strong>personnes &acirc;g&eacute;es au minimum de 21 ans</strong>&nbsp;et poss&eacute;dant un<strong>&nbsp;permis C/EC&nbsp;ou&nbsp;permis</strong>&nbsp;en cours de validit&eacute; (pour la FCO Marchandises) ou un&nbsp;<strong>permis D&nbsp;ou permis ED</strong>&nbsp;(pour la FCO voyageurs).</p>', '<p id=\"tw-target-text\" dir=\"rtl\" data-placeholder=\"Traduction\">&nbsp;<strong>التكوين (FCO) التعليم المستمر الإجباري</strong> مخصص <strong>للأشخاص الذين تبلغ أعمارهم 21 عامًا أو أكثر</strong> ولديهم <strong>رخصة سياقة من نوع C / EC أو رخصة سياقة سارية المفعول</strong> ل (FCO للسلع) أو <strong>رخصة سياقة من نوع D أو رخصة سياقة من نوع ED</strong> (للمسافرين FCO).</p>', '<p>La FCO est la Formation Continue Obligatoire, d&rsquo;une dur&eacute;e de 35 heures, renouvelable tous les 5 ans. Elle permet au conducteur d&rsquo;actualiser ses connaissances et parfaire sa pratique en mati&egrave;re de s&eacute;curit&eacute; et de r&eacute;glementation professionnelle. Elle est le recyclage de la FQIMO.</p>\r\n<p>&nbsp;</p>\r\n<p>OBJECTIFS DE LA FORMATION FCO MARCHANDISES :</p>\r\n<p>Acqu&eacute;rir ou compl&eacute;ter les connaissances et les comp&eacute;tences n&eacute;cessaires &agrave; l&rsquo;acc&egrave;s au secteur du transport de marchandises, par le perfectionnement &agrave; une conduite rationnelle ax&eacute; sur les r&egrave;gles de s&eacute;curit&eacute;, la connaissance, l&rsquo;application et le respect des r&eacute;glementations du transport et des r&egrave;gles relatives &agrave; la sant&eacute;, la s&eacute;curit&eacute; routi&egrave;re, l&rsquo;environnement &eacute;conomique et l&rsquo;organisation du march&eacute; du secteur du transport.</p>\r\n<p>A compter de la mise en place du contrat de progr&egrave;s dans le transport, tout conducteur(trice) de v&eacute;hicules de transport de marchandises, doit tous les 5 ans, suivre une FCO (Formation Continue Obligatoire) lui permettant de proc&eacute;der &agrave; une mise &agrave; jour de ses connaissances dans le domaine th&eacute;orique et pratique.</p>\r\n<p>&nbsp;</p>\r\n<p>METHODES PEDAGOGIQUES</p>\r\n<ul>\r\n<li>Cours th&eacute;oriques et pratiques. En cours collectifs.</li>\r\n<li>Cours pratique sur la route, sur v&eacute;hicule et/ou sur simulateur pour la conduite.</li>\r\n</ul>', '<p>FCO هي التعليم المستمر الإلزامي، ومدته 35 ساعة قابلة للتجديد كل 5 سنوات يسمح للسائق بتحديث معارفه وتحسين ممارسته من حيث السلامة الطلرقية واللوائح المهنية أنها عبارة عن إعادة تدوير ل FQIMO.</p>\r\n<p>&nbsp;</p>\r\n<p>أهداف تكوين FCO:&nbsp;</p>\r\n<p>اكتساب أو إكمال المعرفة والمهارات اللازمة لقطاع نقل البضائع ، من خلال تطوير القيادة العقلانية على أسس قواعد السلامة والمعرفة والتطبيق والامتثال لأنظمة وقواعد النقل المتعلقة بالصحة والسلامة الطرقية والبيئة الاقتصادية المنظمة لقطاع النقل.</p>\r\n<p>اعتبارا من تنفيذ عقد تقدم النقل، يجب على أي سائق مركبات نقل البضائع كل 5 سنوات اتباع تكوين التعليم المستمر الإلزامي (FCO)، مما يسمح له بالمضي قدما في تحديث معارفه في المجال النظري والتطبيقي.</p>\r\n<p>&nbsp;</p>\r\n<p>طرق التدريس</p>\r\n<ul>\r\n<li>دروس نظرية وتطبيقية. دروس جماعية.</li>\r\n<li>دورس تطبيقية على الطريق ، في المركبة و / أو على جهاز محاكاة القيادة.</li>\r\n</ul>');
 
 -- --------------------------------------------------------
 
@@ -265,6 +315,14 @@ CREATE TABLE `iso` (
   `iso_res_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `iso`
+--
+
+INSERT INTO `iso` (`iso_id`, `iso_nom`, `iso_presentation`, `iso_res_nom`, `iso_res_email`, `iso_res_message`, `iso_res_date`) VALUES
+(54, 'ISO 9001', '', 'Fahd', 'a.chnaif2010@gmail.com', 'qsdqsd', '2022-07-13'),
+(55, 'ISO 9001', '', 'Fahd', 'a.chnaif2010@gmail.com', '', '2022-07-13');
+
 -- --------------------------------------------------------
 
 --
@@ -287,7 +345,9 @@ CREATE TABLE `matiere` (
 
 INSERT INTO `matiere` (`mat_id`, `mat_formation`, `mat_nom`, `mat_nom_arab`, `mat_duree`, `mat_prof`, `mat_prof_arab`) VALUES
 (82, 16, 'Cours Théoqrique', 'درس نظري', 4, 'Sallim Bouhouch', 'سليم بوهوش'),
-(83, 16, 'Cours Pratique', 'درس تطبيقي', 5, 'Mohamed Jamil', 'محمد جميل');
+(83, 16, 'Cours Pratique', 'درس تطبيقي', 5, 'Mohamed Jamil', 'محمد جميل'),
+(84, 17, 'Cours Théorique', 'درس نظري', 4, 'Jamal Bida', 'جمال بيدا'),
+(85, 17, 'Cours Pratique', 'درس تطبيقي', 5, 'Salim Bouhouch', 'سليم بوهوش');
 
 -- --------------------------------------------------------
 
@@ -303,6 +363,16 @@ CREATE TABLE `note` (
   `not_note` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `note`
+--
+
+INSERT INTO `note` (`not_id`, `not_formation`, `not_matiere`, `not_etudiant`, `not_note`) VALUES
+(94, 16, 82, 138, 17),
+(95, 16, 83, 138, 5),
+(96, 17, 84, 141, 13),
+(97, 17, 85, 141, 15);
+
 -- --------------------------------------------------------
 
 --
@@ -313,6 +383,13 @@ CREATE TABLE `promos` (
   `pro_id` int(11) NOT NULL,
   `pro_groupe` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `promos`
+--
+
+INSERT INTO `promos` (`pro_id`, `pro_groupe`) VALUES
+(7, '1');
 
 -- --------------------------------------------------------
 
@@ -333,6 +410,13 @@ CREATE TABLE `reservation` (
   `res_ajout` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `reservation`
+--
+
+INSERT INTO `reservation` (`res_id`, `res_nom`, `res_telephone`, `res_email`, `res_salle`, `res_commentaire`, `res_date`, `time_debut`, `time_fin`, `res_ajout`) VALUES
+(50, 'Aimane Chnaif', '0644776612', 'a.chnaif2010@gmail.com', 10, 'Hello World', '2022-07-22', '08:00', '10:00', '2022-07-15');
+
 -- --------------------------------------------------------
 
 --
@@ -342,9 +426,9 @@ CREATE TABLE `reservation` (
 CREATE TABLE `salle` (
   `sal_id` int(11) NOT NULL,
   `sal_nom` varchar(200) NOT NULL,
-  `sal_nom_arab` varchar(200) NOT NULL,
+  `sal_nom_arab` text NOT NULL,
   `sal_desc` text NOT NULL,
-  `sal_desc_arab` varchar(200) NOT NULL,
+  `sal_desc_arab` text NOT NULL,
   `sal_prix` float NOT NULL,
   `sal_personne` int(11) NOT NULL,
   `sal_image` varchar(200) NOT NULL,
@@ -363,7 +447,7 @@ CREATE TABLE `salle` (
 --
 
 INSERT INTO `salle` (`sal_id`, `sal_nom`, `sal_nom_arab`, `sal_desc`, `sal_desc_arab`, `sal_prix`, `sal_personne`, `sal_image`, `sal_service`, `sal_service_arab`, `sal_service2`, `sal_service2_arab`, `sal_service3`, `sal_service3_arab`, `sal_service4`, `sal_service4_arab`) VALUES
-(10, 'Salle 1', 'قاعة 1', '<p>C\'est un salle bien &eacute;quip&eacute;</p>', '<p>قاعة مجهزة</p>', 200, 8, 'salle7_artln.jpg', 'Oridnateurs', 'حواسيب', 'Imprimante', 'طابعة', 'Photocopieur', 'ماسح', 'Restauration', 'طعامة');
+(10, 'Salle 1', 'قاعة 1', '<p>Notre acad&eacute;mie vous propose la location de salles parfaitement &eacute;quip&eacute;es pour vos formations, r&eacute;unions, cours, conf&eacute;rences.</p>\r\n<p>Notre salle de formation est munie du wifi haute-vitesse, un projecteur, un tableau magn&eacute;tique et ses accessoires. Tout est mis &agrave; votre disposition afin de vous permettre de r&eacute;aliser vos pr&eacute;sentations et vos projections.</p>\r\n<p>La salle de formation est une salle ultramoderne, facile d&rsquo;acc&egrave;s situ&eacute;e dans un endroit unique, d&rsquo;un ordinateur et de Multiprises &eacute;lectriques.&nbsp;</p>', '<p>تقدم لك أكاديميتنا تأجير القاعات وهي عبارة عن قاعات مجهزة للتكوين ، والاجتماعات، والدورات، والمؤتمرات.</p>\r\n<p>تم تجهيز قاعات التكوين لدينا بشبكة wifi عالية السرعة وجهاز عرض ولوحة مغناطيسية وملحقاتها. كل شيء تحت تصرفك للسماح لك بعمل عروضك التقديمية.</p>\r\n<p>قاعت التكوين هي قاعات حديثة للغاية، يسهل الوصول إليها وتقع في مكان واحد، مع جهاز كمبيوتر ومنافذ كهربائية.</p>', 200, 8, 'salle2_artln.jpg', 'Oridnateurs', 'حواسيب', 'Imprimante', 'طابعة', 'Photocopieur', 'ماسح', 'Restauration', 'طعامة');
 
 --
 -- Index pour les tables déchargées
@@ -493,7 +577,7 @@ ALTER TABLE `salle`
 -- AUTO_INCREMENT pour la table `absence`
 --
 ALTER TABLE `absence`
-  MODIFY `abs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `abs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT pour la table `admin`
@@ -517,31 +601,31 @@ ALTER TABLE `attestation`
 -- AUTO_INCREMENT pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT pour la table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `con_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `con_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT pour la table `diplome`
 --
 ALTER TABLE `diplome`
-  MODIFY `dip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `dip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `douane`
 --
 ALTER TABLE `douane`
-  MODIFY `dou_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `dou_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `etudiant`
 --
 ALTER TABLE `etudiant`
-  MODIFY `etud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
+  MODIFY `etud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT pour la table `formation`
@@ -559,31 +643,31 @@ ALTER TABLE `img_salle`
 -- AUTO_INCREMENT pour la table `iso`
 --
 ALTER TABLE `iso`
-  MODIFY `iso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `iso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT pour la table `matiere`
 --
 ALTER TABLE `matiere`
-  MODIFY `mat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `mat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT pour la table `note`
 --
 ALTER TABLE `note`
-  MODIFY `not_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `not_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT pour la table `promos`
 --
 ALTER TABLE `promos`
-  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `res_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT pour la table `salle`
