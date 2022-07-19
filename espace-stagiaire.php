@@ -178,7 +178,7 @@
                         <div class="d-flex justify-content-around">
                             <div class="text-center">
                                 <a href="mes-notes"><h3 class="text-color"><?php echo $espaceetudiant['notes']?></h3></a>
-                                <a href="mes-notes"><img src="images/view/notes.png" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
+                                <a href="mes-notes"><img src="images/view/notes_11zon.jpg" class="img-fluid img-thumbnail img-1 mt-4 mb-2" alt="" style="height:234px"></a>
                             </div>
                             <div class="text-center">
                                 <a href="mes-documents"><h3 class="text-color"><?php echo $espaceetudiant['documents']?></h3></a>

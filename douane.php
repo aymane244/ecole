@@ -36,7 +36,7 @@
     </div>
     <div style="position:relative">
       <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-      <img src="images/view/customs.png" alt="" class="d-block img-fluid" style="width:100%;">
+      <img src="images/view/customs_11zon.jpg" alt="" class="d-block img-fluid" style="width:100%;">
     </div>
     <div class="container mt-5">
       <?php

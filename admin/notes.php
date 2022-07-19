@@ -78,15 +78,15 @@ foreach ($etudiants as $etudiant) {
                                         <div class="d-flex">
                                             <i class="fas fa-user-graduate position-awesome"></i>
                                             <select class="custom-select pl-5" name="etudiants">
-                                            <option value="">--Veuillez Choisir un stagiaire--</option>
+                                                <option value="">--Veuillez Choisir un stagiaire--</option>
                                                 <?php
-                                                foreach ($etudiants as $etudiant) {
-                                                    if ($etudiant['for_id'] == $id) {
+                                                    foreach ($etudiants as $etudiant) {
+                                                        if ($etudiant['for_id'] == $id) {
                                                 ?>
-                                                        <option value="<?php echo $etudiant['etud_id'] ?>"><?php echo $etudiant['etud_prenom'] . " " . $etudiant['etud_nom'] ?></option>
+                                                <option value="<?php echo $etudiant['etud_id'] ?>"><?php echo $etudiant['etud_prenom'] . " " . $etudiant['etud_nom'] ?></option>
                                                 <?php
+                                                        }
                                                     }
-                                                }
                                                 ?>
                                             </select>
                                         </div>
@@ -102,19 +102,19 @@ foreach ($etudiants as $etudiant) {
                     </div>
                 </div>
                 <?php
-                if (isset($_POST['submit_note'])) {
-                    $formations = $data->getEtudiantMatiereFormations();
-                    $etuds = $data->getEtudiantId();
-                    foreach ($etuds as $etud) {
-                        $etud_note_prenom = $etud['etud_prenom'];
-                        $etud_note_nom = $etud['etud_nom'];
-                    }
+                    if (isset($_POST['submit_note'])) {
+                        $formations = $data->getEtudiantMatiereFormations();
+                        $etuds = $data->getEtudiantId();
+                        foreach ($etuds as $etud) {
+                            $etud_note_prenom = $etud['etud_prenom'];
+                            $etud_note_nom = $etud['etud_nom'];
+                        }
                 ?>
                 <div class="col-md-6">
                     <table class="table table-bordered mt-5 bg-white">
                         <thead class="text-center text-white" style="background-color: #11101d;">
                             <tr>
-                                <th scope="col" colspan="5">ALT Nord</th>
+                                <th scope="col" colspan="5">ARLT Nord</th>
                             </tr>
                             <tr>
                                 <th scop="col" colspan="5"><?php echo $for_nom ?></th>
@@ -136,6 +136,13 @@ foreach ($etudiants as $etudiant) {
                                 foreach ($formations as $formation) {
                             ?>
                             <tr>
+                                <?php
+                                    if($formation['etud_id'] != $formation['not_etudiant']){
+                                ?>
+                                <td colspan="3"><h4>Pas de notes saisit</h4></td>
+                                <?php        
+                                    }else{
+                                ?>
                                 <td><?php echo $formation['mat_nom'] ?></td>
                                 <td><?php echo $formation['not_note'] ?></td>
                                 <td>
@@ -143,17 +150,26 @@ foreach ($etudiants as $etudiant) {
                                         <i class="fas fa-edit text-success awesome-size"></i>
                                     </a>
                                 </td>
+                                <?php        
+                                    }
+                                ?>
                             </tr>
                             <?php
                                 }
                             ?>
                             <tr>
-                                <td>Note géneral</td>
+                                <th>Note géneral</th>
                                 <?php
                                     foreach ($etuds as $etud) {
+                                        if($etud['etud_id'] != $etud['not_etudiant']){
                                 ?>
-                                <td colspan="2"><?php echo $etud['noteglobal'] ?></td>
+                                <th colspan="2">0</th>
                                 <?php
+                                    }else{
+                                ?>
+                                <th colspan="2"><?php echo $etud['noteglobal'] ?></th>
+                                <?php
+                                            }
                                         }
                                     }
                                 ?>

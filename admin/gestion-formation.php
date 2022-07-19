@@ -51,6 +51,7 @@ foreach ($etudiants as $etudiant) {
     }
 }
 $promos = $data->getPromotion();
+$seances = $data->getFormationMatiere();
 ?>
 
 <body>
@@ -84,8 +85,9 @@ $promos = $data->getPromotion();
                 }
                 ?>
                 <div class="<?php echo $class ?>">
-                    <a href="gérer-promotion" target="_blank" class="btn btn-primary">Gérer les promotion</a>
-                    <a href="absence?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Gérer l'absence</a>
+                    <button type="button" class="btn btn-primary btn-id" data-toggle="modal" data-target="#promotion" data-id="<?php echo $for_id ?>">Ajouter Promotion</button>
+                    <button type="button" class="btn btn-primary btn-id" data-toggle="modal" data-target="#absence" data-id="<?php echo $for_id ?>">Marquer l'absence</button>
+                    <a href="absence?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Etat d'absence</a>
                     <a href="notes?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Afficher les notes</a>
                 </div>
             </div>
@@ -131,7 +133,7 @@ $promos = $data->getPromotion();
                                             if($etudiant['etud_promos'] == 0 ){
                                         ?>
                                         <b>Veuillez saisir la promotion</b>
-                                        <button type="button" class="btn btn-primary btn-id-promotion" id="btn-id" data-toggle="modal" data-target="#modal" data-id="<?php echo $etudiant['etud_id'] ?>">Saisir</button>  
+                                        <button type="button" class="btn btn-primary btn-id-promotion" id="btn-id" data-toggle="modal" data-target="#saisit" data-id="<?php echo $etudiant['etud_id'] ?>">Saisir</button>  
                                         <?php     
                                             }else{
                                         ?>
@@ -141,7 +143,7 @@ $promos = $data->getPromotion();
                                         ?>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-id" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $etudiant['etud_id'] ?>">Détails</button>
+                                        <button type="button" class="btn btn-primary btn-id" data-toggle="modal" data-target="#information" data-id="<?php echo $etudiant['etud_id'] ?>">Détails</button>
                                         <a href="saisir-notes?id=<?php echo $etudiant['etud_id'] ?>" target="_blank" class="btn btn-primary">Saisir les notes</a>
                                     </td>
                                 </tr>
@@ -152,7 +154,8 @@ $promos = $data->getPromotion();
                     ?>
                 </tbody>
             </table>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- information etudiant modal -->
+            <div class="modal fade" id="information" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -171,7 +174,8 @@ $promos = $data->getPromotion();
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- Saisir promotion pour etudiant -->
+            <div class="modal fade" id="saisit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -182,6 +186,108 @@ $promos = $data->getPromotion();
                         </div>
                         <div class="modal-body">
                             <div id="load_students"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Absence modal -->
+            <div class="modal fade" id="absence" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="exampleModalLabel">Veuillez choisir un module</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <i class="fa-solid fa-circle-arrow-left" style="font-size:30px; display:none; cursor:pointer" id="retour"></i>
+                            </div>
+                            <div id="moduleform">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-8">
+                                        <h4 class="my-4 text-center">Avant de poursuivre veuillez choisir un module et une promtion pour la <?php echo $fornom ?></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div id="error"></div>
+                                        <i class="fas fa-folder-open position-awesome"></i>
+                                        <select class="custom-select px-5" name="module" id="module">
+                                            <option selected value="">--Choisir la module--</option>
+                                            <?php
+                                                foreach ($seances as $seance) {
+                                                    if ($seance['for_id'] == $id) {
+                                            ?>
+                                            <option value="<?php echo $seance['mat_id'] ?>"><?php echo $seance['mat_nom'] ?></option>
+                                            <?php
+                                                    }
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="mt-2 col-md-10">
+                                        <i class="fas fa-folder-open position-awesome"></i>
+                                        <select class="custom-select pl-5" name="promo" id="promo">
+                                            <option selected value="">--Choisir une promotion--</option>
+                                            <?php
+                                                foreach ($promos as $promo) {
+                                                    if($for_id == $promo['pro_formation']){
+                                            ?>
+                                            <option value="<?php echo $promo['pro_id'] ?>">Promotion <?php echo $promo['pro_groupe'] ?></option>
+                                            <?php
+                                                    }
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-10 mt-2">
+                                        <button type='submit' class="btn btn-primary submit_module" name="submit_module">Choisir</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="load"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Ajout de promotion modal -->
+            <div class="modal fade" id="promotion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="exampleModalLabel">Ajouter promotion</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h4 class="my-4 text-center">Veuillez Ajouter une promotion</h4>
+                            <form action="" method="post">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-10">
+                                        <i class="fas fa-folder-open position-awesome"></i>
+                                        <select class="custom-select pl-5" name="formation">
+                                            <option value="<?php echo $for_id ?>"><?php echo $fornom ?></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-10 mt-3">
+                                        <div class="d-flex">
+                                            <i class="fas fa-folder-open position-awesome"></i>
+                                            <input id="activity" type="text" class="form-control pl-5" name="promotion_name" autocomplete="activity" placeholder="Nom de la promotion" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10 my-3">
+                                        <button type="submit" class="btn btn-primary" name="submit_promotion">Ajouter la prmotion</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -207,6 +313,36 @@ $promos = $data->getPromotion();
                         $('#load_students').html(data);
                     })
                 });
+                $(".submit_module").click(function() {
+                    var module = $("#module").val();
+                    var promo = $("#promo").val();
+                    if(module == ''){
+                        $('#error').show();
+                        $('#error').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez choisir un module</div>');
+                    }else if(promo == ''){
+                        $('#error').show();
+                        $('#error').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez choisir une promotion</div>');
+                    }else{
+                        $('#error').hide();
+                        $('#error').hide();
+                        $("#moduleform").hide();
+                        $("#retour").show();
+                        $.post("../functions/traitement.php", {
+                        module:module,
+                        promo:promo,
+                        action: "module_submit"
+                        }, function(data) {
+                            $('#load').show();
+                            $('#load').html(data);
+                        })
+                    }
+                    $("#retour").click(function(){
+                        $("#moduleform").show();
+                        $('#load').hide();
+                        $("#retour").hide();
+                    })
+                });
+                
             })
         </script>
 </body>
@@ -215,5 +351,11 @@ $promos = $data->getPromotion();
 <?php
     if(isset($_POST['submit_promos'])){
         $data->updatePromotion();
+    }
+    if (isset($_POST['submit_promotion'])) {
+        $data->insertPromotion();
+    }
+    if (isset($_POST['absence_submit'])) {
+        $data->insertAbsence();
     }
 ?>

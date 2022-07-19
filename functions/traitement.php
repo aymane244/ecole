@@ -133,7 +133,7 @@ if(isset($_POST['action'])){
     if($_POST['action'] == 'student_promotion'){
         $etudiants = $data->getEtudiantNotes();
         $id = $_POST['id'];
-        $promos = $data->getEtudiantPromotion();
+        $promos = $data->getPromotion();
         foreach ($etudiants as $etudiant) {
             if ($etudiant['etud_id'] == $id) {
                 $fornom = $etudiant['for_nom'];
@@ -151,9 +151,11 @@ if(isset($_POST['action'])){
                 <select class="custom-select pl-5" name="promotion">
                     <option selected value="">--Choisir promotion--</option>';
                     foreach($promos as $promo){
-                        echo '<option value="'.$promo['pro_id'].'">Promotion '.$promo['pro_groupe'].'</option>';
+                        if($for_id == $promo['pro_formation']){
+                            echo '<option value="'.$promo['pro_id'].'">Promotion '.$promo['pro_groupe'].'</option>';
+                        }
                     }
-        echo '</select>
+                echo '</select>
             </div>
             <div class="row justify-content-center my-3">
                 <div class="col-md-12 text-center">
@@ -269,6 +271,96 @@ if(isset($_POST['action'])){
                 </div>';
             }
         }
+    }
+    if($_POST['action'] == 'module_submit'){
+        $seances = $data->getFormationMatiere();
+        $total_etudiants = $data->etudiantTotal();
+        $etudiants = $data->getFormationMatiereEtudiant();
+        $module = $_POST['module'];
+        $promotion = $_POST['promo'];
+        foreach ($seances as $seance) {
+            if ($seance['mat_id'] == $module) {
+                $matiere_nom =  $seance['mat_nom'];
+                $matiere_id =  $seance['mat_id'];
+                $formation_nom =  $seance['for_nom'];
+                $for_id =  $seance['for_id'];
+            }
+        }
+        foreach ($total_etudiants as $total_etudiant) {
+            if ($total_etudiant['mat_id'] == $module) {
+                $total = $total_etudiant['total_etudiant'];
+            }
+        }
+        echo '<div class="container">
+            <form action="" method="POST">
+                <div class="text-center py-3">
+                    <input type="hidden" value="'.$for_id.'" name="absence_formation">
+                </div>
+
+                <div class="d-flex justify-content-around mt-3">
+                    <h2>'.$matiere_nom.'</h2>
+                    <input type="hidden" value="'.$matiere_id.'" name="absence_matiere">
+                    <div class="d-flex">
+                        <i class="fas fa-calendar position-awesome"></i>
+                        <input id="absence_date" type="date" class="form-control pl-5" name="absence_date">
+                    </div>
+                </div>
+                <table class="table table-bordered mt-5 bg-white">
+                    <thead class="text-center text-white" style="background-color: #11101d;">
+                        <tr>
+                            <th scope="col" colspan="5">ARTL Nord</th>
+                        </tr>
+                        <tr>
+                            <th scope="col" colspan="5">'; 
+                                foreach ($total_etudiants as $total_etudiant) {
+                                    if($total_etudiant['etud_promos'] == $_POST['promo'] ){
+                                        echo 'Total etudiants: '.$total.'
+                                        <input type="hidden" value="'.$total.'" name="number_etudiant">';
+                                    }else{
+                                        echo 'Total etudiants : 0
+                                        <input type="hidden" value="'.$total.'" name="number_etudiant">'; 
+                                    }
+                                }
+                            echo '</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Etudiants</th>
+                            <th scope="col">Promotion</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">';   
+                        foreach ($etudiants as $etudiant) {
+                            if ($etudiant['mat_id'] == $module) {
+                                echo '<tr>
+                                    <td>
+                                        '.$etudiant['etud_nom'] . " " . $etudiant['etud_prenom'].'
+                                        <input type="hidden" value="'.$etudiant['etud_id'].'" name="absence_etudiant[]">
+                                    </td>
+                                    <td>Promotion '.$etudiant['pro_groupe'].'</td>
+                                    <td>
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-8">
+                                                <div class="d-flex">
+                                                    <i class="fas fa-user-check position-awesome"></i>
+                                                    <select class="custom-select pl-5" name="absence[]" id="absence">
+                                                        <option selected value="Présent">Présent</option>
+                                                        <option value="Absent">Absent</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>';
+                            }
+                        }
+                    echo '</tbody>
+                </table>
+                <div class="text-center py-3">
+                    <button class="btn btn-primary" type="submit" name="absence_submit" id="submit">Valider</button>
+                </div>
+            </form>
+        </div>';
     }
     if ($_POST['action']=='promotion') {
         $etudiants = $data->getEtudiantPromotion();
@@ -444,3 +536,22 @@ function date_in_arabic ($date){
         return confirm('Voulez-vous supprimer cet étudiant');
     }
 </script>
+<script>
+        $(document).ready(function(){
+            $("#submit").click(function(e){
+                var date = $("#absence_date").val();
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+                today = yyyy + '-' + mm + '-' + dd;
+                if(date == ''){
+                    e.preventDefault();
+                    $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir une date</div>');
+                }else if(date > today){
+                    e.preventDefault();
+                    $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">La date saisit ne doit pas être supérieure à la date d\'ajourd\'hui</div>');
+                }
+            })
+        })
+    </script>

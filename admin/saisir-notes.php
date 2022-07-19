@@ -136,7 +136,7 @@ foreach ($etudiants as $etudiant) {
                     <table class="table table-bordered mt-5 bg-white">
                         <thead class="text-center text-white" style="background-color: #11101d;">
                             <tr>
-                                <th scope="col" colspan="5">ALT Nord</th>
+                                <th scope="col" colspan="5">ARLT Nord</th>
                             </tr>
                             <tr>
                                 <th scop="col" colspan="5"><?php echo $for_nom ?></th>
@@ -172,12 +172,12 @@ foreach ($etudiants as $etudiant) {
                             }
                             ?>
                             <tr>
-                                <td>Note géneral</td>
+                                <th>Note géneral</th>
                                 <?php
                                 foreach ($notes as $note) {
                                     if ($note['etud_id'] == $id) {
                                 ?>
-                                        <td colspan="2"><?php echo $note['notegenerale'] ?></td>
+                                    <th colspan="2"><?php echo $note['notegenerale'] ?></th>
                                 <?php
                                     }
                                 }

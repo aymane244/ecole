@@ -43,15 +43,15 @@ $formations = $data->getformation();
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-                <img src="images/view/entropot.png" class="d-block img-fluid" alt="first" style="width:100%; max-height:81vh">
+                <img src="images/view/entropot_11zon.jpg" class="d-block img-fluid" alt="first" style="width:100%; max-height:81vh">
             </div>
             <div class="carousel-item">
                 <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-                <img src="images/view/seb.jpg" class="d-block img-fluid" alt="second" style="width:100%; max-height:81vh">
+                <img src="images/view/seb_11zon.jpg" class="d-block img-fluid" alt="second" style="width:100%; max-height:81vh">
             </div>
             <div class="carousel-item">
                 <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-                <img src="images/view/camions_group.png" class="d-block img-fluid" alt="third" style="width:100%; max-height:81vh">
+                <img src="images/view/camions_group_11zon.jpg" class="d-block img-fluid" alt="third" style="width:100%; max-height:81vh">
             </div>
         </div>
     </div>
@@ -301,7 +301,7 @@ $formations = $data->getformation();
                         <div class="col-lg-6 col-md-12">
                             <div class="text-center pt-3">
                                 <li class="card" style="height: 700px;">
-                                    <a class="card-im" href="formation?id=<?php echo $formation['for_id'] ?>" style="background-image: url(images/view/camion.png);position: relative;">
+                                    <a class="card-im" href="formation?id=<?php echo $formation['for_id'] ?>" style="background-image: url(images/view/camion_11zon.jpg);position: relative;">
                                         <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
                                     </a>
                                     <h1 class="text-white text-center px-3" style="position: absolute; z-index:4 ; filter: none !important;  margin-top: 80px; margin-left:auto; margin-right:auto; width:100% ">

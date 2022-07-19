@@ -92,7 +92,7 @@ foreach ($total_etudiants as $total_etudiant) {
                 </div>
             </form>
             <?php
-            if (!isset($_POST['submit_promotion'])) {
+                if (!isset($_POST['submit_promotion'])) {
             ?>
                 <h3 class="text-center mt-4">Veuillez séléctionner une promotion avent de poursuivre</h3>
             <?php
@@ -181,8 +181,8 @@ foreach ($total_etudiants as $total_etudiant) {
                     </div>
                 </form>
             <?php
+                    }
                 }
-            }
             ?>
         </div>
     </div>

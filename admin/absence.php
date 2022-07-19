@@ -41,9 +41,9 @@ foreach ($formations as $formations) {
             <?php include 'admin.php' ?>
         </header>
         <div class="container mt-5 py-5">
-            <div class="text-center">
+            <!-- <div class="text-center">
                 <h2><i class="fas fa-user-check"></i> Marquer l'absence</h2>
-            </div>
+            </div> -->
             <?php
             if (isset($_SESSION['status'])) {
             ?>
@@ -52,7 +52,7 @@ foreach ($formations as $formations) {
                 unset($_SESSION['status']);
             }
             ?>
-            <div class="row justify-content-center my-4">
+            <!-- <div class="row justify-content-center my-4">
                 <div class="col-md-6">
                     <div class="dropdown">
                         <p class="bg-white p-2 border rounded" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,7 +71,7 @@ foreach ($formations as $formations) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="text-center">
                 <h2 class=" pt-3"><i class="fas fa-user-check"></i> Etat d'absence</h2>
             </div>
@@ -94,7 +94,7 @@ foreach ($formations as $formations) {
                                 foreach ($seances as $seance) {
                                     if ($seance['for_id'] == $id) {
                                 ?>
-                                        <option value="<?php echo $seance['mat_id'] ?>"><?php echo $seance['mat_nom'] ?></option>
+                                    <option value="<?php echo $seance['mat_id'] ?>"><?php echo $seance['mat_nom'] ?></option>
                                 <?php
                                     }
                                 }

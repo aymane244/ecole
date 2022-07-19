@@ -4,6 +4,9 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
     echo "<script>window.location.href='login-admin'</script>";
 }
 $formations = $data->getFormation();
+foreach($formations as $formation){
+    $for_nom = $formation['for_nom'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">

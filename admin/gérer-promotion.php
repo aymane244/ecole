@@ -20,30 +20,44 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
     <title>Gérer les promotions</title>
 </head>
 <?php
-$etudiants = $data->getEtudiantPromotion();
-$promos = $data->getPromotion();
-?>
+$etudiants = $data->getEtudiantPromotionId();
 
+$formations = $data->getFormation();
+foreach($formations as $formation){
+    if($formation['for_id'] == $_GET['id']){
+        $for_nom = $formation['for_nom'];
+        $for_id = $formation['for_id'];
+    }
+}
+?>
 <body>
     <?php include_once "navbar-admin.php"; ?>
     <div class="main-content">
         <header>
-            <?php include 'admin.php' ?>
+            <?php include 'admin.php'; ?>
         </header>
         <div class="container mt-5 pt-5">
             <div class="text-center pt-3 mb-4">
                 <h2>Gestion de la promotion</h2>
             </div>
             <?php
-            if (isset($_SESSION['status'])) {
+                if (isset($_SESSION['status'])) {
             ?>
-                <div class="alert alert-success text-center" role="alert"><?php echo $_SESSION['status'] ?></div>
+                <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status'] ?></div>
             <?php
-                unset($_SESSION['status']);
-            }
+                    unset($_SESSION['status']);
+                }
+            ?>
+            <?php
+                if (isset($_SESSION['status_danger'])) {
+            ?>
+                <div class='alert alert-danger text-center mt-2' role='alert'><?php echo $_SESSION['status_danger'] ?></div>
+            <?php
+                    unset($_SESSION['status_danger']);
+                }
             ?>
             <div class="mt-4 text-center">
-                <a href="ajouter-promotion" target="_blank" class="btn btn-primary"><i class="fas fa-plus-square"></i> Ajouter une promotion</a>
+                <button type="button" class="btn btn-primary btn-id" data-toggle="modal" data-target="#Modal" data-id=""><i class="fas fa-plus-square"></i> Ajouter une promotion</button>
             </div>
             <table class="table table-hover mt-5 bg-white">
                 <thead class="text-center text-white" style="background-color: #11101d;">
@@ -53,6 +67,7 @@ $promos = $data->getPromotion();
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Promos</th>
+                        <th scope="col">Formation</th>
                         <th scope="col">Nombre d'étudiants</th>
                         <!--<th scope="col">Actions</th>-->
                     </tr>
@@ -72,6 +87,7 @@ $promos = $data->getPromotion();
                             <tr>
                                 <th scope="row"><?php echo $i++ ?></th>
                                 <td>Promotion <?php echo $etudiant['pro_groupe']; ?></td>
+                                <td>Promotion <?php echo $for_nom; ?></td>
                                 <td><?php echo $etudiant['total']; ?></td>
                                 <!--<td>
                             <form action="" method="POST">
@@ -87,22 +103,33 @@ $promos = $data->getPromotion();
                     ?>
                 </tbody>
             </table>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="promotion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title text-center" id="exampleModalLabel">Choisir la promotion</h5>
+                            <h5 class="modal-title text-center" id="exampleModalLabel">Ajouter promotion</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="" method="POST">
-                                <div id="load_data"></div>
-                                <div class="text-center font-style mt-4">
-                                    <button type="submit" class="btn btn-primary mb-3" name="submit_promos">Valider</button>
-                                </div>
-                            </form>
+                            <h4 class="my-4 text-center">Veuillez Ajouter une promotion</h4>
+                            <div class="row justify-content-center">
+                                <form action="" method="post">
+                                    <div class="col-md-10">
+                                        <i class="fas fa-folder-open position-awesome"></i>
+                                        <select class="custom-select px-5" name="formation">
+                                            <option value="<?php echo $for_id ?>"><?php echo $for_nom ?></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="d-flex">
+                                            <i class="fas fa-folder-open position-awesome"></i>
+                                            <input id="activity" type="text" class="form-control pl-5" name="promotion_name" autocomplete="activity" placeholder="Nom de la promotion" autofocus required>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                             </div>
@@ -110,7 +137,6 @@ $promos = $data->getPromotion();
                     </div>
                 </div>
             </div>
-        </div>
         <script>
             $(document).ready(function() {
                 $(".btn-id").click(function() {
@@ -127,8 +153,11 @@ $promos = $data->getPromotion();
 </body>
 
 </html>
-<?php
-if (isset($_POST['submit_promos'])) {
-    $data->updatePromotion();
-}
+<?php   
+    if (isset($_POST['submit_promos'])) {
+        $data->updatePromotion();
+    }
+    if (isset($_POST['submit_promotion'])) {
+        $data->insertPromotion();
+    }
 ?>

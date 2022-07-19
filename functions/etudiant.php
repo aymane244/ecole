@@ -173,8 +173,8 @@
                 $_SESSION['status'] = "Veuillez choisir un étudiant";
                 echo "<script>window.location.href='notes?id=$id'</script>";
             }
-            $result = $this->db->conn->query("SELECT * FROM `note` INNER JOIN `matiere` ON not_matiere=mat_id
-                INNER JOIN `etudiant` ON not_etudiant=etud_id WHERE etud_id=$etudiant");
+            $result = $this->db->conn->query("SELECT * FROM `note` RIGHT JOIN `matiere` ON not_matiere=mat_id
+                RIGHT JOIN `etudiant` ON not_etudiant=etud_id WHERE etud_id=$etudiant");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -909,11 +909,7 @@
             }
         }
         public function getFormationMatiereEtudiant(){
-            @$promotion = $_POST['promotion'];
-            if(isset($_POST['submit_promotion'])){
-                if($promotion == ''){
-                    $_SESSION['status_error'] = "Merci de choisir une promotion pour poursuivre";
-                }else{
+            @$promotion = $_POST['promo'];
                     $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
                     INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation  INNER JOIN `promos` ON pro_id=etud_promos WHERE etud_promos = '$promotion' ORDER BY pro_groupe");
                     $resultArray = array();
@@ -922,8 +918,7 @@
                         $resultArray[] = $item;
                     }
                     return $resultArray;
-                }
-            }
+            
         }
         public function getEtudiantFormationPromotion(){
             $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
@@ -936,7 +931,7 @@
             return $resultArray;
         }
         public function etudiantTotal(){
-            $id = $_GET['id'];
+            $id = $_POST['module'];
             $result = $this->db->conn->query("SELECT *, COUNT(etud_nom) AS 'total_etudiant' FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
             INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation INNER JOIN `promos` ON etud_promos=pro_id WHERE mat_id =$id GROUP BY mat_nom");
             $resultArray = array();
@@ -959,7 +954,7 @@
                 VALUES ('$absence_etudiant[$i]','$absence_date','$absence_formation','$absence_matiere','$absence[$i]')");
                 if($result){
                     $_SESSION['status'] = "Les données sont bien enregistrées";
-                    echo "<script>window.location.href='marquer-absence?id=$id'</script>";
+                    echo "<script>window.location.href='gestion-formation?id=$id'</script>";
                 }else{
                     echo $this->db->conn->error;
                 }
@@ -967,21 +962,17 @@
             }
         }
         public function insertPromotion(){
+            $id = $_GET['id'];
             $promotion_name =  mysqli_escape_string($this->db->conn, $_POST['promotion_name']);
-            $checkresult = $this->db->conn->query("SELECT `pro_groupe` FROM `promos` WHERE pro_groupe='$promotion_name'");
-            if($checkresult->num_rows){
-                $_SESSION['status_danger'] = "Nom existe déjà veuillez choisir un autre";
-                echo "<script>window.location.href='ajouter-promotion'</script>";
+            $formation = $_POST['formation'];
+            $result = $this->db->conn->query("INSERT INTO `promos`(`pro_formation`, `pro_groupe`) VALUES ('$formation','$promotion_name')");
+            if($result){
+                $_SESSION['status'] = "La promotion a été bien ajoutée";
+                echo "<script>window.location.href='gestion-formation?id=$id'</script>";
             }else{
-                $result = $this->db->conn->query("INSERT INTO `promos`(`pro_groupe`) VALUES ('$promotion_name')");
-                if($result){
-                    $_SESSION['status'] = "La promotion a été bien ajoutée";
-                    echo "<script>window.location.href='ajouter-promotion'</script>";
-                }else{
-                    echo $this->db->conn->error;
-                }
-                return $result;
+                echo $this->db->conn->error;
             }
+            return $result;
         }
         public function getEtudiantForma(){
             $result = $this->db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON etud_formation=for_id");
@@ -1910,6 +1901,16 @@
             }
             return $result;
         }
+        public function getEtudiantPromotionId(){
+            $id = $_GET['id'];
+            $result = $this->db->conn->query("SELECT `etud_id`, `etud_nom`, `etud_prenom`, `pro_id`, `pro_groupe`, COUNT(etud_promos) AS 'total' FROM `promos` 
+                    LEFT JOIN `etudiant` ON pro_id=etud_promos WHERE pro_formation=$id GROUP BY pro_groupe ORDER BY pro_groupe ASC");
+            $resultArray = array();
+            while($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray [] = $item;
+            }
+            return $resultArray;
+        }
         public function getEtudiantPromotion(){
             $result = $this->db->conn->query("SELECT `etud_id`, `etud_nom`, `etud_prenom`, `pro_id`, `pro_groupe`, COUNT(etud_promos) AS 'total' FROM `promos` 
                     LEFT JOIN `etudiant` ON pro_id=etud_promos GROUP BY pro_groupe ORDER BY pro_groupe ASC");
@@ -1920,7 +1921,7 @@
             return $resultArray;
         }
         public function getPromotion(){
-            $result = $this->db->conn->query("SELECT * FROM `promos`");
+            $result = $this->db->conn->query("SELECT * FROM `promos` INNER JOIN `formation` ON promos.pro_formation=formation.for_id");
             $resultArray = array();
             while($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                 $resultArray[] = $item; 
