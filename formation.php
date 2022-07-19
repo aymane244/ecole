@@ -98,11 +98,11 @@
                     <div class="col-lg-6" lang="ar">
                         <div class="py-4 px-3 mt-5 mb-lg-4 border text-justify bg-white">
                             <h4 class="text-color text-right"><u><?php echo $forma['presentation'] ?></u></h4>
-                            <div class="mx-3 mt-3 text-font">
+                            <div class="mx-3 mt-3" style="font-size: 20px;">
                                 <?php echo $for_pres_arab;?>
                             </div>
                             <h4 class="text-color text-right" ><u><?php echo $forma['description'] ?></u></h4>
-                            <div class="mx-3 mt-3 text-font" dir="rtl">
+                            <div class="mx-3 mt-3" dir="rtl" style="font-size: 20px;">
                                 <?php echo $for_desc_arab;?>
                             </div>
                         </div>
@@ -113,11 +113,11 @@
                     <div class="col-lg-6">
                         <div class="py-4 px-3 mt-5 mb-lg-4 border text-justify bg-white">
                             <h4 class="text-color"><u><?php echo $forma['presentation'] ?></u></h4>
-                            <div class="mx-3 mt-3 text-font ">
+                            <div class="mx-3 mt-3" style="font-size: 20px;">
                                 <?php echo $for_pres;?>
                             </div>
                             <h4 class="text-color" style="white-space: pre-line"><u><?php echo $forma['description'] ?></u></h4>
-                            <div class="ml-3 mt-3 text-font">
+                            <div class="ml-3 mt-3" style="font-size: 20px;">
                                 <?php echo $for_desc;?>
                             </div>
                         </div>

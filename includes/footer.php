@@ -179,12 +179,12 @@
             </div>
             <div class="col-lg-3 text-right" lang="ar">
                 <h4 class="text-color-footer"><?php echo $footer['liens'] ?></h4>
-                <div class="text-white">
-                    <div class="mt-3 mr-3"> <a href="index" class="text-white"><?php echo $navbar['Accueil'] ?></a> <i class="fas fa-caret-left"></i> </div>
-                    <div class="mt-3 mr-3"> <a href="ARTL-Nord" class="text-white"> ARTLN</a> <i class="fas fa-caret-left"></i> </div>
-                    <div class="mt-3 mr-3"> <a href="conseil" class="text-white"> <?php echo $navbar['Conseil'] ?></a> <i class="fas fa-caret-left"></i> </div>
-                    <div class="mt-3 mr-3"> <a href="location-salle" class="text-white"> <?php echo $navbar['salles'] ?></a> <i class="fas fa-caret-left"></i> </div>
-                    <div class="mt-3 mr-3"> <a href="actualités" class="text-white"> <?php echo $navbar['Actualites'] ?></a> <i class="fas fa-caret-left"></i> </div>
+                <div class="text-white mr-3">
+                    <div class="mt-3"> <a href="index" class="text-white"><?php echo $navbar['Accueil'] ?></a> <i class="fas fa-caret-left"></i> </div>
+                    <div class="mt-3"> <a href="ARTL-Nord" class="text-white"> ARTLN</a> <i class="fas fa-caret-left"></i> </div>
+                    <div class="mt-3"> <a href="conseil" class="text-white"> <?php echo $navbar['Conseil'] ?></a> <i class="fas fa-caret-left"></i> </div>
+                    <div class="mt-3"> <a href="location-salle" class="text-white"> <?php echo $navbar['salles'] ?></a> <i class="fas fa-caret-left"></i> </div>
+                    <div class="mt-3"> <a href="actualités" class="text-white"> <?php echo $navbar['Actualites'] ?></a> <i class="fas fa-caret-left"></i> </div>
                 </div>
             </div>
             <?php
@@ -192,12 +192,12 @@
             ?>
             <div class="col-lg-3">
                 <h4 class="text-color-footer"><?php echo $footer['liens'] ?></h4>
-                <div class="text-white">
-                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="index" class="text-white"> <?php echo $navbar['Accueil'] ?></a></div>
-                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="ARTL-Nord" class="text-white"> ARTLN</a></div>
-                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="conseil" class="text-white"> <?php echo $navbar['Conseil'] ?></a></div>
-                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="location-salle" class="text-white"> <?php echo $navbar['salles'] ?></a></div>
-                    <div class="mt-3 ml-3"><i class="fas fa-caret-right"></i> <a href="actualités" class="text-white"> <?php echo $navbar['Actualites'] ?></a></div>
+                <div class="text-white ml-3">
+                    <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="index" class="text-white"> <?php echo $navbar['Accueil'] ?></a></div>
+                    <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="ARTL-Nord" class="text-white"> ARTLN</a></div>
+                    <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="conseil" class="text-white"> <?php echo $navbar['Conseil'] ?></a></div>
+                    <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="location-salle" class="text-white"> <?php echo $navbar['salles'] ?></a></div>
+                    <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="actualités" class="text-white"> <?php echo $navbar['Actualites'] ?></a></div>
                 </div>
             </div>
             <div class="col-lg-3">
@@ -216,7 +216,7 @@
             </div>
             <div class="col-lg-3">
                 <h4 class="text-color-footer"><?php echo $footer['adresse_footer'] ?></h4>
-                <div class="text-white">
+                <div class="text-white mx-3">
                     <p><?php echo $footer['adresse'] ?><br> <?php echo $footer['ville'] ?></p>
                     <p class="pt-3">
                         <b><?php echo $footer['phone'] ?>: </b>+212664159137 <br>
@@ -228,7 +228,7 @@
             </div>
             <div class="col-lg-3">
                 <h4 class="text-color-footer"><?php echo $footer['propos'] ?></h4>
-                <div class="text-white">
+                <div class="text-white mx-3">
                     <p><?php echo $footer['artln'] ?></p>
                     <!-- <div class="d-flex pb-3 justify-content-center">
                         <div class="social-media social-div"><a href="#" class="text-white"><i class="fab fa-facebook-f facebook-position"></i></a></div>

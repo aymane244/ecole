@@ -71,11 +71,11 @@
                                             ?>
                                         </a>
                                     </h1>
-                                    <div class="mt-4 card-description">
+                                    <div class="mt-2 card-description">
                                         <?php
                                             if ($_SESSION['lang'] == "ar") {
                                         ?>
-                                        <div class="row">
+                                        <div class="row align-items-center justify-content-around">
                                             <div dir="rtl" lang="ar" class="col-md-4">
                                                 <strong>
                                                     <?php echo $image['sal_prix'] ?> <?php echo $salle['dirhams'] ?> <br>
@@ -89,7 +89,7 @@
                                         <?php
                                             } else {
                                         ?>
-                                        <div class="row justify-content-around">
+                                        <div class="row justify-content-around align-items-center">
                                             <div class="wrapp col-md-8">
                                                 <?php echo $image['sal_desc'];?>
                                             </div>        
@@ -117,7 +117,6 @@
                 <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>
             </div>
         </div>
-
         <?php include_once "includes/footer.php"; ?>
     </div>
     </div>

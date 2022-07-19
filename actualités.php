@@ -160,7 +160,7 @@ function date_in_arabic ($date){
                         </div>
                     </ul>
                 </div>
-                <div class="col-md-3 bg-white ml-4 border" style="border-radius: 10px;">
+                <div class="col-md-3 bg-white ml-4 border" style="border-radius: 10px; height:408.5px">
                     <div class="mt-4" style="overflow-y: auto; overflow-x:hidden; height:100%">
                         <div class="text-center text-color">
                             <h2 class="pt-2"><?php echo $artic['lire'] ?></h2>

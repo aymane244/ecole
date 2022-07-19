@@ -128,7 +128,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 bg-white py-3 mt-3 card" style="border-radius: 10px;">
+                    <div class="col-md-4 bg-white py-3 mt-3 card" style="border-radius: 10px; height:100%">
                         <div class="div-background" style="overflow-y: auto; overflow-x:hidden">
                             <div class="text-center text-color">
                                 <h2 class="pt-2"><?php echo $artic['lire'] ?></h2>

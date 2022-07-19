@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 18 juil. 2022 à 15:36
+-- Généré le : mar. 19 juil. 2022 à 12:54
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -188,13 +188,6 @@ CREATE TABLE `diplome` (
   `dip_etudiant` int(11) NOT NULL,
   `dip_image` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `diplome`
---
-
-INSERT INTO `diplome` (`dip_id`, `dip_etudiant`, `dip_image`) VALUES
-(19, 138, 'CV Aimane chnaif (5).pdf');
 
 -- --------------------------------------------------------
 
