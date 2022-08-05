@@ -33,7 +33,7 @@
   <?php include_once "navbar.php"; ?>
   <div class="div-background">
     <div class="text-white text-center text-big div-header">
-      <h1><?php echo $accompagenemt['accompagnement'] ?></h1>
+      <h1 class="h1-size-big"><?php echo $accompagenemt['accompagnement'] ?></h1>
     </div>
     <div style="position:relative">
       <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
@@ -108,10 +108,10 @@
         <hr class="hr-width">
       </div>
       <div class="row justify-content-center">
-        <ul class="card-list">
+        <div class="card-list">
           <div class="row justify-content-center">
             <div class="col-md-6 mt-4">
-              <li class="card pb-5">
+              <div class="card pb-5">
                 <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
                 </a>
@@ -137,11 +137,11 @@
                     }
                   ?>
                 </div>
-                <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
-              </li>
+                <button type="button" class="btn btn-dark mx-5 mt-4" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
+              </div>
             </div>
             <div class="col-md-6 mt-4">
-              <li class="card pb-5">
+              <div class="card pb-5">
                 <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
                 </a>
@@ -161,16 +161,17 @@
                 <div class="card-description mt-3 text-justify px-3">
                   <p>
                     <?php echo $accompagenemt['card_2_text'] ?>
+                    <br><br>
                   </p>
                 </div>
                 <?php       
                   }
                 ?>
-                <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
-              </li>
+                <button type="button" class="btn btn-dark mx-5 mt-4" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
+              </div>
             </div>
             <div class="col-md-6 mt-4">
-              <li class="card pb-5">
+              <div class="card pb-5">
                 <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
                 </a>
@@ -195,11 +196,11 @@
                 <?php       
                   }
                 ?>
-                <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
-              </li>
+                <button type="button" class="btn btn-dark mx-5 mt-4" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
+              </div>
             </div>
             <div class="col-md-6 mt-4">
-              <li class="card pb-5">
+              <div class="card pb-5">
                 <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;">
                   </div>
@@ -226,11 +227,11 @@
                     }
                   ?>
                 </div>
-                <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
-              </li>
+                <button type="button" class="btn btn-dark mx-5 mt-4" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
+              </div>
             </div>
             <div class="col-md-6 my-4">
-              <li class="card pb-5">
+              <div class="card pb-5">
                 <a class="card-im" style="background-image: url(images/view/2323.jpg);position: relative;">
                   <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;">
                   </div>
@@ -260,11 +261,11 @@
                 <?php       
                   }
                 ?>
-                <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
-              </li>
+                <button type="button" class="btn btn-dark mx-5 mt-4" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
+              </div>
             </div>
           </div>
-        </ul>
+        </div>
         <!-- <div class="container mt-3">
           <div class="row bg-white py-3 align-items-center">
             <div class="col-md-12">

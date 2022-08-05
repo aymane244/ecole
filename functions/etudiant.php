@@ -5,35 +5,35 @@
             if(!isset($db->conn)) return null;
             $this->db = $db;
         }
-        public function getImage(){
-            $result = $this->db->conn->query("SELECT * FROM `salle`");
-            $resultArray = array();
-            // fetch product data one by one
-            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                $resultArray[] = $item;
-            }
-            return $resultArray;
-        }
-        public function getSalle(){
-            $id = $_GET['nom'];
-            $result = $this->db->conn->query("SELECT * FROM `salle` WHERE REPLACE(sal_nom, ' ', '_')='$id'");
-            $resultArray = array();
-            // fetch product data one by one
-            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                $resultArray[] = $item;
-            }
-            return $resultArray;
-        }
-        public function getSalleModify(){
-            $id = $_GET['id'];
-            $result = $this->db->conn->query("SELECT * FROM `salle` WHERE sal_id='$id'");
-            $resultArray = array();
-            // fetch product data one by one
-            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                $resultArray[] = $item;
-            }
-            return $resultArray;
-        }
+        // public function getImage(){
+        //     $result = $this->db->conn->query("SELECT * FROM `salle`");
+        //     $resultArray = array();
+        //     // fetch product data one by one
+        //     while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+        //         $resultArray[] = $item;
+        //     }
+        //     return $resultArray;
+        // }
+        // public function getSalle(){
+        //     $id = $_GET['nom'];
+        //     $result = $this->db->conn->query("SELECT * FROM `salle` WHERE REPLACE(sal_nom, ' ', '_')='$id'");
+        //     $resultArray = array();
+        //     // fetch product data one by one
+        //     while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+        //         $resultArray[] = $item;
+        //     }
+        //     return $resultArray;
+        // }
+        // public function getSalleModify(){
+        //     $id = $_GET['id'];
+        //     $result = $this->db->conn->query("SELECT * FROM `salle` WHERE sal_id='$id'");
+        //     $resultArray = array();
+        //     // fetch product data one by one
+        //     while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+        //         $resultArray[] = $item;
+        //     }
+        //     return $resultArray;
+        // }
         public function sasirNotes(){
             $id_get = $_GET['id'];
             $id = $_POST['etudiants'];
@@ -66,8 +66,15 @@
                 `etud_scan_cin`, `etud_scan_permis`,`etud_scan_visite`, `etud_image`, NOW() FROM `etudiant` 
                 WHERE etud_id=$id");
             if($result){
-                $_SESSION['status'] = "Inscription bien effectuée";
+
+                if($_SESSION['lang'] == 'ar'){
+                    $_SESSION['status'] = "لقد تم التسجيل بنجاح";
+                }else{
+                    $_SESSION['status'] = "Inscription bien effectuée";
+                }
                 echo "<script>window.location.href='espace-stagiaire'</script>";
+                session_unset();
+                session_destroy();
             }else{
                 echo $this->db->conn->error;
             }
@@ -136,6 +143,16 @@
             }
             return $resultArray;
         }
+        public function getEtudiantNoteMatiere(){
+            $result = $this->db->conn->query("SELECT * FROM `note` RIGHT JOIN `matiere` ON not_matiere=mat_id
+                RIGHT JOIN `etudiant` ON not_etudiant=etud_id");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
         public function getEtudiantNote(){
             $id = $_SESSION['id'];
             $result = $this->db->conn->query("SELECT * FROM `note` INNER JOIN `matiere` ON not_matiere=mat_id
@@ -172,15 +189,17 @@
             if($etudiant == ''){
                 $_SESSION['status'] = "Veuillez choisir un étudiant";
                 echo "<script>window.location.href='notes?id=$id'</script>";
-            }
-            $result = $this->db->conn->query("SELECT * FROM `note` RIGHT JOIN `matiere` ON not_matiere=mat_id
-                RIGHT JOIN `etudiant` ON not_etudiant=etud_id WHERE etud_id=$etudiant");
-            $resultArray = array();
-            // fetch product data one by one
-            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            }else{
+                $result = $this->db->conn->query("SELECT * FROM `note` INNER JOIN `matiere` ON not_matiere=mat_id
+                INNER JOIN `etudiant` ON not_etudiant=etud_id WHERE etud_id=$etudiant");
+                $resultArray = array();
+                // fetch product data one by one
+                while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                 $resultArray[] = $item;
             }
             return $resultArray;
+            }
+
         }
         public function getEtudiantId(){
             $etudiant = $_POST['etudiants'];
@@ -205,7 +224,7 @@
         }
         public function getFormationMatiere(){
             $result = $this->db->conn->query("SELECT `mat_id`, `for_nom`, `for_nom_arab`, `mat_formation`, `mat_nom`, `mat_nom_arab`, 
-            `mat_prof`, `mat_prof_arab`, `mat_duree`, `for_id` FROM `formation` INNER JOIN `matiere` ON 
+            `mat_prof`, `mat_prof_arab`, `mat_duree`, `for_id` FROM `formation` LEFT JOIN `matiere` ON 
             formation.for_id=matiere.mat_formation ORDER BY for_nom");
             $resultArray = array();
             // fetch product data one by one
@@ -254,7 +273,7 @@
             return $resultArray;
         }
         public function updateNote(){
-            $id = $_GET['id'];
+            $id = $_POST['note_id'];
             $etudiant = $_POST['etudiants'];
             $note = $_POST['note'];
             $result = $this->db->conn->query("UPDATE `note` SET `not_note`='$note' WHERE not_id=$id");
@@ -320,54 +339,54 @@
             }
             return $result;
         }
-        public function updateSalle(){
-            $id = $_GET['id'];
-            $salle_prix = $_POST['salle_prix'];
-            $salle_personne = $_POST['salle_personne'];
-            $salle_service1 = $_POST['salle_service1'];
-            $salle_service2 = $_POST['salle_service2'];
-            $salle_service3 = $_POST['salle_service3'];
-            $salle_service4 = $_POST['salle_service4'];
-            $salle_service1_arab = $_POST['salle_service1_arab'];
-            $salle_service2_arab = $_POST['salle_service2_arab'];
-            $salle_service3_arab = $_POST['salle_service3_arab'];
-            $salle_service4_arab = $_POST['salle_service4_arab'];
-            $nom_salle = $_POST['nom_salle'];
-            $nom_salle_arab = $_POST['nom_salle_arab'];
-            $salle_desc = mysqli_escape_string($this->db->conn, $_POST['salle_descr']);
-            $salle_desc_arab = mysqli_escape_string($this->db->conn, $_POST['salle_descr_arab']);            
-            $image = basename($_FILES['salle_image']['name']);
-            $allowed = array('jpg', 'png', 'jpeg');
-            $ext = pathinfo($image, PATHINFO_EXTENSION); 
-            $path = "../images/salles/";
-            if(!in_array($ext, $allowed) && $image != ""){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                    L'image que vous avez choisit ".$image." est de type ".$ext.
-                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
-                </div>";
-            }else{
-                if(move_uploaded_file($_FILES['salle_image']['tmp_name'], $path.$image)){
-                    $result = $this->db->conn->query("UPDATE `salle` SET `sal_nom`='$nom_salle',`sal_nom_arab`='$nom_salle_arab',
-                    `sal_desc`='$salle_desc',`sal_desc_arab`='$salle_desc_arab',`sal_prix`='$salle_prix',`sal_personne`='$salle_personne',
-                    `sal_image`='$image',`sal_service`='$salle_service1',`sal_service2`='$salle_service2',`sal_service3`='$salle_service3',
-                    `sal_service4`='$salle_service4',`sal_service_arab`='$salle_service1_arab',`sal_service2_arab`='$salle_service2_arab',
-                    `sal_service3_arab`='$salle_service3_arab', `sal_service4_arab`='$salle_service4_arab' WHERE sal_id=$id");
-                }else{
-                    $result = $this->db->conn->query("UPDATE `salle` SET `sal_nom`='$nom_salle',`sal_nom_arab`='$nom_salle_arab',
-                    `sal_desc`='$salle_desc',`sal_desc_arab`='$salle_desc_arab',`sal_prix`='$salle_prix',`sal_personne`='$salle_personne',
-                    `sal_service`='$salle_service1',`sal_service2`='$salle_service2',`sal_service3`='$salle_service3',
-                    `sal_service4`='$salle_service4',`sal_service_arab`='$salle_service1_arab',`sal_service2_arab`='$salle_service2_arab',
-                    `sal_service3_arab`='$salle_service3_arab', `sal_service4_arab`='$salle_service4_arab' WHERE sal_id=$id");
-                }
-                if($result){
-                    $_SESSION['status'] = "La salle a été bien modifiée";
-                    echo "<script>window.location.href='salles'</script>";
-                }else{
-                    echo "not". $this->db->conn->error;
-                }
-                return $result;
-            }
-        }
+        // public function updateSalle(){
+        //     $id = $_GET['id'];
+        //     $salle_prix = $_POST['salle_prix'];
+        //     $salle_personne = $_POST['salle_personne'];
+        //     $salle_service1 = $_POST['salle_service1'];
+        //     $salle_service2 = $_POST['salle_service2'];
+        //     $salle_service3 = $_POST['salle_service3'];
+        //     $salle_service4 = $_POST['salle_service4'];
+        //     $salle_service1_arab = $_POST['salle_service1_arab'];
+        //     $salle_service2_arab = $_POST['salle_service2_arab'];
+        //     $salle_service3_arab = $_POST['salle_service3_arab'];
+        //     $salle_service4_arab = $_POST['salle_service4_arab'];
+        //     $nom_salle = $_POST['nom_salle'];
+        //     $nom_salle_arab = $_POST['nom_salle_arab'];
+        //     $salle_desc = mysqli_escape_string($this->db->conn, $_POST['salle_descr']);
+        //     $salle_desc_arab = mysqli_escape_string($this->db->conn, $_POST['salle_descr_arab']);            
+        //     $image = basename($_FILES['salle_image']['name']);
+        //     $allowed = array('jpg', 'png', 'jpeg');
+        //     $ext = pathinfo($image, PATHINFO_EXTENSION); 
+        //     $path = "../images/salles/";
+        //     if(!in_array($ext, $allowed) && $image != ""){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //             L'image que vous avez choisit ".$image." est de type ".$ext.
+        //             "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+        //         </div>";
+        //     }else{
+        //         if(move_uploaded_file($_FILES['salle_image']['tmp_name'], $path.$image)){
+        //             $result = $this->db->conn->query("UPDATE `salle` SET `sal_nom`='$nom_salle',`sal_nom_arab`='$nom_salle_arab',
+        //             `sal_desc`='$salle_desc',`sal_desc_arab`='$salle_desc_arab',`sal_prix`='$salle_prix',`sal_personne`='$salle_personne',
+        //             `sal_image`='$image',`sal_service`='$salle_service1',`sal_service2`='$salle_service2',`sal_service3`='$salle_service3',
+        //             `sal_service4`='$salle_service4',`sal_service_arab`='$salle_service1_arab',`sal_service2_arab`='$salle_service2_arab',
+        //             `sal_service3_arab`='$salle_service3_arab', `sal_service4_arab`='$salle_service4_arab' WHERE sal_id=$id");
+        //         }else{
+        //             $result = $this->db->conn->query("UPDATE `salle` SET `sal_nom`='$nom_salle',`sal_nom_arab`='$nom_salle_arab',
+        //             `sal_desc`='$salle_desc',`sal_desc_arab`='$salle_desc_arab',`sal_prix`='$salle_prix',`sal_personne`='$salle_personne',
+        //             `sal_service`='$salle_service1',`sal_service2`='$salle_service2',`sal_service3`='$salle_service3',
+        //             `sal_service4`='$salle_service4',`sal_service_arab`='$salle_service1_arab',`sal_service2_arab`='$salle_service2_arab',
+        //             `sal_service3_arab`='$salle_service3_arab', `sal_service4_arab`='$salle_service4_arab' WHERE sal_id=$id");
+        //         }
+        //         if($result){
+        //             $_SESSION['status'] = "La salle a été bien modifiée";
+        //             echo "<script>window.location.href='salles'</script>";
+        //         }else{
+        //             echo "not". $this->db->conn->error;
+        //         }
+        //         return $result;
+        //     }
+        // }
         public function updateEtudiant(){
             $id = $_GET['id'];
             $nom = $_POST['nom'];
@@ -394,6 +413,10 @@
                         "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
                     </div>";
             }else{
+                $resultfile = $this->db->conn->query("SELECT  `etud_image` FROM `etudiant` WHERE etud_id=$id");
+                while ($etudiant = $resultfile->fetch_assoc()){  
+                    unlink("../dossiers-stagiaires/".$etudiant['etud_prenom']."-".$etudiant['etud_nom']."/".$etudiant['etud_image']);
+                }
                 if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
                     $result = $this->db->conn->query("UPDATE `etudiant` SET `etud_nom`='$nom',`etud_nom_arab`='$nom_arab',
                     `etud_prenom`='$prenom',`etud_prenom_arabe`='$prenom_arab',`etud_email`='$email',`etud_telephone`='$phone',
@@ -496,6 +519,10 @@
                     "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
                 </div>";
             }else{
+                $resultfile = $this->db->conn->query("SELECT * FROM `article` WHERE art_id=$id");
+                    while ($etudiant = $resultfile->fetch_assoc()){  
+                    unlink("../images/articles/".$etudiant['art_image']);
+                }
                 if(move_uploaded_file($_FILES['image']['tmp_name'], $path.$image)){
                     $result = $this->db->conn->query("UPDATE `article` SET `art_titre`='$titre',`art_titre_arab`='$titre_arab',`art_texte`='$texte',
                         `art_texte_arab`='$texte_arab',`art_image`='$image' WHERE art_id=$id");
@@ -531,15 +558,15 @@
             }
             return $resultArray;
         }
-        public function getAttestation(){
-            $result = $this->db->conn->query("SELECT * FROM `attestation` INNER JOIN `etudiant` ON etud_id=att_etudiant");
-            $resultArray = array();
-            // fetch product data one by one
-            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                $resultArray[] = $item;
-            }
-            return $resultArray;
-        }
+        // public function getAttestation(){
+        //     $result = $this->db->conn->query("SELECT * FROM `attestation` INNER JOIN `etudiant` ON etud_id=att_etudiant");
+        //     $resultArray = array();
+        //     // fetch product data one by one
+        //     while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+        //         $resultArray[] = $item;
+        //     }
+        //     return $resultArray;
+        // }
         public function countNotes(){
             $result = $this->db->conn->query("SELECT *, COUNT(not_id) AS 'total_not' FROM `note` INNER JOIN `etudiant` ON etud_id=not_etudiant");
             $resultArray = array();
@@ -558,18 +585,17 @@
                 echo $this->db->conn->error;
             }
         }
-        public function deleteNote($note_id = null){
-            $count = $_POST['not_count'];
-            for($i=0;$i<$count; $i++){
-                $result= $this->db->conn->query("DELETE FROM `note` WHERE not_id=$note_id[$i]");
-                if($result){
+        // public function deleteNote($note_id = null){
+        //     $count = $_POST['not_count'];
+        //     for($i=0;$i<$count; $i++){
+        //         $result= $this->db->conn->query("DELETE FROM `note` WHERE not_id=$note_id[$i]");
+        //         if($result){
     
-                }else{
-                    echo $this->db->conn->error;
-                }
-            }
-
-        }
+        //         }else{
+        //             echo $this->db->conn->error;
+        //         }
+        //     }
+        // }
         public function deleteIso($iso_id = null){
             $result= $this->db->conn->query("DELETE FROM `iso` WHERE iso_id=$iso_id");
             if($result){
@@ -588,15 +614,15 @@
                 echo $this->db->conn->error;
             }
         }
-        public function deleteSalle($salle_id = null){
-            $result= $this->db->conn->query("DELETE FROM `salle` WHERE sal_id=$salle_id");
-            if($result){
-                $_SESSION['status'] = "La salle a été bien supprimée";
-                echo "<script>window.location.href='salles'</script>";
-            }else{
-                echo $this->db->conn->error;
-            }
-        }
+        // public function deleteSalle($salle_id = null){
+        //     $result= $this->db->conn->query("DELETE FROM `salle` WHERE sal_id=$salle_id");
+        //     if($result){
+        //         $_SESSION['status'] = "La salle a été bien supprimée";
+        //         echo "<script>window.location.href='salles'</script>";
+        //     }else{
+        //         echo $this->db->conn->error;
+        //     }
+        // }
         public function deleteCommentaires($comment_id = null){
             $id = $_GET['titre'];
             $result= $this->db->conn->query("DELETE FROM `commentaire` WHERE com_id=$comment_id");
@@ -614,20 +640,30 @@
         public function getEtudiantCinPwd(){
             $cin = $_POST['cin'];
             $pwd = md5($_POST['password']);
-            $result = $this->db->conn->query("SELECT * FROM `etudiant` WHERE etud_cin = '$cin' AND etud_motdepasse ='$pwd'");
-            while($etudiant = mysqli_fetch_assoc($result)){
-                $_SESSION['etud_cin'] = $etudiant['etud_cin'];
-                $_SESSION['etud_motdepasse'] = $etudiant['etud_motdepasse'];
-                $_SESSION['id'] = $etudiant['etud_id'];
-                $_SESSION['nom'] = $etudiant['etud_nom'];
-                echo "<script>window.location.href='espace-stagiaire'</script>";
-            }
-            if($_SESSION['lang'] == 'ar'){
-                $_SESSION['status'] = "رقم البطاقة الوطنية أو كلمة سر غير صحيحة";
+            $checkresult = $this->db->conn->query("SELECT `etud_promos` FROM `etudiant` WHERE etud_promos IS NULL AND etud_cin='$cin'");
+            if($checkresult->num_rows){
+                if($_SESSION['lang'] == 'ar'){
+                    $_SESSION['status_login'] = "يرجى الاتصال بالإدارة لتأكيد التسجيل الخاص بك";
+                }else{
+                    $_SESSION['status_login'] = "Veuillez contecter l'administration pour confirmer votre inscription";
+                }
             }else{
-                $_SESSION['status'] = "CIN ou mot de passe incorrecte";
+                $result = $this->db->conn->query("SELECT * FROM `etudiant` WHERE etud_cin = '$cin' AND etud_motdepasse ='$pwd'");
+                while($etudiant = mysqli_fetch_assoc($result)){
+                    $_SESSION['etud_cin'] = $etudiant['etud_cin'];
+                    $_SESSION['etud_motdepasse'] = $etudiant['etud_motdepasse'];
+                    $_SESSION['id'] = $etudiant['etud_id'];
+                    $_SESSION['nom'] = $etudiant['etud_nom'];
+                    echo "<script>window.location.href='espace-stagiaire'</script>";
+                }
+                if($_SESSION['lang'] == 'ar'){
+                    $_SESSION['status_login'] = "رقم البطاقة الوطنية أو كلمة المرور غير صحيحة";
+                }else{
+                    $_SESSION['status_login'] = "CIN ou mot de passe incorrecte";
+                }
+                return $result;
             }
-            return $result;
+
         }
         public function getEtudiantNotes(){
             $result = $this->db->conn->query("SELECT * FROM `etudiant` RIGHT JOIN `formation` ON etud_formation=for_id LEFT JOIN `promos`
@@ -672,10 +708,10 @@
             $result = $this->db->conn->query("SELECT `etud_email` FROM `etudiant` WHERE etud_email = '$email'");
             $result2 = $this->db->conn->query("SELECT `etud_cin` FROM `etudiant` WHERE etud_cin = '$cin'");
             if($result->num_rows){
-                $_SESSION['status_error'] = "Email existe déja";
+                $_SESSION['status_error_inscription'] = "Email existe déja";
             }
             else if($result2->num_rows){
-                $_SESSION['status_error'] = "CIN existe déja";
+                $_SESSION['status_error_inscription'] = "CIN existe déja";
             }else{
                 if($prenom == ''){
                     if($_SESSION['lang'] == 'ar'){
@@ -726,11 +762,11 @@
                     }else{
                         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir une date de naissance correcte</div>";
                     }
-                }else if((int)$age->format('%y') < 18){
+                }else if((int)$age->format('%y') < 21){
                     if($_SESSION['lang'] == 'ar'){
-                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>يجب أن يتجاوز عمرك 18 عامًا ، يرجى التحقق من تاريخ الميلاد</div>";
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>يجب أن يتجاوز عمرك 21 عامًا ، يرجى التحقق من تاريخ الميلاد</div>";
                     }else{
-                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Votre age doit dépasser 18 ans veuillez vérifier la date de naissance</div>";
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Votre age doit dépasser 21 ans veuillez vérifier la date de naissance</div>";
                     }
                 }else if($lieu == ''){
                     if($_SESSION['lang'] == 'ar'){
@@ -767,7 +803,7 @@
                         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre numéro de permis</div>";
                     }
                 }else if($categorie == ""){
-                    if($_SESSION['lnag'] == 'ar'){
+                    if($_SESSION['lang'] == 'ar'){
                         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء اختيار فئة رخصة السياقة</div>";
                     }else{
                         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez choisir une catégorie de permis</div>";
@@ -863,12 +899,12 @@
                     $newpermis = 'Permis' . '.' . end($temppermis);
                     $tempvisit = explode(".", $_FILES["scan_visite"]["name"]);
                     $newvisit = 'Visite' . '.' . end($tempvisit);
-                    if($path){
+                    
                         move_uploaded_file($_FILES['image']['tmp_name'], $path.$image);
                         move_uploaded_file($_FILES['scan_cin']['tmp_name'], $path.$newcin);
                         move_uploaded_file($_FILES['scan_permis']['tmp_name'], $path.$newpermis);
                         move_uploaded_file($_FILES['scan_visite']['tmp_name'], $path.$newvisit);   
-                    }
+                    
                     $res = $this->db->conn->query("INSERT INTO `etudiant`(`etud_nom`, `etud_nom_arab`, `etud_prenom`, `etud_prenom_arabe`, 
                         `etud_email`, `etud_telephone`, `etud_motdepasse`, `etud_cin`, `etud_formation`, `etud_naissance`, 
                         `etud_lieu_naissance`, `etud_adress`, `etud_permis`, `etud_cat_permis`, `etude_carte_pro`, `etud_permis_obt`, 
@@ -876,30 +912,27 @@
                         '$prenom','$prenom_arab','$email','$telephone','$motdepasse','$cin','$formation','$naissance','$lieu','$adresse',
                         '$permis','$categorie','$profesionnel','$obtenir','$newcin',
                         '$newpermis','$newvisit','$image',NOW())");
-                        /*$to = $_POST['email'];
-                        $subject = "Confirmation d'inscription";
-                        $headers = 'Content-type: text/html';
-                        $msg = "<img class='img-fluid' src='http://localhost/ecole/images/logo.jpeg' 
-                                style='width:16rem; height:60px' alt='logo'>
-                                <div style='text-align:center; align-items:center;'>
-                                    <h1>Confirmation d'inscription</h1><br>
-                                    <p><b>Merci d'avoir choisit notre institut.<b></p><br>
-                                    Veuillez trouvez ci-dessous vos identifiants:
-                                    <ul>
-                                        <li>idenatidiant: ".$_POST['cin']."</li>
-                                        <li>Mot de passe: ".$_POST['motdepasse']."</li>
-                                    </ul>
-                                    Pour plus d'information merci de visiter notre .<br>    
-                                    <a href='http://localhost/ecole/'>Click here</a>
-                                </div>";
-                        mail($to, $subject, $msg, $headers);*/
+                        //echo "<script>window.location.href='inscription'</script>";
+                        if($_SESSION['lang'] == 'ar'){
+                            $_SESSION['status_inscription'] = "تم التسجيل بنجاح";
+                        }else{
+                            $_SESSION['status_inscription'] = "Votre inscription a été bien effectué";
+                        }
                         echo "<script>window.location.href='login'</script>";
-                        $_SESSION['status_login'] = "Votre inscription a été bien effectué Veuillez ce connecter";
                     return $res;
                 } 
             }
         }
         public function deleteEtudiant($etudiant_id = null){
+            $resultfile = $this->db->conn->query("SELECT `etud_prenom`, `etud_nom`, `etud_scan_cin`, `etud_scan_permis`, `etud_scan_visite`, 
+            `etud_image` FROM `etudiant` WHERE etud_id=$etudiant_id");
+            while ($etudiant = $resultfile->fetch_assoc()){  
+                unlink("../dossiers-stagiaires/".$etudiant['etud_prenom']."-".$etudiant['etud_nom']."/".$etudiant['etud_scan_cin']);
+                unlink("../dossiers-stagiaires/".$etudiant['etud_prenom']."-".$etudiant['etud_nom']."/".$etudiant['etud_scan_permis']);
+                unlink("../dossiers-stagiaires/".$etudiant['etud_prenom']."-".$etudiant['etud_nom']."/".$etudiant['etud_scan_visite']);
+                unlink("../dossiers-stagiaires/".$etudiant['etud_prenom']."-".$etudiant['etud_nom']."/".$etudiant['etud_image']);
+                rmdir("../dossiers-stagiaires/".$etudiant['etud_prenom']."-".$etudiant['etud_nom']);
+            }
             $result= $this->db->conn->query("DELETE FROM `etudiant` WHERE etud_id=$etudiant_id");
             if($result){
                 $_SESSION['status'] = "Le stagiaire a été bien supprimé";
@@ -911,7 +944,7 @@
         public function getFormationMatiereEtudiant(){
             @$promotion = $_POST['promo'];
                     $result = $this->db->conn->query("SELECT * FROM `formation` INNER JOIN `matiere` ON formation.for_id=matiere.mat_formation 
-                    INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation  INNER JOIN `promos` ON pro_id=etud_promos WHERE etud_promos = '$promotion' ORDER BY pro_groupe");
+                    INNER JOIN `etudiant` ON formation.for_id=etudiant.etud_formation  INNER JOIN `promos` ON pro_id=etud_promos WHERE pro_id=$promotion ORDER BY pro_groupe");
                     $resultArray = array();
                     // fetch product data one by one
                     while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -943,36 +976,44 @@
         }
         public function insertAbsence(){
             $id = $_GET['id'];
+            $date = date("Y-m-d");
             $absence_formation = $_POST['absence_formation'];
             $absence_matiere = $_POST['absence_matiere'];
             $absence_date = $_POST['absence_date'];
             $absence_etudiant = $_POST['absence_etudiant'];
             $absence = $_POST['absence'];
             $number_etudiant = $_POST['number_etudiant'];
-            for($i=0;$i<$number_etudiant; $i++){
-                $result = $this->db->conn->query("INSERT INTO `absence`(`abs_etudiant`, `abs_date`, `abs_formation`, `abs_matiere`, `abs_absence`) 
-                VALUES ('$absence_etudiant[$i]','$absence_date','$absence_formation','$absence_matiere','$absence[$i]')");
+                for($i=0;$i<$number_etudiant; $i++){
+                    $result = $this->db->conn->query("INSERT INTO `absence`(`abs_etudiant`, `abs_date`, `abs_formation`, `abs_matiere`, `abs_absence`) 
+                    VALUES ('$absence_etudiant[$i]','$absence_date','$absence_formation','$absence_matiere','$absence[$i]')");
+                    if($result){
+                        $_SESSION['status'] = "Les données sont bien enregistrées";
+                        echo "<script>window.location.href='gestion-formation?id=$id'</script>";
+                    }else{
+                        echo $this->db->conn->error;
+                    }
+                }
+                return $result;
+            
+        }
+        public function insertPromotion(){
+            $id = $_GET['id'];
+            $promotion_name =  mysqli_escape_string($this->db->conn, $_POST['promotion_name']);
+            $formation = $_POST['formation'];
+            $checkresult = $this->db->conn->query("SELECT pro_groupe FROM `promos` WHERE pro_groupe='$promotion_name' AND pro_formation=$id");
+            if($checkresult->num_rows){
+                $_SESSION['error'] = $promotion_name." déjà existe";
+                echo "<script>window.location.href='gestion-formation?id=$id'</script>";
+            }else{
+                $result = $this->db->conn->query("INSERT INTO `promos`(`pro_formation`, `pro_groupe`) VALUES ('$formation','$promotion_name')");
                 if($result){
-                    $_SESSION['status'] = "Les données sont bien enregistrées";
+                    $_SESSION['status'] = "La promotion a été bien ajoutée";
                     echo "<script>window.location.href='gestion-formation?id=$id'</script>";
                 }else{
                     echo $this->db->conn->error;
                 }
                 return $result;
             }
-        }
-        public function insertPromotion(){
-            $id = $_GET['id'];
-            $promotion_name =  mysqli_escape_string($this->db->conn, $_POST['promotion_name']);
-            $formation = $_POST['formation'];
-            $result = $this->db->conn->query("INSERT INTO `promos`(`pro_formation`, `pro_groupe`) VALUES ('$formation','$promotion_name')");
-            if($result){
-                $_SESSION['status'] = "La promotion a été bien ajoutée";
-                echo "<script>window.location.href='gestion-formation?id=$id'</script>";
-            }else{
-                echo $this->db->conn->error;
-            }
-            return $result;
         }
         public function getEtudiantForma(){
             $result = $this->db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON etud_formation=for_id");
@@ -1001,23 +1042,23 @@
                 return $diplome_id;
             }
         }
-        public function getAttestationtId($attestationArray = null, $key = "att_etudiant"){
-          if ($attestationArray != null){
-            $attestation_id = array_map(function ($value) use($key){
-                return $value[$key];
-            }, $attestationArray);
-                return $attestation_id;
-            }
-        }
-        public function getDataAttestation(){
-            $result = $this->db->conn->query("SELECT * FROM `attestation` INNER JOIN `etudiant` ON att_etudiant=etud_id");
-            $resultArray = array();
-            // fetch product data one by one
-            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                $resultArray[] = $item;
-            }
-            return $resultArray;
-        }
+        // public function getAttestationtId($attestationArray = null, $key = "att_etudiant"){
+        //   if ($attestationArray != null){
+        //     $attestation_id = array_map(function ($value) use($key){
+        //         return $value[$key];
+        //     }, $attestationArray);
+        //         return $attestation_id;
+        //     }
+        // }
+        // public function getDataAttestation(){
+        //     $result = $this->db->conn->query("SELECT * FROM `attestation` INNER JOIN `etudiant` ON att_etudiant=etud_id");
+        //     $resultArray = array();
+        //     // fetch product data one by one
+        //     while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+        //         $resultArray[] = $item;
+        //     }
+        //     return $resultArray;
+        // }
         public  function insertIntoDiplome($params = null, $table = "diplome"){
             if ($this->db->conn != null){
                 if ($params != null){
@@ -1065,31 +1106,31 @@
                 }
             }
         }
-        public function addAttestation($etudiant){
-            if (isset($etudiant)){
-                $params = array(
-                    "att_etudiant" => $etudiant
-                );
-                $result = $this->insertIntoAttestation($params);
-                if ($result){
-                    if($_SESSION['lang'] == 'fr'){
-                        $_SESSION['status'] = "Votre demande a été bien envoyée";
-                    }else{
-                        $_SESSION['status'] = "لقد تم إرسال طلبك بنجاح";
-                    }
-                    echo "<script>window.location.href='espace-stagiaire'</script>";
-                }else{
-                    echo $this->db->conn->error;
-                }
-            }
-        }
+        // public function addAttestation($etudiant){
+        //     if (isset($etudiant)){
+        //         $params = array(
+        //             "att_etudiant" => $etudiant
+        //         );
+        //         $result = $this->insertIntoAttestation($params);
+        //         if ($result){
+        //             if($_SESSION['lang'] == 'fr'){
+        //                 $_SESSION['status'] = "Votre demande a été bien envoyée";
+        //             }else{
+        //                 $_SESSION['status'] = "لقد تم إرسال طلبك بنجاح";
+        //             }
+        //             echo "<script>window.location.href='espace-stagiaire'</script>";
+        //         }else{
+        //             echo $this->db->conn->error;
+        //         }
+        //     }
+        // }
         public function insertdouane(){
             $douane_nom = $_POST['douane_nom'];
             $douane_email = $_POST['douane_email'];
             $douane_message = mysqli_escape_string($this->db->conn, $_POST['douane_message']);
-            $douane_categorie= $_POST['douane_categorie'];
-            $result = $this->db->conn->query("INSERT INTO `douane`(`dou_nom`, `dou_res_nom`, `dou_res_email`, `dou_res_message`, `dou_res_date`) 
-                VALUES ('$douane_categorie','$douane_nom','$douane_email','$douane_message', NOW())");
+            // $douane_categorie= $_POST['douane_categorie'];
+            $result = $this->db->conn->query("INSERT INTO `douane`(`dou_res_nom`, `dou_res_email`, `dou_res_message`, `dou_res_date`) 
+                VALUES ('$douane_nom','$douane_email','$douane_message', NOW())");
             if($result){
                 if($_SESSION['lang'] == 'ar'){
                     $_SESSION['status'] = "تم إرسال طلب تصنيف الجمارك بشكل جيد";
@@ -1101,6 +1142,10 @@
             return $result;
         }
         public function deleteDiplome($diplome_id = null){
+            $resultfile = $this->db->conn->query("SELECT `dip_image` FROM `diplome` WHERE dip_id=$diplome_id");
+            while ($etudiant = $resultfile->fetch_assoc()){  
+                unlink("../demandes/".$etudiant['dip_image']);
+            }
             $result= $this->db->conn->query("DELETE FROM `diplome` WHERE dip_id=$diplome_id");
             if($result){
                 $_SESSION['status'] = "La demande de document 1 a été bien supprimée";
@@ -1221,7 +1266,7 @@
             return $resultArray;
         }
         public function getReservations(){
-            $result = $this->db->conn->query("SELECT * FROM `reservation` INNER JOIN `salle` ON sal_id=res_salle");
+            $result = $this->db->conn->query("SELECT * FROM `reservation`");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -1230,8 +1275,7 @@
             return $resultArray;
         }
         public function getReservationsCount(){
-            $result = $this->db->conn->query("SELECT COUNT(res_id) AS 'reservations' FROM `reservation` INNER JOIN `salle` 
-                ON sal_id=res_salle");
+            $result = $this->db->conn->query("SELECT COUNT(res_id) AS 'reservations' FROM `reservation`");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -1241,8 +1285,7 @@
         }
         public function getReservationsDate(){
             $date = date("Y-m-d");
-            $result = $this->db->conn->query("SELECT COUNT(res_id) AS 'reservations_date' FROM `reservation` INNER JOIN `salle` 
-                ON sal_id=res_salle WHERE res_ajout='$date'");
+            $result = $this->db->conn->query("SELECT *, COUNT(res_id) AS 'reservations_date' FROM `reservation` WHERE res_ajout='$date'");
             $resultArray = array();
             // fetch product data one by one
             while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -1278,21 +1321,27 @@
             $iso_email = $_POST['iso_email'];
             $iso_message = mysqli_escape_string($this->db->conn, $_POST['iso_message']);
             $iso_categorie= $_POST['iso_categorie'];
-                $result = $this->db->conn->query("INSERT INTO `iso`(`iso_nom`, `iso_res_nom`, `iso_res_email`, `iso_res_message`, `iso_res_date`) 
+            $result = $this->db->conn->query("INSERT INTO `iso`(`iso_nom`, `iso_res_nom`, `iso_res_email`, `iso_res_message`, `iso_res_date`) 
                 VALUES ('$iso_categorie','$iso_nom','$iso_email','$iso_message', NOW())");
-                if($result){
-                    if($_SESSION['lang'] == 'ar'){
-                        $_SESSION['status'] = "ISO تم إرسال طلب المصاحبة";
-                    }else{
-                        $_SESSION['status'] = "Votre demande d'accompagnement ISO a été bien envoyée";
-                    }
-                    echo "<script>window.location.href='conseil'</script>";
+            if($result){
+                if($_SESSION['lang'] == 'ar'){
+                    $_SESSION['status'] = "ISO تم إرسال طلب المصاحبة";
+                }else{
+                    $_SESSION['status'] = "Votre demande d'accompagnement ISO a été bien envoyée";
                 }
-                return $result;
-            
+                echo "<script>window.location.href='conseil'</script>";
+            }
+            return $result;
         }
         public function deleteArticle($id = null){
+            $resultfile = $this->db->conn->query("SELECT `art_image` FROM `article` WHERE art_id=$id");
+            while ($etudiant = $resultfile->fetch_assoc()){  
+                unlink("../images/articles/".$etudiant['art_image']);
+            }
             $result= $this->db->conn->query("DELETE FROM `article` WHERE art_id=$id");
+            while ($etudiant = $resultfile->fetch_assoc()){
+                unlink($etudiant['art_image']);
+            }
             if($result){
                 $_SESSION['status'] = "L'article a été bien supprimé";
                 echo "<script>window.location.href='articles'</script>";
@@ -1348,105 +1397,105 @@
             }
             return $resultArray;
         }
-        public function insertSalle(){
-            $nom_salle = $_POST['nom_salle'];
-            $nom_salle_arab = $_POST['nom_salle_arab'];
-            $salle_prix = $_POST['salle_prix'];
-            $salle_personne = $_POST['salle_personne'];
-            $salle_service1 = $_POST['salle_service1'];
-            $salle_service2 = $_POST['salle_service2'];
-            $salle_service3 = $_POST['salle_service3'];
-            $salle_service4 = $_POST['salle_service4'];
-            $salle_service1_arab = $_POST['salle_service1_arab'];
-            $salle_service2_arab = $_POST['salle_service2_arab'];
-            $salle_service3_arab = $_POST['salle_service3_arab'];
-            $salle_service4_arab = $_POST['salle_service4_arab'];
-            $salle_desc = mysqli_escape_string($this->db->conn, $_POST['salle_desc']);
-            $salle_desc_arab = mysqli_escape_string($this->db->conn, $_POST['salle_desc_arab']);
-            $image = basename($_FILES['salle_image']['name']);
-            $allowed = array('jpg', 'png', 'jpeg');
-            $ext = pathinfo($image, PATHINFO_EXTENSION);
-            $path = "../images/salles/";
-            if($nom_salle == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir un nom en français pour la salle
-                    </div>";
-            }else if($nom_salle_arab == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir un nom en arabe pour la salle
-                    </div>";
-            }else if($salle_desc == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir une description en français pour la salle
-                    </div>";
-            }else if($salle_desc_arab == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir une description en arabe pour la salle
-                    </div>";
-            }else if($salle_prix == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir un prix pour la salle
-                    </div>";
-            }else if($salle_personne == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir le nombre maximum de personne pour la salle
-                    </div>";
-            }else if($salle_service1 == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir le service 1 de la salle
-                    </div>";
-            }else if($salle_service2 == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir le service 2 de la salle
-                    </div>";
-            }else if($salle_service3 == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir le service 3 de la salle
-                    </div>";
-            }else if($salle_service4 == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir le service 4 de la salle
-                    </div>";
-            }else if($salle_service1_arab == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir le service 1 en arabe de la salle
-                    </div>";
-            }else if($salle_service2_arab == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir le service 2 en arabe de la salle
-                    </div>";
-            }else if($salle_service3_arab == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir le service 3 en arabe de la salle
-                    </div>";
-            }else if($salle_service4_arab == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez saisir le service 4 en arabe de la salle
-                    </div>";
-            }else if($image == ''){
-                echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                        Veuillez choisir une image pour la salle
-                    </div>";
-            }else if(!in_array($ext, $allowed)){
-                echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
-                    L'image que vous avez choisit ".$image." est de type ".$ext.
-                    "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
-                    </div>";
-            }else if(move_uploaded_file($_FILES['salle_image']['tmp_name'], $path.$image)){
-                $result = $this->db->conn->query("INSERT INTO `salle`(`sal_nom`, `sal_nom_arab`, `sal_desc`, `sal_desc_arab`, `sal_prix`, 
-                `sal_personne`, `sal_image`, `sal_service`, `sal_service2`, `sal_service3`, `sal_service4`, `sal_service_arab`, 
-                `sal_service2_arab`, `sal_service3_arab`, `sal_service4_arab`) VALUES ('$nom_salle','$nom_salle_arab','$salle_desc','$salle_desc_arab',
-                '$salle_prix','$salle_personne','$image','$salle_service1','$salle_service2','$salle_service3','$salle_service4',
-                '$salle_service1_arab','$salle_service2_arab','$salle_service3_arab','$salle_service4_arab')");
-                if($result){
-                    $_SESSION['status'] = "La Salle a été bien ajoutée";
-                    echo "<script>window.location.href='salles'</script>";
-                }else{
-                    echo "not good ".$this->db->conn->error;
-                }
-                return $result;
-            }
-        }
+        // public function insertSalle(){
+        //     $nom_salle = $_POST['nom_salle'];
+        //     $nom_salle_arab = $_POST['nom_salle_arab'];
+        //     $salle_prix = $_POST['salle_prix'];
+        //     $salle_personne = $_POST['salle_personne'];
+        //     $salle_service1 = $_POST['salle_service1'];
+        //     $salle_service2 = $_POST['salle_service2'];
+        //     $salle_service3 = $_POST['salle_service3'];
+        //     $salle_service4 = $_POST['salle_service4'];
+        //     $salle_service1_arab = $_POST['salle_service1_arab'];
+        //     $salle_service2_arab = $_POST['salle_service2_arab'];
+        //     $salle_service3_arab = $_POST['salle_service3_arab'];
+        //     $salle_service4_arab = $_POST['salle_service4_arab'];
+        //     $salle_desc = mysqli_escape_string($this->db->conn, $_POST['salle_desc']);
+        //     $salle_desc_arab = mysqli_escape_string($this->db->conn, $_POST['salle_desc_arab']);
+        //     $image = basename($_FILES['salle_image']['name']);
+        //     $allowed = array('jpg', 'png', 'jpeg');
+        //     $ext = pathinfo($image, PATHINFO_EXTENSION);
+        //     $path = "../images/salles/";
+        //     if($nom_salle == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir un nom en français pour la salle
+        //             </div>";
+        //     }else if($nom_salle_arab == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir un nom en arabe pour la salle
+        //             </div>";
+        //     }else if($salle_desc == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir une description en français pour la salle
+        //             </div>";
+        //     }else if($salle_desc_arab == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir une description en arabe pour la salle
+        //             </div>";
+        //     }else if($salle_prix == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir un prix pour la salle
+        //             </div>";
+        //     }else if($salle_personne == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir le nombre maximum de personne pour la salle
+        //             </div>";
+        //     }else if($salle_service1 == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir le service 1 de la salle
+        //             </div>";
+        //     }else if($salle_service2 == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir le service 2 de la salle
+        //             </div>";
+        //     }else if($salle_service3 == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir le service 3 de la salle
+        //             </div>";
+        //     }else if($salle_service4 == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir le service 4 de la salle
+        //             </div>";
+        //     }else if($salle_service1_arab == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir le service 1 en arabe de la salle
+        //             </div>";
+        //     }else if($salle_service2_arab == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir le service 2 en arabe de la salle
+        //             </div>";
+        //     }else if($salle_service3_arab == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir le service 3 en arabe de la salle
+        //             </div>";
+        //     }else if($salle_service4_arab == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez saisir le service 4 en arabe de la salle
+        //             </div>";
+        //     }else if($image == ''){
+        //         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //                 Veuillez choisir une image pour la salle
+        //             </div>";
+        //     }else if(!in_array($ext, $allowed)){
+        //         echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
+        //             L'image que vous avez choisit ".$image." est de type ".$ext.
+        //             "<br>Nous supportons juste les images de type 'jpg, png, jpeg'
+        //             </div>";
+        //     }else if(move_uploaded_file($_FILES['salle_image']['tmp_name'], $path.$image)){
+        //         $result = $this->db->conn->query("INSERT INTO `salle`(`sal_nom`, `sal_nom_arab`, `sal_desc`, `sal_desc_arab`, `sal_prix`, 
+        //         `sal_personne`, `sal_image`, `sal_service`, `sal_service2`, `sal_service3`, `sal_service4`, `sal_service_arab`, 
+        //         `sal_service2_arab`, `sal_service3_arab`, `sal_service4_arab`) VALUES ('$nom_salle','$nom_salle_arab','$salle_desc','$salle_desc_arab',
+        //         '$salle_prix','$salle_personne','$image','$salle_service1','$salle_service2','$salle_service3','$salle_service4',
+        //         '$salle_service1_arab','$salle_service2_arab','$salle_service3_arab','$salle_service4_arab')");
+        //         if($result){
+        //             $_SESSION['status'] = "La Salle a été bien ajoutée";
+        //             echo "<script>window.location.href='salles'</script>";
+        //         }else{
+        //             echo "not good ".$this->db->conn->error;
+        //         }
+        //         return $result;
+        //     }
+        // }
         public function insertMatiere(){
             $formation = $_POST['formation'];
             $matiere = $_POST['matiere'];
@@ -1517,7 +1566,7 @@
             $texte = mysqli_escape_string($this->db->conn, $_POST['texte']);
             $texte_arab = mysqli_escape_string($this->db->conn, $_POST['texte_arab']);
             $image = basename($_FILES['image']['name']);
-            $allowed = array('jpg', 'png', 'jpeg');
+            $allowed = array('jpg', 'png', 'jpeg', 'JPG', 'PNG', 'JPEG');
             $ext = pathinfo($image, PATHINFO_EXTENSION);
             $path = "../images/articles/";
             if($titre == ''){
@@ -1676,37 +1725,29 @@
             }
             return $resultArray;
         }
+        public function getEtudiantFormationPromo(){
+            $result = $this->db->conn->query("SELECT * FROM `etudiant` INNER JOIN  `formation` ON formation.for_id=etudiant.etud_formation
+                                            INNER JOIN `promos` ON promos.pro_id=etud_promos GROUP BY pro_id");
+            $resultArray = array();
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
         public function getabsence(){
-            @$get_matiere = $_POST['get_matiere'];
             @$absence_date = $_POST['absence_date'];
-            if(isset($_POST['absence_submit'])){
-                if($get_matiere == ''){
-                    $_SESSION['status_error'] = "Veuillez saisir un module";
-                }else if($absence_date == ''){
-                    $_SESSION['status_error'] = "Veuillez saisir une date";
-                }else{
-                    $checkresdate = $this->db->conn->query("SELECT `abs_date`,`abs_matiere` FROM `absence` WHERE abs_date !='$absence_date' AND abs_matiere='$get_matiere'");
-                    $checkresmodule = $this->db->conn->query("SELECT `abs_date`,`abs_matiere` FROM `absence` WHERE abs_date ='$absence_date' AND abs_matiere!='$get_matiere'");
-                    $checkresmoduledate = $this->db->conn->query("SELECT `abs_date`,`abs_matiere` FROM `absence` WHERE abs_date !='$absence_date' AND abs_matiere!='$get_matiere'");
-                    if($checkresdate->num_rows){
-                        $_SESSION['status_error'] = "La date que vous avez saisit ne corresponds à aucune date de cours";
-                    }else if($checkresmodule->num_rows){
-                        $_SESSION['status_error'] = "Le module que vous avez saisit ne correspands pas à cette date d'absence ".$absence_date;
-                    }/*else if($checkresmoduledate->num_rows){
-                        $_SESSION['status_error'] = "Aucune donnée ne correspand à votre recherche";
-                    }*/else{
+            @$get_promo = $_POST['get_promo'];
                         $result = $this->db->conn->query("SELECT * FROM `absence` INNER JOIN `etudiant` 
-                        ON absence.abs_etudiant=etudiant.etud_id INNER JOIN `formation` ON absence.abs_formation=formation.for_id 
-                        WHERE abs_matiere='$get_matiere' AND abs_date='$absence_date' GROUP BY etud_id, abs_date");  
+                        ON absence.abs_etudiant=etudiant.etud_id INNER JOIN `matiere` ON absence.abs_matiere=matiere.mat_id
+                        WHERE etud_promos='$get_promo' AND abs_date='$absence_date'");  
                         $resultArray = array();
                         // fetch product data one by one
                         while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                             $resultArray[] = $item;
                         }
                         return $resultArray;
-                    }
-                }
-            }
+                    
             
         }
         public function getabsenceetudiant(){
@@ -1733,7 +1774,7 @@
         }
         public function getTotalAbsenceAdmin(){
             $id = $_POST['id'];
-            $result = $this->db->conn->query("SELECT *, COUNT(abs_id) AS 'Total' FROM `absence` INNER JOIN `etudiant` 
+            $result = $this->db->conn->query("SELECT COUNT(abs_id) AS 'Total' FROM `absence` INNER JOIN `etudiant` 
             ON absence.abs_etudiant=etudiant.etud_id WHERE abs_absence='Absent' AND etud_id='$id'");
             $resultArray = array();
             // fetch product data one by one
@@ -1773,6 +1814,21 @@
             return $resultArray;
         }
         public function insertContact(){
+            function verify($response){
+                $ip = $_SERVER['REMOTE_ADDR'];
+                $key = "6LfgOzAhAAAAABjuBf3feQnKUAFok71RPQSR0oWJ";
+                $url = 'https://www.google.com/recaptcha/api/siteverify';
+                $full_url = $url.'?secret='.$key.'&response='.$response.'&remoteip='.$ip;
+              
+                $data_recaptcha = json_decode(file_get_contents($full_url));
+                if(isset($data_recaptcha->success) && $data_recaptcha->success == true){
+                   return true;
+                }
+                return false;
+              }
+            if(isset($_POST['g-recaptcha-response'])){
+                echo verify($_POST['g-recaptcha-response']);
+            }
             $nom = $_POST['nom'];
             $email = $_POST['email'];
             $message = mysqli_escape_string($this->db->conn, $_POST['message']);
@@ -1784,7 +1840,7 @@
             }else{
                 echo '<div class="alert alert-success text-center mt-2" role="alert" id="btn-fermer">Votre message a été envoyé avec succes</div>'; 
             }
-            return $result;
+            return $result;    
         }
         public function insertReservation(){
             $reservation_nom = $_POST['reservation_nom'];
@@ -1844,8 +1900,8 @@
         public function getEtudiantNotesSearch(){
             if(isset($_POST['nom'])){
                 $nom = $_POST['nom'];
-                $result = $this->db->conn->query("SELECT *, AVG(not_note) AS 'notegenerale' FROM `etudiant` LEFT JOIN `note` ON not_etudiant=etud_id 
-                    LEFT JOIN `formation` ON etud_formation=for_id GROUP BY not_etudiant HAVING etud_nom LIKE '%".$nom."%' OR etud_prenom LIKE '%".$nom."%'");
+                $result = $this->db->conn->query("SELECT * FROM `etudiant` LEFT JOIN `formation` ON etud_formation=for_id 
+                    GROUP BY etud_id HAVING etud_nom LIKE '%".$nom."%' OR etud_prenom LIKE '%".$nom."%' OR CONCAT(etud_prenom, ' ', etud_nom) LIKE '%".$nom."%'");
                 $resultArray = array();
                 // fetch product data one by one
                 while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -1853,8 +1909,7 @@
                 }
                 return $resultArray;
             }else{
-                $result = $this->db->conn->query("SELECT *, AVG(not_note) AS 'notegenerale' FROM `etudiant` LEFT JOIN `note` ON not_etudiant=etud_id 
-                    INNER JOIN `formation` ON etud_formation=for_id GROUP BY etud_nom");
+                $result = $this->db->conn->query("SELECT * FROM `etudiant` LEFT JOIN `formation` ON etud_formation=for_id GROUP BY etud_id");
                 $resultArray = array();
                 // fetch product data one by one
                 while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -1882,22 +1937,43 @@
             $email =  $_POST['email'];
             $result = $this->db->conn->query("UPDATE `etudiant` SET `etud_motdepasse`='$password' WHERE etud_email='$email'");
             $to = $_POST['email'];
-            $subject = "Nouveau mot de passe";
-            $headers = 'Content-type: text/html';
-            $msg = "<img class='img-fluid' src='http://localhost/ecole/images/logo.jpeg' 
-                    style='width:16rem; height:60px' alt='logo'>
-                    <div style='text-align:center; align-items:center;'>
-                        <h1>Changement de mot de passe</h1><br>
-                        <p><b>Veuillez trouvez ci-dessous le nouveau mot de passe de votre compte.<b></p><br>
-                        <ul>
-                            <li>Mot de passe: ".$_POST['password']."</li>
-                        </ul>
-                        <p><b>Veuillez ne communiquer ce mot de passe à perseonne .<b></p><br>
-                    </div>";
-            mail($to, $subject, $msg, $headers);
+            	$subject = "Nouveau mot de passe";
+            	$headers = 'Content-type: text/html; charset=ISO-8859-1';
+            	$headers .= 'MIME-Version: 1.0'; 
+            	$msg = "<div style='display: block;
+                        font-size: 0;
+                        background-color: #F3F8FA;
+                        padding-top: 30px;
+                        padding-bottom:30px;'>
+                    <div style='width: 60% !important;
+                    margin-right:auto;
+                    margin-left:auto;
+                    margin-top:15px;
+                    margin-bottom:15px;
+                    padding-top: 30px;
+                    padding-bottom:30px;
+                    font-size: 1rem;
+                    text-decoration: none;
+                    background-color: white'>
+                        <div style='display: block;
+                        padding: 1em 0.5em;
+                        color: black;
+                        text-decoration: none;'>
+                            <img class='img-fluid' src='https://maritimenews.ma/images/logo/logo-ARTL-NORD-page-001---Copie.jpg' style='width:16rem; height:60px' alt='logo'>
+                            <div style='align-items:center; text-align:center'>
+                                <h2 style='align-items:center;'>Changement de mot de passe</h3>
+                                <h3>Veuillez trouvez ci-dessous le nouveau mot de passe:<b></h3>
+                                <h3 style='background-color: black; color:white; padding:5px; border-radius:5px; width:50%; margin-right:auto; margin-left:auto;'>Mot de passe: ".$_POST['password']."</h2><br>
+                                <h3>Veuillez ne communiquer ce mot de passe à personne.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+            	mail($to, $subject, $msg, $headers);
             if($result){
                 $_SESSION['status_arab'] = "تم تغيير كلمة المرور الخاصة بك بنجاح تم إرسال كلمة المرور الجديدة إلى مربع بريدك الإلكتروني";
                 $_SESSION['status'] = "Votre mot de passe à été modifié avec succès Le nouveau mot de passe a été envoyé à votre boite email";
+                echo "<script>window.location.href='login'</script>";
             }
             return $result;
         }
@@ -1914,6 +1990,15 @@
         public function getEtudiantPromotion(){
             $result = $this->db->conn->query("SELECT `etud_id`, `etud_nom`, `etud_prenom`, `pro_id`, `pro_groupe`, COUNT(etud_promos) AS 'total' FROM `promos` 
                     LEFT JOIN `etudiant` ON pro_id=etud_promos GROUP BY pro_groupe ORDER BY pro_groupe ASC");
+            $resultArray = array();
+            while($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray [] = $item;
+            }
+            return $resultArray;
+        }
+        public function getEtudiantPromotionFormation(){
+            $result = $this->db->conn->query("SELECT `etud_id`, `etud_nom`, `etud_prenom`, `pro_id`, `pro_groupe`, COUNT(etud_promos) AS 'total' FROM `promos` 
+                    LEFT JOIN `etudiant` ON pro_id=etud_promos INNER JOIN `formation` ON promos.pro_formation=formation.for_id GROUP BY pro_groupe ORDER BY pro_groupe ASC");
             $resultArray = array();
             while($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                 $resultArray [] = $item;
@@ -2097,7 +2182,7 @@
             $ext = pathinfo($image, PATHINFO_EXTENSION);
             $result = $this->db->conn->query("SELECT `adm_email` FROM `admin` WHERE adm_email = '$email'");
             if($result->num_rows){
-                $_SESSION['status'] = "email existe déjà";
+                $_SESSION['statusinscription_admin'] = "email existe déjà";
             }else{
                 if(!in_array($ext, $allowed) & $image != ""){
                     echo  "<div class='alert alert-danger text-center mt-3 container' role='alert'>
@@ -2109,8 +2194,8 @@
                     $result = $this->db->conn->query("INSERT INTO `admin`(`adm_prenom`, `adm_nom`, `adm_email`, `adm_password`, `adm_image`, `adm_registre`) 
                         VALUES ('$prenom','$nom','$email','$motdepasse','$image',NOW())");
                         if($result){
-                            $_SESSION['success'] = "Inscription réussite";
-                            echo "<script>window.location.href='login-admin'</script>";
+                            $_SESSION['success_admin'] = "Inscription réussite";
+                            echo "<script>window.location.href='index'</script>";
                         }
                     return $result;
                 }
@@ -2130,8 +2215,8 @@
                 $_SESSION['image'] = $admin['adm_image'];
                 echo "<script>window.location.href='dashboard'</script>";
             }
-            echo "<script>window.location.href='login-admin'</script>";
-            $_SESSION['status'] = "Email ou mot de passe incorrecte";
+            echo "<script>window.location.href='index'</script>";
+            $_SESSION['error_login_admin'] = "Email ou mot de passe incorrecte";
             return $result;
         }
         public function getAdmin(){
@@ -2143,28 +2228,45 @@
             }
             return $resultArray;
         }
-        public function updatePassword(){
+        public function updatePasswordAdmin(){
             $password = md5($_POST['password']);
             $email =  $_POST['email'];
             $result = $this->db->conn->query("UPDATE `admin` SET `adm_password`='$password' WHERE adm_email='$email'");
             $to = $_POST['email'];
             $subject = "Nouveau mot de passe";
             $headers = 'Content-type: text/html';
-            $msg = "<img class='img-fluid' src='http://localhost/ecole/images/logo.jpeg' 
-                    style='width:16rem; height:60px' alt='logo'>
-                    <div style='text-align:center; align-items:center;'>
-                        <h1>Changement de mot de passe</h1><br>
-                        <p><b>Veuillez trouvez ci-dessous le nouveau mot de passe de votre compte.<b></p><br>
-                        <ul>
-                            <li>Mot de passe: ".$_POST['password']."</li>
-                        </ul>
-                        <p><b>Veuillez ne communiquer ce mot de passe à perseonne .<b></p><br>
-                    </div>";
+            $msg = "<div style='display: block;
+            font-size: 0;
+            background-color: #F3F8FA;
+            padding-top: 30px;
+            padding-bottom:30px;'>
+        <div style='width: 60% !important;
+        margin-right:auto;
+        margin-left:auto;
+        margin-top:15px;
+        margin-bottom:15px;
+        padding-top: 30px;
+        padding-bottom:30px;
+        font-size: 1rem;
+        text-decoration: none;
+        background-color: white'>
+            <div style='display: block;
+            padding: 1em 0.5em;
+            color: black;
+            text-decoration: none;'>
+                <img class='img-fluid' src='https://maritimenews.ma/images/logo/logo-ARTL-NORD-page-001---Copie.jpg' style='width:16rem; height:60px' alt='logo'>
+                <div style='align-items:center; text-align:center'>
+                    <h2 style='align-items:center;'>Changement de mot de passe</h3>
+                    <h3>Veuillez trouvez ci-dessous le nouveau mot de passe:<b></h3>
+                    <h3 style='background-color: black; color:white; padding:5px; border-radius:5px; width:50%; margin-right:auto; margin-left:auto;'>Mot de passe: ".$_POST['password']."</h2><br>
+                    <h3>Veuillez ne communiquer ce mot de passe à personne.</h3>
+                </div>
+            </div>
+        </div>
+    </div>";
             mail($to, $subject, $msg, $headers);
-            if($result){
-                echo "<script>window.location.href='login-admin'</script>";
-                $_SESSION['status'] = "Votre mot de passe à été modifié avec succès Le nouveau mot de passe a été envoyé à votre boite email";
-            }
+                echo "<script>window.location.href='index'</script>";
+                $_SESSION['success_password'] = "Votre mot de passe à été modifié avec succès Le nouveau mot de passe a été envoyé à votre boite email";
             return $result;
         }
     }

@@ -42,7 +42,7 @@
         <?php include_once "navbar.php";?>
         <div class="div-background">
             <div class="text-white text-center text-big div-header">
-                <h1 class="text-center pt-3" id="top">
+                <h1 class="text-center pt-3 h1-size-big">
                     <?php
                         if($_SESSION['lang'] =="ar"){
                             echo $for_nom_arab;

@@ -1,11 +1,4 @@
 <?php include_once "../session.php";?>
-<?php
-    $formations = $data->getformation();
-    $promos = $data->getPromotion();
-    foreach($promos as $promo){
-        $promoid = $promo['pro_id']; 
-    }
-?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -28,11 +21,11 @@
                     }
                 ?>
                 <?php
-                    if(isset($_SESSION['status'])){
+                    if(isset($_SESSION['statusinscription_admin'])){
                 ?>
-                <div class='alert alert-danger text-center' role='alert'><?php echo $_SESSION['status']?></div>
+                <div class='alert alert-danger text-center' role='alert'><?php echo $_SESSION['statusinscription_admin']?></div>
                 <?php
-                        unset($_SESSION['status']);
+                        unset($_SESSION['statusinscription_admin']);
                     }
                 ?>
                 <div class="row">

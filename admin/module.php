@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 $formations = $data->getFormationMatiere();
 $arr = array();
@@ -105,6 +105,11 @@ foreach ($formations as $row) {
                                     <td><?php echo $prof[$i] ?></td>
                                     <td><?php echo $duree[$i] ?>h</td>
                                     <td>
+                                        <?php
+                                            if(!$mat_id[$i]){
+                                                echo '';
+                                            }else{
+                                        ?>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <a href="modifier-module?id=<?php echo $mat_id[$i] ?>" target="_blank">
@@ -114,12 +119,16 @@ foreach ($formations as $row) {
                                             <div class="col-md-6">
                                                 <form action="" method="POST">
                                                     <input type="hidden" name="matiere_id" value="<?php echo $mat_id[$i] ?>">
-                                                    <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer ce module")'>
+                                                    <button type="submit" class="btn-style" name="submit_mat" onclick='return confirm("Voulez-vous supprimer ce module")'>
                                                         <i class="fas fa-trash-alt text-danger awesome-size"></i>
                                                     </button>
                                                 </form>
                                             </div>
                                         </div>
+                                        <?php        
+                                            }
+                                        ?>
+                                        
                                     </td>
                                 </tr>
                         <?php
@@ -130,94 +139,14 @@ foreach ($formations as $row) {
                 </table>
                 <br>
             </div>
-            <?php
-            // $arr_arab = array();
-            // $matieres_arab = array();
-            // $formationame_arab = array();
-            // $prof_arab = array();
-            // foreach ($formations as $row) {
-            //     array_push($formationame_arab, $row['for_nom_arab']);
-            //     array_push($matieres_arab, $row['mat_nom_arab']);
-            //     array_push($prof_arab, $row['mat_prof_arab']);
-            //     if (!isset($arr_arab[$row['for_nom_arab']])) {
-            //         $arr_arab[$row['for_nom_arab']]['rowspan'] = 0;
-            //     }
-            //     $arr_arab[$row['for_nom_arab']]['printed'] = 'no';
-            //     $arr_arab[$row['for_nom_arab']]['rowspan'] += 1;
-            // }
-            ?>
-            <!-- <div id="arabe" style="display:none">
-                <table class="table table-bordered bg-white mt-5">
-                    <thead class="text-center text-white" style="background-color: #11101d;">
-                        <tr>
-                            <th scope="col" colspan="5">الأكاديمية الجهوية للنقل واللوجستيك بجهة طنجة</th>
-                        </tr>
-                        <tr>
-                            <th scope="col">إجراءات</th>
-                            <th scope="col">مدة دراسة الوحدة</th>
-                            <th scope="col">اسم المؤطر</th>
-                            <th scope="col">اسم الوحدة</th>
-                            <th scope="col">اسم التكوين</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <?php
-                        if (empty($formations)) {
-                        ?>
-                            <tr>
-                                <th scope="row" colspan="7">
-                                    <h2>لم يتم حفظ أي وحدة يرجى إضافة وحدة جديدة</h2>
-                                </th>
-                            </tr>
-                            <?php
-                        } else {
-                            for ($i = 0; $i < sizeof($matieres_arab); $i++) {
-                                $formationom_arab = $formationame_arab[$i];
-                            ?>
-                                <tr>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <a href="modifier-module?id=<?php echo $mat_id[$i] ?>" target="_blank">
-                                                    <i class="fas fa-edit text-success awesome-size"></i>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <form action="" method="POST">
-                                                    <input type="hidden" name="matiere_id" value="<?php echo $mat_id[$i] ?>">
-                                                    <button type="submit" class="btn-style" name="submit" onclick='return confirm("Voulez-vous supprimer ce module")'>
-                                                        <i class="fas fa-trash-alt text-danger awesome-size"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><?php echo $duree[$i] ?>h</td>
-                                    <td><?php echo $prof_arab[$i] ?></td>
-                                    <td><?php echo $matieres_arab[$i] ?> </td>
-                                    <?php
-                                    if ($arr_arab[$formationom_arab]['printed'] == 'no') {
-                                    ?>
-                                        <td class="row-style" rowspan="<?php echo $arr_arab[$formationom_arab]['rowspan'] ?>"><?php echo $formationom_arab ?></td>
-                                    <?php
-                                        $arr_arab[$formationom_arab]['printed'] = 'yes';
-                                    }
-                                    ?>
-                                </tr>
-                        <?php
-                            }
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div> -->
+            
         </div>
     </div>
 </body>
 
 </html>
 <?php
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit_mat'])) {
     $data->deleteMatieres($_POST['matiere_id']);
 }
 ?>

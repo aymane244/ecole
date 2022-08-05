@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 $iso = $data->getiso();
 $douane = $data->getdouane();
@@ -115,7 +115,6 @@ $douane = $data->getdouane();
                             <th scope="col">#</th>
                             <th scope="col">Nom</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Douane</th>
                             <th scope="col">Message</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -138,7 +137,6 @@ $douane = $data->getdouane();
                                     <th scope="row"><?php echo $i++ ?></th>
                                     <td><?php echo $item['dou_res_nom']; ?></td>
                                     <td><?php echo $item['dou_res_email']; ?></td>
-                                    <td><?php echo $item['dou_nom']; ?></td>
                                     <td><?php echo $item['dou_res_message']; ?></td>
                                     <td class="row-style">
                                         <form action="" method="POST">

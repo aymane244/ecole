@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
     <title>Gérer les promotions</title>
 </head>
 <?php
-$etudiants = $data->getEtudiantPromotionId();
+$etudiants = $data->getEtudiantPromotionFormation();
 
 $formations = $data->getFormation();
 foreach($formations as $formation){
@@ -40,25 +40,9 @@ foreach($formations as $formation){
             <div class="text-center pt-3 mb-4">
                 <h2>Gestion de la promotion</h2>
             </div>
-            <?php
-                if (isset($_SESSION['status'])) {
-            ?>
-                <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status'] ?></div>
-            <?php
-                    unset($_SESSION['status']);
-                }
-            ?>
-            <?php
-                if (isset($_SESSION['status_danger'])) {
-            ?>
-                <div class='alert alert-danger text-center mt-2' role='alert'><?php echo $_SESSION['status_danger'] ?></div>
-            <?php
-                    unset($_SESSION['status_danger']);
-                }
-            ?>
-            <div class="mt-4 text-center">
+            <!-- <div class="mt-4 text-center">
                 <button type="button" class="btn btn-primary btn-id" data-toggle="modal" data-target="#Modal" data-id=""><i class="fas fa-plus-square"></i> Ajouter une promotion</button>
-            </div>
+            </div> -->
             <table class="table table-hover mt-5 bg-white">
                 <thead class="text-center text-white" style="background-color: #11101d;">
                     <tr>
@@ -86,8 +70,8 @@ foreach($formations as $formation){
                         ?>
                             <tr>
                                 <th scope="row"><?php echo $i++ ?></th>
-                                <td>Promotion <?php echo $etudiant['pro_groupe']; ?></td>
-                                <td>Promotion <?php echo $for_nom; ?></td>
+                                <td><?php echo $etudiant['pro_groupe']; ?></td>
+                                <td><?php echo $for_nom; ?></td>
                                 <td><?php echo $etudiant['total']; ?></td>
                                 <!--<td>
                             <form action="" method="POST">

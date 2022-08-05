@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 ?>
 <!DOCTYPE html>
@@ -18,21 +18,21 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
         include_once "../includes/scripts.php";
     ?>
     <style>
-    .modal {
+    .modal-absence {
   		padding: 0 !important;
 	}
-	.modal .modal-dialog {
+	.modal-absence .modal-dialog-absence {
   		width: 100%;
   		max-width: none;
   		height: 100%;
   		margin: 0;
 	}
-	.modal .modal-content {
+	.modal-absence .modal-content-absence {
   		height: 100%;
   		border: 0;
   		border-radius: 0;
 	}
-	.modal .modal-body {
+	.modal-absence .modal-body-absence {
   		overflow-y: auto;
 	}
     </style>
@@ -69,8 +69,20 @@ $seances = $data->getFormationMatiere();
                     unset($_SESSION['status']);
                 }
             ?>
+            <?php 
+                if(isset($_SESSION['error'])){
+            ?>
+            <div class="alert alert-danger text-center mt-2" role="alert"><?php echo $_SESSION['error']?></div>
+            <?php
+                    unset($_SESSION['error']);
+                }
+            ?>
             <div class="text-center py-3">
-                <h2>Gestion de la formation</h2>
+                <h2>
+                    Gestion de la 
+                    <br>
+                    <?php echo $fornom ?>
+                </h2>
             </div>
             <div class="text-center mt-4">
                 <?php
@@ -94,6 +106,16 @@ $seances = $data->getFormationMatiere();
 
             <div class="text-center pt-5 pb-3">
                 <h3>Liste des stagiaires</h3>
+            </div>
+            <div class="d-flex">
+                <form action="../functions/download.php" method="post">
+                    <input type="hidden" name="for_id" id="" value="<?php echo $for_id ?>">
+                    <button type="submit" class="btn text-success" name="xsl_download" style="font-size: 35px; outline:none"><i class="fa-solid fa-file-excel"></i></button>
+                </form>
+                <form action="../functions/pdf.php" method="post" target="_blank">
+                    <input type="hidden" name="for_id" id="" value="<?php echo $for_id ?>">
+                    <button type="submit" class="btn text-danger" name="pdf_download" style="font-size: 35px; outline:none"><i class="fa-solid fa-file-pdf"></i></button>
+                </form>
             </div>
             <table class="table table-hover bg-white">
                 <thead class="text-center text-white" style="background-color: #11101d;">
@@ -137,14 +159,24 @@ $seances = $data->getFormationMatiere();
                                         <?php     
                                             }else{
                                         ?>
-                                        Promotion <?php echo $etudiant['pro_groupe'] ?>
+                                        <?php echo $etudiant['pro_groupe'] ?>
                                         <?php     
                                             }
                                         ?>
                                     </td>
                                     <td>
+                                        <?php
+                                            if($etudiant['etud_promos'] == 0 ){
+                                        ?>
+                                        <strong>Merci de saisir la promotion pour le stagiaire</strong>
+                                        <?php     
+                                            }else{
+                                        ?>
                                         <button type="button" class="btn btn-primary btn-id" data-toggle="modal" data-target="#information" data-id="<?php echo $etudiant['etud_id'] ?>">Détails</button>
                                         <a href="saisir-notes?id=<?php echo $etudiant['etud_id'] ?>" target="_blank" class="btn btn-primary">Saisir les notes</a>
+                                        <?php     
+                                            }
+                                        ?>
                                     </td>
                                 </tr>
                     <?php
@@ -156,7 +188,7 @@ $seances = $data->getFormationMatiere();
             </table>
             <!-- information etudiant modal -->
             <div class="modal fade" id="information" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog modal-dialog-scrollable modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title text-center" id="exampleModalLabel">Informations personnelles</h5>
@@ -165,11 +197,10 @@ $seances = $data->getFormationMatiere();
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div id="load_data">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            </div>
+                            <div id="load_data"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                         </div>
                     </div>
                 </div>
@@ -187,20 +218,23 @@ $seances = $data->getFormationMatiere();
                         <div class="modal-body">
                             <div id="load_students"></div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        </div>
                     </div>
                 </div>
             </div>
             <!-- Absence modal -->
-            <div class="modal fade" id="absence" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
+            <div class="modal fade modal-absence" id="absence" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-absence">
+                    <div class="modal-content modal-content-absence">
                         <div class="modal-header">
                             <h5 class="modal-title text-center" id="exampleModalLabel">Veuillez choisir un module</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body modal-body-absence">
                             <div class="container">
                                 <i class="fa-solid fa-circle-arrow-left" style="font-size:30px; display:none; cursor:pointer" id="retour"></i>
                             </div>
@@ -233,7 +267,7 @@ $seances = $data->getFormationMatiere();
                                                 foreach ($promos as $promo) {
                                                     if($for_id == $promo['pro_formation']){
                                             ?>
-                                            <option value="<?php echo $promo['pro_id'] ?>">Promotion <?php echo $promo['pro_groupe'] ?></option>
+                                            <option value="<?php echo $promo['pro_id'] ?>"><?php echo $promo['pro_groupe'] ?></option>
                                             <?php
                                                     }
                                                 }
@@ -245,7 +279,7 @@ $seances = $data->getFormationMatiere();
                                     </div>
                                 </div>
                             </div>
-                            <div id="load"></div>
+                                <div id="load"></div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -265,6 +299,9 @@ $seances = $data->getFormationMatiere();
                             </button>
                         </div>
                         <div class="modal-body">
+                            <div class="text-center">
+                                <a href="gérer-promotion?id=<?php echo $for_id ?>" target="_blank" class="btn btn-primary">Afficher les promotions</a>
+                            </div>
                             <h4 class="my-4 text-center">Veuillez Ajouter une promotion</h4>
                             <form action="" method="post">
                                 <div class="row justify-content-center">

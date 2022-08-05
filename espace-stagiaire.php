@@ -7,7 +7,7 @@
     $formations = $data->getformation();
     $articles = $data->getArticle();
     $diplomes = $data->getDataDiplome();
-    $attestations = $data->getAttestation();
+    // $attestations = $data->getAttestation();
     $absences = $data->getabsenceetudiant();
     $totalabsences = $data->getTotalAbsence();
     foreach($absences as $absence){
@@ -74,7 +74,7 @@
                         <div class="text-center">
                             <?php
                                 if($etud_image === ""){
-                                    echo '<img src="images/etudiants/unknown_person.jpg" alt="" class="card-image">';
+                                    echo '<img src="images/unknown.jpg" alt="" class="card-image">';
                                 }
                             ?>
                             <p><img src="dossiers-stagiaires/<?php echo $etud_prenom.'-'.$etud_nom.'/'.$etud_image ?>" alt=""  class="card-image"></p>
@@ -154,23 +154,23 @@
                                     }
                                 ?>
                             </form>    
-                            <form action="" method="POST">
+                            <!-- <form action="" method="POST">
                                 <input type="hidden" name="student_id" value="<?php echo $etud_id ?? '1'; ?>">
                                 <?php
-                                    foreach($attestations as $attestation){
-                                        if($_SESSION['id'] == $attestation['etud_id']){
-                                            if($attestation['att_image'] == ''){
-                                                echo '<button type="submit" disabled class="btn btn-info button-style ml-3">'.$espaceetudiant['envoyee'].'</button>';
-                                            }else if(in_array($etud_id, $data->getAttestationtId($data->getDataAttestation()) ?? [])){
-                                                echo '<a href="mes-documents" class="btn btn-info button-style ml-3">'.$espaceetudiant['Attestation'].'</a>';
-                                            }
-                                        }
-                                    }
-                                    if(!in_array($etud_id, $data->getAttestationtId($data->getDataAttestation()) ?? [])){
-                                        echo '<button type="submit" name="attestation_submit" class="btn btn-info button-style ml-3">'.$espaceetudiant['Demande_att'].'</button>';
-                                    }
+                                    // foreach($attestations as $attestation){
+                                    //     if($_SESSION['id'] == $attestation['etud_id']){
+                                    //         if($attestation['att_image'] == ''){
+                                    //             echo '<button type="submit" disabled class="btn btn-info button-style ml-3">'.$espaceetudiant['envoyee'].'</button>';
+                                    //         }else if(in_array($etud_id, $data->getAttestationtId($data->getDataAttestation()) ?? [])){
+                                    //             echo '<a href="mes-documents" class="btn btn-info button-style ml-3">'.$espaceetudiant['Attestation'].'</a>';
+                                    //         }
+                                    //     }
+                                    // }
+                                    // if(!in_array($etud_id, $data->getAttestationtId($data->getDataAttestation()) ?? [])){
+                                    //     echo '<button type="submit" name="attestation_submit" class="btn btn-info button-style ml-3">'.$espaceetudiant['Demande_att'].'</button>';
+                                    // }
                                ?>
-                            </form>
+                            </form> -->
                         </div>
                         <hr class="bg-light">
                     </div>
@@ -227,9 +227,9 @@
     }
 ?>
 <?php
-    if($_SERVER['REQUEST_METHOD'] == "POST"){
-        if (isset($_POST['attestation_submit'])){
-            $data->addAttestation($_POST['student_id']);
-        }
-    }
+    // if($_SERVER['REQUEST_METHOD'] == "POST"){
+    //     if (isset($_POST['attestation_submit'])){
+    //         $data->addAttestation($_POST['student_id']);
+    //     }
+    // }
 ?>

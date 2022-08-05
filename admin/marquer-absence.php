@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 $etudiants = $data->getFormationMatiereEtudiant();
 $promos = $data->getPromotion();
@@ -44,11 +44,7 @@ foreach ($total_etudiants as $total_etudiant) {
 </head>
 
 <body>
-    <?php include_once "navbar-admin.php"; ?>
-    <div class="main-content">
-        <header>
-            <?php include 'admin.php' ?>
-        </header>
+
         <div class="container mt-5 pt-5">
             <div class="text-center py-3">
                 <h2><i class="fas fa-user-check"></i> Absence</h2>
@@ -151,25 +147,24 @@ foreach ($total_etudiants as $total_etudiant) {
                                     if ($etudiant['mat_id'] == $id) {
                             ?>
                                     <tr>
-                                        <td>
-                                            <?php echo $etudiant['etud_nom'] . " " . $etudiant['etud_prenom'] ?>
-                                            <input type="hidden" value="<?php echo $etudiant['etud_id'] ?>" name="absence_etudiant[]">
-                                        </td>
-                                        <td>Promotion <?php echo $etudiant['pro_groupe'] ?></td>
-                                        <td>
-                                            <div class="row justify-content-center">
-                                                <div class="col-md-8">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-user-check position-awesome"></i>
-                                                        <select class="custom-select pl-5" name="absence[]" id="absence">
-                                                            <option selected value="Présent">Présent</option>
-                                                            <option value="Absent">Absent</option>
-                                                        </select>
-                                                    </div>
+                                    <td>
+                                        <?php echo $etudiant['etud_nom'] . " " . $etudiant['etud_prenom'] ?>
+                                        <input type="hidden" value="<?php echo $etudiant['etud_id'] ?>" name="absence_etudiant[]">
+                                    </td>
+                                    <td>
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-8">
+                                                <div class="d-flex">
+                                                    <i class="fas fa-user-check position-awesome"></i>
+                                                    <select class="custom-select pl-5" name="absence[]" id="absence">
+                                                        <option selected value="Présent">Présent</option>
+                                                        <option value="Absent">Absent</option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                        </td>
-                                    </tr>
+                                        </div>
+                                    </td>
+                                </tr>
                             <?php 
                                     }
                                 }

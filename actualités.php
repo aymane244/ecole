@@ -49,7 +49,7 @@ function date_in_arabic ($date){
             /* number of lines to show */
             line-clamp: 4;
             -webkit-box-orient: vertical;
-            height: 110px;
+            height: 100px;
         }
     </style>
     <title><?php echo $title['article'] ?></title>
@@ -90,19 +90,19 @@ function date_in_arabic ($date){
         </div>
         <div class="container py-3 mt-3">
             <div class="row">
-                <div class="col-md-8">
-                    <ul class="card-list">
+                <div class="col-md-8 mt-3">
+                    <div class="card-list">
                         <div class="row justify-content-center">
                             <?php
                                 foreach ($articles as $article) {
                             ?>
-                            <div class="col-md-6">
-                                <li class="card pb-4">
+                            <div class="col-md-6 mb-2">
+                                <div class="card pb-4">
                                     <a class="card-im" href="article?titre=<?php echo str_replace(" ", "_", $article['art_titre']) ?>" style="background-image: url(images/articles/<?php echo $article['art_image'] ?>);position: relative;">
                                         <!-- <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div> -->
                                     </a>
                                     <a href="article?titre=<?php echo str_replace(" ", "_", $article['art_titre']) ?>" class="text-white">
-                                    <p class="text-white py-3 w-100 text-truncate px-2" style="position: absolute; z-index:4 ; margin-top:-17%; background-color:rgba(000,000,000,0.5);">
+                                    <p class="text-white py-3 w-100 text-truncate px-2 position-margin" style="position: absolute; z-index:4 ; background-color:rgba(000,000,000,0.5);">
                                         <strong>
                                         <?php
                                             if ($_SESSION['lang'] == "ar") {
@@ -114,7 +114,7 @@ function date_in_arabic ($date){
                                         </strong>
                                     </p>
                                     </a>
-                                    <div class="card-description px-3 wrapp">
+                                    <div class="card-description px-3 wrapp mt-2">
                                         <?php
                                             if ($_SESSION['lang'] == "ar") {
                                         ?>
@@ -152,16 +152,16 @@ function date_in_arabic ($date){
                                     <?php
                                         }
                                     ?> -->
-                                </li>
+                                </div>
                             </div>
                             <?php
                                 }
                             ?>
                         </div>
-                    </ul>
+                    </div>
                 </div>
-                <div class="col-md-3 bg-white ml-4 border" style="border-radius: 10px; height:408.5px">
-                    <div class="mt-4" style="overflow-y: auto; overflow-x:hidden; height:100%">
+                <div class="col-md-3 bg-white border mt-3" style="border-radius: 10px; height:406px; overflow-y: auto; overflow-x:hidden;">
+                    <div class="mt-4" style=" height:100%">
                         <div class="text-center text-color">
                             <h2 class="pt-2"><?php echo $artic['lire'] ?></h2>
                             <hr class="hr-width">

@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 $formations = $data->getFormation();
 foreach($formations as $formation){
@@ -93,20 +93,20 @@ foreach($formations as $formation){
                                         </a>
                                     </td>
                                     <td class="row-style">
-                                        <div class="row">
-                                            <div class="col-md-5">
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-12">
                                                 <a href="modifier-formation?id=<?php echo $formation['for_id'] ?>" target="_blank">
                                                     <i class="fas fa-edit text-success awesome-size"></i>
                                                 </a>
                                             </div>
-                                            <div class="col-md-5">
+                                            <!-- <div class="col-md-5">
                                                 <form action="" method="POST">
                                                     <input type="hidden" name="formation_id" value="<?php echo $formation['for_id'] ?>">
                                                     <button type="submit" class="btn-style" name="submit_formation" onclick='return confirm("Voulez-vous supprimer cette formation \nATTENTION!! tous les étudiants seront supprimés")'>
                                                         <i class="fas fa-trash-alt text-danger awesome-size"></i>
                                                     </button>
                                                 </form>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </td>
                                 </tr>

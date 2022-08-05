@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 if (!isset($_GET['id'])) {
     echo "<script>window.location.href='formations'</script>";
@@ -129,7 +129,7 @@ foreach ($etudiants as $etudiant) {
                     </div>
                 </div>
                 <?php
-                $formations = $data->getEtudiantMatiereFormation();
+                $formations = $data->getEtudiantNoteMatiere();
                 $notes = $data->noteGenerale();
                 ?>
                 <div class="col-md-6">
@@ -159,14 +159,25 @@ foreach ($etudiants as $etudiant) {
                                 if ($formation['etud_id'] == $id) {
                             ?>
                                     <tr>
+                                    <?php
+                                        if($formation['etud_id'] != $formation['not_etudiant']){
+                                    ?>
+                                    <td colspan="3"><h4>Pas de notes saisit</h4></td>
+                                    <?php        
+                                        }else{
+                                    ?>
                                         <td><?php echo $formation['mat_nom'] ?></td>
                                         <td><?php echo $formation['not_note'] ?></td>
                                         <td>
-                                            <a href="modifier-note?id=<?php echo $formation['not_id'] ?>" target="_blank">
-                                                <i class="fas fa-edit text-success awesome-size"></i>
-                                            </a>
+                                            <!-- <a href="modifier-note?id=" target="_blank">
+                                                
+                                            </a> -->
+                                            <button type="button" class="btn btn-note bg-transparent" id="btn-id" data-toggle="modal" data-target="#saisit" data-id="<?php echo $formation['not_id'] ?>"><i class="fas fa-edit text-success awesome-size"></i></button>  
                                         </td>
                                     </tr>
+                                    <?php        
+                                        }
+                                    ?>
                             <?php
                                 }
                             }
@@ -189,10 +200,47 @@ foreach ($etudiants as $etudiant) {
             </div>
         </div>
     </div>
+    <!-- Modifier note -->
+    <div class="modal fade" id="saisit" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Modifier note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="load_notes"></div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $(".btn-note").click(function(){
+                var note = $("#note").val();
+                var ids = $(this).data('id');
+                $.post("../functions/traitement.php", {
+                        id: ids,
+                        action: "modifier_note"
+                    }, function(data) {
+                        $('#load_notes').html(data);
+                })
+            })
+        })
+    </script>
 </body>
 </html>
 <?php
-if (isset($_POST['submit'])) {
-    $data->sasirNotes();
-}
+    if (isset($_POST['submit'])) {
+        $data->sasirNotes();
+    }
+    if (isset($_POST['submit_note'])) {
+        $data->updateNote();
+    }
 ?>

@@ -32,7 +32,7 @@
   <?php include_once "navbar.php"; ?>
   <div class="div-background">
     <div class="text-white text-center text-big div-header">
-      <h2><?php echo $douane['categorisation'] ?></h2>
+      <h2 class="h1-size-big"><?php echo $douane['categorisation'] ?></h2>
     </div>
     <div style="position:relative">
       <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
@@ -103,10 +103,10 @@
       <br>
     </div>
     <div class="container">
-      <ul class="card-list">
+      <div class="card-list">
         <div class="row">
           <div class="col-md-4 mt-4">
-            <li class="card pb-4">
+            <div class="card pb-4">
               <a class=" card-im" style="background-image: url(images/view/OFF.jpg);position: relative;">
                 <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
               </a>
@@ -128,11 +128,11 @@
                   }
                 ?>
               </div>
-              <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
-            </li>
+              <button type="button" class="btn btn-dark mx-5 mt-4" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
+            </div>
           </div>
           <div class="col-md-4 mt-4">
-            <li class="card pb-4">
+            <div class="card pb-4">
               <a class="card-im" style="background-image: url(images/view/OFF.jpg);position: relative;">
                 <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
               </a>
@@ -154,11 +154,11 @@
                   }
                 ?>
               </div>
-              <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
-            </li>
+              <button type="button" class="btn btn-dark mx-5 mt-4" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
+            </div>
           </div>
           <!-- <div class="col-md-4 mt-4">
-            <li class="card pb-4">
+            <div class="card pb-4">
               <a class="card-im" style="background-image: url(images/view/OFF.jpg);position: relative;">
                 <div style="background-color:rgba(0,0,0,0.4); z-index: 1;  position:absolute; top:0; left:0; width:100%; height:100%;"></div>
               </a>
@@ -167,11 +167,11 @@
                 <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page
                   avant de polices de texte.</p>
               </div>
-              <button type="button" class="btn btn-dark mx-5" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
-            </li>
+              <button type="button" class="btn btn-dark mx-5 mt-4" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id=""><?php echo $accompagenemt['choisir'] ?></button>
+            </div>
           </div> -->
         </div>
-      </ul>
+      </div>
     </div>
     <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">
       <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>
@@ -255,7 +255,7 @@
                   ?>
                 </div>
               </div>
-              <div class="col-md-8">
+              <!-- <div class="col-md-8">
                 <div class="form-group">
                   <?php
                   if ($_SESSION['lang'] == "ar") {
@@ -285,7 +285,7 @@
                   }
                   ?>
                 </div>
-              </div>
+              </div> -->
               <div class="col-md-8">
                 <div class="form-group">
                   <?php
@@ -323,7 +323,7 @@
         e.preventDefault();
         var douane_nom = $('#douane_nom').val();
         var douane_email = $('#douane_email').val();
-        var douane_categorie = $('#douane_categorie').val();
+        // var douane_categorie = $('#douane_categorie').val();
         var douane_message = $('#douane_message').val();
         if (douane_nom == '' && douane_email == '' && douane_categorie == '') {
           $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez remplir tous les champs</div>');
@@ -334,14 +334,14 @@
         } else if (douane_email == '') {
           $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir votre email</div>');
           $('#errors_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">رجاءا أدخل بريدك الإلكتروني</div>');
-        } else if (douane_categorie == '') {
-          $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez choisir la catégorie</div>');
-          $('#errors_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">الرجاء اختيار الفئة</div>');
+        // } else if (douane_categorie == '') {
+        //   $('#errors').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez choisir la catégorie</div>');
+        //   $('#errors_arab').html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">الرجاء اختيار الفئة</div>');
         } else {
           $.post("functions/traitement.php", {
             douane_nom: douane_nom,
             douane_email: douane_email,
-            douane_categorie: douane_categorie,
+            // douane_categorie: douane_categorie,
             douane_message: douane_message,
             action: 'add_douane'
           }, function(result) {

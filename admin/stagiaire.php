@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 //$etudiants = $data->getEtudiantForma();
 $result = $db->conn->query("SELECT `etud_id` FROM `etudiant` INNER JOIN `formation` ON for_id=etud_formation");
@@ -62,7 +62,15 @@ $result = $db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON f
                 <i class="fas fa-search position-awesome"></i>
                 <input type="text" class="form-control px-5" id="search" placeholder="Chercher un stagiaire" name="nom">
             </div>
-            <table class="table bg-white table-bordered mt-5">
+            <div class="d-flex mt-5">
+                <form action="../functions/download.php" method="post">
+                    <button type="submit" class="btn text-success" name="xsl_download_stagiaire" style="font-size: 35px; outline:none"><i class="fa-solid fa-file-excel"></i></button>
+                </form>
+                <form action="../functions/pdf_stagiaire.php" method="post" target="_blank">
+                    <button type="submit" class="btn text-danger" name="pdf_download" style="font-size: 35px; outline:none"><i class="fa-solid fa-file-pdf"></i></button>
+                </form>
+            </div>
+            <table class="table bg-white table-bordered">
                 <thead class="text-center text-white" style="background-color: #11101d;">
                     <tr>
                         <th scope="col" colspan="9">ARTL Nord</th>
@@ -94,6 +102,23 @@ $result = $db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON f
                                 <td><?php echo $etudiant['etud_prenom'] . " " . $etudiant['etud_nom']; ?></td>
                                 <td>
                                     <div class="row align-items-center">
+                                        <?php
+                                            if($etudiant['etud_promos'] == 0 ){
+                                        ?>
+                                        <div class="col-md-9">
+                                            <strong>Merci de saisir la promotion pour le stagiaire dans la section formation</strong>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <form action="" method="POST">
+                                                <input type="hidden" name="etudiant_id" value="<?php echo $etudiant['etud_id'] ?>">
+                                                <button type="submit" class="btn-style" name="submit_etudiant" onclick='return confirm("Voulez-vous supprimer ce stagiaire")'>
+                                                    <i class="fas fa-trash-alt text-danger awesome-size"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <?php     
+                                            }else{
+                                        ?>
                                         <div class="col-md-3">
                                             <a href="modifier-stagiaire?id=<?php echo $etudiant['etud_id'] ?>" target="_blank">
                                                 <i class="fas fa-edit text-success awesome-size"></i>
@@ -110,6 +135,9 @@ $result = $db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON f
                                         <div class="col-md-4">
                                             <button type="button" class="btn btn-primary btn-id" id="btn-id" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $etudiant['etud_id'] ?>">Détails</button>
                                         </div>
+                                        <?php     
+                                            }
+                                        ?>
                                     </div>
                                 </td>
                             </tr>
@@ -144,8 +172,7 @@ $result = $db->conn->query("SELECT * FROM `etudiant` INNER JOIN `formation` ON f
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div id="load_data">
-                            </div>
+                            <div id="load_data"></div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                             </div>

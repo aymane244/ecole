@@ -11,25 +11,81 @@ if(isset($_POST['action'])){
         $id = $_POST['article_id'];
         foreach ($data->getCommentsAjax() as $comment) {
             if ($_SESSION['lang'] == "ar") {
-                echo '<div class="pr-3 mt-3 text-right" dir="rtl" lang="ar" class="">
-                    <b><span style="font-size: 17px;" dir="rtl" lang="ar">'.$comment['com_nom'].' '.$comment['com_prenom'].' </span></b> <br>
-                    <span class="pr-3"> '.$comment['com_comentaire'].'</span> <br>
-                    <span style="color:#BBBBBB; font-size: 14px;" class="pr-3"> '.date_in_arabic($comment['com_time']).' </span>
+                echo '<div class="row">
+                    <div class="col-md-3 bg-light rounded-left py-2 mt-3 my-2">';
+                    if(isset($_SESSION['username']) && isset($_SESSION['pwd'])){
+                        echo '<form action="" method="POST">
+                            <input type="hidden" name="comment_id" value="'.$id.'">
+                            <button type="submit" name="submit_comment" class="btn-style">
+                                <i class="fas fa-times" style="font-size:20px"></i>
+                            </button>
+                        </form>';
+                    }
+                    echo '</div>
+                    <div class="col-md-8 mt-3 text-right bg-light rounded-right py-2 my-2" dir="rtl" lang="ar">
+                        <b><span style="font-size: 17px;" dir="rtl" lang="ar">'.$comment['com_nom'].' '.$comment['com_prenom'].' </span></b> <br>
+                        <span class="pr-3"> '.$comment['com_comentaire'].'</span> <br>
+                        <span style="color:#BBBBBB; font-size: 14px;" class="pr-3"> '.date_in_arabic($comment['com_time']).' </span>
+                    </div>
                 </div>';
             }else{
-                echo '<p class="pl-3 mt-3">
-                <b>'.$comment['com_prenom'].' '.$comment['com_nom'].' </b> <br>
-                <span style="color:#BBBBBB"> '.date_in_french($comment['com_time']).' </span> <br>
-                <span class="pl-3"> '.$comment['com_comentaire'].'</span> </p>';
+                echo '<div class="row">
+                    <div class="col-md-8 pl-4 bg-light rounded-left py-2 my-2">
+                        <b>'.$comment['com_prenom'].' '.$comment['com_nom'].' </b> <br>
+                        <span style="color:#BBBBBB"> '.date_in_french($comment['com_time']).' </span> <br>
+                        <span class="pl-3"> '.$comment['com_comentaire'].'</span> 
+                    </div>
+                    <div class="col-md-3 bg-light py-2 rounded-right my-2">';
+                        if(isset($_SESSION['username']) && isset($_SESSION['pwd'])){
+                            echo '<form action="" method="POST" class="float-right">
+                                <input type="hidden" name="comment_id" value="'.$id.'">
+                                <button type="submit" name="submit_comment" class="btn-style">
+                                    <i class="fas fa-times" style="font-size:20px"></i>
+                                </button>
+                            </form>';
+                        }
+                    echo'</div>
+                </div>';
             }
         }
+    }
+    if ($_POST['action']=='modifier_note') {
+        $id = $_POST['id'];
+        $formations = $data->getEtudiantMatiereFormation();
+        foreach ($formations as $formation) {
+            if ($formation['not_id'] == $id) {
+                $for_nom = $formation['for_nom'];
+                $for_id = $formation['for_id'];
+                $mat_id = $formation['mat_id'];
+                $mat_nom = $formation['mat_nom'];
+                $etud_id = $formation['etud_id'];
+                $etud_nom = $formation['etud_nom'];
+                $etud_prenom = $formation['etud_prenom'];
+                $note = $formation['not_note'];
+            }
+        }
+        echo '<form action="" method="POST">
+            <div class="row mb-3">
+                <label for="note" class="col-md-4 col-form-label text-md-end">Saisir la note</label>
+                <div class="col-md-12">
+                    <div class="d-flex">
+                        <i class="fas fa-poll position-awesome"></i>
+                        <input id="note" type="number" class="form-control pl-5" min="0" max="20" name="note" value="'.$note.'" autocomplete="note" size="2" required>
+                        <input id="etudiants" type="hidden" class="form-control pl-5" name="etudiants" value="'.$etud_id.'" autocomplete="note">
+                        <input id="note_id" type="hidden" class="form-control pl-5" name="note_id" value="'.$id.'" autocomplete="note">
+                        </div>
+                </div>
+            </div>
+            <div class="row mb-0">
+                <div class="col-md-12 text-center mt-3">
+                    <button type="submit" name="submit_note" class="btn btn-primary">Modifier la note</button>
+                </div>
+            </div>
+        </form>';
     }
     if ($_POST['action']=='student_id') {
         $id = $_POST['id'];
         $absences = $data->getTotalAbsenceAdmin();
-        foreach($absences as $absence){
-            $total = $absence['Total'];
-        }
         foreach ($data->getEtudiantNotesAjax() as $detail) {
             if($detail['etud_id'] == $id){
                 $date= date("Y-m-d");
@@ -37,67 +93,73 @@ if(isset($_POST['action'])){
                 $age = date_diff(date_create($detail['etud_naissance']), date_create($date));
                 $nom = $detail['etud_nom'];
                 $prenom = $detail['etud_prenom'];
+                echo '<br>';
                 echo '<div class="container-fluid">
-                    <div class="text-center">';
-                        if($detail['etud_image'] == ""){
-                            echo '<img src="../images/etudiants/unknown_person.jpg" class="card-image-2">';
-                        }else{
-                            echo '<img src="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_image'].'" class="card-image-2">';
-                        };
-                    echo '</div>
-                    <div class="text-center mt-5 mb-4 font-style">
-                        <p>Formation: '.$detail['for_nom'].'</p>
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-md-12">
+                            <h4 class="text-center pb-3">Information personnelle</h4>
+                            <div class="d-flex align-items-center justify-content-around">';
+                                if($detail['etud_image'] == ""){
+                                    echo '<img src="../images/unknown.jpg" class="card-image-detail">';
+                                }else{
+                                    echo '<img src="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_image'].'" class="card-image-detail">';
+                                };
+                                echo '<p>
+                                    <strong>Nom complet:</strong> '.$detail['etud_prenom'].' '.$detail['etud_nom'].' <br>
+                                    <strong>Age:</strong> '.$age->format('%y').' <br>
+                                    <strong>CIN:</strong> '.$detail['etud_cin'].' <br>
+                                    <strong>Téléphone:</strong> '.$detail['etud_telephone'].' <br>
+                                    <strong>Email:</strong> '.$detail['etud_email'].'
+                                </p>
+                                <p>
+                                    <strong>Adresse:</strong> '.$detail['etud_adress'].' <br>
+                                    <strong>Permis:</strong> '.$detail['etud_permis'].' <br>
+                                    <strong>Catégorie de permis:</strong> '.$detail['etud_cat_permis'].' <br>
+                                    <strong>Date d\'obtention:</strong> '.$detail['etud_permis_obt'].' <br>
+                                    <strong>Carte Professionnelle:</strong> ';
+                                    if($detail['etude_carte_pro'] == ''){
+                                        echo 'Pas encore obtenue';
+                                    }else{
+                                        echo $detail['etude_carte_pro'];
+                                    };
+                                echo '</p>
+                            </div>
+                        </div>
                     </div>
+                    <hr class="bg-light">
                     <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <table class="table table-hover mt-5 font-style">
-                                <tr>
-                                    <td>Nom</td>
-                                    <td>'.$detail['etud_nom'].'</td>
-                                </tr>
-                                <tr>
-                                    <td>Prénom</td>
-                                    <td>'.$detail['etud_prenom'].'</td>
-                                </tr>
-                                <tr>
-                                    <td>Age</td>
-                                    <td>'.$age->format('%y').'</td>
-                                </tr>
-                                <tr>
-                                    <td>CIN</td>
-                                    <td>'.$detail['etud_cin'].'</td>
-                                </tr>
-                                <tr>
-                                    <td>Téléphone</td>
-                                    <td>'.$detail['etud_telephone'].'</td>
-                                </tr>
-                                <tr>
-                                    <td>Absences</td>
-                                    <td>'.$total;
-                                        if($total == 1 || $total == 0){
+                        <div class="col-md-12">
+                            <h4 class="text-center pb-3">Information formation</h4>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <p>
+                                    <strong>Absences:</strong> ';
+                                    foreach($absences as $absence){
+                                        echo $absence['Total'];
+                                        if($absence['Total'] == 1 || $absence['Total'] == 0){
                                             echo " Absence";
                                         }else{
                                             echo " Absences";
                                         }
-                                    echo '</td>
-                                </tr>
-                                <tr>
-                                    <th>Note Générale</th>';
+                                    }  
+                                echo '</p>
+                                <p class="ml-3">
+                                    <strong>Note générale:</strong> ';
                                     if(!$detail['not_id']){
-                                        echo '<th>0</th>';
+                                        echo '0';
                                     }else{
-                                        echo '<th>'.$detail['notegenerale'].'</th>';
+                                        echo $detail['notegenerale'];
                                     };
-                                echo '</tr>
-                                </tr>
-                            </table>
-                            <div class="text-center font-style mt-4">
+                                echo '</p>
+                            </div>
+                            <div class="text-center font-style ">
                                 <a href="saisir-notes?id='.$detail['etud_id'].'" target="_blank" class="btn btn-primary">Saisir les notes</a>
                             </div>
-                            <br>
                         </div>
-                        <div class="col-md-6 font-style">
-                            <h4 class="text-center pb-2">Documents scanés</h4>
+                    </div>
+                    <hr class="bg-light">
+                    <div class="row">
+                        <div class="col-md-12 font-style">
+                            <h4 class="text-center pb-3">Documents scanés</h4>
                             <div class="d-flex align-items-center justify-content-around">
                                 <p>
                                     <a download="'.$detail['etud_scan_cin'].'" href="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_scan_cin'].'">
@@ -152,7 +214,7 @@ if(isset($_POST['action'])){
                     <option selected value="">--Choisir promotion--</option>';
                     foreach($promos as $promo){
                         if($for_id == $promo['pro_formation']){
-                            echo '<option value="'.$promo['pro_id'].'">Promotion '.$promo['pro_groupe'].'</option>';
+                            echo '<option value="'.$promo['pro_id'].'">'.$promo['pro_groupe'].'</option>';
                         }
                     }
                 echo '</select>
@@ -163,10 +225,7 @@ if(isset($_POST['action'])){
                     <button type="submit" class="btn btn-primary" name="submit_promos">Saisir</button>
                 </div>
             </div>
-        </form>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        </div>';
+        </form>';
     }
     if ($_POST['action']=='student_detail') {
         $id = $_POST['id'];
@@ -202,29 +261,28 @@ if(isset($_POST['action'])){
                 // }
                 echo '<br>';
                 echo '<div class="container-fluid">
-                    <hr>
                     <div class="row align-items-center justify-content-center">
-                        <div class="col-md-12 font-style">
+                        <div class="col-md-12">
                             <h4 class="text-center pb-2">Information personnelle</h4>
                             <div class="d-flex align-items-center justify-content-around">';
                                 if($detail['etud_image'] === ""){
-                                    echo '<img src="../images/etudiants/unknown_person.jpg"  class="card-image-2">';
+                                    echo '<img src="../images/unknown.jpg"  class="card-image-detail">';
                                 }else{
-                                    echo '<img src="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_image'].'" class="card-image-2">';
+                                    echo '<img src="../dossiers-stagiaires/'.$prenom.'-'.$nom.'/'.$detail['etud_image'].'" class="card-image-detail">';
                                 };
                                 echo '<p>
-                                    Nom complet: '.$detail['etud_prenom'].' '.$detail['etud_nom'].' <br>
-                                    Age: '.$age->format('%y').' <br>
-                                    CIN: '.$detail['etud_cin'].' <br>
-                                    Téléphone: '.$detail['etud_telephone'].' <br>
-                                    Email: '.$detail['etud_email'].'
+                                    <strong>Nom complet:</strong> '.$detail['etud_prenom'].' '.$detail['etud_nom'].' <br>
+                                    <strong>Age:</strong> '.$age->format('%y').' <br>
+                                    <strong>CIN:</strong> '.$detail['etud_cin'].' <br>
+                                    <strong>Téléphone:</strong> '.$detail['etud_telephone'].' <br>
+                                    <strong>Email:</strong> '.$detail['etud_email'].'
                                 </p>
                                 <p>
-                                    Adresse: '.$detail['etud_adress'].' <br>
-                                    Permis: '.$detail['etud_permis'].' <br>
-                                    Catégorie de permis: '.$detail['etud_cat_permis'].' <br>
-                                    Date d\'obtention: '.$detail['etud_permis_obt'].' <br>
-                                    Carte Professionnelle: ';
+                                    <strong>Adresse:</strong> '.$detail['etud_adress'].' <br>
+                                    <strong>Permis:</strong> '.$detail['etud_permis'].' <br>
+                                    <strong>Catégorie de permis:</strong> '.$detail['etud_cat_permis'].' <br>
+                                    <strong>Date d\'obtention:</strong> '.$detail['etud_permis_obt'].' <br>
+                                    <strong>Carte Professionnelle:</strong> ';
                                     if($detail['etude_carte_pro'] == ''){
                                         echo 'Pas encore obtenue';
                                     }else{
@@ -234,7 +292,7 @@ if(isset($_POST['action'])){
                             </div>
                         </div>  
                     </div>
-                    <hr>
+                    <hr class="bg-light">
                     <div class="row">
                         <div class="col-md-12 font-style">
                             <h4 class="text-center pb-2">Documents scanés</h4>
@@ -255,7 +313,7 @@ if(isset($_POST['action'])){
                                     </a>
                                 </p>
                             </div>
-                            <hr>
+                            <hr class="bg-light">
                             <div class="text-center">
                                 <form action="../functions/download.php" method="POST">
                                     <input type="hidden" name="id" value="'.$detail['etud_id'].'">
@@ -266,7 +324,6 @@ if(isset($_POST['action'])){
                             </div>
                         </div>
                     </div>
-                    <hr>
                     <br>
                 </div>';
             }
@@ -305,6 +362,7 @@ if(isset($_POST['action'])){
                         <input id="absence_date" type="date" class="form-control pl-5" name="absence_date">
                     </div>
                 </div>
+                <div id="errors"></div>
                 <table class="table table-bordered mt-5 bg-white">
                     <thead class="text-center text-white" style="background-color: #11101d;">
                         <tr>
@@ -337,7 +395,7 @@ if(isset($_POST['action'])){
                                         '.$etudiant['etud_nom'] . " " . $etudiant['etud_prenom'].'
                                         <input type="hidden" value="'.$etudiant['etud_id'].'" name="absence_etudiant[]">
                                     </td>
-                                    <td>Promotion '.$etudiant['pro_groupe'].'</td>
+                                    <td>'.$etudiant['pro_groupe'].'</td>
                                     <td>
                                         <div class="row justify-content-center">
                                             <div class="col-md-8">
@@ -361,6 +419,9 @@ if(isset($_POST['action'])){
                 </div>
             </form>
         </div>';
+        if (isset($_POST['absence_submit'])) {
+            $data->insertAbsence();
+        }
     }
     if ($_POST['action']=='promotion') {
         $etudiants = $data->getEtudiantPromotion();
@@ -383,9 +444,9 @@ if(isset($_POST['action'])){
                             <th>Promotion</th>
                             <th>
                                 <select name="promotion" id="promotion" class="custom-select w-75">
-                                    <option value="'.$detail['pro_id'].'">'.$detail['pro_année'].'</option>';            
+                                    <option value="'.$detail['pro_id'].'">'.$detail['pro_groupe'].'</option>';            
                                         foreach($promos as $promo){
-                                    echo '<option value="'.$promo['pro_id'].'">'.$promo['pro_année'].'</option>';
+                                    echo '<option value="'.$promo['pro_id'].'">'.$promo['pro_groupe'].'</option>';
                                     }
                                 echo '</select>
                             </th>
@@ -400,11 +461,17 @@ if(isset($_POST['action'])){
         $date_salle = $_POST['date_salle'];
         $time_debut = $_POST['time_debut'];
         $time_fin = $_POST['time_fin'];
-        $reservation_salle = $_POST['reservation_salle'];
+        $reservation_salle = $_POST['reservaion_salle'];
         $date = date("Y-m-d");
-        if($date_salle === ""){
+        if($reservation_salle === ""){
             if($_SESSION['lang'] == 'ar'){
                 echo '<div class="alert alert-danger text-center mt-2" role="alert">الرجاء اختيار تاريخك</div>';
+            }else{
+                echo '<div class="alert alert-danger text-center mt-2" role="alert">Veuillez choisir une salle</div>';
+            }
+        }else if($date_salle === ""){
+            if($_SESSION['lang'] == 'ar'){
+                echo '<div class="alert alert-danger text-center mt-2" role="alert">الرجاء اختيار قاعة الدرس</div>';
             }else{
                 echo '<div class="alert alert-danger text-center mt-2" role="alert">Veuillez choisir votre date</div>';
             }

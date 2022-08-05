@@ -8,9 +8,10 @@
 				$message_arab = "رجاءا أدخل بريدك الإلكتروني";
 			}else if($etudiant['etud_email'] != $_POST['email']){
 				$message = "Email ".$_POST['email']." n'existe pas dans nos données";
-				$message_arab = "غير موجود في بياناتنا".$_POST['email']."البريد الإلكتروني";
+				$message_arab = "البريد الإلكتروني ".$_POST['email']." غير متواجد في بيانتنا";
 			}else{
 				$data->updatePassword();
+				
 			}
 		}
 	}
@@ -102,7 +103,7 @@
 											<div style="float:right">
 												<i class="fas fa-key position-awesome-arab"></i>
 											</div>
-											<input type="password" class="form-control pr-5 input-check text-right" dir="rtl" lang="ar" id="exampleInputPassword" placeholder="كلمة المرور" name="password">
+											<input type="password" class="form-control pr-5 input-check text-right" dir="rtl" lang="ar" id="exampleInputPassword" placeholder="كلمة المرور" name="password" value="<?php echo isset($_POST['password']) ? $_POST['password'] : ''; ?>">
 											<p id="error_ara" style="text-align: right;" dir="rtl" lang="ar"></p>
 											<div class="form-group form-check px-4 text-right">
 												<label class="form-check-label " for="exampleCheck1"><?php echo $password['afficher'] ?></label>
@@ -120,7 +121,7 @@
 										<div class="col-md-8">
 											<div class="d-flex">
 												<i class="fas fa-key position-awesome"></i>
-												<input type="password" class="form-control pl-5 input-check" id="exampleInputPassword" placeholder="Mot de Passe" name="password">
+												<input type="password" class="form-control pl-5 input-check" id="exampleInputPassword" placeholder="Mot de Passe" name="password" value="<?php echo isset($_POST['password']) ? $_POST['password'] : ''; ?>">
 											</div>
 											<p id="error"></p>
 											<div class="form-group form-check px-4">

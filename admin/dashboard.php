@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 $etudparforma = $data->getEtudiantparFormation();
 $etudianttotal = $data->getEtudiantTotal();
@@ -11,7 +11,7 @@ $etudiantsinscrit = $data->getEtudiantInscri();
 $articles = $data->getTotalArtciles();
 $totals = $data->getTotalComments();
 $diplomes = $data->getDiplome();
-$attestations = $data->getAttestation();
+// $attestations = $data->getAttestation();
 $reservations = $data->getReservations();
 $etuds = $data->getEtudiantTotalDate();
 $dates = $data->getReservationsDate();
@@ -72,6 +72,7 @@ foreach ($douanetotal as $count) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../images/view/logo.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <?php
         include_once "../includes/header.php";  
         include_once "../includes/style.php";
@@ -84,14 +85,6 @@ foreach ($douanetotal as $count) {
     <?php include_once "navbar-admin.php"; ?>
     <div class="main-content">
         <div class="container-fluid">
-            <?php
-            if (isset($_SESSION['status'])) {
-            ?>
-                <div class='alert alert-success text-center mt-2' role='alert'><?php echo $_SESSION['status'] ?></div>
-            <?php
-                unset($_SESSION['status']);
-            }
-            ?>
             <header>
                 <?php include 'admin.php' ?>
             </header>
@@ -208,7 +201,7 @@ foreach ($douanetotal as $count) {
                             </thead>
                             <tbody class="text-center">
                                 <?php
-                                if (empty($diplomes) && empty($attestations)) {
+                                if (empty($diplomes)) {
                                 ?>
                                     <tr>
                                         <th scope="row" colspan="3">
@@ -222,21 +215,21 @@ foreach ($douanetotal as $count) {
                                     ?>
                                             <tr>
                                                 <td><?= $diplome['etud_prenom'] . " " . $diplome['etud_nom'] ?></td>
-                                                <td>Document 1</td>
+                                                <td>Document</td>
                                             </tr>
                                         <?php
                                         }
                                     }
-                                    foreach ($attestations as $attestation) {
-                                        if ($attestation['att_image'] == '') {
+                                    // foreach ($attestations as $attestation) {
+                                    //     if ($attestation['att_image'] == '') {
                                         ?>
-                                            <tr>
+                                            <!-- <tr>
                                                 <td><?= $attestation['etud_prenom'] . " " . $attestation['etud_nom'] ?></td>
                                                 <td>Document 2</td>
-                                            </tr>
+                                            </tr> -->
                                 <?php
-                                        }
-                                    }
+                                    //     }
+                                    // }
                                 }
                                 ?>
                             </tbody>
@@ -274,7 +267,7 @@ foreach ($douanetotal as $count) {
                                     ?>
                                         <tr>
                                             <td><?= $item['dou_res_nom'] ?></td>
-                                            <td><?= $item['dou_nom'] ?></td>
+                                            <td>Demande Catégorisation</td>
                                         </tr>
                                 <?php
                                     }
@@ -293,10 +286,11 @@ foreach ($douanetotal as $count) {
                                     <th scope="col">#</th>
                                     <th scope="col">Salle</th>
                                     <th scope="col">Date</th>
+                                    <th scope="col">Heure début</th>
+                                    <th scope="col">Heure fin</th>
                                     <th scope="col">Nom</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Telephone</th>
-                                    <th scope="col">Message</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
@@ -315,12 +309,13 @@ foreach ($douanetotal as $count) {
                                     ?>
                                         <tr>
                                             <th scope="row"><?php echo $i++ ?></th>
-                                            <td><?php echo $reservation['sal_nom']; ?></td>
-                                            <td><?php echo $reservation['res_date'] . " " . $reservation['time_debut'] . " " . $reservation['time_fin']; ?></td>
+                                            <th><?php echo $reservation['res_salle']; ?></th>
+                                            <th style="width:12%"><?php echo $reservation['res_date']; ?></th>
+                                            <th><?php echo $reservation['time_debut']; ?></th>
+                                            <th><?php echo $reservation['time_fin']; ?></th>
                                             <td><?php echo $reservation['res_nom']; ?></td>
                                             <td><?php echo $reservation['res_email']; ?></td>
                                             <td><?php echo $reservation['res_telephone']; ?></td>
-                                            <td><?php echo $reservation['res_commentaire']; ?></td>
                                         </tr>
                                 <?php
                                     }
@@ -402,12 +397,10 @@ foreach ($douanetotal as $count) {
             if (i == 0) {
                 i = 1;
                 var elem = document.getElementById("myBar");
-                var elem2 = document.getElementById("myBar2");
                 var elem3 = document.getElementById("myBar3");
                 var widthbar = 0;
                 var id = setInterval(frame, 40);
                 var numbetud = <?php echo json_encode($total_etud) ?>;
-                var numbforma = <?php echo json_encode($total_forma) ?>;
                 var numbprof = <?php echo json_encode($total_prof) ?>;
 
                 function frame() {
@@ -417,13 +410,6 @@ foreach ($douanetotal as $count) {
                     } else if (widthbar <= numbetud) {
                         widthbar++;
                         elem.style.width = widthbar + "%";
-                    }
-                    if (widthbar >= numbforma) {
-                        clearInterval(id);
-                        i = 0;
-                    } else if (widthbar <= numbforma) {
-                        widthbar++;
-                        elem2.style.width = widthbar + "%";
                     }
                     if (widthbar >= numbprof) {
                         clearInterval(id);
@@ -438,7 +424,6 @@ foreach ($douanetotal as $count) {
     </script>
     <script>
         var numbetud = <?php echo json_encode($total_etud) ?>;
-        var numbforma = <?php echo json_encode($total_forma) ?>;
         var numbprof = <?php echo json_encode($total_prof) ?>;
         var numbart = <?php echo json_encode($total_article) ?>;
         var numbcom = <?php echo json_encode($com_total) ?>;
@@ -449,14 +434,11 @@ foreach ($douanetotal as $count) {
         var douane = <?php echo json_encode($countdaounae) ?>;
         var isodate = <?php echo json_encode($countisodate) ?>;
         var douanedate = <?php echo json_encode($countdouanedate) ?>;
-
         function animateValue(obj, start, end, duration) {
             let startTimestamp = null;
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 if (numbetud < 10) {
-                    var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
-                } else if (numbforma < 10) {
                     var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
                 } else if (numbprof < 10) {
                     var progress = Math.min((timestamp - startTimestamp) / duration, 0.1);
@@ -491,10 +473,6 @@ foreach ($douanetotal as $count) {
         if (numbetud) {
             const obj = document.getElementById("value_etud");
             animateValue(obj, numbetud, 0, 5000);
-        }
-        if (numbforma) {
-            const obj = document.getElementById("value_forma");
-            animateValue(obj, numbforma, 0, 5000);
         }
         if (numbprof) {
             const obj = document.getElementById("value_prof");

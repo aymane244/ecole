@@ -1,3 +1,0 @@
-lien: login-admin
-Nom d'utilisateur: aymane
-Mot de passe :aymane

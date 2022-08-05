@@ -17,17 +17,17 @@
         $number = $article['commentaires'];
         $art_id = $article['art_id'];
     }
-    function date_in_french ($date){
+    function date_in_french ($dates){
         $month_name=array("","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
-        $split = preg_split('/-/', $date);
+        $split = preg_split('/-/', $dates);
         $year = $split[0];
         $month = round($split[1]);
         $day = round($split[2]);
         return $day .' '. $month_name[$month] .' '. $year;
     }
-    function date_in_arabic ($date){
+    function date_in_arabic ($dates){
         $month_name=array("","يناير","فبراير","مارس","أبريل","ماي","يونيو","يوليوز","غشت","شتنبر","أكتوبر","نونبر","دجنبر");
-        $split = preg_split('/-/', $date);
+        $split = preg_split('/-/', $dates);
         $year = $split[0];
         $month = round($split[1]);
         $day = round($split[2]);
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 bg-white py-3 mt-3 card" style="border-radius: 10px; height:100%">
-                        <div class="div-background" style="overflow-y: auto; overflow-x:hidden">
+                        <div style="overflow-y: auto; overflow-x:hidden">
                             <div class="text-center text-color">
                                 <h2 class="pt-2"><?php echo $artic['lire'] ?></h2>
                                 <hr class="hr-width">
@@ -188,8 +188,8 @@
                                     <?php
                                         foreach($commentaires as $commentaire){
                                     ?>
-                                    <div class="d-flex justify-content-between">
-                                        <div class="pr-4">
+                                    <div class="row">
+                                        <div class="col-md-3 bg-light rounded-left py-2 mt-3 my-2">
                                             <?php
                                                 if(isset($_SESSION['username']) && isset($_SESSION['pwd'])){
                                             ?>
@@ -203,10 +203,10 @@
                                                 }
                                             ?>
                                         </div>
-                                        <div class="pr-4 mt-3 text-right" dir="rtl" lang="ar">
+                                        <div class="col-md-8 mt-3 text-right bg-light rounded-right py-2 my-2" dir="rtl" lang="ar">
                                             <b><span style="font-size: 17px;" dir="rtl" lang='ar'><?php echo $commentaire['com_nom']." ".$commentaire['com_prenom']; ?></span></b> <br>
                                             <span class="pr-3"><?php echo $commentaire['com_comentaire'] ?></span> <br>
-                                            <span style="color:#BBBBBB; font-size: 14px;" class="pr-3"><?php echo date_in_arabic($article['com_time'])?></span>
+                                            <span style="color:#BBBBBB; font-size: 14px;" class="pr-3"><?php echo date_in_arabic($commentaire['com_time'])?></span>
                                         </div>
                                     </div>
                                     <?php
@@ -218,17 +218,17 @@
                                     <?php
                                         foreach($commentaires as $commentaire){
                                     ?>  
-                                    <div class="d-flex justify-content-between">
-                                        <div class="pl-4 mt-3">
+                                    <div class="row mr-5">
+                                        <div class="col-md-8 bg-light rounded-left py-2 my-2">
                                             <b><span style="font-size: 17px;"><?php echo $commentaire['com_prenom']." ".$commentaire['com_nom']; ?></span></b> <br>
                                             <span class="pl-3"><?php echo $commentaire['com_comentaire'] ?></span> <br>
-                                            <span style="color:#BBBBBB; font-size: 14px;" class="pl-3"><?php echo date_in_french($article['com_time'])?></span>
+                                            <span style="color:#BBBBBB; font-size: 14px;" class="pl-3"><?php echo date_in_french($commentaire['com_time'])?></span>
                                         </div>
-                                        <div class="pr-4">
+                                        <div class="col-md-3 bg-light py-2 rounded-right my-2 form-display">
                                             <?php
                                                 if(isset($_SESSION['username']) && isset($_SESSION['pwd'])){
                                             ?>
-                                            <form action="" method="POST">
+                                            <form action="" method="POST" class="float-right">
                                                 <input type="hidden" name="comment_id" value="<?php echo $commentaire['com_id'] ?>">
                                                 <button type="submit" name="submit_comment" onclick='return confirm("Voulez-vous supprimer ce commentaire")' class="btn-style">
                                                     <i class="fas fa-times" style="font-size:20px"></i>

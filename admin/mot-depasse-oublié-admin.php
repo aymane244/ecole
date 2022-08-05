@@ -8,7 +8,7 @@
 			}else if($item['adm_email'] != $_POST['email']){
 				$message = "Email ".$_POST['email']." n'existe pas dans nos données";
 			}else{
-				$admin->updatePassword();
+				$admin->updatePasswordAdmin();
 			}
 		}
 	}
@@ -29,6 +29,9 @@
     </head>
     <body>
 		<div class="container py-4">
+			<div class="text-center py-5">
+                <h2><i class="fas fa-lock"></i> Mot de passe oublié</h2>
+            </div>
 			<?php
             	if(isset($_SESSION['status'])){
             ?>
@@ -43,9 +46,6 @@
 					unset($message);
 				}
 			?>
-			<div class="text-center py-5">
-                <h2><i class="fas fa-lock"></i> Mot de passe oublié</h2>
-            </div>
 			<form action="" method="POST" class="pb-3">
 				<div id="password">
 					<div class="row justify-content-center">
@@ -62,7 +62,7 @@
 										<div class="col-md-8">
 											<div class="d-flex">
 												<i class="fas fa-key position-awesome"></i>
-												<input type="password" class="form-control pl-5 input-check" id="exampleInputPassword" placeholder="Mot de Passe" name="password">
+												<input type="password" class="form-control pl-5 input-check" id="exampleInputPassword" placeholder="Mot de Passe" name="password" value="<?php echo isset($_POST['password']) ? $_POST['password'] : ''; ?>">
 											</div>
 											<p id="error"></p>
 											<div class="form-group form-check px-4">
@@ -98,7 +98,7 @@
 										<div class="col-md-8">
 											<div class="d-flex">
 												<i class="fas fa-at position-awesome"></i>
-												<input type="email" class="form-control pl-5" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" name="email">
+												<input type="email" class="form-control pl-5" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
 											</div>
 											<br>
 											<div class="pt-2">

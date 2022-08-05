@@ -1,10 +1,6 @@
 <?php include_once "session.php";?>
 <?php
     $formations = $data->getformation();
-    $promos = $data->getPromotion();
-    foreach($promos as $promo){
-        $promoid = $promo['pro_id']; 
-    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -25,24 +21,18 @@
                 <?php
                     if(isset($_POST['submit'])){
                         $data->checkEmailCin();
+                        $message = "Votre inscription a été bien effectué Veuillez ce connecter";
                     }
                 ?>
                 <?php
-                    if(isset($_SESSION['status_error'])){
+                    if(isset($_SESSION['status_error_inscription'])){
                 ?>
-                <div class='alert alert-danger text-center' role='alert'><?php echo $_SESSION['status_error']?></div>
+                <div class='alert alert-danger text-center' role='alert'><?php echo $_SESSION['status_error_inscription']?></div>
                 <?php
-                        unset($_SESSION['status_error']);
+                    unset($_SESSION['status_error_inscription']);
                     }
                 ?>
-                <?php
-                    if(isset($_SESSION['status_login'])){
-                ?>
-                <div class='alert alert-success text-center' role='alert'><?php echo $_SESSION['status_login']?></div>
-                <?php
-                        unset($_SESSION['status_login']);
-                    }
-                ?>
+
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="card" style="box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);">
@@ -340,7 +330,7 @@
                                                 <i class="fas fa-folder-open position-awesome-arab"></i>
                                             </div>
                                             <select class="custom-select pr-5 text-right" name="formation" onchange="affichage()" id="formation" style="appearance: none;" dir="rtl" lang="ar">
-                                                <option selected value="">--<?php echo $inscription['choisir']?>--</option>
+                                                <option value="">--<?php echo $inscription['choisir']?>--</option>
                                                 <?php
                                                     foreach($formations as $formation){
                                                 ?>
@@ -638,7 +628,7 @@
                 }else{
                     const reader = new FileReader();
                     reader.addEventListener('load', () =>{
-                    document.getElementById("showimage4").style.backgroundImage = `url('images/Untitled-2.png')`;
+                    document.getElementById("showimage4").style.backgroundImage = `url('images/view/Untitled-2.png')`;
                     });
                     reader.readAsDataURL(this.files[0]);
                 }
@@ -665,7 +655,7 @@
                 }else{
                     const reader = new FileReader();
                     reader.addEventListener('load', () =>{
-                    document.getElementById("showimage3").style.backgroundImage = `url('images/Untitled-2.png')`;
+                    document.getElementById("showimage3").style.backgroundImage = `url('images/view/Untitled-2.png')`;
                     });
                     reader.readAsDataURL(this.files[0]);
                 }
@@ -692,7 +682,7 @@
                 }else{
                     const reader = new FileReader();
                     reader.addEventListener('load', () =>{
-                    document.getElementById("showimage2").style.backgroundImage = `url('images/Untitled-2.png')`;
+                    document.getElementById("showimage2").style.backgroundImage = `url('images/view/Untitled-2.png')`;
                     });
                     reader.readAsDataURL(this.files[0]);
                 }

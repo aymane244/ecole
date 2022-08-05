@@ -235,15 +235,6 @@
         .navbar-font{
             font-size: 16px;
         }
-        .h1-size {
-            font-size: 25px;
-        }
-        .h3-size{
-            font-size: 15px;
-        }
-        .demo{
-            display: none;
-        }
         .text-height{
             height: auto;
         }
@@ -256,8 +247,26 @@
         .padding-equal-2{
             padding-bottom: 20px !important;
         }
-        .h1-size-big{
+        .h1-size{
+            font-size: 30px;
+        }
+        .h3-size{
+            font-size: 25px;
+        }
+        .text-font{
             font-size: 22px;
+        }
+        .h1-size-big{
+            font-size: 18px;
+        }
+        .position-margin{
+            margin-top:-17%
+        }
+        .form-display{
+            display:none;
+        }
+        .div-header {
+            margin-top: 8%;
         }
     }
     @media only screen and (min-width: 600px) {
@@ -326,15 +335,6 @@
         .margin-service{
             margin-bottom: 15px;
         }
-        .h1-size {
-            font-size: 35px;
-        }
-        .h3-size{
-            font-size: 20px;
-        }
-        .demo{
-            display: none;
-        }
         .text-height{
             height: auto;
         }
@@ -352,6 +352,21 @@
         }
         .h1-size-big{
             font-size: 26px;
+        }
+        .h1-size{
+            font-size: 22px;
+        }
+        .h3-size{
+            font-size: 18px;
+        }
+        .position-margin{
+            margin-top:-11%
+        }
+        .form-display{
+            display:none;
+        }
+        .div-header {
+            margin-top: 1%;
         }
     }
     @media only screen and (min-width: 768px) {
@@ -408,15 +423,6 @@
         .margin-text{
             margin-top:33px;
         }
-        .h1-size {
-            font-size: 35px;
-        }
-        .h3-size{
-            font-size: 20px;
-        }
-        .demo{
-            display: none;
-        }
         .text-height{
             height: auto;
         }
@@ -431,6 +437,24 @@
         }
         .h1-size-big{
             font-size: 35px;
+        }
+        .h1-size{
+            font-size: 40px;
+        }
+        .h3-size{
+            font-size: 35px;
+        }
+        .padding-equal-2{
+            padding-bottom: 65px !important;
+        }
+        .position-margin{
+            margin-top:-27%
+        }
+        .form-display{
+            display:block;
+        }
+        .div-header {
+            margin-top: 20%;
         }
     }
     @media only screen and (min-width: 992px) {
@@ -497,7 +521,7 @@
             font-size: 14.4px;
         }
         .padding-text{
-            padding-bottom: 102px;
+            padding-bottom: 102.8px;
         }
         .padding-text-2{
             padding-bottom: 128px;
@@ -514,12 +538,6 @@
         .h1-size {
             font-size: 40px;
         }
-        .h3-size{
-            font-size: 30px;
-        }
-        .demo{
-            display: block;
-        }
         .text-height{
             padding-bottom: 43px;
         }
@@ -530,13 +548,22 @@
             padding-bottom: 72px;
         }
         .padding-equal{
-            padding-bottom: 63px !important;
+            padding-bottom: 65px !important;
         }
         .padding-equal-2{
-            padding-bottom: 16px !important;
+            padding-bottom: 40.5px !important;
         }
         .h1-size-big{
             font-size: 36px;
+        }
+        .position-margin{
+            margin-top:-19%
+        }
+        .form-display{
+            display:block;
+        }
+        .div-header {
+            margin-top: 8%;
         }
     }
     @media only screen and (min-width: 1200px) {
@@ -630,7 +657,7 @@
             padding-bottom: 20px;
         }
         .spacing{
-            padding-bottom: 48.5px;
+            padding-bottom: 71px;
         }
         .text-font{
             font-size: 32px !important;
@@ -640,6 +667,12 @@
         }
         .admin-margin{
             margin-right: 70px;
+        }
+        .position-margin{
+            margin-top:-16%
+        }
+        .padding-equal-2{
+            padding-bottom: 17px !important;
         }
     }
     @media only screen and (min-width: 1920px) {
@@ -729,29 +762,29 @@
     }
     .btn-formation {
         background-color: #0D2735;
-        border: 1px solid #53ADF6 !important;
+        border: 1px solid white !important;
         font-size: 20px;
         padding-left: 32px;
         padding-right: 44px;
         transition: 0.6s;
-        color: #53ADF6;
+        color: white;
     }
     .btn-formation:hover {
-        background-color: #53ADF6;
+        background-color: white;
         color: #0D2735 !important;
         transition: 0.6s;
     }
     .btn-formation-arab{
         background-color: #0D2735;
-        border: 1px solid #53ADF6 !important;
+        border: 1px solid white !important;
         font-size: 20px;
         padding-left: 44px;
         padding-right: 32px;
         transition: 0.6s;
-        color: #53ADF6;
+        color: white;
     }
     .btn-formation-arab:hover {
-        background-color: #53ADF6;
+        background-color: white;
         color: #0D2735 !important;
         transition: 0.6s;
     }
@@ -880,6 +913,12 @@
         height: auto;
         position: relative;
         top: 10px;
+    }
+    .card-image-detail {
+        border-radius: 80%;
+        width: 120px;
+        height: auto;
+        position: relative;
     }
     .font-style {
         font-weight: bold;
@@ -1278,7 +1317,6 @@
     }
     .div-header {
         position: absolute;
-        margin-top: 8%;
         z-index: 4;
         width: 100%;
     }
@@ -1443,10 +1481,11 @@
         padding: 1rem 1.5rem;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
         position: fixed;
-        left: 254px;
+        left: 238px;
         top: 0;
-        z-index: 100;
-        width: calc(100% - 254px);
+        width: 100%;
+        z-index: 2;
+        width: calc(100% - 238px);
         transition: left 300ms;
     }
     #nav-toggle {
@@ -1721,7 +1760,6 @@
     }
     .card-description {
         display: block;
-        padding: 1em 0.5em;
         color: black;
         text-decoration: none;
         text-align: justify !important;

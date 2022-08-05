@@ -1,9 +1,9 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
-$etudiants = $data->getEtudiantFormationID();
+$etudiants = $data->getEtudiantFormationPromo();
 $seances = $data->getFormationMatiere();
 $formations = $data->getformation();
 $states = $data->getabsence();
@@ -85,7 +85,7 @@ foreach ($formations as $formations) {
             ?>
             <form action="" method="POST">
                 <div class="row pt-3">
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-4">
                         <div class="d-flex">
                             <i class="fas fa-folder-open position-awesome"></i>
                             <select class="custom-select px-5" name="get_matiere">
@@ -101,16 +101,34 @@ foreach ($formations as $formations) {
                                 ?>
                             </select>
                         </div>
+                    </div> -->
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <i class="fas fa-folder-open position-awesome"></i>
+                            <select class="custom-select px-5" name="get_promo" id="get_promo">
+                                <option selected value="">--Choisir promotion--</option>
+                                <?php
+                                foreach ($etudiants as $etudiant) { 
+                                    if ($etudiant['for_id'] == $id) {
+                                ?>
+                                    <option value="<?php echo $etudiant['etud_promos'] ?>"><?php echo $etudiant['pro_groupe'] ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex">
                             <i class="fas fa-calendar position-awesome"></i>
-                            <input id="absence_date" type="date" class="form-control pl-5" name="absence_date" autofocus>
-                            <button type="submit" class="btn btn-primary ml-3" name="absence_submit">Filtrer</button>
+                            <input id="absence_date" type="date" class="form-control pl-5" name="absence_date" id="absence_date">
+                            <button type="submit" class="btn btn-primary ml-3" name="absence_submit" id="absence_submit">Filtrer</button>
                         </div>
                     </div>
                 </div>
             </form>
+            <div id="error"></div>
             <hr style="background-color: #DEE2E6;">
             <table class="table table-bordered mt-3 bg-white">
                 <thead class="text-center text-white" style="background-color: #11101d;">
@@ -120,6 +138,7 @@ foreach ($formations as $formations) {
                     <tr>
                         <th scope="col">Stagiaires</th>
                         <th scope="col">Etat d'absence</th>
+                        <th scope="col">Cours</th>
                         <th scope="col">Date</th>
                     </tr>
                 </thead>
@@ -133,6 +152,7 @@ foreach ($formations as $formations) {
                                 <tr>
                                     <td><?php echo $state['etud_nom'] . " " . $state['etud_prenom'] ?> </td>
                                     <td><?php echo $state['abs_absence'] ?></td>
+                                    <td><?php echo $state['mat_nom'] ?></td>
                                     <td><?php echo date('d/m/Y',$date) ?></td>
                                 </tr>
                         <?php
@@ -152,5 +172,20 @@ foreach ($formations as $formations) {
             </table>
         </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            $("#absence_submit").click(function(e){
+                var promotion = $("#get_promo").val();
+                var date = $("#absence_date").val();
+                if(promotion == ""){
+                    e.preventDefault()
+                    $("#error").html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir une promotion</div>');
+                }else if(date == ""){
+                    e.preventDefault()
+                    $("#error").html('<div class="alert alert-danger text-center mt-2" role="alert" id="btn-fermer">Veuillez saisir une date</div>');
+                }
+            })
+        })
+    </script>
 </body>
 </html>

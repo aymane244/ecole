@@ -2,6 +2,17 @@
     $data = new Etudiant($db);
     $formations = $data->getformation();
 ?>
+<?php
+    if($_SESSION['lang'] == 'ar'){
+?>
+<script src="https://www.google.com/recaptcha/api.js?hl=ar" async defer></script>
+<?php
+    }else{
+?>
+<script src="https://www.google.com/recaptcha/api.js?hl=fr" async defer></script>
+<?php
+    }
+?>
 <div class="text-center pt-3 text-color" id="contactez-nous">
     <h2 class="pt-4"><?php echo $footer['contactez'] ?></h2>
     <hr class="hr-width">
@@ -115,9 +126,14 @@
                         }
                     ?>
                 </div>
+                <div class="mx-auto w-100">
+                    <div class="g-recaptcha" data-sitekey="6LfgOzAhAAAAAHVLIYf_vY-oNWizH-86kcCpT1BX"></div>
+                </div>
                 <div class="text-center">
+                    
+                    <br>
                     <button type="submit" class="btn btn-primary" id="submit" name="submit"><?php echo $footer['btn_message'] ?></button>
-                    <div id="res"></div>
+                    <div id="res" class="text-white"></div>
                     <?php
                         if ($_SESSION['lang'] == "ar") {
                     ?>
@@ -139,7 +155,7 @@
             <?php
                 if ($_SESSION['lang'] == "ar") {
             ?>
-            <div class="col-lg-3 text-right" lang="ar">
+            <div class="col-lg-3 text-right py-3" lang="ar">
                 <h4 class="text-color-footer"><?php echo $footer['propos'] ?></h4>
                 <div class="text-white mr-3">
                     <p>.<?php echo $footer['artln'] ?></p>
@@ -151,7 +167,7 @@
                     </div> -->
                 </div>
             </div>
-            <div class="col-lg-3 text-right" lang="ar">
+            <div class="col-lg-3 text-right py-3" lang="ar">
                 <h4 class="text-color-footer"><?php echo $footer['adresse_footer'] ?></h4>
                 <div class="text-white mr-3">
                     <p><?php echo $footer['adresse'] ?> <?php echo $footer['ville'] ?></p>
@@ -163,7 +179,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-lg-3 text-right" lang="ar">
+            <div class="col-lg-3 text-right py-3" lang="ar">
                 <h4 class="text-color-footer"><?php echo $navbar['Formations'] ?></h4>
                 <div class="text-white">
                     <?php
@@ -177,7 +193,7 @@
                     ?>
                 </div>
             </div>
-            <div class="col-lg-3 text-right" lang="ar">
+            <div class="col-lg-3 text-right py-3" lang="ar">
                 <h4 class="text-color-footer"><?php echo $footer['liens'] ?></h4>
                 <div class="text-white mr-3">
                     <div class="mt-3"> <a href="index" class="text-white"><?php echo $navbar['Accueil'] ?></a> <i class="fas fa-caret-left"></i> </div>
@@ -190,7 +206,7 @@
             <?php
                 } else {
             ?>
-            <div class="col-lg-3">
+            <div class="col-lg-3 py-3">
                 <h4 class="text-color-footer"><?php echo $footer['liens'] ?></h4>
                 <div class="text-white ml-3">
                     <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="index" class="text-white"> <?php echo $navbar['Accueil'] ?></a></div>
@@ -200,7 +216,7 @@
                     <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="actualités" class="text-white"> <?php echo $navbar['Actualites'] ?></a></div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 py-3">
                 <h4 class="text-color-footer"><?php echo $navbar['Formations'] ?></h4>
                 <div class="text-white">
                     <?php
@@ -214,7 +230,7 @@
                     ?>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 py-3">
                 <h4 class="text-color-footer"><?php echo $footer['adresse_footer'] ?></h4>
                 <div class="text-white mx-3">
                     <p><?php echo $footer['adresse'] ?><br> <?php echo $footer['ville'] ?></p>
@@ -241,12 +257,11 @@
             <?php
                 }
             ?>
-            
         </div>
     </div>
     <div class="bg-white text-center pb-4">
         <hr>
-        <i class="far fa-copyright size-awesome"></i> Copyright Aimane Chnaif. All right reserved
+        <i class="far fa-copyright size-awesome"></i> Copyright Aimane Chnaif, Chaimae Souiri, Ilyass Assebane, Yasmina Aboussabr. All rights reserved
     </div>
 </div>
 <script>

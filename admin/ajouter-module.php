@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 $formations = $data->getformation();
 ?>
@@ -83,12 +83,12 @@ $formations = $data->getformation();
                                                         <input id="matiere" type="text" class="form-control pl-5" name="matiere[]" placeholder="Nom du module" autocomplete="matiere" value="<?php echo isset($_POST['matiere']) ? $_POST['matiere'] : ''; ?>" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 text-right">
+                                                <div class="col-md-6 text-right" dir="rtl" lang="ar">
                                                     <div class="text-right">
                                                     <label for="matiere_arab" class="col-md-12 col-form-label text-md-end">اسم الوحدة</label>
                                                     </div>
                                                     <div class="float-right">
-                                                        <i class="fas fa-tag position-awesome-arab"></i>
+                                                        <i class="fas fa-tag position-awesome-arab mr-2"></i>
                                                     </div>
                                                     <input id="matiere_arab" type="text" class="form-control pr-5 text-right" name="matiere_arab[]" placeholder="اسم الوحدة" autocomplete="matiere" value="<?php echo isset($_POST['matiere_arab']) ? $_POST['matiere_arab'] : ''; ?>" required>
                                                 </div>
@@ -99,12 +99,12 @@ $formations = $data->getformation();
                                                         <input id="prof" type="text" class="form-control pl-5" name="prof[]" placeholder="Nom du formateur" autocomplete="prof" value="<?php echo isset($_POST['prof']) ? $_POST['prof'] : ''; ?>" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 text-right">
+                                                <div class="col-md-6 text-right" dir="rtl" lang="ar">
                                                     <div class="text-right">
                                                         <label for="prof_arab" class="col-md-12 col-form-label text-md-end">اسم المؤطر</label>
                                                     </div>
                                                     <div class="float-right">
-                                                        <i class="fas fa-user-tie position-awesome-arab"></i>
+                                                        <i class="fas fa-user-tie position-awesome-arab mr-2"></i>
                                                     </div>
                                                     <input id="prof_arab" type="text" class="form-control pr-5 text-right" name="prof_arab[]" placeholder="اسم المؤطر" autocomplete="matiere" value="<?php echo isset($_POST['matiere_arab']) ? $_POST['matiere_arab'] : ''; ?>" required>
                                                 </div>

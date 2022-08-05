@@ -21,11 +21,19 @@
         <?php include_once "navbar.php";?>
         <div class="container pt-5" id="top">
             <?php
-                if(isset($_SESSION['status'])){
+                if(isset($_SESSION['status_login'])){
             ?>
-            <div class='alert alert-danger text-center' role='alert'><?php echo $_SESSION['status']?></div>
+            <div class='alert alert-danger text-center' role='alert'><?php echo $_SESSION['status_login']?></div>
             <?php
-                    unset($_SESSION['status']);
+                    unset($_SESSION['status_login']);
+                }
+            ?>
+            <?php
+                if(isset($_SESSION['status_inscription'])){
+            ?>
+            <div class='alert alert-success text-center' role='alert'><?php echo $_SESSION['status_inscription']?></div>
+            <?php
+                unset($_SESSION['status_inscription']);
                 }
             ?>
             <?php

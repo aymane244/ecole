@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 if (!isset($_GET['id'])) {
     echo "<script>window.location.href='formations'</script>";
@@ -81,7 +81,7 @@ foreach ($etudiants as $etudiant) {
                                                 <option value="">--Veuillez Choisir un stagiaire--</option>
                                                 <?php
                                                     foreach ($etudiants as $etudiant) {
-                                                        if ($etudiant['for_id'] == $id) {
+                                                        if ($etudiant['for_id'] == $id && $etudiant['etud_promos'] != "") {
                                                 ?>
                                                 <option value="<?php echo $etudiant['etud_id'] ?>"><?php echo $etudiant['etud_prenom'] . " " . $etudiant['etud_nom'] ?></option>
                                                 <?php
@@ -146,9 +146,10 @@ foreach ($etudiants as $etudiant) {
                                 <td><?php echo $formation['mat_nom'] ?></td>
                                 <td><?php echo $formation['not_note'] ?></td>
                                 <td>
-                                    <a href="modifier-note?id=<?php echo $formation['not_id'] ?>" target="_blank">
+                                    <!-- <a href="modifier-note?id=<?php echo $formation['not_id'] ?>" target="_blank">
                                         <i class="fas fa-edit text-success awesome-size"></i>
-                                    </a>
+                                    </a> -->
+                                    <button type="button" class="btn btn-notes bg-transparent" id="btn-id" data-toggle="modal" data-target="#note" data-id="<?php echo $formation['not_id'] ?>"><i class="fas fa-edit text-success awesome-size"></i></button> 
                                 </td>
                                 <?php        
                                     }
@@ -180,6 +181,43 @@ foreach ($etudiants as $etudiant) {
             </div>
         </div>
     </div>
+    <!-- Modifier note -->
+    <div class="modal fade" id="note" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Modifier note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="notes"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $(".btn-notes").click(function(){
+                var ids = $(this).data('id');
+                $.post("../functions/traitement.php", {
+                        id: ids,
+                        action: "modifier_note"
+                    }, function(data) {
+                        $('#notes').html(data);
+                })
+            })
+        })
+    </script>
 </body>
 
 </html>
+<?php
+    if (isset($_POST['submit_note'])) {
+        $data->updateNote();
+    }
+?>

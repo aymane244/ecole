@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 if (!isset($_GET['id'])) {
     echo "<script>window.location.href='etudiant'</script>";
@@ -66,7 +66,7 @@ foreach ($etudiants as $etudiant) {
                                 <div id="display_image" class="display_image_profile" style="display:none;background-size:100% 100%; background-repeat:no-repeat"></div>
                                 <?php
                                 if ($image == "") {
-                                    echo "<img src='../images/etudiants/unknown_person.jpg' class='rounded-circle img-fluid' style='max-width: 5rem' id='image_display'>";
+                                    echo "<img src='../unknown.jpg' class='rounded-circle img-fluid' style='max-width: 5rem' id='image_display'>";
                                 }
                                 ?>
                                 <img src="../dossiers-stagiaires/<?php echo $prenom."-".$nom."/".$image ?>" alt="" class='rounded-circle img-fluid' style='max-width: 5rem' id='image_display'>

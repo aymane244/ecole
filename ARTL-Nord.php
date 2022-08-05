@@ -250,7 +250,7 @@
                     <h2 class="pt-4"><?php echo $ARTLN['organigramme'] ?></h2>
                     <hr class="hr-width">
                 </div>
-                <div class="bg-white pb-4 pt-2 text-center">
+                <div class="bg-white pb-4 pt-2 text-center organigram">
                     <?php
                         if($_SESSION['lang'] == 'ar'){
                     ?>

@@ -7,7 +7,7 @@
     <?php
         if($_SESSION['image'] == ''){
     ?>
-    <img src="../images/admin/unknown.jpg" width="40px" height="40px" alt="profile-img">
+    <img src="../images/unknown.jpg" width="40px" height="40px" alt="profile-img">
     <?php       
         }else{
     ?>

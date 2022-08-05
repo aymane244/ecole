@@ -1,10 +1,10 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='login-admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 $diplomes = $data->getDiplome();
-$attestations = $data->getAttestation();
+// $attestations = $data->getAttestation();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -30,7 +30,7 @@ $attestations = $data->getAttestation();
         </header>
         <div class="container mt-5 pt-5">
             <div class="text-center py-3">
-                <h2><i class="fas fa-graduation-cap"></i> Page Demandes</h2>
+                <h2><i class="fas fa-graduation-cap"></i> Page Demande document</h2>
             </div>
             <?php
             if (isset($_SESSION['status'])) {
@@ -40,16 +40,16 @@ $attestations = $data->getAttestation();
                 unset($_SESSION['status']);
             }
             ?>
-            <div class="mt-4 align-items-center d-flex justify-content-center mb-4">
-                <input type="button" class="btn btn-primary" onclick="diplome()" value="Demande Document 1">
+            <!-- <div class="mt-4 align-items-center d-flex justify-content-center mb-4">
+                <input type="button" class="btn btn-primary" onclick="diplome()" value="Demande Document">
                 <input type="button" class="btn btn-primary ml-3" onclick="attestation()" value="Demande Document 2">
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col-md-12" id="diplome">
                     <table class="table bg-white table-bordered">
                         <thead class="text-center text-white" style="background-color: #11101d;">
                             <tr>
-                                <th scope="col" colspan="5">Demande document 1</th>
+                                <th scope="col" colspan="5">Demande document</th>
                             </tr>
                             <tr>
                                 <th>#</th>
@@ -77,18 +77,28 @@ $attestations = $data->getAttestation();
                                         <td><?= $i++ ?></td>
                                         <td><?= $diplome['etud_prenom'] . " " . $diplome['etud_nom'] ?></td>
                                         <td>
+                                            <?php
+                                                if($diplome['dip_image'] == ''){
+                                            ?>
                                             <form action="" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="dip_etud" value="<?= $diplome['etud_id'] ?>">
                                                 <input type="file" name="dip_image" id="">
                                                 <input type="submit" value="Envoyer" class="btn btn-primary" name="dip-btn">
                                             </form>
+                                            <?php        
+                                                }else{
+                                            ?>
+                                            <h4 colspan="5">Document envoyé</h4>
+                                            <?php         
+                                                }
+                                            ?>
                                         </td>
                                         <td>
                                             <?php
                                             if ($diplome['dip_image'] == '') {
                                                 echo '<p class="text-primary">Demande reçue</p>';
                                             } else if ($diplome['dip_image'] == $diplome['dip_image']) {
-                                                echo '<p class="text-success">Document 1 envoyé</p>';
+                                                echo '<p class="text-success">Document envoyé</p>';
                                             }
                                             ?>
                                         </td>
@@ -124,19 +134,19 @@ $attestations = $data->getAttestation();
                         </thead>
                         <tbody class="text-center">
                             <?php
-                            if (empty($attestations)) {
+                            // if (empty($attestations)) {
                             ?>
-                                <tr>
+                                <!-- <tr>
                                     <th scope="row" colspan="5">
                                         <h2>Pas de demande</h2>
                                     </th>
-                                </tr>
+                                </tr> -->
                                 <?php
-                            } else {
-                                $i = 1;
-                                foreach ($attestations as $attestation) {
+                            // } else {
+                                // $i = 1;
+                                // foreach ($attestations as $attestation) {
                                 ?>
-                                    <tr>
+                                    <!-- <tr>
                                         <td><?= $i++ ?></td>
                                         <td><?= $attestation['etud_prenom'] . " " . $attestation['etud_nom'] ?></td>
                                         <td>
@@ -163,10 +173,10 @@ $attestations = $data->getAttestation();
                                                 </button>
                                             </form>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                             <?php
-                                }
-                            }
+                            //     }
+                            // }
                             ?>
                         </tbody>
                     </table>
@@ -181,13 +191,13 @@ $attestations = $data->getAttestation();
 if (isset($_POST['submit_diplome'])) {
     $data->deleteDiplome($_POST['diplome_id']);
 }
-if (isset($_POST['submit_att'])) {
-    $data->deleteAttestation($_POST['attestation_id']);
-}
+// if (isset($_POST['submit_att'])) {
+//     $data->deleteAttestation($_POST['attestation_id']);
+// }
 if (isset($_POST['dip-btn'])) {
     $data->updateDiplome();
 }
-if (isset($_POST['att-btn'])) {
-    $data->updateAttestation();
-}
+// if (isset($_POST['att-btn'])) {
+//     $data->updateAttestation();
+// }
 ?>

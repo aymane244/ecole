@@ -1,7 +1,7 @@
 <?php include_once "../session.php"; ?>
 <?php
 if (!isset($_SESSION['username']) && !isset($_SESSION['pwrd'])) {
-    echo "<script>window.location.href='logi-_admin'</script>";
+    echo "<script>window.location.href='index'</script>";
 }
 $articles = $data->getArticle();
 ?>

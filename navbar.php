@@ -188,7 +188,7 @@
                             foreach($etudiants as $etudiant){
                                 if($etudiant['etud_id'] == $_SESSION['id']){   
                     ?>
-                    <a class="nav-link dropdown-toggle text-color btn-etudiant rounded" id="btn-etudiant" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-color btn-etudiant rounded admin-margin" id="btn-etudiant" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user"></i> <?php echo $etudiant['etud_prenom']." ". $etudiant['etud_nom'] ?>
                     </a>
                     <?php
@@ -231,4 +231,4 @@
     //}
 // ]]>
 </script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+<!-- <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script> -->
