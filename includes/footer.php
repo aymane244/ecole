@@ -259,10 +259,6 @@
             ?>
         </div>
     </div>
-    <div class="bg-white text-center pb-4">
-        <hr>
-        <i class="far fa-copyright size-awesome"></i> Copyright Aimane Chnaif, Chaimae Souiri, Ilyass Assebane, Yasmina Aboussabr. All rights reserved
-    </div>
 </div>
 <script>
     $(document).ready(function(){
