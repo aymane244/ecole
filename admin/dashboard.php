@@ -154,7 +154,7 @@ foreach ($douanetotal as $count) {
                                         </th>
                                     </tr>
                                     <?php
-                                } else {
+                                }else{
                                     foreach ($etudiantsinscrit as $inscrit) {
                                     ?>
                                         <tr>

@@ -66,7 +66,6 @@
                 `etud_scan_cin`, `etud_scan_permis`,`etud_scan_visite`, `etud_image`, NOW() FROM `etudiant` 
                 WHERE etud_id=$id");
             if($result){
-
                 if($_SESSION['lang'] == 'ar'){
                     $_SESSION['status'] = "لقد تم التسجيل بنجاح";
                 }else{
@@ -138,7 +137,7 @@
                 INNER JOIN `etudiant` ON not_etudiant=etud_id INNER JOIN `formation` ON not_formation=for_id");
             $resultArray = array();
             // fetch product data one by one
-            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+            while($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                 $resultArray[] = $item;
             }
             return $resultArray;
@@ -663,7 +662,6 @@
                 }
                 return $result;
             }
-
         }
         public function getEtudiantNotes(){
             $result = $this->db->conn->query("SELECT * FROM `etudiant` RIGHT JOIN `formation` ON etud_formation=for_id LEFT JOIN `promos`

@@ -41,7 +41,7 @@
     <?php
         if ($_SESSION['lang'] == "ar") {
     ?>
-    <div class="collapse navbar-collapse " id="navbarSupportedContent" lang="ar">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" lang="ar">
         <div class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav navbar-font">
                 <li class="nav-item dropdown mr-4">

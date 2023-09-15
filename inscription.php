@@ -32,7 +32,6 @@
                     unset($_SESSION['status_error_inscription']);
                     }
                 ?>
-
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="card" style="box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);">
@@ -711,11 +710,11 @@
                 }else{
                     const reader = new FileReader();
                     reader.addEventListener('load', () =>{
-                    uploaded_image = reader.result;
-                    document.getElementById("showimage").style.backgroundImage = `url(${uploaded_image})`;
-                    document.getElementById("showimage").classList.add("showimage");
-                });
-                reader.readAsDataURL(this.files[0]);
+                        uploaded_image = reader.result;
+                        document.getElementById("showimage").style.backgroundImage = `url(${uploaded_image})`;
+                        document.getElementById("showimage").classList.add("showimage");
+                    });
+                    reader.readAsDataURL(this.files[0]);
                 }
             });
         </script>
