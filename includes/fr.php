@@ -7,7 +7,7 @@
         "arabe" => "Arabe"
     );
     $title= array(
-        "titre" => "ARTL Nord",
+        "titre" => "Application de gestion scolaire",
         "Accompagnement" => "Accompagnement à la certification ISO",
         "Categoratsion" => "Catégoratsion de la douane",
         "salle" => "Location des salles",
@@ -18,7 +18,7 @@
     );
     $navbar= array(
         "Accueil"=>"Accueil",
-        "ARTLN"=>"ARTLN",
+        "ARTLN"=>"App. gestion scolaire",
         "Formations"=>"Formations",
         "Conseil"=>"Conseil & Accompagnement",
         "Accompagnement"=>"Accompagnement à la certification  ISO",
@@ -27,86 +27,66 @@
         "Actualites"=>"Actualités",
         "etudiant"=>"Espace stagiaire",
         "Contact"=>"Contact",
-        "presentation"=>"Présentation ARTL Nord",
-        "adresse"=>"Boulevard Hariri N°12 Tanger-Maroc",
+        "presentation"=>"Présentation Application de gestion scolaire",
+        "adresse"=>"Votre adresse",
         "espace"=>"Espace stagiaire",
         "deconnexion"=>"Déconnexion",
         "admin"=>"Admin",
         "dashboard"=>"Tableau de bord",
     );
     $index= array(
-        "banner_1" => "Académie Régionale du Transport",
-        "banner_2" => "et de Logistique du Nord",
-        "banner_3" => "Nous sommes spécialisé dans la Formation",
-        "banner_4" => "et le Conseil des entreprises du secteur",
-        "banner_5" => "du Transport et de la Logistique",
-        "main_title" => "Académie ARTL Nord",
-        "academie" => "L'Académie",
-        "text_1" => "L'Académie Régionale du Transport et de la Logistique du Nord (ARTL NORD) est un organisme spécialisé dans 
-                    la Formation & le Conseil des entreprises du secteur du Transport et de la Logistique, il soutien votre 
-                    équipe en interne et vous propose des solutions rentables selon les besoins ou affectation d’une équipe 
-                    dédiée à la réalisation d’un projet d’amélioration logistique et de la chaîne d’approvisionnement, 
-                    ainsi il vous accompagne à l’intégration et la mise en place des systèmes de management de la qualité au 
-                    Maroc et à l’international.",
-        "text_2" => "Nous Intervenons ainsi sur des thématiques majeures, au coeur des préoccupations opérationnelles et 
-                    stratégiques de nos clients : la Supply Chain, le transport, la distribution, l’entreposage, les matières 
-                    dangereuses, les échanges internationaux.",
+        "banner_1" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom",
+        "banner_2" => "Lorem Ipsom Lorem Ipsom",
+        "banner_3" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom",
+        "banner_4" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom",
+        "banner_5" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom",
+        "main_title" => "Application de gestion scolaire",
+        "academie" => "Application de gestion scolaire",
+        "text_1" => "Lorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem Ipsom.",
+        "text_2" => "Lorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem Ipsom.",
         "pourquoi" => "Pourquoi nous choisir ?",
-        "text_pourquoi_1" => "La formation dans le secteur du transport et de la logistique est notre spécialité, nous utilisons une pédagogie active pour une meilleure expérience, Notre objectif est que tous les stagiaires exercent rationnellement le métier de chauffeur professionnel.",
-        "text_pourquoi_2" => "Nous accompagnons également les entreprises pour obtenir la catégorisation douanière (statut d'opérateur économique) et également obtenir la certification ISO dans les meilleures conditions et suivant une politique qualité très stricte.",
+        "text_pourquoi_1" => "Lorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem .",
+        "text_pourquoi_2" => "Lorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem IpsomLorem.",
         "qualite" => "Qualité",
-        "qualite_text" => "Nous suivons une politique de qualité très stricte et fournissons les bonnes conditions pour vous accompangé pour obtenir le certificat ISO.",
+        "qualite_text" => "Lorem IpsomLorem IpsomLorem.",
         "profes" => "Professionnalisme",
-        "profes_text" => "Afin de satisfaire vos services, nous vous garantissons de mettre en plae une équipe professionnelle, efficace et à jour.",
+        "profes_text" => "Lorem IpsomLorem IpsomLorem.",
         "carte" => "Conduite professionnel",
-        "carte_text" => "Nous veillons à ce que les stagiaires FQIMO et FCO soient formés dans les meilleures conditions avec un maximum d'apprentissage, pour exercer au mieux le métier de chauffeur professionnel et obtenir la carte professionnelle.",
+        "carte_text" => "Lorem IpsomLorem IpsomLorem.",
         "plus" => "Plus d'information",
         "service" => "Nos Services",
-        "formation" => "Formation FQIMO et FCO",
-        "formation_text" => "Formation FQIMO pour 10 jours et FCO pour 3 jours, dans des salles bien équipées, des formateurs professionnels 
-                        et des cours théorique et pratique.",
+        "formation" => "Formations",
+        "formation_text" => "Lorem Ipsom Lorem Ipsom Lorem.",
         "certificat" => "Certification ISO",
-        "certificat_text" => "Vous pouvez prendre un rendez-vous avec notre équipe pour vous accompagner pour obtenir la certification ISO de vos services.",
+        "certificat_text" => "Lorem Ipsom Lorem Ipsom Lorem.",
         "douane" => "Catégorisation Douane",
-        "douane_text" => "Vous pouvez prendre un rendez-vous avec notre équipe pour vous prendre le statut d’Opérateur Economique Agréé aux 
-        intervenants  dans  la  chaine du commerce extérieur.",
+        "douane_text" => "Lorem Ipsom Lorem Ipsom Lorem.",
         "location" => "Location des salles",
-        "location_text" => "Vous pouvez prendre un rendez-vous pour consulter la disponibilité des nos salles de formation pour 20 personnes maximum,
-                            qui sont équipés avec des vidéoprojecteurs, tableaux magnétiques...",
+        "location_text" => "Lorem Ipsom Lorem Ipsom Lorem.",
         "nosformation" => "Nos formations",
         "partenaires" => "Nos partenaires"
     );
     $ARTLN= array(
-        "presentation" => "Présentation ARTL Nord",
+        "presentation" => "Application de gestion scolaire",
         "directeur" => "Mot de directeur",
         "historique" => "Historique",
-        "historique_text_1" => "L'Académie Régionale du Transport et de la Logistique du Nord (ARTL NORD), a été créée le 21/12/2017 nous
-                                sommes spécialisé dans la Formation & le Conseil des entreprises du secteur du Transport et de la 
-                                Logistique, il soutien votre équipe en interne et vous propose des solutions rentables selon les besoins 
-                                ou affectation d’une équipe dédiée à la réalisation d’un projet d’amélioration logistique et de la chaîne 
-                                d’approvisionnement, ainsi il vous accompagne à l’intégration et la mise en place des systèmes de management
-                                de la qualité au Maroc et à l’international.",
-        "historique_text_2" => "Nous Intervenons ainsi sur des thématiques majeures, au cœur des préoccupations opérationnelles et 
-                                stratégiques de nos clients : la Supply Chain, le transport, la distribution, l’entreposage, les matières 
-                                dangereuses, les échanges internationaux.",
-        "notreAcademi" => "Notre Académie",
+        "historique_text_1" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom .",
+        "historique_text_2" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom .",
+        "notreAcademi" => "App. gestion scolaire",
         "missions" => "Nos missions",
-        "missions_text_1" => "ARTL Nord est au cœur du développement de la région Nord, notamment dans le secteur des transports et de la logistique, où nous nous appuyons sur d'énormes potentiels humains et matériels pour atteindre nos objectifs.",
-        "missions_text_2" => "
-        Nous prenons les questions environnementales au sérieux alors que nous essayons de préparer un programme d'éducation approprié pour une conduite préservative de l'environnement.",
+        "missions_text_1" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom .",
+        "missions_text_2" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom .",
         "objectifs" => "Nos objectifs",
-        "objectifs_text_1" => "Notre objectif est de rationaliser la conduite compte tenu de l'utilisation massive de véhicules dans la région, notamment pour les conducteurs professionnels, en formant les stagiaires à exercer le métier dans le respect des normes de sécurité routière et de préservation de l'environnement, en plus de travailler aux côtés de toutes les parties prenantes.",
+        "objectifs_text_1" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom.",
         "valeurs" => "Nos valeurs",
-        "valeurs_text_1" => "Responsabilité : Former des conducteurs responsables qui pratiquent de bonnes normes de conduite, ce qui nous pousse également à être plus responsables dans tous nos domaines.",
-        "valeurs_text_2" => "Engagement envers notre mission: L'engagement envers notre mission fait partie intégrante de nos valeurs. Nous visons toujours le développement et la continuité, et cela ne peut être atteint que par l'engagement.",
-        "valeurs_text_3" => "Pratique de la conscience : Nous nous concentrons sur le présent et prenons le temps de réfléchir et d'intégrer de nouvelles connaissances. Ces pratiques permettent un apprentissage collectif partagé et ainsi nous nous améliorons ensemble et développons constamment notre culture.",
+        "valeurs_text_1" => "Responsabilité : Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom .",
+        "valeurs_text_2" => "Engagement envers notre mission: Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom .",
+        "valeurs_text_3" => "Pratique de la conscience : Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom .",
         "vision" => "Notre vision",
-        "vision_text_1" => "La vision de l'Académie est de s'engager activement dans le développement de la région et d'en faire un exemple de bon comportement routier, en coopération avec toutes les parties prenantes.",
+        "vision_text_1" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom .",
         "qualite" => "Politique de qualité",
-        "qualite_text_1" => "La Politique Qualité est un document synthétique (une page suffit) qui définit de quelle manière votre 
-                            démarche qualité s’inscrit dans votre stratégie globale d’entreprise",
-        "qualite_text_2" => "Elle est destinée à être communiquée en interne, mais peut l’être aussi en externe, auprès de vos prospects, 
-                            clients et autres partenaires. Certaines entreprises la publient sur leur site internet",
+        "qualite_text_1" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom ",
+        "qualite_text_2" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom ",
         "organigramme" => "Organigramme de l'académie",
         "pres" => "Présentation de la formation",
         "description" => "Description et objectif de cette formation",
@@ -256,6 +236,7 @@
         "telephone" => "Numéro de téléphone",
         "adresse" => "Adresse",
         "passe" => "Mot de passe",
+        "confirm" => "Confirmer Mot de passe",
         "cin" => "CIN",
         "formation" => "Formations",
         "permis" => "Numéro de permis",
@@ -292,15 +273,14 @@
         "btn_message" => "Envoyer votre message",
         "liens" => "Liens utils",
         "adresse_footer" => "Adresse",
-        "adresse" => "Boulevard Hariri N°12",
+        "adresse" => "Adresse",
         "ville" => "Tanger-Maroc",
         "propos" => "A propos de nous",
         "phone" => "Téléphone",
         "fix" => "Fix",
         "fax" => "Fax",
         "email_footer" => "Email",
-        "artln" => "L'Académie Régionale du Transport et de la Logistique du Nord (ARTL NORD) est un organisme spécialisé dans 
-                    la Formation & le Conseil des entreprises du secteur du Transport et de la Logistique."
+        "artln" => "Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom Lorem Ipsom."
     );
     $pasnotes = array(
         "pas_notes" => "Pas de note",

@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-6 py-3">
               <div class="text-center">
-                <img src="images/salles/salle2_artln.jpg" alt="" class="img-fluid">
+                <img src="images/no_image.jpg" alt="" class="img-fluid">
               </div>
             </div>
             <div class="col-md-6 bg-white py-3">
@@ -56,9 +56,7 @@
               ?>
               <div lang="ar" dir="rtl">
                 <p class="text-justify mt-3 text-right"> 
-                  تقدم لك أكاديميتنا تأجير القاعات وهي عبارة عن قاعات مجهزة للتكوين ، والاجتماعات، والدورات، والمؤتمرات. <br><br>
-                  تم تجهيز قاعات التكوين لدينا بشبكة wifi عالية السرعة وجهاز عرض ولوحة مغناطيسية وملحقاتها. كل شيء تحت تصرفك للسماح لك بعمل عروضك التقديمية. <br><br>
-                  قاعت التكوين هي قاعات حديثة للغاية، يسهل الوصول إليها وتقع في مكان واحد، مع جهاز كمبيوتر ومنافذ كهربائية. <br><br>
+                لوريم إبسون لوريم إبسون لوريم إبسون لوريم إبسون لوريم إبسون لوريم إبسون لوريم إبسون لوريم إبسون
                 </p>
               </div>
               <?php
@@ -66,12 +64,7 @@
               ?>
               <div>
                 <p class="text-justify mt-3"> 
-                  Notre académie vous propose la location de salles parfaitement équipées pour vos formations, réunions, cours, 
-                  conférences. <br> <br>
-                  Nos salles de formation est munie du wifi haute-vitesse, un projecteur, un tableau magnétique et ses accessoires. 
-                  Tout est mis à votre disposition afin de vous permettre de réaliser vos présentations et vos projections. <br><br>
-                  La salle de formation est une salle ultramoderne, facile d’accès située dans un endroit unique, d’un ordinateur 
-                  et de Multiprises électriques.  
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, sunt excepturi vero autem repellendus tenetur ut dicta libero? Molestiae impedit aliquid nisi illo ut ipsam, facilis atque assumenda quod quidem. 
                 </p>
               </div>
               <?php 
@@ -143,10 +136,10 @@
                 <div class="Gallery-box">
                   <figure>
                     <a href="images/salle1_artln.jpg" class="fancybox" rel="ligthbox">
-                      <img src="images/salles/salle1_artln.jpg" alt="" class="img-fluid img-width">
+                      <img src="images/no_image.jpg" alt="" class="img-fluid img-width">
                     </a>
                     <span class="hoverle">
-                      <a href="images/salles/salle1_artln.jpg" class="fancybox" rel="ligthbox"><?php echo $salle['apercu'] ?></a>
+                      <a href="images/no_image.jpg" class="fancybox" rel="ligthbox"><?php echo $salle['apercu'] ?></a>
                     </span>
                   </figure>
                 </div>
@@ -154,11 +147,11 @@
               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 thumb">
                 <div class="Gallery-box">
                   <figure>
-                    <a href="images/salles/salle3_artln.jpg" class="fancybox" rel="ligthbox">
-                      <img src="images/salles/salle3_artln.jpg" alt="" class="img-fluid img-width">
+                    <a href="iimages/no_image.jpg" class="fancybox" rel="ligthbox">
+                      <img src="images/no_image.jpg" alt="" class="img-fluid img-width">
                     </a>
                     <span class="hoverle">
-                      <a href="images/salles/salle3_artln.jpg" class="fancybox" rel="ligthbox"><?php echo $salle['apercu'] ?></a>
+                      <a href="images/no_image.jpg" class="fancybox" rel="ligthbox"><?php echo $salle['apercu'] ?></a>
                     </span>
                   </figure>
                 </div>
@@ -166,11 +159,11 @@
               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 thumb">
                 <div class="Gallery-box">
                   <figure>
-                    <a href="images/salles/salle4_artln.jpg" class="fancybox" rel="ligthbox">
-                      <img src="images/salles/salle4_artln.jpg" alt="" class="img-fluid img-width">
+                    <a href="images/no_image.jpg" class="fancybox" rel="ligthbox">
+                      <img src="images/no_image.jpg" alt="" class="img-fluid img-width">
                     </a>
                     <span class="hoverle">
-                      <a href="images/salles/salle4_artln.jpg" class="fancybox" rel="ligthbox"><?php echo $salle['apercu'] ?></a>
+                      <a href="images/no_image.jpg" class="fancybox" rel="ligthbox"><?php echo $salle['apercu'] ?></a>
                     </span>
                   </figure>
                 </div>
@@ -178,11 +171,11 @@
               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 thumb">
                 <div class="Gallery-box">
                   <figure>
-                    <a href="images/salles/salle5_artln.jpg" class="fancybox" rel="ligthbox">
-                      <img src="images/salles/salle5_artln.jpg" alt="" class="img-fluid img-width">
+                    <a href="images/no_image.jpg" class="fancybox" rel="ligthbox">
+                      <img src="images/no_image.jpg" alt="" class="img-fluid img-width">
                     </a>
                     <span class="hoverle">
-                      <a href="images/salles/salle5_artln.jpg" class="fancybox" rel="ligthbox"><?php echo $salle['apercu'] ?></a>
+                      <a href="images/no_image.jpg" class="fancybox" rel="ligthbox"><?php echo $salle['apercu'] ?></a>
                     </span>
                   </figure>
                 </div>
@@ -190,11 +183,11 @@
               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 thumb">
                 <div class="Gallery-box">
                   <figure>
-                    <a href="images/salles/salle6_artln.jpg" class="fancybox" rel="ligthbox">
-                      <img src="images/salles/salle6_artln.jpg" alt="" class="img-fluid img-width">
+                    <a href="images/no_image.jpg" class="fancybox" rel="ligthbox">
+                      <img src="images/no_image.jpg" alt="" class="img-fluid img-width">
                     </a>
                     <span class="hoverle">
-                      <a href="images/salles/salle6_artln.jpg" class="fancybox" rel="ligthbox"><?php echo $salle['apercu'] ?></a>
+                      <a href="images/no_image.jpg" class="fancybox" rel="ligthbox"><?php echo $salle['apercu'] ?></a>
                     </span>
                   </figure>
                 </div>
@@ -202,11 +195,11 @@
               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 thumb">
                 <div class="Gallery-box">
                   <figure>
-                    <a href="images/salles/salle7_artln.jpg" class="fancybox" rel="ligthbox">
-                      <img src="images/salles/salle7_artln.jpg" alt="" class="img-fluid img-width">
+                    <a href="images/no_image.jpg" class="fancybox" rel="ligthbox">
+                      <img src="images/no_image.jpg" alt="" class="img-fluid img-width">
                     </a>
                     <span class="hoverle">
-                      <a href="images/salles/salle7_artln.jpg" class="fancybox" rel="ligthbox"><?php echo $salle['apercu'] ?></a>
+                      <a href="images/no_image.jpg" class="fancybox" rel="ligthbox"><?php echo $salle['apercu'] ?></a>
                     </span>
                   </figure>
                 </div>

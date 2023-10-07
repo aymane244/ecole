@@ -235,17 +235,8 @@
         .navbar-font{
             font-size: 16px;
         }
-        .text-height{
-            height: auto;
-        }
         .text-font{
             font-size: 32px !important;
-        }
-        .padding-equal{
-            padding-bottom: 20px !important;
-        }
-        .padding-equal-2{
-            padding-bottom: 20px !important;
         }
         .h1-size{
             font-size: 30px;
@@ -335,17 +326,8 @@
         .margin-service{
             margin-bottom: 15px;
         }
-        .text-height{
-            height: auto;
-        }
         .text-font{
             font-size: 32px !important;
-        }
-        .padding-equal{
-            padding-bottom: 20px !important;
-        }
-        .padding-equal-2{
-            padding-bottom: 40px !important;
         }
         .equal-space{
             padding-bottom: 96px;
@@ -420,20 +402,8 @@
         .margin-service{
             margin-bottom: 0;
         }
-        .margin-text{
-            margin-top:33px;
-        }
-        .text-height{
-            height: auto;
-        }
-        .text-space{
-            padding-bottom: 41px !important;
-        }
         .spacing{
             padding-bottom: 97px;
-        }
-        .padding-equal{
-            padding-bottom: 65px !important;
         }
         .h1-size-big{
             font-size: 35px;
@@ -443,9 +413,6 @@
         }
         .h3-size{
             font-size: 35px;
-        }
-        .padding-equal-2{
-            padding-bottom: 65px !important;
         }
         .position-margin{
             margin-top:-27%
@@ -520,38 +487,17 @@
         .navbar-font{
             font-size: 14.4px;
         }
-        .padding-text{
-            padding-bottom: 102.8px;
-        }
-        .padding-text-2{
-            padding-bottom: 128px;
-        }
         .text-font{
             font-size: 30px !important;
         }
         .margin-service{
             margin-bottom: 0;
         }
-        .margin-text{
-            margin-top:0;
-        }
         .h1-size {
             font-size: 40px;
         }
-        .text-height{
-            padding-bottom: 43px;
-        }
-        .text-space{
-            padding-bottom: 16.5px !important;
-        }
         .spacing{
             padding-bottom: 72px;
-        }
-        .padding-equal{
-            padding-bottom: 65px !important;
-        }
-        .padding-equal-2{
-            padding-bottom: 40.5px !important;
         }
         .h1-size-big{
             font-size: 36px;
@@ -638,23 +584,11 @@
         .navbar-font{
             font-size: 14.4px;
         }
-        .padding-text{
-            padding-bottom: 68px;
-        }
-        .padding-text-2{
-            padding-bottom: 68px;
-        }
         .margin-service{
             margin-bottom: 0;
         }
-        .margin-text{
-            margin-top:0;
-        }
         .h1-size {
             font-size: 40px;
-        }
-        .text-height{
-            padding-bottom: 20px;
         }
         .spacing{
             padding-bottom: 71px;
@@ -662,17 +596,11 @@
         .text-font{
             font-size: 32px !important;
         }
-        .padding-equal{
-            padding-bottom: 40px !important;
-        }
         .admin-margin{
             margin-right: 70px;
         }
         .position-margin{
             margin-top:-16%
-        }
-        .padding-equal-2{
-            padding-bottom: 17px !important;
         }
     }
     @media only screen and (min-width: 1920px) {
@@ -693,9 +621,6 @@
             padding-left: 20px;
             padding-right: 20px;
         }
-        .margin-text {
-            margin-top: 150px;
-        }
         .foot-bg {
             background-color: #0D2735;
         }
@@ -715,9 +640,6 @@
         }
         .margin-service{
             margin-bottom: 0;
-        }
-        .margin-text{
-            margin-top:0;
         }
     }
     .size-awesome {

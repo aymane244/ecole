@@ -5,13 +5,13 @@
     $etudiants=$data->getEtudiant();
     $formations = $data->getformation();
 ?>
-<div class="foot-bg text-color pt-3">
+<div class="foot-bg text-color pt-3" dir="<?php  $_SESSION['lang'] === 'ar' ? "rtl" : "" ?>">
     <div class="responsive-bar">
         <div class="text-white"><i class="fas fa-home"></i> <?php echo $navbar['adresse'] ?></div>
         <div class="text-white block">
-            <b><i class="fas fa-mobile display-2 pr-1"></i> </b><span class="pr-2 display-2 font">+212664159137 </span>
-            <b><i class="fas fa-phone pr-1"></i> </b><span class="pr-2">+212539320395 </span>
-            <b><i class="fas fa-envelope display pr-1"></i> </b><span class="pr-2 display">artl.nord.tanger@gmail.com </span>
+            <b><i class="fas fa-mobile display-2 pr-1"></i> </b><span class="pr-2 display-2 font">+212666666666 </span>
+            <b><i class="fas fa-phone pr-1"></i> </b><span class="pr-2">+212666666666 </span>
+            <b><i class="fas fa-envelope display pr-1"></i> </b><span class="pr-2 display">example@gmail.com </span>
         </div>
         <!--<div id="google_translate_element"></div>-->
         <div class="">
@@ -93,7 +93,7 @@
             <li class="nav-item pr-3 navbar-font">
                 <a class="nav-link text-color" href="location-salle"><?php echo $navbar['salles'] ?></a>
             </li>
-            <li class="nav-item dropdown space-link navbar-font">
+            <!--<li class="nav-item dropdown space-link navbar-font">
                 <a class="nav-link dropdown-toggle pr-3 text-color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                     <?php echo $navbar['Conseil'] ?>
                 </a>
@@ -102,7 +102,7 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="douane"><?php echo $navbar['Categorisation'] ?></a>
                 </div>
-            </li>
+            </li>-->
             <li class="nav-item dropdown navbar-font">
                 <a class="nav-link dropdown-toggle pr-3 text-color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                     <?php echo $navbar['Formations'] ?>
@@ -120,21 +120,21 @@
                 </div>
             </li>
             <li class="nav-item pr-3 space-link navbar-font">
-                <a class="nav-link text-color " href="ARTL-Nord">ARTLN</a>
+                <a class="nav-link text-color " href="about"><?= $navbar['ARTLN'] ?></a>
             </li>
             <li class="nav-item navbar-font">
                 <a class="nav-link pr-3 text-color" href="index"><?php echo $navbar['Accueil'] ?><span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>
-    <a class="navbar-brand"  href="index" ><img class="img-fluid" src="images/view/logo.jpeg" style="width:14rem; height:60px"></a>
+    <a class="navbar-brand"  href="index" style="width:11rem; height:50px">لوغو</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <?php
         } else {
     ?>   
-    <a class="navbar-brand"  href="index" ><img class="img-fluid" src="images/view/logo.jpeg" style="width:11rem; height:50px"></a>
+    <a class="navbar-brand" href="index" style="width:11rem; height:50px">Logo</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -144,7 +144,7 @@
                 <a class="nav-link pr-2 text-color" href="index"><?php echo $navbar['Accueil'] ?><span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item pr-2 space-link navbar-font">
-                <a class="nav-link text-color " href="ARTL-Nord">ARTLN</a>
+                <a class="nav-link text-color " href="about"><?= $navbar['ARTLN'] ?></a>
             </li>    
             <li class="nav-item dropdown navbar-font">
                 <a class="nav-link dropdown-toggle pr-2 text-color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -162,7 +162,7 @@
                     ?>
                 </div>
             </li>
-            <li class="nav-item dropdown space-link navbar-font">
+            <!--<li class="nav-item dropdown space-link navbar-font">
                 <a class="nav-link dropdown-toggle pr-2 text-color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                     <?php echo $navbar['Conseil'] ?>
                 </a>
@@ -171,7 +171,7 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="douane"><?php echo $navbar['Categorisation'] ?></a>
                 </div>
-            </li>
+            </li>-->
             <li class="nav-item pr-2 navbar-font">
                 <a class="nav-link text-color" href="location-salle"><?php echo $navbar['salles'] ?></a>
             </li>

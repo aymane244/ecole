@@ -18,7 +18,7 @@
         <?php include_once "navbar.php";?>
         <div class="div-background">
             <div class="text-white text-center text-big div-header">
-                <h1 class="h1-size-big"><?php echo $index['banner_1'] ?> <br> <?php echo $index['banner_2'] ?><br>ARTLN</h1>
+                <h1 class="h1-size-big"><?php echo $index['banner_1'] ?> <br> <?php echo $index['banner_2'] ?></h1>
             </div>
             <div style="position:relative">
                 <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
@@ -49,7 +49,7 @@
                                 </p>
                             </div>
                         </div> -->
-                        <div class="row align-items-center">
+                        <div class="row align-items-center justify-content-center">
                             <?php
                                 if($_SESSION['lang'] == 'ar'){
                             ?>
@@ -60,14 +60,14 @@
                                     <?php echo $ARTLN['historique_text_2'] ?>
                                 </p>
                             </div>
-                            <div class="col-md-12 mt-4 col-lg-6">
-                                <img src="images/view/logo.jpeg" alt="" class="img-fluid">
+                            <div class="col-md-12 mt-4 col-lg-6 text-center">
+                                <img src="images/no_image.jpg" alt="" class="img-fluid" style="width:100px">
                             </div>
                             <?php
                                 }else{
                             ?>
-                            <div class="col-md-12 mt-4 col-lg-6">
-                                <img src="images/view/logo.jpeg" alt="" class="img-fluid">
+                            <div class="col-md-12 mt-4 col-lg-6 text-center">
+                                <img src="images/no_image.jpg" alt="" class="img-fluid" style="width:100px">
                             </div>
                             <div class="col-md-12 col-lg-6 mt-4 text-justify">                             
                                 <p>
@@ -246,7 +246,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center pt-3 text-color organigram">
+                <!--<div class="text-center pt-3 text-color organigram">
                     <h2 class="pt-4"><?php echo $ARTLN['organigramme'] ?></h2>
                     <hr class="hr-width">
                 </div>
@@ -262,7 +262,7 @@
                     <?php       
                         }
                     ?>
-                </div>
+                </div>-->
             </div>
             <div class="div-btn fixed-bottom mb-2 mx-2" id="div-btn">
                 <a href="#top" class="btn-top px-3 float-right py-2 rounded"><i class="fas fa-long-arrow-alt-up text-white"></i></a>

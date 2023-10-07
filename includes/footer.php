@@ -17,7 +17,7 @@
     <h2 class="pt-4"><?php echo $footer['contactez'] ?></h2>
     <hr class="hr-width">
 </div>
-<div class="footer-background">
+<div class="footer-background" dir="<?php  $_SESSION['lang'] === 'ar' ? "rtl" : "" ?>">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 py-2">
@@ -26,7 +26,7 @@
                     <hr class="hr-width">
                 </div>
                 <div>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1618.496397530596!2d-5.806634243149613!3d35.77555333239981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0c7f57d96a4d39%3A0xa8bf6236db39c3a3!2s12%20Rue%20El%20Hariri%2C%20Tanger!5e0!3m2!1sfr!2sma!4v1646222682302!5m2!1sfr!2sma" style="border:0; width:100%; height:450px" allowfullscreen="" loading="lazy" class="img-fluid"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d103599.61833316906!2d-5.916871741584243!3d35.76338544940883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sma!4v1696613638705!5m2!1sfr!2sma" style="border:0; width:100%; height:450px" allowfullscreen="" loading="lazy" class="img-fluid"></iframe>
                 </div>
             </div>
             <div class="col-lg-6 py-2">
@@ -172,10 +172,10 @@
                 <div class="text-white mr-3">
                     <p><?php echo $footer['adresse'] ?> <?php echo $footer['ville'] ?></p>
                     <p class="pt-3">
-                        <b><?php echo $footer['phone'] ?>: </b>+212664159137 <br>
-                        <b><?php echo $footer['fix'] ?>: </b>+212539320395 <br>
-                        <b><?php echo $footer['fax'] ?>: </b>+212539320395 <br>
-                        <b><?php echo $footer['email_footer'] ?>: </b>artl.nord.tanger@gmail.com
+                        <b><?php echo $footer['phone'] ?>: </b>+212666666666 <br>
+                        <b><?php echo $footer['fix'] ?>: </b>+212666666666 <br>
+                        <b><?php echo $footer['fax'] ?>: </b>+212666666666 <br>
+                        <b><?php echo $footer['email_footer'] ?>: </b>example@gmail.com
                     </p>
                 </div>
             </div>
@@ -197,8 +197,8 @@
                 <h4 class="text-color-footer"><?php echo $footer['liens'] ?></h4>
                 <div class="text-white mr-3">
                     <div class="mt-3"> <a href="index" class="text-white"><?php echo $navbar['Accueil'] ?></a> <i class="fas fa-caret-left"></i> </div>
-                    <div class="mt-3"> <a href="ARTL-Nord" class="text-white"> ARTLN</a> <i class="fas fa-caret-left"></i> </div>
-                    <div class="mt-3"> <a href="conseil" class="text-white"> <?php echo $navbar['Conseil'] ?></a> <i class="fas fa-caret-left"></i> </div>
+                    <div class="mt-3"> <a href="about" class="text-white"><?php echo $navbar['ARTLN'] ?></a> <i class="fas fa-caret-left"></i> </div>
+                    <!--<div class="mt-3"> <a href="conseil" class="text-white"> <?php echo $navbar['Conseil'] ?></a> <i class="fas fa-caret-left"></i> </div>-->
                     <div class="mt-3"> <a href="location-salle" class="text-white"> <?php echo $navbar['salles'] ?></a> <i class="fas fa-caret-left"></i> </div>
                     <div class="mt-3"> <a href="actualités" class="text-white"> <?php echo $navbar['Actualites'] ?></a> <i class="fas fa-caret-left"></i> </div>
                 </div>
@@ -210,8 +210,8 @@
                 <h4 class="text-color-footer"><?php echo $footer['liens'] ?></h4>
                 <div class="text-white ml-3">
                     <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="index" class="text-white"> <?php echo $navbar['Accueil'] ?></a></div>
-                    <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="ARTL-Nord" class="text-white"> ARTLN</a></div>
-                    <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="conseil" class="text-white"> <?php echo $navbar['Conseil'] ?></a></div>
+                    <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="about" class="text-white"><?php echo $navbar['ARTLN'] ?></a></div>
+                    <!--<div class="mt-3"><i class="fas fa-caret-right"></i> <a href="conseil" class="text-white"> <?php echo $navbar['Conseil'] ?></a></div>-->
                     <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="location-salle" class="text-white"> <?php echo $navbar['salles'] ?></a></div>
                     <div class="mt-3"><i class="fas fa-caret-right"></i> <a href="actualités" class="text-white"> <?php echo $navbar['Actualites'] ?></a></div>
                 </div>
@@ -235,14 +235,14 @@
                 <div class="text-white mx-3">
                     <p><?php echo $footer['adresse'] ?><br> <?php echo $footer['ville'] ?></p>
                     <p class="pt-3">
-                        <b><?php echo $footer['phone'] ?>: </b>+212664159137 <br>
-                        <b><?php echo $footer['fix'] ?>: </b>+212539320395 <br>
-                        <b><?php echo $footer['fax'] ?>: </b>+212539320395 <br>
-                        <b><?php echo $footer['email_footer'] ?>: </b>artl.nord.tanger@gmail.com
+                        <b><?php echo $footer['phone'] ?>: </b>+212666666666 <br>
+                        <b><?php echo $footer['fix'] ?>: </b>+212666666666 <br>
+                        <b><?php echo $footer['fax'] ?>: </b>+212666666666 <br>
+                        <b><?php echo $footer['email_footer'] ?>: </b>example@gmail.com
                     </p>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 py-3">
                 <h4 class="text-color-footer"><?php echo $footer['propos'] ?></h4>
                 <div class="text-white mx-3">
                     <p><?php echo $footer['artln'] ?></p>

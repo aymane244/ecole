@@ -638,7 +638,7 @@
         }
         public function getEtudiantCinPwd(){
             $cin = $_POST['cin'];
-            $pwd = md5($_POST['password']);
+            $pwd = $_POST['password'];
             $checkresult = $this->db->conn->query("SELECT `etud_promos` FROM `etudiant` WHERE etud_promos IS NULL AND etud_cin='$cin'");
             if($checkresult->num_rows){
                 if($_SESSION['lang'] == 'ar'){
@@ -647,13 +647,15 @@
                     $_SESSION['status_login'] = "Veuillez contecter l'administration pour confirmer votre inscription";
                 }
             }else{
-                $result = $this->db->conn->query("SELECT * FROM `etudiant` WHERE etud_cin = '$cin' AND etud_motdepasse ='$pwd'");
+                $result = $this->db->conn->query("SELECT * FROM `etudiant` WHERE etud_cin = '$cin'");
                 while($etudiant = mysqli_fetch_assoc($result)){
-                    $_SESSION['etud_cin'] = $etudiant['etud_cin'];
-                    $_SESSION['etud_motdepasse'] = $etudiant['etud_motdepasse'];
-                    $_SESSION['id'] = $etudiant['etud_id'];
-                    $_SESSION['nom'] = $etudiant['etud_nom'];
-                    echo "<script>window.location.href='espace-stagiaire'</script>";
+                    if(password_verify($pwd, $etudiant['etud_motdepasse'])){
+                        $_SESSION['etud_cin'] = $etudiant['etud_cin'];
+                        $_SESSION['etud_motdepasse'] = $etudiant['etud_motdepasse'];
+                        $_SESSION['id'] = $etudiant['etud_id'];
+                        $_SESSION['nom'] = $etudiant['etud_nom'];
+                        echo "<script>window.location.href='espace-stagiaire'</script>";
+                    }
                 }
                 if($_SESSION['lang'] == 'ar'){
                     $_SESSION['status_login'] = "رقم البطاقة الوطنية أو كلمة المرور غير صحيحة";
@@ -680,7 +682,8 @@
             $prenom = $_POST['prenom'];
             $prenom_arab = $_POST['prenom_arab'];
             $email = $_POST['email'];
-            $motdepasse = md5($_POST['motdepasse']);
+            $motdepasse = password_hash($_POST['motdepasse'], PASSWORD_DEFAULT);
+            $confirm = password_hash($_POST['confirm'], PASSWORD_DEFAULT);
             $cin = $_POST['cin'];
             $telephone = $_POST['telephone'];
             $naissance = $_POST['naissance'];
@@ -720,19 +723,31 @@
 
                 }else if($nom == ''){
                     if($_SESSION['lang'] == 'ar'){
-                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدخال اسمك بالفرنسية</div>";
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>المرجو إدخال اسمك بالفرنسية</div>";
                     }else{
                         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre nom en français</div>";
                     }
                 }else if($prenom_arab == ''){
                     if($_SESSION['lang'] == 'ar'){
-                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدخال اسمك الأول باللغة العربية</div>";
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>المرجو إدخال اسمك الأول باللغة العربية</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre prénom en arabe</div>";
+                    }
+                }else if(!preg_match('/^[\x{0600}-\x{06FF}]+$/u', $prenom_arab)){
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>المرجو إدخال اسمكم الشخصي بالعربية</div>";
                     }else{
                         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre prénom en arabe</div>";
                     }
                 }else if($nom_arab == ''){
                     if($_SESSION['lang'] == 'ar'){
-                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدخال اسمك باللغة العربية</div>";
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>المرجو إدخال اسمك باللغة العربية</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre nom en arabe</div>";
+                    }
+                }else if(!preg_match('/^[\x{0600}-\x{06FF}]+$/u', $nom_arab)){
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>المرجو إدخال اسمكم العائلي بالعربية</div>";
                     }else{
                         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre nom en arabe</div>";
                     }
@@ -747,6 +762,12 @@
                         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>الرجاء إدراج كلمة المرور الخاصة بك</div>";
                     }else{
                         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre mot de passe</div>";
+                    }
+                }else if($_POST['motdepasse'] !== $_POST['confirm']){
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>كلمة المرور غير متطابقة</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Mot de passe incorrect</div>";
                     }
                 }else if($naissance == ''){
                     if($_SESSION['lang'] == 'ar'){
@@ -783,6 +804,12 @@
                         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>يرجى إدخال رقم الهاتف الخاص بك</div>";
                     }else{
                         echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez saisir votre numéro de téléphone</div>";
+                    }
+                }else if(!preg_match('/^(\+)?\d+$/', $telephone) || strlen($telephone) > 20){
+                    if($_SESSION['lang'] == 'ar'){
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>المرجو إدخال رقم هاتف شغال</div>";
+                    }else{
+                        echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>Veuillez entrer un numéro de téléphone valide</div>";
                     }
                 }else if($adresse == ''){
                     echo "<div class='alert alert-danger text-center mt-3 container' role='alert'>
@@ -1931,7 +1958,7 @@
             return $result;
         }
         public function updatePassword(){
-            $password = md5($_POST['password']);
+            $password = password_hash($_POST['motdepasse'], PASSWORD_DEFAULT);
             $email =  $_POST['email'];
             $result = $this->db->conn->query("UPDATE `etudiant` SET `etud_motdepasse`='$password' WHERE etud_email='$email'");
             $to = $_POST['email'];
@@ -2173,7 +2200,7 @@
             $prenom = $_POST['prenom'];
             $nom = $_POST['nom'];
             $email = $_POST['email'];
-            $motdepasse = md5($_POST['motdepasse']);
+            $motdepasse = password_hash($_POST['motdepasse'], PASSWORD_DEFAULT);
             $image = basename($_FILES['image']['name']);
             $path = "../images/admin/";
             $allowed = array('jpg', 'png', 'jpeg');
@@ -2198,20 +2225,21 @@
                     return $result;
                 }
             }
-
         }
         public function loginAdmin(){
             $email = $_POST['email'];
-            $pwd = md5($_POST['pwrd']);
-            $result = $this->db->conn->query("SELECT * FROM `admin` WHERE adm_email = '$email' AND adm_password ='$pwd'");
+            $pwd = mysqli_real_escape_string($this->db->conn, htmlspecialchars($_POST['pwrd']));
+            $result = $this->db->conn->query("SELECT * FROM `admin` WHERE adm_email = '$email'");
             while($admin = mysqli_fetch_assoc($result)){
-                $_SESSION['username'] = $admin['adm_email'];
-                $_SESSION['pwd'] = $admin['adm_password'];
-                $_SESSION['id'] = $admin['adm_id'];
-                $_SESSION['nom'] = $admin['adm_nom'];
-                $_SESSION['prenom'] = $admin['adm_prenom'];
-                $_SESSION['image'] = $admin['adm_image'];
-                echo "<script>window.location.href='dashboard'</script>";
+                if(password_verify($pwd, $admin['adm_password'])){
+                    $_SESSION['username'] = $admin['adm_email'];
+                    $_SESSION['pwd'] = $admin['adm_password'];
+                    $_SESSION['id'] = $admin['adm_id'];
+                    $_SESSION['nom'] = $admin['adm_nom'];
+                    $_SESSION['prenom'] = $admin['adm_prenom'];
+                    $_SESSION['image'] = $admin['adm_image'];
+                    echo "<script>window.location.href='dashboard'</script>";
+                }
             }
             echo "<script>window.location.href='index'</script>";
             $_SESSION['error_login_admin'] = "Email ou mot de passe incorrecte";

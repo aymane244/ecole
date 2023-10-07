@@ -40,13 +40,13 @@ $formations = $data->getformation();
     <title><?php echo $title['titre'] ?></title>
 </head>
 
-<body>
+<body dir="<?php  $_SESSION['lang'] === 'ar' ? "rtl" : "" ?>">
     <div id="top"></div>
     <?php include_once "navbar.php"; ?>
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style="position:relative">
         <div class="text-white text-center text-fade text-big div-header">
-            <h1 class="h1-size"><?php echo $index['banner_1'] ?> <br> <?php echo $index['banner_2'] ?><br>ARTLN</h1>
-            <h3 class="pt-4 margin-text h3-size">
+            <h1 class="h1-size"><?php echo $index['banner_1'] ?> <br> <?php echo $index['banner_2'] ?></h1>
+            <h3 class="pt-4 h3-size">
                 <?php echo $index['banner_3'] ?> <br> <?php echo $index['banner_4'] ?> <br> <?php echo $index['banner_5'] ?>
             </h3>
             <section id="section07" class="demo">
@@ -56,15 +56,15 @@ $formations = $data->getformation();
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-                <img src="images/view/entropot_11zon.jpg" class="d-block img-fluid img-height" alt="first" style="width:100%; height:81.3vh">
+                <img src="images/school1.jpg" class="d-block img-fluid img-height" alt="first" style="width:100%; height:81.3vh">
             </div>
             <div class="carousel-item">
                 <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-                <img src="images/view/seb_11zon.jpg" class="d-block img-fluid" alt="second" style="width:100%; height:81.3vh">
+                <img src="images/school2.jpg" class="d-block img-fluid" alt="second" style="width:100%; height:81.3vh">
             </div>
             <div class="carousel-item">
                 <div style="background-color: black;opacity: 0.5;top: 0;left: 0;width: 100%;height: 100%;position: absolute; z-index:2"></div>
-                <img src="images/view/camions_group_11zon.jpg" class="d-block img-fluid" alt="third" style="width:100%; height:81.3vh">
+                <img src="images/school3.jpg" class="d-block img-fluid" alt="third" style="width:100%; height:81.3vh">
             </div>
         </div>
     </div>
@@ -78,24 +78,8 @@ $formations = $data->getformation();
             <div class="bg-white pb-4">
                 <div class="container-fluid">
                     <div class="row align-items-center">
-                        <?php
-                            if($_SESSION['lang'] == 'ar'){
-                        ?>
-                        <div class="col-md-12 col-lg-6 mt-4 text-justify d-flex align-items-center">
-                            <p class="text-right" dir="rtl" lang="ar">
-                                <?php echo $index['text_1'] ?>
-                                <br><br>
-                                <?php echo $index['text_2'] ?>
-                            </p>                            
-                        </div>
                         <div class="col-md-12 mt-4 col-lg-6 text-center">
-                            <img src="images/view/logo.jpeg" alt="" class="img-fluid" style="width:100%">
-                        </div>
-                        <?php
-                            }else{
-                        ?>
-                        <div class="col-md-12 mt-4 col-lg-6 text-center">
-                            <img src="images/view/logo.jpeg" alt="" class="img-fluid" style="width:100%">
+                            <img src="images/no_image.jpg" alt="" class="img-fluid" style="width:100px">
                         </div>
                         <div class="col-md-12 col-lg-6 mt-4 text-justify d-flex align-items-center">
                             <p>
@@ -104,9 +88,6 @@ $formations = $data->getformation();
                                 <?php echo $index['text_2'] ?>
                             </p>
                         </div>
-                        <?php       
-                            }
-                        ?>
                     </div>
                 </div>
             </div>
@@ -114,105 +95,44 @@ $formations = $data->getformation();
         <div class="container">
             <div class="bg-choisir rounded px-3 mt-4 text-center pt-3">
                 <h2 class="text-white"><?php echo $index['pourquoi'] ?></h2>
-                <?php
-                    if($_SESSION['lang'] == 'ar'){
-                ?> 
-                <p class="text-white" lang="ar" dir="rtl">
-                    <?php echo $index['text_pourquoi_1'] ?>
-                    <br> <br>
-                    <?php echo $index['text_pourquoi_2'] ?>
-                </p>
-                <?php
-                    }else{
-                ?>
                 <p class="text-white">
                     <?php echo $index['text_pourquoi_1'] ?>
                     <br> <br>
                     <?php echo $index['text_pourquoi_2'] ?>
                 </p>
-                <?php       
-                    }
-                ?>
                 <div class="row mt-5">
-                    <div class="col-lg-4 mt-2">
+                    <div class="col-lg-6 mt-2">
                         <div class="border text-white">
                             <div class="py-3">
                                 <i class="fas fa-award awesome-font py-3 px-4 text-white rounded-circle img-thumbnail bg-choisir"></i>
                             </div>
                             <h2><?php echo $index['qualite'] ?></h2>
-                            <?php
-                                if($_SESSION['lang'] == 'ar'){
-                            ?>
-                            <p class="text-justify px-3 text-right text-height" lang="ar" dir="rtl">
+                            <p class="text-justify px-3">
                                 <?php echo $index['qualite_text'] ?>
                             </p>
-                            <?php
-                                }else{
-                            ?>
-                            <p class="text-justify px-3 padding-text">
-                                <?php echo $index['qualite_text'] ?>
-                            </p>
-                            <?php       
-                                }
-                            ?>
                         </div>
                     </div>
-                    <div class="col-lg-4 mt-2">
+                    <div class="col-lg-6 mt-2">
                         <div class="border text-white">
                             <div class="py-3"><i class="fas fa-user-tie awesome-font py-3 px-4 text-white rounded-circle img-thumbnail bg-choisir"></i></div>
-                            <?php
-                                if($_SESSION['lang'] == 'ar'){
-                            ?>
-                            <h2><?php echo $index['profes'] ?></h2>
-                            <p class="text-justify px-3 text-right text-height" lang="ar" dir="rtl">
-                                <?php echo $index['profes_text'] ?>
-                            </p>
-                            <?php
-                                }else{
-                            ?>
                             <h2 class="text-font"><?php echo $index['profes'] ?></h2>
-                            <p class="text-justify px-3 padding-text-2">
+                            <p class="text-justify px-3">
                                 <?php echo $index['profes_text'] ?>
                             </p>
-                            <?php       
-                                }
-                            ?>
                         </div>
                     </div>
-                    <div class="col-lg-4 mt-2">
+                    <!--<div class="col-lg-4 mt-2">
                         <div class="border text-white">
                             <div class="py-3"><i class="fas fa-address-card awesome-font py-3 px-4 text-white rounded-circle img-thumbnail bg-choisir"></i></div>
                             <h3><?php echo $index['carte'] ?></h3>
-                            <?php
-                                if($_SESSION['lang'] == 'ar'){
-                            ?>
-                            <p class="text-justify px-3 text-right" lang='ar' dir="rtl">
-                                <?php echo $index['carte_text'] ?>
-                            </p>
-                            <?php
-                                }else{
-                            ?>
                             <p class="text-justify px-3">
                                 <?php echo $index['carte_text'] ?>
                             </p>
-                            <?php       
-                                }
-                            ?>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="col-lg-12">
                         <div class="text-center my-5">
-                            <?php
-                                if($_SESSION['lang'] == 'ar'){
-                            ?>
-                            <a href="ARTL-Nord" class="btn-formation-arab rounded-pill py-2" lang="ar"><i class="fas fa-chevron-left arrow-font-arab"></i> <?php echo $index['plus'] ?></a>
-                            <?php
-                                }else{
-                            ?>
-                            <a href="ARTL-Nord" class="btn-formation rounded-pill py-2"><?php echo $index['plus'] ?> <i class="fas fa-chevron-right arrow-font"></i></a>
-                            <?php       
-                                }
-                            ?>
+                            <a href="about" class="btn-formation rounded-pill py-2"><?php echo $index['plus'] ?> <i class="fas fa-chevron-right arrow-font"></i></a>
                         </div>
                     </div>
                 </div>
@@ -228,54 +148,32 @@ $formations = $data->getformation();
                     <div class="card bg-white rounded" style="box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);">
                         <div class="pb-3 text-center"><i class="fas fa-book awesome-font pt-3"></i></div>
                         <h3 class="text-center"><?php echo $index['formation'] ?></h3>
-                        <?php
-                            if($_SESSION['lang'] == 'ar'){
-                        ?>
-                        <p class="text-justify px-3 py-3 text-right text-space" lang="ar" dir="rtl">
+                        <p class="text-justify px-3 py-3">
                             <?php echo $index['formation_text'] ?>
                         </p>
-                        <?php
-                            }else{
-                        ?>
-                        <p class="text-justify px-3 py-3 padding-equal">
-                            <?php echo $index['formation_text'] ?>
-                        </p>
-                        <?php       
-                            }
-                        ?>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="card bg-white rounded" style="box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);">
                         <div class="pb-3 text-center"><i class="fa-solid fa-people-roof awesome-font pt-3"></i></div>
                         <h3 class="text-center"><?php echo $index['location'] ?></h3>
-                        <?php
-                            if($_SESSION['lang'] == 'ar'){
-                        ?>
-                        <p class="text-justify px-3 py-3 text-right" lang="ar" dir="rtl"><?php echo $index['location_text'] ?></p>
-                        <?php
-                            }else{
-                        ?>
-                        <p class="text-justify px-3 py-3 margin-text"><?php echo $index['location_text'] ?></p>
-                        <?php       
-                            }
-                        ?>
+                        <p class="text-justify px-3 py-3"><?php echo $index['location_text'] ?></p>
                     </div>
                 </div>
-                <div class="col-md-6 mb-3">
+                <!--<div class="col-md-6 mb-3">
                     <div class="card bg-white rounded" style="box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);">
                         <div class="pb-3 text-center"><i class="fas fa-file awesome-font pt-3"></i></div>
                         <h3 class="text-center"><?php echo $index['certificat'] ?></h3>
                         <?php
                             if($_SESSION['lang'] == 'ar'){
                         ?>
-                        <p class="text-justify px-3 py-3 text-right text-space" lang="ar" dir="rtl">
+                        <p class="text-justify px-3 py-3" lang="ar" dir="rtl">
                             <?php echo $index['certificat_text'] ?>
                         </p>
                         <?php
                             }else{
                         ?>
-                        <p class="text-justify px-3 py-3 margin-text padding-equal-2">
+                        <p class="text-justify px-3 py-3">
                             <?php echo $index['certificat_text'] ?>
                         </p>
                         <?php       
@@ -290,7 +188,7 @@ $formations = $data->getformation();
                         <?php
                             if($_SESSION['lang'] == 'ar'){
                         ?>
-                        <p class="text-justify px-3 py-3 text-right" lang="ar" dir="rtl"><?php echo $index['douane_text'] ?></p>
+                        <p class="text-justify px-3 py-3" lang="ar" dir="rtl"><?php echo $index['douane_text'] ?></p>
                         <?php
                             }else{
                         ?>
@@ -299,7 +197,7 @@ $formations = $data->getformation();
                             }
                         ?>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
         <div class="text-center pt-3 text-color">
@@ -356,11 +254,11 @@ $formations = $data->getformation();
         </div>
         <div class="pb-4">
             <div class="customer-logos slider pt-4">
-                <div class="slide"><img src="images/view/FTA.png" class="img-fluid" style="width: 25rem; height:180px"></div>
-                <div class="slide"><img src="images/view/giz.png" class="img-fluid" style="width: 25rem; height:180px"></div>
-                <div class="slide"><img src="images/view/OEA.png" class="img-fluid" style="width: 25rem; height:180px"></div>
-                <div class="slide"><img src="images/view/IFMEREE.png" class="img-fluid" style="width: 25rem; height:180px"></div>
-                <div class="slide"><img src="images/view/URTL_NOrd.png" class="img-fluid" style="width: 25rem; height:180px"></div>
+                <div class="slide"><img src="images/no_image.jpg" class="img-fluid" style="width: 25rem; height:180px"></div>
+                <div class="slide"><img src="images/no_image.jpg" class="img-fluid" style="width: 25rem; height:180px"></div>
+                <div class="slide"><img src="images/no_image.jpg" class="img-fluid" style="width: 25rem; height:180px"></div>
+                <div class="slide"><img src="images/no_image.jpg" class="img-fluid" style="width: 25rem; height:180px"></div>
+                <div class="slide"><img src="images/no_image.jpg" class="img-fluid" style="width: 25rem; height:180px"></div>
             </div>
         </div>
     </div>

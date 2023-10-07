@@ -106,37 +106,6 @@
                                                 if($_SESSION['lang'] == 'ar'){
                                             ?>
                                             <div class="text-right" dir="rtl" lang="ar">
-                                                <label for="email" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['email']?></label>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-12">
-                                                    <div class="float-right">
-                                                        <i class="fas fa-envelope position-awesome-arab"></i>
-                                                    </div>
-                                                    <input id="email" type="email" dir="rtl" lang="ar" class="form-control pr-5 text-right" name="email" autocomplete="email" placeholder="بريدك الإلكتروني" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
-                                                </div>
-                                            </div>
-                                            <?php        
-                                                }else{
-                                            ?>
-                                            <div class="row mb-3">
-                                                <label for="email" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['email']?></label>
-                                                <div class="col-md-12">
-                                                    <div class="d-flex">
-                                                        <i class="fas fa-envelope position-awesome"></i>
-                                                        <input id="email" type="email" class="form-control pl-5" name="email" autocomplete="email" placeholder="Votre email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <?php        
-                                                }
-                                            ?>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <?php
-                                                if($_SESSION['lang'] == 'ar'){
-                                            ?>
-                                            <div class="text-right" dir="rtl" lang="ar">
                                                 <label for="motdepasse" class="col-md-12 col-form-label text-md-end" dir="rtl" lang="ar"><?php echo $inscription['passe']?></label>
                                             </div>
                                             <div class="row mb-3">
@@ -156,6 +125,37 @@
                                                     <div class="d-flex">
                                                         <i class="fas fa-lock position-awesome"></i>
                                                         <input id="motdepasse" type="password" class="form-control pl-5" name="motdepasse" placeholder="Votre mot de passe" value="<?php echo isset($_POST['motdepasse']) ? $_POST['motdepasse'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php        
+                                                }
+                                            ?>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <?php
+                                                if($_SESSION['lang'] == 'ar'){
+                                            ?>
+                                            <div class="text-right" dir="rtl" lang="ar">
+                                                <label for="confirm" class="col-md-12 col-form-label text-md-end" dir="rtl" lang="ar"><?php echo $inscription['confirm']?></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-lock position-awesome-arab"></i>
+                                                    </div>
+                                                    <input id="confirm" type="password" dir="rtl" lang="ar" class="form-control pr-5 text-right" name="confirm" placeholder="تأكيد كلمة المرور" value="<?php echo isset($_POST['confirm']) ? $_POST['confirm'] : ''; ?>">
+                                                </div>
+                                            </div>
+                                            <?php        
+                                                }else{
+                                            ?>
+                                            <div class="row mb-3">
+                                                <label for="confirm" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['confirm']?></label>
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-lock position-awesome"></i>
+                                                        <input id="confirm" type="password" class="form-control pl-5" name="confirm" placeholder="Confirmer votre mot de passe" value="<?php echo isset($_POST['confirm']) ? $_POST['confirm'] : ''; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -256,7 +256,38 @@
                                                 }
                                             ?>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-4">
+                                            <?php
+                                                if($_SESSION['lang'] == 'ar'){
+                                            ?>
+                                            <div class="text-right" dir="rtl" lang="ar">
+                                                <label for="email" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['email']?></label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-12">
+                                                    <div class="float-right">
+                                                        <i class="fas fa-envelope position-awesome-arab"></i>
+                                                    </div>
+                                                    <input id="email" type="email" dir="rtl" lang="ar" class="form-control pr-5 text-right" name="email" autocomplete="email" placeholder="بريدك الإلكتروني" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
+                                                </div>
+                                            </div>
+                                            <?php        
+                                                }else{
+                                            ?>
+                                            <div class="row mb-3">
+                                                <label for="email" class="col-md-12 col-form-label text-md-end"><?php echo $inscription['email']?></label>
+                                                <div class="col-md-12">
+                                                    <div class="d-flex">
+                                                        <i class="fas fa-envelope position-awesome"></i>
+                                                        <input id="email" type="email" class="form-control pl-5" name="email" autocomplete="email" placeholder="Votre email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php        
+                                                }
+                                            ?>
+                                        </div>
+                                        <div class="col-lg-4">
                                             <?php
                                                 if($_SESSION['lang'] == 'ar'){
                                             ?>
@@ -287,7 +318,7 @@
                                                 }
                                             ?>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-4">
                                             <?php
                                                 if($_SESSION['lang'] == 'ar'){
                                             ?>
